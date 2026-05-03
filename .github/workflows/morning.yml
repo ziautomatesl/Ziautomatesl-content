@@ -4,6 +4,8 @@ on:
   schedule:
     - cron: '0 5 * * *'  # 7:00 hora España (UTC+2 verano)
   workflow_dispatch:      # permite lanzarlo manualmente para probar
+  push:
+    branches: [main]
 
 jobs:
   publicar-video:
