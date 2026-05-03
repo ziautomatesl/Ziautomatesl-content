@@ -31,4 +31,8 @@ jobs:
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
-        run: python main.py evening > debug.txt 2>&1
+        run: python main.py evening 2>&1 | tee debug.txt; exit ${PIPESTATUS[0]}
+
+      - name: Mostrar log si falla
+        if: failure()
+        run: cat debug.txt || echo "(sin log)"

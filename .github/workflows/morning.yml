@@ -36,13 +36,8 @@ jobs:
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
-        run: python main.py morning > debug.txt 2>&1
+        run: python main.py morning 2>&1 | tee debug.txt; exit ${PIPESTATUS[0]}
 
-      - name: Guardar debug si hay error
+      - name: Mostrar log si falla
         if: failure()
-        run: |
-          git config user.email "actions@github.com"
-          git config user.name "ZIA Bot"
-          git add debug.txt
-          git commit -m "debug output [skip ci]"
-          git push
+        run: cat debug.txt || echo "(sin log)"
