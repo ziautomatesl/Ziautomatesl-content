@@ -113,7 +113,7 @@ def create_animated_video(audio_path, word_timings, output_path="zia_video.mp4")
         return np.array(frame)
 
     video = VideoClip(make_frame, duration=duration)
-    video = video.set_audio(audio)
+    video = video.with_audio(audio)
     video.write_videofile(
         output_path,
         fps=FPS,
