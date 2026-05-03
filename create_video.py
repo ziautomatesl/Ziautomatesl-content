@@ -1,7 +1,7 @@
 import os
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
-from moviepy.editor import VideoClip, AudioFileClip
+from moviepy import VideoClip, AudioFileClip
 import requests
 
 ROBOT_PATH = os.path.join(os.path.dirname(__file__), "robot.png")
