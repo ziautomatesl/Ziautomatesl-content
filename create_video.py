@@ -5,6 +5,7 @@ from PIL import Image, ImageDraw, ImageFont
 from moviepy import VideoClip, AudioFileClip
 from generate_robot import robot_frame, RW, RH
 from get_backgrounds import fetch_backgrounds
+from robot_behavior import build_timeline, get_behavior
 
 W, H  = 1080, 1920
 FPS   = 30
@@ -30,28 +31,6 @@ def _get_fonts():
         r = "C:/Windows/Fonts/arial.ttf"
     return {"brand": _load_font(b,86), "sub": _load_font(r,44),
             "cap":   _load_font(b,56), "tag": _load_font(r,34)}
-
-
-# ── Gesture selection from spoken words ──────────────────────────────────────
-_GESTURE_MAP = [
-    (['euro','€','dinero','cobro','factura','precio','pago','sueldo',
-      'gana','inver'], 'thumbsup'),
-    (['tú','tu','negocio','empresa','pyme','autónom','tienda',
-      'restau','clíni','inmobi'], 'point_cam'),
-    (['automático','auto','solo','sistema','bot','ia','robot',
-      'inteligenci','n8n','make'], 'explain'),
-    (['hola','gracias','semana','mes','día','tiempo','hora',
-      'minuto','segunda'], 'wave'),
-    (['qué','cómo','por qué','problema','antes'], 'shrug'),
-]
-
-def _pick_gesture(recent_words: list[str]) -> str:
-    text = " ".join(recent_words).lower()
-    for keywords, gesture in _GESTURE_MAP:
-        for kw in keywords:
-            if kw in text:
-                return gesture
-    return 'neutral'
 
 
 # ── Timing helpers ────────────────────────────────────────────────────────────
@@ -174,11 +153,8 @@ def create_animated_video(audio_path, word_timings, output_path="zia_video.mp4",
     overlay  = _make_overlay()
     vignette = _get_vignette()
 
-    # Gesture change interval: switch pose every ~7 seconds
-    def _gesture(t, wt):
-        recent = _last_words(t, wt, n=12)
-        words  = [w["word"] for w in recent]
-        return _pick_gesture(words)
+    print("Construyendo timeline de comportamiento...")
+    behavior_events = build_timeline(word_timings, script_text)
 
     def make_frame(t):
         # 1. Background
@@ -201,12 +177,15 @@ def create_animated_video(audio_path, word_timings, output_path="zia_video.mp4",
             draw.ellipse([(W//2-hr, hcy-hr),(W//2+hr, hcy+hr)],
                          outline=(0,int(42*glow_v),int(76*glow_v)), width=3)
 
-        # 4. Robot with gesture + lip sync
+        # 4. Robot – behavior engine drives pose, gaze and energy
+        beh     = get_behavior(t, behavior_events)
         bob     = int(9 * math.sin(t*math.pi*1.5))
         mouth_v = abs(math.sin(t*math.pi*7)) * (1.0 if glow_v>0.5 else 0.0)
-        gesture = _gesture(t, word_timings)
 
-        r_img = robot_frame(t, mouth_v, eff_g, pose=gesture, bob=bob)
+        r_img = robot_frame(t, mouth_v, eff_g,
+                            pose=beh['pose'], bob=bob,
+                            gaze_x=beh['gaze_x'], gaze_y=beh['gaze_y'],
+                            energy=beh['energy'])
         frame.paste(r_img, (ROBOT_X, ROBOT_Y), r_img)
 
         draw = ImageDraw.Draw(frame)
