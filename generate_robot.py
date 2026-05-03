@@ -34,6 +34,8 @@ def _sphere(out, cx, cy, r, col,
     H, W = out.shape[:2]
     y0, y1 = max(0, cy-r-1), min(H, cy+r+2)
     x0, x1 = max(0, cx-r-1), min(W, cx+r+2)
+    if y0 >= y1 or x0 >= x1:
+        return
     ys, xs  = np.mgrid[y0:y1, x0:x1]
     dx = (xs-cx)/r;  dy = (ys-cy)/r
     d2 = dx*dx + dy*dy;  ok = d2 <= 1.0
