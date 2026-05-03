@@ -3,7 +3,7 @@ import os
 from generate_script import generate_script
 from create_audio import create_audio
 from create_video import create_animated_video, upload_for_instagram
-from post_instagram import post_reel
+from post_youtube import post_youtube
 
 def main():
     slot = sys.argv[1] if len(sys.argv) > 1 else "morning"
@@ -21,18 +21,16 @@ def main():
     print("PASO 3: Creando video animado...")
     video_path = create_animated_video(audio_path, word_timings, "zia_video.mp4")
 
-    print("PASO 4: Subiendo video...")
-    video_url = upload_for_instagram(video_path)
-
-    print("PASO 5: Publicando en Instagram...")
-    caption = f"{content['script']}\n\n{content['hashtags']}"
-    post_reel(video_url, caption)
+    print("PASO 4: Publicando en YouTube...")
+    title = content["topic"]
+    description = f"{content['script']}\n\n{content['hashtags']}\n\nziautomate.netlify.app"
+    post_youtube(video_path, title, description)
 
     for f in ["zia_audio.mp3", "zia_video.mp4"]:
         if os.path.exists(f):
             os.remove(f)
 
-    print("\n✅ Video publicado en Instagram!\n")
+    print("\n✅ Video publicado en YouTube!\n")
 
 if __name__ == "__main__":
     main()
