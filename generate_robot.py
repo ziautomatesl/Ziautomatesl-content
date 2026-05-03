@@ -1,135 +1,199 @@
-from PIL import ImageDraw
+"""
+3D robot avatar generated with numpy sphere rendering + PIL drawing.
+Looks similar to the ziautomate blue robot mascot.
+"""
+import math
+import numpy as np
+from PIL import Image, ImageDraw
+
+# Canvas for the robot
+RW, RH = 820, 960
+LIGHT = (0.42, -0.52, 0.74)   # light direction (x, y, z)
+
+BLUE_HEAD  = (18,  55, 205)
+BLUE_BODY  = (15,  45, 185)
+BLUE_LIMB  = (20,  50, 175)
+ORANGE     = (230, 130,  10)
+DARK_VISOR = (8,    8,  18)
+CYAN_EYE   = (0,  210, 255)
+FOOT_COLOR = (14,  14,  28)
 
 
-def draw_robot(img, cx, cy, mouth=0.0, blink=0.0, glow=0.15, pose='neutral'):
-    """
-    Draw robot onto img (PIL RGBA).
-    pose: 'neutral' | 'point_right' | 'point_left' | 'raise_right' | 'explain'
-    """
+# ── 3D sphere via numpy ───────────────────────────────────────────────────────
+def _sphere(out, cx, cy, r, base, spec_power=32, spec_str=0.9):
+    H, W = out.shape[:2]
+    y0, y1 = max(0, cy-r-1), min(H, cy+r+2)
+    x0, x1 = max(0, cx-r-1), min(W, cx+r+2)
+    ys, xs = np.mgrid[y0:y1, x0:x1]
+    dx = (xs - cx) / r
+    dy = (ys - cy) / r
+    d2 = dx**2 + dy**2
+    inside = d2 <= 1.0
+    dz = np.where(inside, np.sqrt(np.clip(1 - d2, 0, 1)), 0)
+    dot = np.clip(dx*LIGHT[0] + dy*LIGHT[1] + dz*LIGHT[2], 0, 1)
+    diffuse = np.where(inside, np.clip(dot, 0.12, 1.0), 0)
+    spec = np.where(inside, np.clip(2*dz*dot - LIGHT[2], 0, 1)**spec_power * spec_str, 0)
+    for i, c in enumerate(base):
+        channel = np.clip(c * diffuse + 255 * spec, 0, 255)
+        out[y0:y1, x0:x1, i] = np.where(inside, channel, out[y0:y1, x0:x1, i])
+    out[y0:y1, x0:x1, 3] = np.where(inside, 255, out[y0:y1, x0:x1, 3])
+
+
+def _ellipsoid(out, cx, cy, rx, ry, base, spec_power=28, spec_str=0.7):
+    H, W = out.shape[:2]
+    y0, y1 = max(0, cy-ry-1), min(H, cy+ry+2)
+    x0, x1 = max(0, cx-rx-1), min(W, cx+rx+2)
+    ys, xs = np.mgrid[y0:y1, x0:x1]
+    dx = (xs - cx) / rx
+    dy = (ys - cy) / ry
+    d2 = dx**2 + dy**2
+    inside = d2 <= 1.0
+    dz = np.where(inside, np.sqrt(np.clip(1 - d2, 0, 1)), 0)
+    dot = np.clip(dx*LIGHT[0] + dy*LIGHT[1] + dz*LIGHT[2], 0, 1)
+    diffuse = np.where(inside, np.clip(dot, 0.12, 1.0), 0)
+    spec = np.where(inside, np.clip(2*dz*dot - LIGHT[2], 0, 1)**spec_power * spec_str, 0)
+    for i, c in enumerate(base):
+        channel = np.clip(c * diffuse + 255 * spec, 0, 255)
+        out[y0:y1, x0:x1, i] = np.where(inside, channel, out[y0:y1, x0:x1, i])
+    out[y0:y1, x0:x1, 3] = np.where(inside, 255, out[y0:y1, x0:x1, 3])
+
+
+# ── Pre-render static robot parts ────────────────────────────────────────────
+def build_base():
+    """Render the robot (no mouth/eyes) as a pre-computed numpy RGBA array."""
+    arr = np.zeros((RH, RW, 4), dtype=np.float32)
+    cx = RW // 2
+
+    # Feet
+    _ellipsoid(arr, cx-90, 900, 62, 32, FOOT_COLOR)
+    _ellipsoid(arr, cx+90, 900, 62, 32, FOOT_COLOR)
+
+    # Legs
+    _ellipsoid(arr, cx-88, 790, 42, 90, BLUE_LIMB)
+    _ellipsoid(arr, cx+88, 790, 42, 90, BLUE_LIMB)
+
+    # Body
+    _ellipsoid(arr, cx, 580, 168, 148, BLUE_BODY, spec_power=24, spec_str=0.8)
+
+    # Chest glow placeholder (filled later in overlay)
+    _sphere(arr, cx, 560, 40, (0, 60, 180), spec_power=16, spec_str=0.4)
+
+    # Shoulders
+    _sphere(arr, cx-175, 465, 45, BLUE_LIMB, spec_power=20)
+    _sphere(arr, cx+175, 465, 45, BLUE_LIMB, spec_power=20)
+
+    # Left arm (hanging, slightly forward)
+    _ellipsoid(arr, cx-200, 585, 36, 110, BLUE_LIMB)
+    _sphere(arr, cx-195, 700, 36, BLUE_LIMB, spec_power=18)   # fist
+
+    # Right arm — raised and waving
+    _ellipsoid(arr, cx+215, 490, 36, 80, BLUE_LIMB)
+    _ellipsoid(arr, cx+268, 360, 32, 72, BLUE_LIMB)
+    _sphere(arr, cx+310, 275, 36, BLUE_LIMB, spec_power=18)   # fist raised
+
+    # Neck
+    _ellipsoid(arr, cx, 388, 28, 45, BLUE_LIMB)
+
+    # Head (sphere) — drawn last so it's on top
+    _sphere(arr, cx, 218, 162, BLUE_HEAD, spec_power=36, spec_str=1.0)
+
+    # Antenna stick
+    for y in range(40, 68):
+        arr[y, cx-2:cx+3, :3] = [80, 80, 80]
+        arr[y, cx-2:cx+3, 3] = 255
+    # Antenna ball
+    _sphere(arr, cx, 38, 22, ORANGE, spec_power=40, spec_str=1.0)
+
+    # Face visor (dark oval on front of head)
+    img = Image.fromarray(arr.astype(np.uint8), 'RGBA')
     draw = ImageDraw.Draw(img)
+    vx, vy, vrx, vry = cx, 225, 105, 88
+    draw.ellipse([(vx-vrx, vy-vry), (vx+vrx, vy+vry)],
+                 fill=DARK_VISOR + (255,))
+
+    return np.array(img).astype(np.float32), {
+        'cx': cx,
+        'head_cy': 218,
+        'visor_cx': vx, 'visor_cy': vy,
+        'eye_ly': vy - 20,  'eye_lx': vx - 48,
+        'eye_ry': vy - 20,  'eye_rx': vx + 48,
+        'eye_rw': 32,       'eye_rh': 22,
+        'mouth_cx': vx,     'mouth_cy': vy + 46,
+        'mouth_rw': 52,     'mouth_rh': 16,
+    }
+
+
+BASE_ARR, META = build_base()
+
+
+# ── Per-frame animated render ─────────────────────────────────────────────────
+def robot_frame(mouth_open: float, glow: float, bob: int = 0) -> Image.Image:
+    """
+    mouth_open : 0.0 smile closed  →  1.0 fully open
+    glow       : 0.0 dim           →  1.0 blazing cyan
+    bob        : vertical pixel offset (animation)
+    Returns PIL RGBA image.
+    """
+    arr = BASE_ARR.copy()
+
+    m = META
     g = glow
+    CYAN  = (0, min(255, int(170 + 85*g)), min(255, int(215 + 40*g)), 255)
+    CYAND = (0, int(40 + 50*g), int(70 + 50*g), 255)
+    WHITE = (220, 235, 255, 255)
+    DARK  = DARK_VISOR + (255,)
 
-    CYAN  = (0,  min(255, int(155 + 100*g)), min(255, int(195 + 60*g)))
-    DCYAN = (0,  int(40  + 60*g),             int(75  + 60*g))
-    BODY  = (12, 18, 35)
-    PANEL = (22, 32, 58)
-    METAL = (38, 52, 82)
-    EDGE  = (0,  int(85  + 55*g), int(145 + 45*g))
-    WHITE = (220, 235, 255)
+    img  = Image.fromarray(arr.astype(np.uint8), 'RGBA')
+    draw = ImageDraw.Draw(img)
 
-    def rr(xy, r, fill, out=None, w=2):
-        draw.rounded_rectangle(xy, radius=r, fill=fill, outline=out, width=w)
+    # ── Chest core glow ───────────────────────────────────────────────────────
+    cr = int(24 + g * 14)
+    draw.ellipse([(m['cx']-cr, 560-cr), (m['cx']+cr, 560+cr)],
+                 fill=(0, int(80 + 120*g), int(170 + 85*g), 255))
+    draw.ellipse([(m['cx']-cr//2, 560-cr//2), (m['cx']+cr//2, 560+cr//2)],
+                 fill=(int(180*g), int(220*g), 255, 255))
 
-    def arm(x1, y1, x2, y2, w=28):
-        """Draw an arm as a thick line (polygon) between two points."""
-        import math
-        dx, dy = x2 - x1, y2 - y1
-        length = max(1, math.hypot(dx, dy))
-        nx, ny = -dy / length * w, dx / length * w
-        pts = [
-            (x1 + nx, y1 + ny), (x1 - nx, y1 - ny),
-            (x2 - nx, y2 - ny), (x2 + nx, y2 + ny),
-        ]
-        draw.polygon(pts, fill=PANEL, outline=EDGE)
-        # Hand circle
-        draw.ellipse([(x2-w+4, y2-w+4), (x2+w-4, y2+w-4)], fill=METAL, outline=EDGE, width=2)
-        draw.ellipse([(x2-9,   y2-9),   (x2+9,   y2+9)],   fill=CYAN)
+    # ── Eyes ─────────────────────────────────────────────────────────────────
+    for (ex, ey) in ((m['eye_lx'], m['eye_ly']), (m['eye_rx'], m['eye_ry'])):
+        erw, erh = m['eye_rw'], m['eye_rh']
+        # Glow halo
+        draw.ellipse([(ex-erw-6, ey-erh-5), (ex+erw+6, ey+erh+5)], fill=CYAND)
+        # Iris
+        draw.ellipse([(ex-erw, ey-erh), (ex+erw, ey+erh)], fill=CYAN)
+        # Specular
+        draw.ellipse([(ex-erw//3, ey-erh//2), (ex+erw//4, ey)], fill=WHITE)
 
-    # ── Antena ────────────────────────────────────────────────────────────────
-    draw.line([(cx, cy-418), (cx, cy-362)], fill=EDGE, width=4)
-    draw.ellipse([(cx-13, cy-440), (cx+13, cy-414)], fill=CYAN)
-    draw.ellipse([(cx-6,  cy-433), (cx+6,  cy-421)], fill=WHITE)
+    # ── Mouth ─────────────────────────────────────────────────────────────────
+    mcx, mcy = m['mouth_cx'], m['mouth_cy']
+    mrw, mrh = m['mouth_rw'], m['mouth_rh']
 
-    # ── Cabeza ────────────────────────────────────────────────────────────────
-    ht, hb = cy - 360, cy - 162
-    rr([(cx-150, ht), (cx+150, hb)], 34, PANEL, EDGE, 3)
-    rr([(cx-84,  ht+10), (cx+84, ht+32)], 6, METAL, DCYAN, 1)
+    # Cover existing area
+    draw.ellipse([(mcx-mrw-6, mcy-mrh-8), (mcx+mrw+6, mcy+mrh+8)], fill=DARK)
 
-    # Ojos
-    ey = ht + 98
-    bh = max(2, int(22 * (1 - blink)))
-    for ex in (cx - 72, cx + 72):
-        draw.ellipse([(ex-32, ey-24), (ex+32, ey+24)], fill=DCYAN)
-        draw.ellipse([(ex-24, ey-bh), (ex+24, ey+bh)],
-                     fill=CYAN if blink < 0.9 else EDGE)
-        if blink < 0.8:
-            draw.ellipse([(ex-11, ey-11), (ex+11, ey+11)], fill=WHITE)
-
-    # Boca
-    my = ht + 163
-    rr([(cx-74, my-23), (cx+74, my+27)], 10, BODY, DCYAN, 1)
-    if mouth < 0.12:
-        for i in range(5):
-            xd = cx - 44 + i * 22
-            draw.ellipse([(xd-5, my-5), (xd+5, my+5)], fill=CYAN)
+    if mouth_open < 0.08:
+        # Closed smile arc
+        draw.arc([(mcx-mrw, mcy-mrw//3), (mcx+mrw, mcy+mrw//3)],
+                 start=8, end=172, fill=CYAN, width=5)
+        # Smile corners
+        draw.ellipse([(mcx-mrw-3, mcy-5), (mcx-mrw+6, mcy+6)], fill=CYAN)
+        draw.ellipse([(mcx+mrw-6, mcy-5), (mcx+mrw+3, mcy+6)], fill=CYAN)
     else:
-        mw = int(53 + mouth * 15)
-        mh = int(7  + mouth * 22)
-        draw.ellipse([(cx-mw, my-mh), (cx+mw, my+mh)], fill=DCYAN)
-        draw.ellipse([(cx-mw+7, my-mh+5), (cx+mw-7, my+mh-5)], fill=CYAN)
+        # Open mouth oval
+        ow = int(mrw * 0.88)
+        oh = int(6 + mouth_open * mrw * 0.58)
+        draw.ellipse([(mcx-ow, mcy-oh), (mcx+ow, mcy+oh)],
+                     fill=(5, 5, 15, 255))
+        draw.ellipse([(mcx-ow, mcy-oh), (mcx+ow, mcy+oh)],
+                     outline=CYAN, width=4)
+        if mouth_open > 0.3:
+            tw = int(ow * 0.65)
+            draw.arc([(mcx-tw, mcy-oh+3), (mcx+tw, mcy-oh//2+4)],
+                     start=0, end=180, fill=(200, 215, 230, 180), width=3)
 
-    # ── Cuello ────────────────────────────────────────────────────────────────
-    rr([(cx-24, hb-6), (cx+24, hb+42)], 6, METAL, EDGE, 1)
+    # ── Apply vertical bob ────────────────────────────────────────────────────
+    if bob != 0:
+        final = Image.new("RGBA", (RW, RH), (0, 0, 0, 0))
+        final.paste(img, (0, bob), img)
+        return final
 
-    # ── Cuerpo ────────────────────────────────────────────────────────────────
-    by1 = hb + 30
-    by2 = by1 + 300
-    rr([(cx-168, by1), (cx+168, by2)], 28, PANEL, EDGE, 3)
-    rr([(cx-108, by1+26), (cx+108, by1+180)], 14, BODY, DCYAN, 1)
-
-    # Núcleo
-    ny = by1 + 94
-    draw.ellipse([(cx-44, ny-44), (cx+44, ny+44)], fill=DCYAN)
-    draw.ellipse([(cx-31, ny-31), (cx+31, ny+31)], fill=CYAN)
-    draw.ellipse([(cx-14, ny-14), (cx+14, ny+14)], fill=WHITE)
-
-    for i in range(4):
-        ly = by1 + 33 + i * 22
-        draw.line([(cx-97, ly), (cx-57, ly)], fill=EDGE, width=2)
-        draw.line([(cx+57, ly), (cx+97, ly)], fill=EDGE, width=2)
-
-    rr([(cx-76, by1+200), (cx+76, by1+264)], 8, BODY, DCYAN, 1)
-    for i in range(3):
-        xd = cx - 42 + i * 42
-        draw.line([(xd, by1+210), (xd, by1+256)], fill=EDGE, width=1)
-
-    # Hombros
-    lshoulder = (cx - 198, by1 + 24)
-    rshoulder = (cx + 198, by1 + 24)
-    for sx, sy in (lshoulder, rshoulder):
-        rr([(sx-38, sy-14), (sx+38, sy+54)], 22, METAL, EDGE, 2)
-        draw.ellipse([(sx-10, sy+14), (sx+10, sy+34)], fill=CYAN)
-
-    # ── Brazos según pose ─────────────────────────────────────────────────────
-    lsx, lsy = cx - 198, by1 + 40
-    rsx, rsy = cx + 198, by1 + 40
-
-    if pose == 'neutral':
-        arm(lsx, lsy, lsx - 14, lsy + 210)
-        arm(rsx, rsy, rsx + 14, rsy + 210)
-
-    elif pose == 'point_right':
-        arm(lsx, lsy, lsx - 14, lsy + 210)
-        arm(rsx, rsy, cx + 420, rsy - 20)   # brazo derecho apunta →
-
-    elif pose == 'point_left':
-        arm(lsx, lsy, cx - 420, lsy - 20)   # brazo izq apunta ←
-        arm(rsx, rsy, rsx + 14, rsy + 210)
-
-    elif pose == 'raise_right':
-        arm(lsx, lsy, lsx - 14, lsy + 210)
-        arm(rsx, rsy, cx + 280, by1 - 90)   # brazo derecho arriba ↗
-
-    elif pose == 'explain':
-        arm(lsx, lsy, cx - 300, by1 - 60)   # ambos brazos abiertos ↗↖
-        arm(rsx, rsy, cx + 300, by1 - 60)
-
-    # ── Cintura ───────────────────────────────────────────────────────────────
-    rr([(cx-152, by2-10), (cx+152, by2+24)], 8, METAL, EDGE, 2)
-
-    # ── Piernas ───────────────────────────────────────────────────────────────
-    ly0 = by2 + 16
-    for lx in (cx - 92, cx + 92):
-        rr([(lx-43, ly0), (lx+43, ly0+165)], 16, PANEL, EDGE, 2)
-        draw.line([(lx, ly0+28), (lx, ly0+136)], fill=EDGE, width=2)
-        rr([(lx-49, ly0+154), (lx+53, ly0+200)], 14, METAL, EDGE, 2)
+    return img
