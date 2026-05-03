@@ -57,6 +57,58 @@ def _cover_crop(img, tw, th):
     return img.crop((left, top, left + tw, top + th))
 
 
+def fetch_background_videos(topic, n=3):
+    """Download n portrait video clips from Pexels. Returns list of local file paths."""
+    api_key = os.environ.get('PEXELS_API_KEY', '')
+    if not api_key:
+        print("PEXELS_API_KEY not set, sin vídeo de fondo")
+        return []
+
+    kw = _keywords(topic)
+    headers = {'Authorization': api_key}
+    url = (f'https://api.pexels.com/videos/search'
+           f'?query={requests.utils.quote(kw)}&orientation=portrait&per_page={n}&size=medium')
+
+    try:
+        resp = requests.get(url, headers=headers, timeout=20)
+        resp.raise_for_status()
+        videos = resp.json().get('videos', [])
+        paths = []
+        for i, video in enumerate(videos):
+            files = video.get('video_files', [])
+
+            def _score(f):
+                q  = f.get('quality', '')
+                fh = f.get('height', 0)
+                fw = f.get('width', 1)
+                portrait = 100 if fh > fw else 0
+                quality  = {'hd': 50, 'sd': 20}.get(q, 5)
+                size_ok  = 10 if fh <= 1920 else 0
+                return portrait + quality + size_ok
+
+            best = sorted(files, key=_score, reverse=True)
+            if not best:
+                continue
+            link = best[0].get('link')
+            if not link:
+                continue
+
+            path = f'/tmp/zia_bgvid_{i}.mp4'
+            r = requests.get(link, timeout=60, stream=True)
+            with open(path, 'wb') as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    f.write(chunk)
+            paths.append(path)
+            print(f"  Vídeo {i+1}: {best[0].get('quality')} "
+                  f"{best[0].get('width')}x{best[0].get('height')}")
+
+        print(f"Descargados {len(paths)} vídeos de Pexels para '{topic}'")
+        return paths
+    except Exception as e:
+        print(f"Pexels video error: {e}")
+        return []
+
+
 def fetch_backgrounds(topic, n=3):
     """Download n portrait photos from Pexels related to topic. Returns list of PIL RGB images."""
     api_key = os.environ.get('PEXELS_API_KEY', '')

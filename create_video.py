@@ -2,9 +2,8 @@ import math
 import os
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
-from moviepy import VideoClip, AudioFileClip
-from generate_robot import robot_frame, RW, RH
-from get_backgrounds import fetch_backgrounds
+from moviepy import VideoClip, AudioFileClip, VideoFileClip, concatenate_videoclips
+from get_backgrounds import fetch_background_videos
 from robot_behavior import build_timeline, get_behavior
 
 W, H  = 1080, 1920
@@ -13,9 +12,6 @@ BG    = (5,   5,  14)
 CYAN  = (0, 220, 255)
 WHITE = (255, 255, 255)
 GREY  = (105, 120, 142)
-
-ROBOT_X = (W - RW) // 2
-ROBOT_Y = H - RH - 105   # robot stands just above footer
 
 
 # ── Fuentes ───────────────────────────────────────────────────────────────────
@@ -50,23 +46,22 @@ def _last_words(t, wt, n=8):
     spoken = [w for w in wt if w["start"] <= t+0.08]
     return spoken[-n:] if spoken else []
 
-def _blink(t):
-    for bt in [2.1,5.3,8.7,12.0,15.4,18.9,22.3,26.0,29.5,33.0,36.5]:
-        dt = t - bt
-        if 0 <= dt < 0.13:
-            return math.sin(dt/0.13 * math.pi)
-    return 0.0
-
 
 # ── Background helpers ────────────────────────────────────────────────────────
 def _make_overlay():
     ov = Image.new("RGBA", (W, H), (0,0,0,0))
     d  = ImageDraw.Draw(ov)
     for y in range(H):
-        if y < 135:           a = 195
-        elif y < 400:         a = int(16 + (y-135)*0.05)
-        elif y < 720:         a = int(29 + (y-400)*0.09)
-        else:                 a = min(165, int(58 + (y-720)*0.09))
+        if y < 135:
+            a = 210
+        elif y < 400:
+            a = int(80 - (y-135)*0.22)
+        elif y < 1400:
+            a = int(28 + (y-400)*0.02)
+        elif y < 1700:
+            a = int(52 + (y-1400)*0.30)
+        else:
+            a = min(210, int(142 + (y-1700)*0.23))
         d.line([(0,y),(W,y)], fill=(0,3,10,a))
     return ov
 
@@ -78,15 +73,52 @@ def _solid_bg():
             d.ellipse([(x-1,y-1),(x+1,y+1)],fill=(0,22,42))
     return bg
 
-def _bg_frame(t, dur, imgs, fb):
-    if not imgs: return fb.copy().convert("RGBA")
-    n=len(imgs); seg=dur/n; i=min(int(t/seg),n-1); st=t-i*seg; fade=0.6
-    if st<fade and i>0:
-        return Image.blend(imgs[i-1].convert("RGBA"),imgs[i].convert("RGBA"),st/fade)
-    if st>seg-fade and i<n-1:
-        return Image.blend(imgs[i].convert("RGBA"),imgs[i+1].convert("RGBA"),
-                           (st-(seg-fade))/fade)
-    return imgs[i].convert("RGBA")
+
+def _prepare_bg_video(video_paths, target_duration):
+    """Load, resize/crop and loop video clips to cover target_duration."""
+    clips = []
+    for p in video_paths:
+        try:
+            c = VideoFileClip(p).without_audio()
+            src_ratio = c.w / c.h
+            tgt_ratio = W / H
+            if src_ratio > tgt_ratio:
+                c = c.resized(height=H)
+            else:
+                c = c.resized(width=W)
+            x1 = max(0, (c.w - W) // 2)
+            y1 = max(0, (c.h - H) // 2)
+            c = c.cropped(x1=x1, y1=y1, width=W, height=H)
+            clips.append(c)
+        except Exception as e:
+            print(f"Error cargando vídeo {p}: {e}")
+
+    if not clips:
+        return None
+
+    total = sum(c.duration for c in clips)
+    if total < target_duration:
+        loops = int(target_duration / total) + 2
+        clips = clips * loops
+
+    combined = concatenate_videoclips(clips)
+    return combined.subclipped(0, target_duration)
+
+
+# ── Vignette ──────────────────────────────────────────────────────────────────
+_VIGNETTE = None
+def _get_vignette():
+    global _VIGNETTE
+    if _VIGNETTE is None:
+        v  = Image.new("RGBA",(W,H),(0,0,0,0))
+        dv = ImageDraw.Draw(v)
+        cx2, cy2 = W//2, H//2
+        for r in range(max(W,H)//2, 0, -4):
+            dist = r / (max(W,H)//2)
+            a = int(max(0, (dist-0.55)*1.8*180))
+            dv.ellipse([(cx2-r,cy2-r),(cx2+r,cy2+r)], outline=(0,0,0,a), width=4)
+        _VIGNETTE = v
+    return _VIGNETTE
 
 
 # ── Subtitle ──────────────────────────────────────────────────────────────────
@@ -110,36 +142,6 @@ def _subtitle(draw, t, wt, fonts):
         xc  = wb[2] + draw.textbbox((0,0)," ",font=fonts["cap"])[2]
 
 
-# ── Energy particles ──────────────────────────────────────────────────────────
-def _particles(draw, t, glow):
-    if glow < 0.5: return
-    import random
-    rand = random.Random(int(t*9))
-    for _ in range(16):
-        age  = rand.random()
-        px   = W//2 + rand.randint(-200,200)
-        py   = ROBOT_Y + rand.randint(0,320) - int(age*210*glow)
-        pr   = int(1.5 + rand.random()*4*glow)
-        br   = int(160*glow); bg2 = int(248*glow)
-        draw.ellipse([(px-pr,py-pr),(px+pr,py+pr)], fill=(0,br,bg2))
-
-
-# ── Vignette post-processing ──────────────────────────────────────────────────
-_VIGNETTE = None
-def _get_vignette():
-    global _VIGNETTE
-    if _VIGNETTE is None:
-        v = Image.new("RGBA",(W,H),(0,0,0,0))
-        dv = ImageDraw.Draw(v)
-        cx2,cy2 = W//2, H//2
-        for r in range(max(W,H)//2, 0, -4):
-            dist = r / (max(W,H)//2)
-            a = int(max(0, (dist-0.55)*1.8*180))
-            dv.ellipse([(cx2-r,cy2-r),(cx2+r,cy2+r)], outline=(0,0,0,a), width=4)
-        _VIGNETTE = v
-    return _VIGNETTE
-
-
 # ── MAIN ──────────────────────────────────────────────────────────────────────
 def create_animated_video(audio_path, word_timings, output_path="zia_video.mp4",
                           topic="", script_text=""):
@@ -147,73 +149,51 @@ def create_animated_video(audio_path, word_timings, output_path="zia_video.mp4",
     audio    = AudioFileClip(audio_path)
     duration = audio.duration
 
-    print(f"Descargando fondos Pexels para '{topic}'...")
-    bg_imgs  = fetch_backgrounds(topic, n=3)
+    print(f"Descargando vídeos Pexels para '{topic}'...")
+    video_paths = fetch_background_videos(topic, n=3)
+
+    print("Preparando vídeo de fondo...")
+    bg_clip  = _prepare_bg_video(video_paths, duration)
     fallback = _solid_bg()
     overlay  = _make_overlay()
     vignette = _get_vignette()
 
-    print("Construyendo timeline de comportamiento...")
-    behavior_events = build_timeline(word_timings, script_text)
-
     def make_frame(t):
-        # 1. Background
-        frame = _bg_frame(t, duration, bg_imgs, fallback)
+        # 1. Background frame
+        if bg_clip is not None:
+            frame = Image.fromarray(bg_clip.get_frame(t).astype('uint8'))
+        else:
+            frame = fallback.copy()
+
+        frame = frame.convert("RGBA")
         frame.paste(overlay, (0,0), overlay)
         frame = frame.convert("RGB")
         draw  = ImageDraw.Draw(frame)
 
-        glow_v  = _glow(t, word_timings)
-        blink_v = _blink(t)
-        eff_g   = glow_v * (1.0 - blink_v*0.88)
-
-        # 2. Particles
-        _particles(draw, t, glow_v)
-
-        # 3. Halo
-        if glow_v > 0.5:
-            hr  = int(230 + 22*math.sin(t*12))
-            hcy = ROBOT_Y + RH//2
-            draw.ellipse([(W//2-hr, hcy-hr),(W//2+hr, hcy+hr)],
-                         outline=(0,int(42*glow_v),int(76*glow_v)), width=3)
-
-        # 4. Robot – behavior engine drives pose, gaze and energy
-        beh     = get_behavior(t, behavior_events)
-        bob     = int(9 * math.sin(t*math.pi*1.5))
-        mouth_v = abs(math.sin(t*math.pi*7)) * (1.0 if glow_v>0.5 else 0.0)
-
-        r_img = robot_frame(t, mouth_v, eff_g,
-                            pose=beh['pose'], bob=bob,
-                            gaze_x=beh['gaze_x'], gaze_y=beh['gaze_y'],
-                            energy=beh['energy'])
-        frame.paste(r_img, (ROBOT_X, ROBOT_Y), r_img)
-
-        draw = ImageDraw.Draw(frame)
-
-        # 5. Vignette
+        # 2. Vignette
         frame.paste(vignette, (0,0), vignette)
         draw = ImageDraw.Draw(frame)
 
-        # 6. Header
+        # 3. Subtitle
+        _subtitle(draw, t, word_timings, fonts)
+
+        # 4. Header
         draw.rectangle([(0,0),(W,130)], fill=(0,4,14,235))
         draw.rectangle([(0,127),(W,131)], fill=CYAN)
         draw.text((W//2,65), "ziautomate", fill=CYAN,
                   font=fonts["brand"], anchor="mm")
 
-        # 7. Topic badge
+        # 5. Topic badge
         if topic:
             tl = topic.upper()[:36]
             ty = 202
             tb = draw.textbbox((W//2,ty), tl, font=fonts["tag"], anchor="mm")
             draw.rounded_rectangle(
                 [(tb[0]-20,tb[1]-10),(tb[2]+20,tb[3]+10)],
-                radius=20, fill=(0,0,0,155), outline=(0,86,140),width=1)
+                radius=20, fill=(0,0,0,155), outline=(0,86,140), width=1)
             draw.text((W//2,ty), tl, fill=CYAN, font=fonts["tag"], anchor="mm")
 
-        # 8. Subtitle
-        _subtitle(draw, t, word_timings, fonts)
-
-        # 9. Footer
+        # 6. Footer
         draw.rectangle([(0,H-114),(W,H)], fill=(0,4,14,235))
         draw.rectangle([(0,H-117),(W,H-113)], fill=CYAN)
         draw.text((W//2,H-68), "ziautomate.netlify.app",
@@ -227,6 +207,11 @@ def create_animated_video(audio_path, word_timings, output_path="zia_video.mp4",
     video = video.with_audio(audio)
     video.write_videofile(output_path, fps=FPS, codec="libx264",
                           audio_codec="aac", preset="faster", logger=None)
+
+    for p in video_paths:
+        try: os.remove(p)
+        except: pass
+
     return output_path
 
 
