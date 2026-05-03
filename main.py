@@ -19,7 +19,9 @@ def main():
     print(f"Palabras detectadas: {len(word_timings)}")
 
     print("PASO 3: Creando video animado...")
-    video_path = create_animated_video(audio_path, word_timings, "zia_video.mp4")
+    video_path = create_animated_video(audio_path, word_timings, "zia_video.mp4",
+                                       topic=content["topic"],
+                                       script_text=content["script"])
 
     print("PASO 4: Publicando en YouTube...")
     title = content["topic"]

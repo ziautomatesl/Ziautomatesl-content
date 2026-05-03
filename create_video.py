@@ -5,6 +5,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from moviepy import VideoClip, AudioFileClip
 from generate_robot import draw_robot
+from visual_scenes import build_scene
 
 W, H   = 1080, 1920
 FPS    = 30
@@ -154,15 +155,19 @@ def _render_progress(draw, t, duration):
 
 
 # ── MAIN ──────────────────────────────────────────────────────────────────────
-def create_animated_video(audio_path, word_timings, output_path="zia_video.mp4"):
-    particles = _make_particles(55)
-    bg_static = _static_bg()
-    fonts     = _get_fonts()
-    audio     = AudioFileClip(audio_path)
-    duration  = audio.duration
+def create_animated_video(audio_path, word_timings, output_path="zia_video.mp4",
+                          topic="", script_text=""):
+    particles  = _make_particles(55)
+    bg_static  = _static_bg()
+    fonts      = _get_fonts()
+    audio      = AudioFileClip(audio_path)
+    duration   = audio.duration
 
     cx_robot = W // 2
-    cy_robot = int(H * 0.56)   # centro visual del robot en el frame
+    cy_robot = int(H * 0.56)
+
+    # Escena informativa pre-renderizada (se pega cada frame, no se recalcula)
+    scene_img = build_scene(topic, script_text, fonts, W, H)
 
     def make_frame(t):
         frame = bg_static.copy()
@@ -171,9 +176,12 @@ def create_animated_video(audio_path, word_timings, output_path="zia_video.mp4")
         # Partículas flotando
         _render_particles(draw, particles, t)
 
+        # Panel informativo (tema + dato + flujo)
+        frame.paste(scene_img, (0, 0), scene_img)
+
         # Scan-line horizontal descendente (cada 4 segundos)
-        scan_t   = t % 4.0
-        scan_y   = int(scan_t / 4.0 * H)
+        scan_t = t % 4.0
+        scan_y = int(scan_t / 4.0 * H)
         draw.rectangle([(0, scan_y), (W, scan_y+2)], fill=(0, 50, 80))
 
         # Halo pulsante alrededor del robot cuando habla
