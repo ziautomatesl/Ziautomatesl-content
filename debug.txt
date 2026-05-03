@@ -9,13 +9,21 @@ El email marketing sigue siendo el canal con mejor retorno de inversión. El pro
 PASO 2: Creando audio con voz IA...
 Palabras detectadas: 0
 PASO 3: Creando video animado...
+PASO 4: Publicando en YouTube...
 Traceback (most recent call last):
   File "/home/runner/work/Ziautomatesl-content/Ziautomatesl-content/main.py", line 36, in <module>
     main()
-  File "/home/runner/work/Ziautomatesl-content/Ziautomatesl-content/main.py", line 22, in main
-    video_path = create_animated_video(audio_path, word_timings, "zia_video.mp4")
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/Ziautomatesl-content/Ziautomatesl-content/create_video.py", line 116, in create_animated_video
-    video = video.set_audio(audio)
-            ^^^^^^^^^^^^^^^
-AttributeError: 'VideoClip' object has no attribute 'set_audio'. Did you mean: 'with_audio'?
+  File "/home/runner/work/Ziautomatesl-content/Ziautomatesl-content/main.py", line 27, in main
+    post_youtube(video_path, title, description)
+  File "/home/runner/work/Ziautomatesl-content/Ziautomatesl-content/post_youtube.py", line 15, in post_youtube
+    creds.refresh(Request())
+  File "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/google/auth/credentials.py", line 474, in refresh
+    self._perform_refresh_token(request)
+  File "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/google/oauth2/credentials.py", line 435, in _perform_refresh_token
+    ) = reauth.refresh_grant(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/google/oauth2/reauth.py", line 370, in refresh_grant
+    _client._handle_error_response(response_data, retryable_error)
+  File "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/google/oauth2/_client.py", line 73, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('unauthorized_client: Unauthorized', {'error': 'unauthorized_client', 'error_description': 'Unauthorized'})
