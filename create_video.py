@@ -1,20 +1,20 @@
 import math
-import random
 import os
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from moviepy import VideoClip, AudioFileClip
 from generate_robot import draw_robot
-from visual_scenes import build_scene
+from get_backgrounds import fetch_backgrounds
 
 W, H   = 1080, 1920
 FPS    = 30
 BG     = (8,   8,  20)
 CYAN   = (0, 220, 255)
-DCYAN  = (0,  70, 110)
 WHITE  = (255, 255, 255)
 GREY   = (110, 125, 148)
 BLACK  = (0,   0,   0)
+
+POSES = ['neutral', 'point_right', 'raise_right', 'explain', 'point_left']
 
 
 # ── Fuentes ───────────────────────────────────────────────────────────────────
@@ -32,63 +32,33 @@ def _get_fonts():
         bold    = "C:/Windows/Fonts/arialbd.ttf"
         regular = "C:/Windows/Fonts/arial.ttf"
     return {
-        "brand":  _load_font(bold,    88),
-        "sub":    _load_font(regular, 44),
-        "cap":    _load_font(bold,    56),
-        "tag":    _load_font(regular, 34),
-        "word":   _load_font(bold,    60),
+        "brand": _load_font(bold,    86),
+        "sub":   _load_font(regular, 44),
+        "cap":   _load_font(bold,    56),
+        "tag":   _load_font(regular, 34),
     }
 
 
-# ── Partículas de fondo ───────────────────────────────────────────────────────
-def _make_particles(n=55, seed=42):
-    rng = random.Random(seed)
-    return [
-        {
-            "x":     rng.uniform(0, W),
-            "y":     rng.uniform(0, H),
-            "speed": rng.uniform(18, 60),
-            "r":     rng.uniform(1.2, 3.5),
-            "alpha": rng.uniform(0.15, 0.55),
-        }
-        for _ in range(n)
-    ]
+# ── Gradiente oscuro sobre la imagen ─────────────────────────────────────────
+def _dark_gradient(w, h):
+    """RGBA overlay: transparente arriba, opaco abajo (zona del robot)."""
+    grad = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(grad)
+    for y in range(h):
+        if y < 140:
+            alpha = 200          # barra marca
+        elif y < 400:
+            alpha = int(30 + (y - 140) * 0.10)   # imagen visible
+        elif y < 700:
+            alpha = int(45 + (y - 400) * 0.25)
+        else:
+            alpha = min(210, int(120 + (y - 700) * 0.13))  # zona robot
+        draw.line([(0, y), (w, y)], fill=(0, 4, 12, alpha))
+    return grad
 
 
-# ── Timings de palabras ───────────────────────────────────────────────────────
-def _word_at(t, word_timings):
-    for w in word_timings:
-        if w["start"] - 0.03 <= t <= w["end"] + 0.08:
-            return w["word"]
-    return None
-
-
-def _last_words(t, word_timings, n=7):
-    spoken = [w for w in word_timings if w["start"] <= t + 0.08]
-    return spoken[-n:] if spoken else []
-
-
-def _glow(t, word_timings):
-    for w in word_timings:
-        if w["start"] - 0.05 <= t <= w["end"] + 0.12:
-            return 1.0
-    return 0.15
-
-
-# ── Blink schedule ────────────────────────────────────────────────────────────
-def _blink(t):
-    """Devuelve 0-1 para el parpadeo (1 = cerrado)."""
-    # Parpadeos cada ~3s, duración 0.1s
-    blink_times = [2.1, 5.3, 8.7, 12.0, 15.4, 18.9, 22.3, 26.0, 29.5, 33.0, 36.8]
-    for bt in blink_times:
-        dt = t - bt
-        if 0 <= dt < 0.12:
-            return math.sin(dt / 0.12 * math.pi)
-    return 0.0
-
-
-# ── Fondo con rejilla de puntos ───────────────────────────────────────────────
-def _static_bg():
+# ── Fondo sólido de respaldo ──────────────────────────────────────────────────
+def _solid_bg():
     bg = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(bg)
     step = 58
@@ -98,135 +68,171 @@ def _static_bg():
     return bg
 
 
-# ── Render de partículas ──────────────────────────────────────────────────────
-def _render_particles(draw, particles, t):
-    for p in particles:
-        y = (p["y"] - p["speed"] * t) % H
-        c = (0, int(180 * p["alpha"]), int(255 * p["alpha"]))
-        r = p["r"]
-        draw.ellipse([(p["x"]-r, y-r), (p["x"]+r, y+r)], fill=c)
+# ── Timings ───────────────────────────────────────────────────────────────────
+def _glow(t, wt):
+    for w in wt:
+        if w["start"] - 0.05 <= t <= w["end"] + 0.12:
+            return 1.0
+    return 0.15
 
 
-# ── Barras de voz ─────────────────────────────────────────────────────────────
-def _render_voice_bars(draw, t, word_timings, cx, y, n=9):
-    speaking = _glow(t, word_timings) > 0.5
-    for i in range(n):
-        phase = i * 0.7 + t * 12
-        h = int(8 + 28 * abs(math.sin(phase))) if speaking else 4
-        x = cx - (n // 2) * 16 + i * 16
-        alpha_c = CYAN if speaking else (0, 60, 90)
-        draw.rectangle([(x-4, y - h), (x+4, y + h)], fill=alpha_c)
+def _word_at(t, wt):
+    for w in wt:
+        if w["start"] - 0.03 <= t <= w["end"] + 0.08:
+            return w["word"]
+    return None
 
 
-# ── Subtítulo con palabra actual resaltada ────────────────────────────────────
-def _render_subtitle(draw, t, word_timings, fonts):
-    words = _last_words(t, word_timings)
+def _last_words(t, wt, n=6):
+    spoken = [w for w in wt if w["start"] <= t + 0.08]
+    return spoken[-n:] if spoken else []
+
+
+def _blink(t):
+    for bt in [2.1, 5.3, 8.7, 12.0, 15.4, 18.9, 22.3, 26.0, 29.5, 33.0]:
+        dt = t - bt
+        if 0 <= dt < 0.12:
+            return math.sin(dt / 0.12 * math.pi)
+    return 0.0
+
+
+def _pose(t):
+    """Cambia de pose cada ~7 segundos."""
+    return POSES[int(t / 7) % len(POSES)]
+
+
+# ── Background con crossfade ──────────────────────────────────────────────────
+def _get_bg_frame(t, duration, bg_images, fallback):
+    if not bg_images:
+        return fallback.copy().convert("RGBA")
+
+    n = len(bg_images)
+    seg = duration / n
+    seg_t = t % seg
+    seg_i = min(int(t / seg), n - 1)
+
+    fade_dur = 0.6
+    if seg_t < fade_dur and seg_i > 0:
+        alpha = seg_t / fade_dur
+        base = bg_images[seg_i - 1].convert("RGBA")
+        over = bg_images[seg_i].convert("RGBA")
+        return Image.blend(base, over, alpha)
+    elif seg_t > seg - fade_dur and seg_i < n - 1:
+        alpha = (seg_t - (seg - fade_dur)) / fade_dur
+        base = bg_images[seg_i].convert("RGBA")
+        over = bg_images[seg_i + 1].convert("RGBA")
+        return Image.blend(base, over, alpha)
+    else:
+        return bg_images[seg_i].convert("RGBA")
+
+
+# ── Subtítulo animado ─────────────────────────────────────────────────────────
+def _render_subtitle(draw, t, wt, fonts):
+    words = _last_words(t, wt)
     if not words:
         return
-    current = _word_at(t, word_timings)
-    text = " ".join(w["word"] for w in words)
+    current = _word_at(t, wt)
+    sy = H - 220
 
-    sy = H - 230
-    bbox = draw.textbbox((W // 2, sy), text, font=fonts["cap"], anchor="mm")
-    pad = 20
+    # Caja de fondo
+    text_full = " ".join(w["word"] for w in words)
+    bbox = draw.textbbox((W // 2, sy), text_full, font=fonts["cap"], anchor="mm")
+    pad = 22
     draw.rounded_rectangle(
-        [(bbox[0]-pad, bbox[1]-pad*0.7), (bbox[2]+pad, bbox[3]+pad*0.7)],
-        radius=14, fill=(0, 0, 0, 200)
+        [(bbox[0]-pad, bbox[1]-12), (bbox[2]+pad, bbox[3]+12)],
+        radius=14, fill=(0, 0, 0, 210)
+    )
+    # Borde cyan
+    draw.rounded_rectangle(
+        [(bbox[0]-pad, bbox[1]-12), (bbox[2]+pad, bbox[3]+12)],
+        radius=14, outline=(0, 100, 160), width=2
     )
 
-    # Palabra a palabra: la activa en cyan, las demás en blanco
-    x_cursor = bbox[0] + pad
-
+    # Palabras: activa en cyan, resto en blanco
+    x_cur = bbox[0] + pad
     for wdata in words:
         color = CYAN if wdata["word"] == current else WHITE
-        wb = draw.textbbox((x_cursor, sy), wdata["word"], font=fonts["cap"], anchor="lm")
-        draw.text((x_cursor, sy), wdata["word"], fill=color,
-                  font=fonts["cap"], anchor="lm")
-        x_cursor = wb[2] + draw.textbbox((0, 0), " ", font=fonts["cap"])[2]
-
-
-# ── Barra de progreso ─────────────────────────────────────────────────────────
-def _render_progress(draw, t, duration):
-    bar_y = H - 138
-    draw.rectangle([(60, bar_y), (W-60, bar_y+4)], fill=(0, 40, 65))
-    filled = int((W - 120) * min(1, t / duration))
-    if filled > 0:
-        draw.rectangle([(60, bar_y), (60 + filled, bar_y+4)], fill=CYAN)
+        wb = draw.textbbox((x_cur, sy), wdata["word"], font=fonts["cap"], anchor="lm")
+        draw.text((x_cur, sy), wdata["word"], fill=color, font=fonts["cap"], anchor="lm")
+        x_cur = wb[2] + draw.textbbox((0, 0), " ", font=fonts["cap"])[2]
 
 
 # ── MAIN ──────────────────────────────────────────────────────────────────────
 def create_animated_video(audio_path, word_timings, output_path="zia_video.mp4",
                           topic="", script_text=""):
-    particles  = _make_particles(55)
-    bg_static  = _static_bg()
-    fonts      = _get_fonts()
-    audio      = AudioFileClip(audio_path)
-    duration   = audio.duration
+    fonts    = _get_fonts()
+    audio    = AudioFileClip(audio_path)
+    duration = audio.duration
+
+    print(f"Descargando fondos de Pexels para '{topic}'...")
+    bg_images = fetch_backgrounds(topic, n=3)
+    fallback  = _solid_bg()
+    gradient  = _dark_gradient(W, H)
 
     cx_robot = W // 2
-    cy_robot = int(H * 0.56)
-
-    # Escena informativa pre-renderizada (se pega cada frame, no se recalcula)
-    scene_img = build_scene(topic, script_text, fonts, W, H)
+    cy_robot = int(H * 0.73)   # robot en mitad inferior
 
     def make_frame(t):
-        frame = bg_static.copy()
+        # 1. Fondo (Pexels o sólido)
+        bg = _get_bg_frame(t, duration, bg_images, fallback)
+
+        # 2. Gradiente oscuro encima
+        bg.paste(gradient, (0, 0), gradient)
+
+        frame = bg.convert("RGB")
         draw  = ImageDraw.Draw(frame)
 
-        # Partículas flotando
-        _render_particles(draw, particles, t)
-
-        # Panel informativo (tema + dato + flujo)
-        frame.paste(scene_img, (0, 0), scene_img)
-
-        # Scan-line horizontal descendente (cada 4 segundos)
-        scan_t = t % 4.0
-        scan_y = int(scan_t / 4.0 * H)
-        draw.rectangle([(0, scan_y), (W, scan_y+2)], fill=(0, 50, 80))
-
-        # Halo pulsante alrededor del robot cuando habla
+        # 3. Halo pulsante
         glow_v = _glow(t, word_timings)
         if glow_v > 0.5:
-            halo_r = int(350 + 18 * math.sin(t * 14))
+            halo_r = int(300 + 20 * math.sin(t * 14))
             draw.ellipse(
-                [(cx_robot-halo_r, cy_robot-halo_r),
-                 (cx_robot+halo_r, cy_robot+halo_r)],
-                outline=(0, int(60*glow_v), int(100*glow_v)),
+                [(cx_robot - halo_r, cy_robot - halo_r),
+                 (cx_robot + halo_r, cy_robot + halo_r)],
+                outline=(0, int(55 * glow_v), int(95 * glow_v)),
                 width=3
             )
 
-        # ── Robot animado ────────────────────────────────────────────
-        bob_y    = int(7 * math.sin(t * math.pi * 1.6))
+        # 4. Robot animado con pose
+        bob_y   = int(7 * math.sin(t * math.pi * 1.6))
         speaking = glow_v > 0.5
-        mouth_v  = abs(math.sin(t * math.pi * 8)) * (1.0 if speaking else 0.0)
-        blink_v  = _blink(t)
+        mouth_v = abs(math.sin(t * math.pi * 8)) * (1.0 if speaking else 0.0)
+        blink_v = _blink(t)
+        pose_v  = _pose(t)
 
         robot_img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         draw_robot(robot_img, cx_robot, cy_robot + bob_y,
-                   mouth=mouth_v, blink=blink_v, glow=glow_v)
+                   mouth=mouth_v, blink=blink_v, glow=glow_v, pose=pose_v)
         frame.paste(robot_img, (0, 0), robot_img)
 
-        # ── Franja superior ──────────────────────────────────────────
-        draw.rectangle([(0, 0), (W, 152)], fill=(0, 8, 20))
-        draw.rectangle([(0, 149), (W, 153)], fill=CYAN)
-        draw.text((W//2, 76), "ziautomate",
+        draw = ImageDraw.Draw(frame)   # redibujar sobre el robot
+
+        # 5. Barra superior
+        draw.rectangle([(0, 0), (W, 130)], fill=(0, 6, 18, 230))
+        draw.rectangle([(0, 127), (W, 131)], fill=CYAN)
+        draw.text((W // 2, 65), "ziautomate",
                   fill=CYAN, font=fonts["brand"], anchor="mm")
 
-        # ── Barras de voz bajo la marca ──────────────────────────────
-        _render_voice_bars(draw, t, word_timings, W//2, 135)
+        # 6. Tema del video (zona visible sobre la foto)
+        if topic:
+            topic_short = topic.upper()[:38]
+            ty = 220
+            tbbox = draw.textbbox((W//2, ty), topic_short, font=fonts["tag"], anchor="mm")
+            draw.rounded_rectangle(
+                [(tbbox[0]-18, tbbox[1]-10), (tbbox[2]+18, tbbox[3]+10)],
+                radius=20, fill=(0, 0, 0, 160), outline=(0, 100, 160), width=1
+            )
+            draw.text((W//2, ty), topic_short, fill=CYAN, font=fonts["tag"], anchor="mm")
 
-        # ── Subtítulo con palabra resaltada ──────────────────────────
+        # 7. Subtítulo
         _render_subtitle(draw, t, word_timings, fonts)
 
-        # ── Franja inferior ──────────────────────────────────────────
-        draw.rectangle([(0, H-128), (W, H)], fill=(0, 8, 20))
-        draw.rectangle([(0, H-131), (W, H-127)], fill=CYAN)
-
-        _render_progress(draw, t, duration)
-
-        draw.text((W//2, H-80), "ziautomate.netlify.app",
+        # 8. Barra inferior
+        draw.rectangle([(0, H - 120), (W, H)], fill=(0, 6, 18, 230))
+        draw.rectangle([(0, H - 123), (W, H - 119)], fill=CYAN)
+        draw.text((W // 2, H - 72), "ziautomate.netlify.app",
                   fill=CYAN, font=fonts["sub"], anchor="mm")
-        draw.text((W//2, H-36), "automatización · IA · pymes",
+        draw.text((W // 2, H - 30), "automatización · IA · pymes",
                   fill=GREY, font=fonts["tag"], anchor="mm")
 
         return np.array(frame)
