@@ -1,0 +1,21 @@
+
+=== ZIA Video Bot - MORNING ===
+
+PASO 1: Generando guion con IA...
+Tema: Automatiza tus emails de marketing
+Guion:
+El email marketing sigue siendo el canal con mejor retorno de inversión. El problema es que pocos lo hacen bien porque lleva tiempo. Lo que montamos son secuencias automáticas: alguien se suscribe a tu lista y recibe una serie de emails durante 2 semanas que lo llevan de no conocerte a querer comprarte. Sin que escribas nada nuevo. Una tienda de suplementos deportivos genera 3.000 euros al mes solo con su secuencia de bienvenida automática. Escríbeme por WhatsApp o entra en ziautomate.netlify.app y te explico cómo.
+
+PASO 2: Creando audio con voz IA...
+Palabras detectadas: 0
+PASO 3: Creando video animado...
+Traceback (most recent call last):
+  File "/home/runner/work/Ziautomatesl-content/Ziautomatesl-content/main.py", line 36, in <module>
+    main()
+  File "/home/runner/work/Ziautomatesl-content/Ziautomatesl-content/main.py", line 22, in main
+    video_path = create_animated_video(audio_path, word_timings, "zia_video.mp4")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Ziautomatesl-content/Ziautomatesl-content/create_video.py", line 116, in create_animated_video
+    video = video.set_audio(audio)
+            ^^^^^^^^^^^^^^^
+AttributeError: 'VideoClip' object has no attribute 'set_audio'. Did you mean: 'with_audio'?
