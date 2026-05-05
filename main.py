@@ -25,15 +25,25 @@ def main():
                                        script_text=content["script"])
 
     caption = f"{content['topic']}\n\n{content['script']}\n\n{content['hashtags']}\n\nziautomate.netlify.app"
-
-    print("PASO 4: Publicando en YouTube...")
     title = content["topic"]
     description = f"{content['script']}\n\n{content['hashtags']}\n\nziautomate.netlify.app"
-    post_youtube(video_path, title, description)
+
+    yt_ok = ig_ok = False
+
+    print("PASO 4: Publicando en YouTube...")
+    try:
+        post_youtube(video_path, title, description)
+        yt_ok = True
+    except Exception as e:
+        print(f"YouTube error (se continua): {e}")
 
     print("PASO 5: Publicando en Instagram...")
     if os.environ.get("INSTAGRAM_USERNAME"):
-        post_instagram(video_path, caption)
+        try:
+            post_instagram(video_path, caption)
+            ig_ok = True
+        except Exception as e:
+            print(f"Instagram error: {e}")
     else:
         print("INSTAGRAM_USERNAME no configurado, saltando.")
 
@@ -41,7 +51,9 @@ def main():
         if os.path.exists(f):
             os.remove(f)
 
-    print("\n✅ Video publicado!\n")
+    print(f"\n✅ YouTube: {'OK' if yt_ok else 'FALLÓ'} | Instagram: {'OK' if ig_ok else 'FALLÓ'}\n")
+    if not yt_ok and not ig_ok:
+        raise SystemExit(1)
 
 if __name__ == "__main__":
     main()
