@@ -3,18 +3,12 @@ name: Setup Instagram Session (ejecutar una vez)
 on:
   workflow_dispatch:
 
-permissions:
-  contents: read
-  secrets: write
-
 jobs:
   setup:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -22,15 +16,13 @@ jobs:
       - name: Instalar instagrapi
         run: pip install instagrapi
 
-      - name: Generar sesión y guardar como secreto
+      - name: Generar sesión Instagram
         env:
           INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
           INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
         run: |
           python3 - <<'EOF'
-          import os, json, base64, subprocess
+          import os, json, base64
           from instagrapi import Client
 
           username = os.environ["INSTAGRAM_USERNAME"]
@@ -44,16 +36,5 @@ jobs:
           session = cl.get_settings()
           encoded = base64.b64encode(json.dumps(session).encode()).decode()
           print("Sesión generada correctamente.")
-
-          result = subprocess.run(
-              ["gh", "secret", "set", "INSTAGRAM_SESSION",
-               "--repo", os.environ["REPO"],
-               "--body", encoded],
-              capture_output=True, text=True
-          )
-          if result.returncode == 0:
-              print("✅ INSTAGRAM_SESSION guardado en GitHub Secrets.")
-          else:
-              print("Error guardando secreto:", result.stderr)
-              raise SystemExit(1)
+          print(f"INSTAGRAM_SESSION_VALUE={encoded}")
           EOF
