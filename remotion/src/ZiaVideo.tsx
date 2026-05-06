@@ -1,12 +1,8 @@
 import React, { useMemo } from "react";
 import {
   AbsoluteFill,
-  Audio,
-  OffthreadVideo,
-  Sequence,
   interpolate,
   spring,
-  staticFile,
   useCurrentFrame,
   useVideoConfig,
   Easing,
@@ -20,27 +16,23 @@ export interface WordTiming {
 
 export interface ZiaVideoProps {
   topic: string;
-  audioSrc: string;
   wordTimings: WordTiming[];
-  bgVideos: string[];
   durationInSeconds: number;
 }
 
 export const defaultZiaVideoProps: ZiaVideoProps = {
   topic: "Automatización IA para pymes",
-  audioSrc: "audio.mp3",
   wordTimings: [],
-  bgVideos: [],
   durationInSeconds: 30,
 };
 
 const YELLOW = "#FFE400";
 const CYAN = "#00E5FF";
 const FONT = "'Noto Sans', 'DejaVu Sans', Arial, sans-serif";
-const SCENE_SECONDS = 3;   // hard cut interval
-const WORDS_PER_GROUP = 3; // words shown per caption block
+const SCENE_SECONDS = 3;
+const WORDS_PER_GROUP = 3;
 
-// ── CapCut-style viral subtitle ───────────────────────────────────────────────
+// ── CapCut-style viral captions ───────────────────────────────────────────────
 const ViralCaption: React.FC<{
   t: number;
   timings: WordTiming[];
@@ -64,14 +56,14 @@ const ViralCaption: React.FC<{
   const group = wordGroups[groupIdx];
   if (!group) return null;
 
-  // Spring pop when group first appears
   const groupStartFrame = Math.round(group[0].start * fps);
   const elapsed = Math.max(0, frame - groupStartFrame);
+
   const popScale = spring({
     fps,
     frame: elapsed,
     config: { damping: 9, stiffness: 380, mass: 0.25 },
-    from: 0.55,
+    from: 0.5,
     to: 1.0,
   });
 
@@ -121,44 +113,22 @@ const ViralCaption: React.FC<{
   );
 };
 
-// ── Main composition ──────────────────────────────────────────────────────────
+// ── Main overlay composition (transparent bg) ─────────────────────────────────
 export const ZiaVideo: React.FC<ZiaVideoProps> = ({
   topic,
-  audioSrc,
   wordTimings,
-  bgVideos,
   durationInSeconds,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
   const totalFrames = Math.ceil(durationInSeconds * fps);
-  const sceneDuration = Math.round(fps * SCENE_SECONDS);
 
-  // Position within current scene (resets every SCENE_SECONDS)
+  const sceneDuration = Math.round(fps * SCENE_SECONDS);
   const sceneIdx = Math.floor(frame / sceneDuration);
   const sceneFrame = frame - sceneIdx * sceneDuration;
 
-  // ── Zoom punch on every hard cut, then slow drift ──
-  const bgZoom = interpolate(
-    sceneFrame,
-    [0, 4, 14, sceneDuration],
-    [1.16, 1.24, 1.15, 1.06],
-    {
-      extrapolateRight: "clamp",
-      easing: Easing.bezier(0.22, 1, 0.36, 1),
-    }
-  );
-
-  // ── Horizontal micro-shake on cut ──
-  const shakeX =
-    sceneFrame < 12
-      ? interpolate(sceneFrame, [0, 2, 4, 7, 10, 12], [8, -5, 3, -1.5, 0.5, 0], {
-          extrapolateRight: "clamp",
-        })
-      : 0;
-
-  // ── White flash on every cut (skip first scene) ──
+  // White flash at every scene cut (skips first)
   const flashOpacity =
     sceneIdx === 0
       ? 0
@@ -166,30 +136,26 @@ export const ZiaVideo: React.FC<ZiaVideoProps> = ({
           extrapolateRight: "clamp",
         });
 
-  // ── Pre-build scene schedule ──
-  const sceneList = useMemo(() => {
-    if (bgVideos.length === 0) return [];
-    const list: { clipIdx: number; seqFrom: number; seqDuration: number }[] = [];
-    let s = 0;
-    while (s * sceneDuration < totalFrames) {
-      const seqFrom = s * sceneDuration;
-      const seqDuration = Math.min(sceneDuration, totalFrames - seqFrom) + fps;
-      list.push({ clipIdx: s % bgVideos.length, seqFrom, seqDuration });
-      s++;
-    }
-    return list;
-  }, [bgVideos, totalFrames, sceneDuration, fps]);
+  // Cinematic dark gradient (makes text readable over any video bg)
+  const gradientOverlay =
+    "linear-gradient(to bottom," +
+    "rgba(0,4,18,0.82) 0%," +
+    "rgba(0,4,18,0.18) 12%," +
+    "rgba(0,4,18,0.04) 35%," +
+    "rgba(0,4,18,0.08) 62%," +
+    "rgba(0,4,18,0.60) 80%," +
+    "rgba(0,4,18,0.95) 100%)";
 
-  // ── UI fade-in ──
+  // UI fade-in
   const uiIn = interpolate(frame, [0, Math.round(fps * 0.4)], [0, 1], {
     extrapolateRight: "clamp",
     easing: Easing.bezier(0.16, 1, 0.3, 1),
   });
 
-  // ── Progress ──
+  // Progress bar
   const progress = Math.min(1, t / durationInSeconds);
 
-  // ── End-screen CTA (last 3 s) ──
+  // End-screen CTA (last 3 s)
   const ctaThreshold = Math.max(0, durationInSeconds - 3);
   const ctaSpring =
     durationInSeconds > 5
@@ -206,58 +172,13 @@ export const ZiaVideo: React.FC<ZiaVideoProps> = ({
   const showCaption = !showCTA || ctaSpring < 0.4;
 
   return (
-    <AbsoluteFill style={{ backgroundColor: "#000814", overflow: "hidden" }}>
+    // No backgroundColor → fully transparent canvas
+    <AbsoluteFill>
 
-      {/* ══ BG VIDEO + ZOOM + SHAKE ══ */}
-      <AbsoluteFill
-        style={{
-          transform: `scale(${bgZoom}) translateX(${shakeX}px)`,
-          transformOrigin: "center center",
-        }}
-      >
-        {/* Fallback solid bg when no Pexels clips */}
-        {bgVideos.length === 0 && (
-          <AbsoluteFill
-            style={{
-              background: "linear-gradient(160deg,#000d1a 0%,#001830 50%,#000d1a 100%)",
-            }}
-          />
-        )}
+      {/* ══ Cinematic gradient overlay ══ */}
+      <AbsoluteFill style={{ background: gradientOverlay }} />
 
-        {/* Hard-cut scene system */}
-        {sceneList.map(({ clipIdx, seqFrom, seqDuration }) => (
-          <Sequence
-            key={`${clipIdx}-${seqFrom}`}
-            from={seqFrom}
-            durationInFrames={seqDuration}
-            premountFor={Math.round(fps * 0.5)}
-          >
-            <AbsoluteFill>
-              <OffthreadVideo
-                src={staticFile(bgVideos[clipIdx])}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                loop
-              />
-            </AbsoluteFill>
-          </Sequence>
-        ))}
-      </AbsoluteFill>
-
-      {/* ══ CINEMATIC OVERLAY ══ */}
-      <AbsoluteFill
-        style={{
-          background:
-            "linear-gradient(to bottom," +
-            "rgba(0,4,18,0.82) 0%," +
-            "rgba(0,4,18,0.18) 12%," +
-            "rgba(0,4,18,0.04) 35%," +
-            "rgba(0,4,18,0.08) 62%," +
-            "rgba(0,4,18,0.60) 80%," +
-            "rgba(0,4,18,0.94) 100%)",
-        }}
-      />
-
-      {/* ══ CUT FLASH ══ */}
+      {/* ══ Cut flash ══ */}
       <AbsoluteFill
         style={{
           backgroundColor: "white",
@@ -266,10 +187,7 @@ export const ZiaVideo: React.FC<ZiaVideoProps> = ({
         }}
       />
 
-      {/* ══ AUDIO ══ */}
-      <Audio src={staticFile(audioSrc)} />
-
-      {/* ══ PROGRESS BAR (top) ══ */}
+      {/* ══ Progress bar ══ */}
       <div
         style={{
           position: "absolute",
@@ -283,7 +201,7 @@ export const ZiaVideo: React.FC<ZiaVideoProps> = ({
         }}
       />
 
-      {/* ══ BRAND PILL (top) ══ */}
+      {/* ══ Brand pill ══ */}
       <div
         style={{
           position: "absolute",
@@ -329,7 +247,7 @@ export const ZiaVideo: React.FC<ZiaVideoProps> = ({
         </div>
       </div>
 
-      {/* ══ TOPIC LINE (below brand) ══ */}
+      {/* ══ Topic line ══ */}
       {topic && (
         <div
           style={{
@@ -362,17 +280,12 @@ export const ZiaVideo: React.FC<ZiaVideoProps> = ({
         </div>
       )}
 
-      {/* ══ VIRAL CAPTIONS ══ */}
+      {/* ══ Viral captions ══ */}
       {showCaption && (
-        <ViralCaption
-          t={t}
-          timings={wordTimings}
-          frame={frame}
-          fps={fps}
-        />
+        <ViralCaption t={t} timings={wordTimings} frame={frame} fps={fps} />
       )}
 
-      {/* ══ END-SCREEN CTA ══ */}
+      {/* ══ End CTA ══ */}
       {showCTA && (
         <div
           style={{
@@ -411,7 +324,6 @@ export const ZiaVideo: React.FC<ZiaVideoProps> = ({
               fontFamily: FONT,
               fontWeight: 700,
               marginTop: 14,
-              letterSpacing: "0.01em",
             }}
           >
             ziautomate.netlify.app
@@ -419,7 +331,7 @@ export const ZiaVideo: React.FC<ZiaVideoProps> = ({
         </div>
       )}
 
-      {/* ══ FOOTER BAR ══ */}
+      {/* ══ Footer bar ══ */}
       <div
         style={{
           position: "absolute",

@@ -1,0 +1,7 @@
+node_modules/
+public/
+props.json
+overlay.webm
+test_*.png
+*.png
+*.webm

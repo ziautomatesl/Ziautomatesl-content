@@ -2,7 +2,7 @@ import React from "react";
 import { Composition, CalculateMetadataFunction } from "remotion";
 import { ZiaVideo, ZiaVideoProps, defaultZiaVideoProps } from "./ZiaVideo";
 
-const FPS = 30;
+const FPS = 24; // 24fps = 20% fewer frames vs 30fps → faster render
 
 const calculateMetadata: CalculateMetadataFunction<ZiaVideoProps> = async ({ props }) => {
   return {

@@ -2,13 +2,13 @@ name: ZIA Video - Manana 7:00
 
 on:
   schedule:
-    - cron: '0 5 * * *'  # 7:00 hora España (UTC+2 verano)
-  workflow_dispatch:      # permite lanzarlo manualmente para probar
+    - cron: '0 5 * * *'
+  workflow_dispatch:
 
 jobs:
   publicar-video:
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 25
 
     steps:
       - name: Descargar código
@@ -23,6 +23,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
+      - name: Caché node_modules (Remotion)
+        uses: actions/cache@v4
+        with:
+          path: remotion/node_modules
+          key: npm-${{ runner.os }}-${{ hashFiles('remotion/package.json') }}
+          restore-keys: npm-${{ runner.os }}-
+
+      - name: Caché Chrome headless (Remotion)
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/remotion
+          key: remotion-chrome-${{ runner.os }}-v1
 
       - name: Instalar dependencias del sistema
         run: sudo apt-get install -y fonts-dejavu fonts-noto-core ffmpeg
