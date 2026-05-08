@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@react-three/fiber": "^8.18.0",
+    "@remotion/captions": "^4.0.459",
     "@remotion/cli": "^4.0.0",
     "@remotion/light-leaks": "^4.0.458",
     "@remotion/three": "^4.0.458",

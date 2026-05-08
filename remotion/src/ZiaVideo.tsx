@@ -6,6 +6,8 @@ import {
 } from "remotion";
 import { ThreeCanvas } from "@remotion/three";
 import { LightLeak } from "@remotion/light-leaks";
+import { createTikTokStyleCaptions } from "@remotion/captions";
+import type { Caption } from "@remotion/captions";
 
 export interface WordTiming { word: string; start: number; end: number; }
 export interface ZiaVideoProps {
@@ -33,194 +35,121 @@ const BrandFonts: React.FC = () => (
   <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&display=swap');`}</style>
 );
 
-// ─── Ad scenes ───────────────────────────────────────────────────────────────
-type SceneData = {
-  stat: string | null; statPre: string; statNum: number | null; statSuf: string;
-  headline: string; sub: string; words: string[];
-};
-
-// Escenas 2-7: dos variantes que rotan según seed para que cada video sea distinto
-const TAIL_A: SceneData[] = [
-  { stat: "+300%", statPre: "+", statNum: 300, statSuf: "%",
-    headline: "más clientes", sub: "En solo 48 horas de implementación",
-    words: ["+300%", "más", "clientes", "en", "48h"] },
-  { stat: "24/7", statPre: "", statNum: null, statSuf: "",
-    headline: "sin descanso", sub: "Tu IA trabaja mientras tú vives",
-    words: ["24/7", "sin", "descanso", "nunca", "para"] },
-  { stat: null, statPre: "", statNum: null, statSuf: "",
-    headline: "Automatiza · Escala · Domina", sub: "Sin contratar más personal",
-    words: ["Automatiza", "Escala", "Domina"] },
-  { stat: "€599", statPre: "€", statNum: 599, statSuf: "/mes",
-    headline: "todo incluido", sub: "IA · marketing · webs · automatización",
-    words: ["€599/mes", "todo", "incluido"] },
-  { stat: "4.2x", statPre: "", statNum: 4.2, statSuf: "x",
-    headline: "más retorno", sub: "En publicidad digital con IA",
-    words: ["4.2x", "más", "retorno", "con", "IA"] },
-  { stat: "GRATIS", statPre: "", statNum: null, statSuf: "",
-    headline: "Primera consulta", sub: "ziautomate.netlify.app · Reserva ahora",
-    words: ["Primera", "consulta", "GRATIS"] },
-];
-
-const TAIL_B: SceneData[] = [
-  { stat: "2h", statPre: "", statNum: 2, statSuf: "h/día",
-    headline: "de trabajo recuperadas", sub: "Automatizando tareas repetitivas",
-    words: ["2h/día", "de", "trabajo", "libre"] },
-  { stat: "100%", statPre: "", statNum: 100, statSuf: "%",
-    headline: "automático", sub: "Sin tocar nada, sin contratar a nadie",
-    words: ["100%", "automático", "sin", "esfuerzo"] },
-  { stat: null, statPre: "", statNum: null, statSuf: "",
-    headline: "Capta · Convierte · Fideliza", sub: "El ciclo completo con IA",
-    words: ["Capta", "Convierte", "Fideliza"] },
-  { stat: "48h", statPre: "", statNum: null, statSuf: "",
-    headline: "de implementación", sub: "Listo y funcionando en 2 días",
-    words: ["En", "48h", "funcionando"] },
-  { stat: "-80%", statPre: "-", statNum: 80, statSuf: "%",
-    headline: "menos tiempo manual", sub: "Más tiempo para lo que importa",
-    words: ["-80%", "tiempo", "manual"] },
-  { stat: "GRATIS", statPre: "", statNum: null, statSuf: "",
-    headline: "Primera sesión", sub: "ziautomate.netlify.app · Sin compromiso",
-    words: ["Sesión", "GRATIS", "ahora"] },
-];
-
-// Escena 1 dinámica: usa el topic generado por IA
-function buildScenes(topic: string, seed: number): SceneData[] {
-  const topicWords = topic.split(" ").slice(0, 6);
-  const tail = seed % 2 === 0 ? TAIL_A : TAIL_B;
-  return [
-    { stat: null, statPre: "", statNum: null, statSuf: "",
-      headline: topic || "¿Tu negocio trabaja sin parar?",
-      sub: "Hay una solución más inteligente",
-      words: topicWords.length >= 2 ? topicWords : ["Automatiza", "tu", "negocio"] },
-    ...tail,
-  ];
+// ─── Skill: TikTok-style captions using real wordTimings ─────────────────────
+// Converts our WordTiming format to Caption format required by @remotion/captions
+function toCaptions(wordTimings: WordTiming[]): Caption[] {
+  return wordTimings.map((wt) => ({
+    text: " " + wt.word,          // leading space as per skill whitespace rule
+    startMs: wt.start * 1000,
+    endMs: wt.end * 1000,
+    timestampMs: wt.start * 1000,
+    confidence: null,
+  }));
 }
 
-// ─── Ad overlay ───────────────────────────────────────────────────────────────
-const AdOverlay: React.FC<{ scenes: SceneData[]; sceneIdx: number; frame: number; fps: number; sceneDuration: number }> = ({
-  scenes, sceneIdx, frame, fps, sceneDuration,
-}) => {
-  const scene = scenes[sceneIdx % scenes.length];
+const SWITCH_MS = 1400; // ~3 words per page
 
-  const countProg = interpolate(frame, [4, 52], [0, 1], {
-    extrapolateLeft: "clamp", extrapolateRight: "clamp",
-    easing: Easing.bezier(0.45, 0, 0.55, 1),
-  });
-  const statSc = spring({ fps, frame, config: { damping: 9, stiffness: 260, mass: 0.48 }, from: 0, to: 1 });
-  const subIn  = interpolate(frame, [24, 42], [0, 1], {
-    extrapolateLeft: "clamp", extrapolateRight: "clamp",
-    easing: Easing.bezier(0.16, 1, 0.3, 1),
-  });
-
-  const statDisplay: string | null = (() => {
-    if (!scene.stat) return null;
-    if (scene.statNum === null) return scene.stat;
-    const val = scene.statNum * countProg;
-    return `${scene.statPre}${Number.isInteger(scene.statNum) ? Math.round(val) : val.toFixed(1)}${scene.statSuf}`;
-  })();
-
-  const hasStat = statDisplay !== null;
-  const headlineWords = scene.headline.split(" ");
-
-  const PAGE = 3;
-  const words = scene.words;
-  const numPages = Math.ceil(words.length / PAGE);
-  const pageFrames = (sceneDuration * 0.84) / numPages;
-  const pageIdx = Math.min(numPages - 1, Math.floor(frame / pageFrames));
-  const pageFrame = frame - pageIdx * pageFrames;
-  const page = words.slice(pageIdx * PAGE, (pageIdx + 1) * PAGE);
-  const wInterval = pageFrames / (PAGE + 0.5);
-  const activeWi = Math.min(page.length - 1, Math.floor(pageFrame / wInterval));
+// Skill: separate component for caption page with word highlighting
+const CaptionPage: React.FC<{ page: ReturnType<typeof createTikTokStyleCaptions>["pages"][number] }> = ({ page }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const currentTimeMs = (frame / fps) * 1000;
+  const absoluteTimeMs = page.startMs + currentTimeMs;
 
   return (
-    <>
-      <div style={{
-        position: "absolute", top: hasStat ? "26%" : "33%",
-        left: 44, right: 44, display: "flex", flexDirection: "column",
-        alignItems: "center", gap: 18,
-      }}>
-        {hasStat && (
-          <div style={{
-            transform: `scale(${statSc})`,
-            fontSize: statDisplay!.length > 5 ? 148 : statDisplay!.length > 3 ? 182 : 220,
-            fontFamily: FONT_HEAD, fontWeight: 900, lineHeight: 0.95, textAlign: "center",
-            background: BRAND_GRADIENT, WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent", backgroundClip: "text",
-            filter: `drop-shadow(0 0 40px rgba(0,229,255,0.35)) drop-shadow(0 0 80px rgba(26,107,255,0.2))`,
+    <div style={{
+      position: "absolute", bottom: 180, left: 20, right: 20,
+      display: "flex", justifyContent: "center", flexWrap: "wrap",
+      gap: "2px 4px", whiteSpace: "pre",
+    }}>
+      {page.tokens.map((token) => {
+        const isActive = token.fromMs <= absoluteTimeMs && token.toMs > absoluteTimeMs;
+        const sc = spring({
+          fps, frame,
+          config: { damping: 10, stiffness: 280, mass: 0.4 },
+          from: 0.85, to: 1,
+        });
+        return (
+          <span key={token.fromMs} style={{
+            display: "inline-block",
+            fontSize: 72, fontFamily: FONT_HEAD, fontWeight: 800,
+            textTransform: "uppercase", lineHeight: 1.15, letterSpacing: "-0.02em",
+            color: isActive ? "#03010a" : WHITE,
+            background: isActive ? BRAND_GRADIENT : "transparent",
+            padding: isActive ? "4px 20px 8px" : "0",
+            borderRadius: isActive ? 12 : 0,
+            textShadow: isActive ? "none" : "2px 3px 0 rgba(0,0,0,0.95)",
+            boxShadow: isActive ? "0 0 28px rgba(26,107,255,0.5)" : "none",
+            transform: isActive ? `scale(${sc})` : "scale(1)",
+            transformOrigin: "center bottom",
           }}>
-            {statDisplay}
-          </div>
-        )}
+            {token.text}
+          </span>
+        );
+      })}
+    </div>
+  );
+};
 
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "5px 12px", lineHeight: 1.15, textAlign: "center" }}>
-          {headlineWords.map((word, i) => {
-            const wIn = interpolate(frame, [i * 9, i * 9 + 16], [0, 1], {
-              extrapolateLeft: "clamp", extrapolateRight: "clamp",
-              easing: Easing.bezier(0.16, 1, 0.3, 1),
-            });
-            return (
-              <span key={i} style={{
-                display: "inline-block",
-                fontSize: hasStat ? 76 : 92, fontFamily: FONT_HEAD, fontWeight: 800,
-                color: WHITE, textShadow: "2px 3px 0 rgba(0,0,0,0.92), 0 0 32px rgba(0,0,0,0.85)",
-                opacity: wIn, transform: `translateY(${(1 - wIn) * 24}px)`,
-              }}>
-                {word}
-              </span>
-            );
-          })}
-        </div>
+// Skill: renders all caption pages as Sequences, each timed to the audio
+const SyncedCaptions: React.FC<{ wordTimings: WordTiming[] }> = ({ wordTimings }) => {
+  const { fps } = useVideoConfig();
 
-        <div style={{
-          color: TEXT, fontSize: 36, fontFamily: FONT, fontWeight: 600,
-          textAlign: "center", opacity: subIn,
-          textShadow: "1px 2px 10px rgba(0,0,0,0.98)", maxWidth: 900, letterSpacing: "0.01em",
-        }}>
-          {scene.sub}
-        </div>
+  const pages = useMemo(() => {
+    if (!wordTimings.length) return [];
+    const captions = toCaptions(wordTimings);
+    return createTikTokStyleCaptions({ captions, combineTokensWithinMilliseconds: SWITCH_MS }).pages;
+  }, [wordTimings]);
 
-        {scene.stat === "GRATIS" && (
-          <div style={{
-            opacity: spring({ fps, frame: Math.max(0, frame - 20), config: { damping: 10, stiffness: 300, mass: 0.3 }, from: 0, to: 1 }),
-            transform: `scale(${spring({ fps, frame: Math.max(0, frame - 20), config: { damping: 10, stiffness: 300, mass: 0.3 }, from: 0, to: 1 })})`,
-            background: BRAND_GRADIENT, borderRadius: 20, padding: "22px 50px",
-            boxShadow: `0 0 50px rgba(0,229,255,0.4), 0 0 100px rgba(26,107,255,0.25)`, marginTop: 8,
+  return (
+    <AbsoluteFill style={{ pointerEvents: "none" }}>
+      {pages.map((page, i) => {
+        const next = pages[i + 1] ?? null;
+        const startFrame = Math.floor((page.startMs / 1000) * fps);
+        const endFrame   = next
+          ? Math.floor((next.startMs / 1000) * fps)
+          : startFrame + Math.ceil((SWITCH_MS / 1000) * fps);
+        const dur = Math.max(1, endFrame - startFrame);
+        return (
+          <Sequence key={i} from={startFrame} durationInFrames={dur}>
+            <CaptionPage page={page} />
+          </Sequence>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
+
+// ─── Topic headline — aparece al inicio, sigue visible todo el video ──────────
+const TopicHeadline: React.FC<{ topic: string; fps: number }> = ({ topic, fps }) => {
+  const frame = useCurrentFrame();
+  // Skill: crisp UI entrance easing
+  const words = topic.split(" ");
+  return (
+    <div style={{
+      position: "absolute", top: "28%", left: 44, right: 44,
+      display: "flex", flexWrap: "wrap", justifyContent: "center",
+      gap: "6px 14px", lineHeight: 1.15, textAlign: "center",
+    }}>
+      {words.map((word, i) => {
+        const wIn = interpolate(frame, [i * 8, i * 8 + 18], [0, 1], {
+          extrapolateLeft: "clamp", extrapolateRight: "clamp",
+          easing: Easing.bezier(0.16, 1, 0.3, 1),
+        });
+        return (
+          <span key={i} style={{
+            display: "inline-block",
+            fontSize: words.length > 6 ? 72 : 88,
+            fontFamily: FONT_HEAD, fontWeight: 800,
+            color: WHITE,
+            textShadow: "2px 3px 0 rgba(0,0,0,0.92), 0 0 40px rgba(0,0,0,0.85)",
+            opacity: wIn, transform: `translateY(${(1 - wIn) * 22}px)`,
           }}>
-            <span style={{ color: WHITE, fontSize: 44, fontFamily: FONT_HEAD, fontWeight: 800 }}>
-              Reserva tu consulta ahora →
-            </span>
-          </div>
-        )}
-      </div>
-
-      <div style={{
-        position: "absolute", bottom: 180, left: 20, right: 20,
-        display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "4px 10px", minHeight: 100,
-      }}>
-        {page.map((word, wi) => {
-          const wProg = interpolate(pageFrame, [wi * wInterval - 4, wi * wInterval + 14], [0, 1], {
-            extrapolateLeft: "clamp", extrapolateRight: "clamp",
-            easing: Easing.bezier(0.34, 1.56, 0.64, 1),
-          });
-          const isActive = wi === activeWi;
-          return (
-            <span key={`${pageIdx}-${wi}`} style={{
-              display: "inline-block", fontSize: 74, fontFamily: FONT_HEAD, fontWeight: 800,
-              textTransform: "uppercase", lineHeight: 1.12, letterSpacing: "-0.02em",
-              opacity: wProg, transform: `scale(${1 - (1 - wProg) * 0.28})`,
-              transformOrigin: "center bottom",
-              color: isActive ? "#03010a" : WHITE,
-              background: isActive ? BRAND_GRADIENT : "transparent",
-              padding: isActive ? "5px 22px 9px" : "0",
-              borderRadius: isActive ? 13 : 0,
-              textShadow: isActive ? "none" : "2px 3px 0 rgba(0,0,0,0.95), 0 0 28px rgba(0,0,0,0.9)",
-              boxShadow: isActive ? `0 0 30px rgba(26,107,255,0.55)` : "none",
-            }}>
-              {word}
-            </span>
-          );
-        })}
-      </div>
-    </>
+            {word}
+          </span>
+        );
+      })}
+    </div>
   );
 };
 
@@ -386,28 +315,29 @@ export const ZiaVideo: React.FC<ZiaVideoProps> = ({ topic, wordTimings, duration
   const { fps } = useVideoConfig();
   const t = frame / fps;
 
-  const scenes = buildScenes(topic, seed ?? 0);
-  const sceneDuration = Math.round(fps * SCENE_SECONDS);
-  const sceneIdx  = Math.floor(frame / sceneDuration);
-  const sceneFrame = frame - sceneIdx * sceneDuration;
-
   const uiIn = interpolate(frame, [0, Math.round(fps * 0.4)], [0, 1], {
     extrapolateRight: "clamp", easing: Easing.bezier(0.16, 1, 0.3, 1),
   });
 
   const progress    = Math.min(1, t / durationInSeconds);
   const totalFrames = Math.round(durationInSeconds * fps);
-  const numScenes   = Math.ceil(totalFrames / sceneDuration);
+
+  // Aurora scene index: changes every 3s for color variety
+  const sceneDuration = Math.round(fps * SCENE_SECONDS);
+  const sceneIdx = Math.floor(frame / sceneDuration);
+
+  // LightLeaks every 3s
+  const numScenes = Math.ceil(totalFrames / sceneDuration);
 
   return (
     <AbsoluteFill>
       <BrandFonts />
       {audioSrc && <Audio src={staticFile(audioSrc)} />}
 
-      {/* Ad background — aurora colors shift per scene */}
+      {/* Aurora + particle background — colors shift every 3s */}
       <AdBackground frame={frame} sceneIdx={sceneIdx} />
 
-      {/* Vignette — top/bottom darkening for text readability */}
+      {/* Vignette */}
       <AbsoluteFill style={{
         background: "linear-gradient(to bottom," +
           "rgba(0,0,0,0.82) 0%,rgba(0,0,0,0.12) 14%," +
@@ -416,7 +346,7 @@ export const ZiaVideo: React.FC<ZiaVideoProps> = ({ topic, wordTimings, duration
         pointerEvents: "none",
       }} />
 
-      {/* Skill: LightLeak overlays at every scene cut */}
+      {/* Skill: LightLeak at every 3s color shift */}
       {Array.from({ length: numScenes - 1 }, (_, i) => {
         const cutFrame = (i + 1) * sceneDuration;
         if (cutFrame >= totalFrames) return null;
@@ -451,8 +381,11 @@ export const ZiaVideo: React.FC<ZiaVideoProps> = ({ topic, wordTimings, duration
         </div>
       </div>
 
-      {/* Ad content: stat + headline + CapCut captions */}
-      <AdOverlay scenes={scenes} sceneIdx={sceneIdx} frame={sceneFrame} fps={fps} sceneDuration={sceneDuration} />
+      {/* Topic headline — animado, dinámico desde el guion IA */}
+      <TopicHeadline topic={topic || "Automatiza tu negocio"} fps={fps} />
+
+      {/* Skill: captions sincronizados al audio real con wordTimings */}
+      <SyncedCaptions wordTimings={wordTimings} />
 
       {/* Footer */}
       <div style={{
