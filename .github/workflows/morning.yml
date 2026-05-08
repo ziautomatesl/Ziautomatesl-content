@@ -2,13 +2,13 @@ name: ZIA Video - Manana 7:00
 
 on:
   schedule:
-    - cron: '0 5 * * *'
+    - cron: '30 5 * * *'
   workflow_dispatch:
 
 jobs:
   publicar-video:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
 
     steps:
       - name: Descargar código

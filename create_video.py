@@ -9,6 +9,7 @@ import os
 import json
 import shutil
 import subprocess
+import time
 from moviepy import AudioFileClip
 
 _HERE        = os.path.dirname(os.path.abspath(__file__))
@@ -35,6 +36,7 @@ def create_animated_video(audio_path, word_timings, output_path="zia_video.mp4",
         "wordTimings":       word_timings,
         "durationInSeconds": duration,
         "audioSrc":          "audio.mp3",
+        "seed":              int(time.time()) % 100,  # different theme order each video
     }
     props_path = os.path.join(REMOTION_DIR, "props.json")
     with open(props_path, "w", encoding="utf-8") as f:
