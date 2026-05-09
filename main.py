@@ -71,7 +71,7 @@ def main():
             print("PASO 6: Generando y publicando Historia de Instagram...")
             try:
                 story_path = create_story_image(content, "zia_story.png")
-                post_instagram_story(story_path)
+                post_instagram_story(story_path, content.get("engagement_question", ""))
                 story_ok = True
             except Exception as e:
                 print(f"Instagram Story error (no es crítico): {e}")

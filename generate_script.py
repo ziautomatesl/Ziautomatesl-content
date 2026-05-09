@@ -65,6 +65,7 @@ def generate_script(slot_number: int = 0) -> dict:
         "topic":               script_data["topic"],
         "script":              script_data["script"],
         "highlights":          script_data.get("highlights", []),
+        "engagement_question": eng_question,
         "instagram_caption":   instagram_caption,
         "youtube_title":       youtube_title,
         "youtube_description": youtube_description,
