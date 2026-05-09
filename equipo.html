@@ -462,7 +462,7 @@ header p{color:#4b5563;font-size:14px;letter-spacing:.12em;text-transform:upperc
 
 <header>
   <h1>Equipo ZIA Automate</h1>
-  <p>7 agentes · 3 publicaciones diarias · 0 intervención humana</p>
+  <p>2 sistemas autónomos · contenido diario + outreach B2B · 0 intervención humana</p>
   <div class="building-line"></div>
 </header>
 
@@ -849,8 +849,75 @@ header p{color:#4b5563;font-size:14px;letter-spacing:.12em;text-transform:upperc
         <span class="file">youtube_1730.yml</span>
         <span class="file">instagram_1830.yml</span>
         <span class="file">primetime_2000.yml</span>
+        <span class="file">campaign.yml</span>
       </div>
-      <p>Dispara el pipeline a las horas exactas ajustándose automáticamente al horario de verano e invierno de España. Doble cron por workflow + guard de hora real: si el cron equivocado dispara, aborta en segundos sin publicar nada.</p>
+      <p>Dispara el pipeline a las horas exactas ajustándose automáticamente al horario de verano e invierno de España. Doble cron por workflow + guard de hora real. El agente de outreach corre aparte cada mañana a las 09:00.</p>
+    </div>
+  </div>
+
+  <!-- ══ OFFICE 8: El Agente Comercial (wide) ══ -->
+  <div class="office wide" id="o8">
+    <div class="room" style="height:300px;background:linear-gradient(180deg,#051a0e 0%,#082b15 68%,#041008 68%,#020a04 100%)">
+
+      <!-- grid de leads animado -->
+      <div style="position:absolute;inset:0 0 70px 0;background-image:linear-gradient(rgba(74,222,128,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(74,222,128,.04) 1px,transparent 1px);background-size:40px 40px"></div>
+
+      <!-- tarjetas de leads flotantes -->
+      <div style="position:absolute;bottom:100px;left:80px;width:110px;height:64px;background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.2);border-radius:8px;display:flex;flex-direction:column;justify-content:center;padding:8px 12px">
+        <div style="font-size:9px;color:#4ade80;font-family:monospace;opacity:.8">PELUQUERÍA</div>
+        <div style="font-size:10px;color:#e0e6f0;margin-top:3px;font-weight:600">Madrid · 4.8⭐</div>
+        <div style="font-size:9px;color:#4ade80;margin-top:4px">● enviado</div>
+      </div>
+      <div style="position:absolute;bottom:100px;left:50%;transform:translateX(-50%);width:110px;height:64px;background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.15);border-radius:8px;display:flex;flex-direction:column;justify-content:center;padding:8px 12px">
+        <div style="font-size:9px;color:#4ade80;font-family:monospace;opacity:.8">RESTAURANTE</div>
+        <div style="font-size:10px;color:#e0e6f0;margin-top:3px;font-weight:600">Madrid · 4.6⭐</div>
+        <div style="font-size:9px;color:#fbbf24;margin-top:4px">● pendiente</div>
+      </div>
+      <div style="position:absolute;bottom:100px;right:80px;width:110px;height:64px;background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.2);border-radius:8px;display:flex;flex-direction:column;justify-content:center;padding:8px 12px">
+        <div style="font-size:9px;color:#4ade80;font-family:monospace;opacity:.8">CLÍNICA</div>
+        <div style="font-size:10px;color:#e0e6f0;margin-top:3px;font-weight:600">Madrid · 5.0⭐</div>
+        <div style="font-size:9px;color:#a78bfa;margin-top:4px">● interesado</div>
+      </div>
+
+      <div class="desk" style="left:50%;transform:translateX(-50%);width:380px;height:14px;background:#0d2a14;bottom:70px"></div>
+      <div class="floor" style="background:linear-gradient(180deg,#020a04,#010602)"></div>
+
+      <!-- robot -->
+      <div class="robot" style="bottom:84px;left:50%;transform:translateX(-50%);animation:breathe 3s ease-in-out infinite">
+        <div class="r-head" style="width:44px;height:44px;background:linear-gradient(135deg,#14532d,#15803d);border:2px solid rgba(74,222,128,.4);animation:nod 4s ease-in-out infinite">
+          <div class="r-eye L" style="color:#4ade80;animation:blink 5s infinite"></div>
+          <div class="r-eye R" style="color:#4ade80;animation:blink 5s infinite;animation-delay:.3s"></div>
+          <div class="r-mouth"></div>
+        </div>
+        <div class="r-body" style="width:52px;height:44px;background:linear-gradient(135deg,#14532d,#166534);border:2px solid rgba(74,222,128,.25)">
+          <div class="r-arms">
+            <div class="r-arm L" style="height:30px;background:#15803d;border:1px solid rgba(74,222,128,.3);animation:typing 0.8s ease-in-out infinite"></div>
+            <div class="r-arm R" style="height:30px;background:#15803d;border:1px solid rgba(74,222,128,.3);animation:typingR 0.8s ease-in-out infinite;animation-delay:.4s"></div>
+          </div>
+        </div>
+        <div class="r-legs" style="margin-top:3px">
+          <div class="r-leg" style="background:#14532d;border:1px solid rgba(74,222,128,.2)"></div>
+          <div class="r-leg" style="background:#14532d;border:1px solid rgba(74,222,128,.2)"></div>
+        </div>
+      </div>
+
+      <div class="floats">
+        <span class="float" style="left:20%;bottom:80px;animation-delay:0s;color:#4ade80;font-family:monospace;font-size:11px">+lead</span>
+        <span class="float" style="left:50%;bottom:80px;animation-delay:1.5s;color:#4ade80;font-size:13px">📧</span>
+        <span class="float" style="left:75%;bottom:80px;animation-delay:3s;color:#4ade80;font-family:monospace;font-size:11px">enviado</span>
+      </div>
+    </div>
+    <div class="info">
+      <h3 style="color:#4ade80">El Agente Comercial</h3>
+      <div class="role" style="color:#4ade80">Outreach B2B automático · 09:00 Mar–Vie</div>
+      <div class="files">
+        <span class="file">agents/scraper.py</span>
+        <span class="file">agents/email_generator.py</span>
+        <span class="file">agents/email_sender.py</span>
+        <span class="file">leads.json</span>
+      </div>
+      <p>Busca cada día negocios reales en Google Maps por sector (peluquerías martes, restaurantes miércoles, clínicas jueves, talleres viernes). Extrae el email de su web, genera un email personalizado con Gemini y lo envía con botón de WhatsApp directo a tu número. Nunca contacta dos veces al mismo negocio. Máx. 5 emails/día para calentar el dominio.</p>
+      <button class="action-btn" style="background:rgba(74,222,128,.1);color:#4ade80;border:1px solid rgba(74,222,128,.3)" onclick="openCampanas()">📊 Ver panel de leads</button>
     </div>
   </div>
 
@@ -907,14 +974,19 @@ header p{color:#4b5563;font-size:14px;letter-spacing:.12em;text-transform:upperc
 <!-- ══ SCHEDULE ══ -->
 <div class="schedule">
   <div class="sched-grid">
+    <div class="sched" style="--g:linear-gradient(135deg,#4ade80,#16a34a)">
+      <div class="sched-time">09:00</div>
+      <div class="sched-sub">España · Mar–Vie</div>
+      <div class="sched-tags"><span class="tag" style="background:rgba(74,222,128,.15);color:#4ade80;border-color:rgba(74,222,128,.3)">Outreach B2B</span></div>
+    </div>
     <div class="sched" style="--g:linear-gradient(135deg,#ef4444,#f59e0b)">
       <div class="sched-time">17:30</div>
-      <div class="sched-sub">España · cada día</div>
+      <div class="sched-sub">España · Mar–Vie</div>
       <div class="sched-tags"><span class="tag tag-yt">YouTube</span></div>
     </div>
     <div class="sched" style="--g:linear-gradient(135deg,#ec4899,#7c3aed)">
       <div class="sched-time">18:30</div>
-      <div class="sched-sub">España · cada día</div>
+      <div class="sched-sub">España · Mar–Vie</div>
       <div class="sched-tags"><span class="tag tag-ig">Instagram</span></div>
     </div>
     <div class="sched" style="--g:linear-gradient(135deg,#00e5ff,#1a6bff,#7c3aed)">
