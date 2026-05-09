@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Archivos temporales del pipeline (se generan en cada ejecución)
+zia_audio.mp3
+zia_video.mp4
+debug.txt
+remotion/props.json
+
+# Artefactos de test locales
+test_*.mp4
+test_*.png
+variety_*.mp4
+remotion/props_*.json
+
+# Node / Remotion
+remotion/node_modules/
+remotion/out/
+
+# OS
+.DS_Store
+Thumbs.db

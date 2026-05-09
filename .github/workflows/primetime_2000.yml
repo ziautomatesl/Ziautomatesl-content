@@ -2,11 +2,36 @@ name: ZIA Video - Prime Time 20:00
 
 on:
   schedule:
-    - cron: '0 18 * * *'    # 20:00 España (UTC+2 verano)
+    - cron: '0 18 * * *'    # 20:00 España verano  (UTC+2 / CEST)
+    - cron: '0 19 * * *'    # 20:00 España invierno (UTC+1 / CET)
   workflow_dispatch:
 
 jobs:
+  check-time:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+    steps:
+      - name: Verificar horario España
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "should_run=true" >> $GITHUB_OUTPUT
+            echo "Ejecución manual: omitiendo comprobación de horario"
+          else
+            HOUR=$(TZ='Europe/Madrid' date +%-H)
+            echo "Hora España: ${HOUR}h (objetivo: 20h)"
+            if [ "$HOUR" = "20" ]; then
+              echo "should_run=true" >> $GITHUB_OUTPUT
+            else
+              echo "should_run=false" >> $GITHUB_OUTPUT
+              echo "Cron incorrecto para esta zona horaria, omitiendo."
+            fi
+          fi
+
   publicar-video:
+    needs: check-time
+    if: needs.check-time.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 35
 

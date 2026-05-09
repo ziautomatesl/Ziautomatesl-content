@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equipo ZIA Automate</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#e0e6f0;min-height:100vh;overflow-x:hidden}
+
+/* ── HEADER ── */
+header{text-align:center;padding:60px 20px 48px;position:relative}
+header h1{font-size:52px;font-weight:900;letter-spacing:-2px;
+  background:linear-gradient(135deg,#00e5ff 0%,#1a6bff 50%,#7c3aed 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+header p{color:#4b5563;font-size:14px;letter-spacing:.12em;text-transform:uppercase;margin-top:8px}
+.building-line{width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,229,255,.2),rgba(26,107,255,.3),rgba(124,58,237,.2),transparent);margin-top:40px}
+
+/* ── GRID ── */
+.offices{display:grid;grid-template-columns:1fr 1fr;gap:2px;max-width:1200px;margin:0 auto;padding:0 0 80px}
+.offices > .wide{grid-column:1/-1}
+
+/* ── OFFICE CARD ── */
+.office{position:relative;overflow:hidden;cursor:default}
+.office:hover .room{filter:brightness(1.08)}
+.room{height:340px;position:relative;overflow:hidden;transition:filter .3s}
+
+/* info strip */
+.info{padding:22px 26px 26px;background:#0d0d14;border-top:1px solid rgba(255,255,255,.05)}
+.info h3{font-size:18px;font-weight:800;letter-spacing:-.3px;margin-bottom:3px}
+.info .role{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;opacity:.6;margin-bottom:10px}
+.info .files{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.info .file{font-size:11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:3px 9px;font-family:monospace;color:#9ca3af}
+.info p{font-size:13px;color:#6b7280;line-height:1.6}
+
+/* ── ROBOTS ── */
+.robot{position:absolute;display:flex;flex-direction:column;align-items:center}
+
+/* head */
+.r-head{border-radius:10px;position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.r-eye{width:10px;height:10px;border-radius:50%;position:absolute;top:30%;background:#fff;box-shadow:0 0 8px currentColor}
+.r-eye.L{left:22%}.r-eye.R{right:22%}
+.r-eye::after{content:'';width:5px;height:5px;border-radius:50%;background:#1a1a2e;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.r-mouth{width:18px;height:4px;border-radius:2px;background:rgba(255,255,255,.5);position:absolute;bottom:22%}
+
+/* body */
+.r-body{border-radius:8px;position:relative;margin-top:3px;display:flex;align-items:center;justify-content:center}
+.r-body::after{content:'';width:18px;height:8px;border-radius:3px;background:rgba(255,255,255,.15);position:absolute;top:30%}
+
+/* arms */
+.r-arms{position:absolute;top:0;width:100%}
+.r-arm{width:12px;border-radius:6px;position:absolute;transform-origin:top center}
+.r-arm.L{left:-10px}.r-arm.R{right:-10px}
+
+/* legs */
+.r-legs{display:flex;gap:8px;margin-top:3px}
+.r-leg{width:12px;height:26px;border-radius:6px}
+
+/* ── FLOATING ELEMENTS ── */
+.floats{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.float{position:absolute;font-size:14px;opacity:0;animation:floatUp 3s ease-in infinite}
+@keyframes floatUp{0%{opacity:0;transform:translateY(0) scale(.8)}20%{opacity:.9}80%{opacity:.6}100%{opacity:0;transform:translateY(-80px) scale(1.1)}}
+
+/* ── SHARED ROOM ELEMENTS ── */
+.floor{position:absolute;bottom:0;left:0;right:0;height:70px}
+.desk{position:absolute;border-radius:6px 6px 2px 2px;bottom:70px}
+.desk-leg{position:absolute;bottom:0;width:8px;border-radius:0 0 4px 4px}
+.monitor{position:absolute;border-radius:5px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.monitor-stand{position:absolute;width:8px;border-radius:2px}
+.monitor-base{position:absolute;border-radius:3px;height:5px}
+.window{position:absolute;border-radius:6px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+
+/* ── ANIMATIONS ── */
+@keyframes blink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes typing{0%,100%{transform:rotate(-5deg) translateX(0)}50%{transform:rotate(5deg) translateX(4px)}}
+@keyframes typingR{0%,100%{transform:rotate(5deg) translateX(0)}50%{transform:rotate(-5deg) translateX(-4px)}}
+@keyframes nod{0%,100%{transform:rotate(0deg)}30%{transform:rotate(5deg)}70%{transform:rotate(-5deg)}}
+@keyframes conductL{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(20deg)}}
+@keyframes conductR{0%,100%{transform:rotate(20deg)}50%{transform:rotate(-20deg)}}
+@keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes shake{0%,100%{transform:rotate(0)}25%{transform:rotate(-3deg)}75%{transform:rotate(3deg)}}
+@keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+@keyframes scan{0%{top:10%}100%{top:85%}}
+@keyframes glow{0%,100%{box-shadow:0 0 8px currentColor}50%{box-shadow:0 0 22px currentColor}}
+@keyframes screenFlicker{0%,98%{opacity:1}99%{opacity:.7}100%{opacity:1}}
+@keyframes waveAnim{0%,100%{transform:scaleY(1)}50%{transform:scaleY(2.2)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes heartPop{0%{opacity:0;transform:scale(0) translateY(0)}20%{opacity:1;transform:scale(1.3)}80%{opacity:.7;transform:scale(1) translateY(-60px)}100%{opacity:0;transform:scale(.5) translateY(-90px)}}
+@keyframes counterUp{0%,100%{content:'1.2M'}50%{content:'1.2M'}}
+@keyframes tick{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes slideIn{0%{opacity:0;transform:translateX(-20px)}20%{opacity:1;transform:translateX(0)}80%{opacity:1}100%{opacity:0;transform:translateX(20px)}}
+@keyframes filmMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes pipelineFlow{0%{stroke-dashoffset:200}100%{stroke-dashoffset:0}}
+@keyframes dotPulse{0%,100%{r:4;opacity:.3}50%{r:7;opacity:1}}
+
+/* ══════════════════════════════════════════════════════════════
+   OFFICE 1 — main.py — EL JEFE
+══════════════════════════════════════════════════════════════ */
+#o1 .room{background:linear-gradient(180deg,#0b1628 0%,#0d1e38 68%,#0a1220 68%,#071018 100%)}
+
+/* Grid lines on wall */
+#o1 .wall-grid{position:absolute;inset:0 0 70px 0;
+  background-image:linear-gradient(rgba(0,229,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.04) 1px,transparent 1px);
+  background-size:40px 40px}
+
+/* 3 monitors */
+#o1 .mon{position:absolute;bottom:114px;border-radius:6px;border:2px solid rgba(0,229,255,.3);animation:screenFlicker 8s infinite}
+#o1 .mon1{left:60px;width:100px;height:68px;background:linear-gradient(135deg,#001a33,#003366);animation-delay:0s}
+#o1 .mon2{left:50%;transform:translateX(-50%);width:120px;height:80px;background:linear-gradient(135deg,#00101f,#002244);animation-delay:1.3s}
+#o1 .mon3{right:60px;width:100px;height:68px;background:linear-gradient(135deg,#001a33,#003366);animation-delay:2.6s}
+
+/* monitor glow lines */
+#o1 .mon::after{content:'';position:absolute;inset:6px;border-radius:3px;
+  background:repeating-linear-gradient(0deg,rgba(0,229,255,.1) 0px,rgba(0,229,255,.1) 2px,transparent 2px,transparent 8px)}
+
+/* scan line */
+#o1 .scan{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,229,255,.8),transparent);animation:scan 2.5s linear infinite}
+#o1 .mon1 .scan{animation-delay:0s}
+#o1 .mon2 .scan{animation-delay:.8s}
+#o1 .mon3 .scan{animation-delay:1.6s}
+
+/* desks */
+#o1 .desk{left:50%;transform:translateX(-50%);width:340px;height:14px;background:#1a2a3a;bottom:100px}
+#o1 .floor{background:linear-gradient(180deg,#071018,#050c14)}
+
+/* robot 1 */
+#o1 .robot{bottom:114px;left:50%;transform:translateX(-50%);animation:breathe 3s ease-in-out infinite}
+#o1 .r-head{width:44px;height:44px;background:linear-gradient(135deg,#1e40af,#1d4ed8);border:2px solid rgba(0,229,255,.4);animation:nod 4s ease-in-out infinite}
+#o1 .r-eye{color:#00e5ff;animation:blink 5s infinite}
+#o1 .r-eye.L{animation-delay:.2s}
+#o1 .r-body{width:52px;height:44px;background:linear-gradient(135deg,#1e3a5f,#1e40af);border:2px solid rgba(0,229,255,.25)}
+#o1 .r-arm{height:30px;background:#1e40af;border:1px solid rgba(0,229,255,.3)}
+#o1 .r-arm.L{animation:conductL 1.8s ease-in-out infinite}
+#o1 .r-arm.R{animation:conductR 1.8s ease-in-out infinite;animation-delay:.9s}
+#o1 .r-leg{background:#1e3a5f;border:1px solid rgba(0,229,255,.2)}
+
+/* arrows between monitors */
+#o1 .arrow{position:absolute;bottom:148px;font-size:18px;color:rgba(0,229,255,.5);animation:pulse 2s ease-in-out infinite}
+#o1 .arr1{left:145px;animation-delay:0s}
+#o1 .arr2{right:145px;animation-delay:.3s}
+
+/* floats */
+#o1 .float{color:#00e5ff;font-family:monospace;font-size:12px}
+
+/* ══════════════════════════════════════════════════════════════
+   OFFICE 2 — Guionista
+══════════════════════════════════════════════════════════════ */
+#o2 .room{background:linear-gradient(180deg,#1a1208 0%,#231808 68%,#150e04 68%,#100b02 100%)}
+
+#o2 .desk{left:50%;transform:translateX(-50%);width:260px;height:14px;background:#3d2a10;bottom:100px}
+#o2 .floor{background:linear-gradient(180deg,#100b02,#0a0701)}
+
+/* paper stack */
+#o2 .papers{position:absolute;bottom:114px;left:calc(50% - 80px);display:flex;flex-direction:column;gap:3px}
+#o2 .paper{width:50px;height:36px;border-radius:3px;border:1px solid rgba(255,200,100,.15)}
+#o2 .paper:nth-child(1){background:rgba(255,220,150,.07);transform:rotate(-4deg)}
+#o2 .paper:nth-child(2){background:rgba(255,220,150,.05);transform:rotate(2deg)}
+#o2 .paper:nth-child(3){background:rgba(255,220,150,.04);transform:rotate(-1deg)}
+
+/* text lines on paper */
+#o2 .paper::after{content:'';position:absolute;inset:6px 8px;
+  background:repeating-linear-gradient(0deg,rgba(255,200,100,.2) 0px,rgba(255,200,100,.2) 1px,transparent 1px,transparent 5px)}
+
+/* lamp */
+#o2 .lamp{position:absolute;bottom:114px;right:120px;width:6px;height:50px;background:#5a3a18;border-radius:3px}
+#o2 .lamp::before{content:'';position:absolute;top:-8px;left:-16px;width:38px;height:20px;border-radius:20px 20px 0 0;background:#7a4f20;border:2px solid #5a3a18}
+#o2 .lamp::after{content:'';position:absolute;top:-4px;left:-14px;width:34px;height:30px;border-radius:20px;background:radial-gradient(ellipse at center,rgba(255,220,100,.35) 0%,transparent 70%)}
+
+/* robot 2 */
+#o2 .robot{bottom:114px;left:calc(50% + 20px);transform:translateX(-50%);animation:breathe 3.5s ease-in-out infinite}
+#o2 .r-head{width:44px;height:44px;background:linear-gradient(135deg,#92400e,#b45309);border:2px solid rgba(251,191,36,.4);animation:nod 5s ease-in-out infinite}
+#o2 .r-eye{color:#fbbf24;animation:blink 6s infinite}
+#o2 .r-body{width:52px;height:44px;background:linear-gradient(135deg,#78350f,#92400e);border:2px solid rgba(251,191,36,.25)}
+#o2 .r-arm{height:28px;background:#92400e;border:1px solid rgba(251,191,36,.3)}
+#o2 .r-arm.L{animation:typing 0.5s ease-in-out infinite}
+#o2 .r-arm.R{animation:typingR 0.5s ease-in-out infinite;animation-delay:.25s}
+#o2 .r-leg{background:#78350f;border:1px solid rgba(251,191,36,.2)}
+
+/* floating words */
+#o2 .float{color:#fbbf24;font-size:11px;font-weight:700;font-family:monospace}
+
+/* ══════════════════════════════════════════════════════════════
+   OFFICE 3 — Locutor IA
+══════════════════════════════════════════════════════════════ */
+#o3 .room{background:linear-gradient(180deg,#0d0518 0%,#120820 68%,#0a0415 68%,#07030e 100%)}
+
+/* acoustic foam pattern */
+#o3 .foam{position:absolute;inset:0 0 70px 0;
+  background-image:radial-gradient(circle at 50% 50%,rgba(124,58,237,.06) 2px,transparent 2px);
+  background-size:20px 20px}
+
+/* microphone */
+#o3 .mic-stand{position:absolute;bottom:70px;left:50%;transform:translateX(-50%);width:4px;height:80px;background:#3a2060;border-radius:2px}
+#o3 .mic-arm{position:absolute;bottom:130px;left:50%;width:60px;height:4px;background:#3a2060;border-radius:2px;transform-origin:left center;transform:rotate(-20deg)}
+#o3 .mic-head{position:absolute;bottom:158px;left:calc(50% + 30px);width:28px;height:42px;background:linear-gradient(135deg,#5b21b6,#7c3aed);border-radius:14px;border:2px solid rgba(167,139,250,.4);animation:glow 2s ease-in-out infinite;color:#a78bfa}
+
+/* sound waves */
+#o3 .wave-ring{position:absolute;border-radius:50%;border:2px solid rgba(167,139,250,0);animation:soundRing 2s ease-out infinite}
+#o3 .wr1{width:50px;height:50px;bottom:162px;left:calc(50% + 21px);transform:translateX(-50%);animation-delay:0s}
+#o3 .wr2{width:80px;height:80px;bottom:147px;left:calc(50% + 6px);transform:translateX(-50%);animation-delay:.5s}
+#o3 .wr3{width:115px;height:115px;bottom:130px;left:calc(50% - 11px);transform:translateX(-50%);animation-delay:1s}
+@keyframes soundRing{0%{border-color:rgba(167,139,250,.6);transform:translateX(-50%) scale(.8)}100%{border-color:rgba(167,139,250,0);transform:translateX(-50%) scale(1.4)}}
+
+/* eq bars */
+#o3 .eq{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);display:flex;gap:4px;align-items:flex-end}
+#o3 .bar{width:6px;background:linear-gradient(to top,#7c3aed,#a78bfa);border-radius:3px 3px 0 0;animation:waveAnim .4s ease-in-out infinite}
+#o3 .b1{height:14px;animation-delay:0s}
+#o3 .b2{height:24px;animation-delay:.05s}
+#o3 .b3{height:32px;animation-delay:.1s}
+#o3 .b4{height:20px;animation-delay:.15s}
+#o3 .b5{height:28px;animation-delay:.2s}
+#o3 .b6{height:16px;animation-delay:.25s}
+#o3 .b7{height:22px;animation-delay:.3s}
+#o3 .b8{height:12px;animation-delay:.35s}
+
+#o3 .desk{left:50%;transform:translateX(-50%);width:220px;height:14px;background:#1e0a33;bottom:100px}
+#o3 .floor{background:linear-gradient(180deg,#07030e,#050210)}
+
+/* robot 3 */
+#o3 .robot{bottom:114px;left:calc(50% - 70px);transform:translateX(-50%);animation:breathe 4s ease-in-out infinite}
+#o3 .r-head{width:44px;height:44px;background:linear-gradient(135deg,#4c1d95,#5b21b6);border:2px solid rgba(167,139,250,.4);animation:nod 3s ease-in-out infinite}
+#o3 .r-eye{color:#a78bfa;animation:blink 4s infinite}
+#o3 .r-body{width:52px;height:44px;background:linear-gradient(135deg,#3b0764,#4c1d95);border:2px solid rgba(167,139,250,.25)}
+#o3 .r-arm.L{height:28px;background:#4c1d95;border:1px solid rgba(167,139,250,.3);animation:conductL 3s ease-in-out infinite}
+#o3 .r-arm.R{height:28px;background:#4c1d95;border:1px solid rgba(167,139,250,.3);animation:conductR 3s ease-in-out infinite;animation-delay:1.5s}
+#o3 .r-leg{background:#3b0764;border:1px solid rgba(167,139,250,.2)}
+
+#o3 .float{color:#a78bfa;font-size:13px}
+
+/* ══════════════════════════════════════════════════════════════
+   OFFICE 4 — Director de Cine
+══════════════════════════════════════════════════════════════ */
+#o4 .room{background:linear-gradient(180deg,#080808 0%,#0f0f0f 68%,#050505 68%,#020202 100%)}
+
+/* film strip top */
+#o4 .filmstrip{position:absolute;top:0;left:0;right:0;height:30px;background:#111;display:flex;align-items:center;overflow:hidden}
+#o4 .filmstrip-inner{display:flex;gap:4px;animation:filmMove 4s linear infinite;white-space:nowrap}
+#o4 .frame{width:28px;height:20px;background:#222;border-radius:2px;border:2px solid #333;flex-shrink:0}
+
+/* big screen */
+#o4 .screen{position:absolute;top:40px;left:50%;transform:translateX(-50%);width:200px;height:130px;
+  background:linear-gradient(135deg,#0a1628,#1e3a5f);border:3px solid #333;border-radius:4px;overflow:hidden}
+#o4 .screen::after{content:'▶';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:32px;color:rgba(0,229,255,.3);animation:pulse 2s ease-in-out infinite}
+#o4 .screen-glow{position:absolute;top:40px;left:50%;transform:translateX(-50%);width:220px;height:150px;
+  background:radial-gradient(ellipse at center,rgba(0,229,255,.08) 0%,transparent 70%);pointer-events:none}
+
+/* camera */
+#o4 .camera{position:absolute;bottom:130px;left:50%;transform:translateX(-50%);
+  width:60px;height:36px;background:#1a1a1a;border-radius:6px;border:2px solid #333}
+#o4 .camera::before{content:'';position:absolute;top:50%;left:-22px;transform:translateY(-50%);
+  width:22px;height:18px;background:#111;border-radius:50% 0 0 50%;border:2px solid #2a2a2a;border-right:none}
+#o4 .camera::after{content:'●';position:absolute;top:50%;right:8px;transform:translateY(-50%);
+  font-size:8px;color:rgba(255,50,50,.8);animation:pulse 1s ease-in-out infinite}
+#o4 .tripod{position:absolute;bottom:70px;left:50%;transform:translateX(-50%);width:80px;height:60px}
+#o4 .tripod::before,#o4 .tripod::after{content:'';position:absolute;top:0;width:3px;height:60px;background:#2a2a2a;border-radius:1px}
+#o4 .tripod::before{left:10px;transform:rotate(15deg);transform-origin:top center}
+#o4 .tripod::after{right:10px;transform:rotate(-15deg);transform-origin:top center}
+#o4 .tripod-center{position:absolute;top:0;left:50%;transform:translateX(-50%);width:3px;height:60px;background:#2a2a2a;border-radius:1px}
+
+/* clapperboard */
+#o4 .clap{position:absolute;bottom:170px;right:80px;width:44px;height:36px;
+  background:#111;border:2px solid #333;border-radius:3px;animation:shake 4s ease-in-out infinite;animation-delay:2s}
+#o4 .clap-top{position:absolute;top:-14px;left:-2px;right:-2px;height:14px;
+  background:repeating-linear-gradient(90deg,#fff 0px,#fff 6px,#111 6px,#111 12px);border-radius:2px 2px 0 0}
+
+#o4 .floor{background:linear-gradient(180deg,#020202,#000)}
+#o4 .desk{left:50%;transform:translateX(-50%);width:200px;height:14px;background:#0a0a0a;bottom:100px;display:none}
+
+/* robot 4 */
+#o4 .robot{bottom:126px;left:calc(50% - 10px);transform:translateX(-50%);animation:breathe 4s ease-in-out infinite}
+#o4 .r-head{width:44px;height:44px;background:linear-gradient(135deg,#111,#1a1a1a);border:2px solid rgba(255,255,255,.15);animation:nod 6s ease-in-out infinite}
+#o4 .r-eye{color:#ff4444;animation:blink 4s infinite}
+#o4 .r-eye::after{background:#ff4444}
+#o4 .r-body{width:52px;height:44px;background:linear-gradient(135deg,#0a0a0a,#111);border:2px solid rgba(255,255,255,.1)}
+#o4 .r-arm{height:30px;background:#111;border:1px solid rgba(255,255,255,.1)}
+#o4 .r-arm.L{animation:conductL 3s ease-in-out infinite}
+#o4 .r-arm.R{animation:conductR 3s ease-in-out infinite;animation-delay:1.5s}
+#o4 .r-leg{background:#0a0a0a;border:1px solid rgba(255,255,255,.08)}
+
+#o4 .float{color:rgba(255,255,255,.5);font-size:11px;font-family:monospace}
+
+/* ══════════════════════════════════════════════════════════════
+   OFFICE 5 — Manager YouTube
+══════════════════════════════════════════════════════════════ */
+#o5 .room{background:linear-gradient(180deg,#1a0505 0%,#220808 68%,#120202 68%,#0a0101 100%)}
+
+/* YouTube logo on wall */
+#o5 .yt-logo{position:absolute;top:40px;left:50%;transform:translateX(-50%);width:90px;height:64px;
+  background:#ff0000;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 30px rgba(255,0,0,.4);animation:pulse 3s ease-in-out infinite}
+#o5 .yt-logo::after{content:'▶';font-size:28px;color:#fff}
+
+/* subscriber counter */
+#o5 .counter{position:absolute;top:120px;left:50%;transform:translateX(-50%);
+  background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.3);border-radius:8px;padding:8px 16px;text-align:center}
+#o5 .counter-num{font-size:22px;font-weight:900;color:#ff4444;letter-spacing:-1px;font-family:monospace}
+#o5 .counter-label{font-size:10px;color:#6b7280;letter-spacing:.08em;text-transform:uppercase}
+
+/* notification bell */
+#o5 .bell{position:absolute;top:40px;right:80px;font-size:32px;animation:shake 3s ease-in-out infinite;animation-delay:1s}
+
+#o5 .desk{left:50%;transform:translateX(-50%);width:260px;height:14px;background:#1a0505;bottom:100px}
+#o5 .floor{background:linear-gradient(180deg,#0a0101,#070000)}
+
+/* laptop */
+#o5 .laptop{position:absolute;bottom:114px;left:calc(50% + 20px);
+  width:90px;height:58px;background:#111;border-radius:4px;border:2px solid rgba(255,0,0,.2)}
+#o5 .laptop::after{content:'▶';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:#ff4444;animation:pulse 1.5s ease-in-out infinite}
+
+/* robot 5 */
+#o5 .robot{bottom:114px;left:calc(50% - 60px);transform:translateX(-50%);animation:breathe 3s ease-in-out infinite}
+#o5 .r-head{width:44px;height:44px;background:linear-gradient(135deg,#7f1d1d,#991b1b);border:2px solid rgba(255,68,68,.4);animation:nod 3.5s ease-in-out infinite}
+#o5 .r-eye{color:#ff4444;animation:blink 5s infinite}
+#o5 .r-eye::after{background:#ff4444}
+#o5 .r-body{width:52px;height:44px;background:linear-gradient(135deg,#6b1010,#7f1d1d);border:2px solid rgba(255,68,68,.25)}
+#o5 .r-arm{height:28px;background:#7f1d1d;border:1px solid rgba(255,68,68,.3)}
+#o5 .r-arm.L{animation:typing .6s ease-in-out infinite}
+#o5 .r-arm.R{animation:typingR .6s ease-in-out infinite;animation-delay:.3s}
+#o5 .r-leg{background:#6b1010;border:1px solid rgba(255,68,68,.2)}
+
+#o5 .float{color:#ff4444;font-size:16px}
+
+/* ══════════════════════════════════════════════════════════════
+   OFFICE 6 — Manager Instagram
+══════════════════════════════════════════════════════════════ */
+#o6 .room{background:linear-gradient(180deg,#150515 0%,#1e0826 68%,#0e0313 68%,#080210 100%)}
+
+/* gradient wall accent */
+#o6 .wall-accent{position:absolute;top:0;right:0;width:160px;height:220px;
+  background:linear-gradient(135deg,rgba(195,64,255,.08),rgba(255,64,175,.05));border-radius:0 0 0 60px}
+
+/* phone */
+#o6 .phone{position:absolute;bottom:130px;right:130px;width:44px;height:76px;
+  background:#0d0d14;border:3px solid rgba(195,64,255,.4);border-radius:10px;
+  overflow:hidden;animation:shake 6s ease-in-out infinite;animation-delay:3s}
+#o6 .phone-screen{position:absolute;inset:4px;border-radius:6px;
+  background:linear-gradient(135deg,#3b0764,#7c3aed,#db2777);animation:screenFlicker 5s infinite}
+#o6 .phone::after{content:'📸';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px}
+
+/* flash */
+#o6 .flash{position:absolute;bottom:200px;right:112px;width:8px;height:8px;
+  background:#fff;border-radius:50%;animation:pulse .8s ease-in-out infinite;box-shadow:0 0 20px #fff}
+
+#o6 .desk{left:50%;transform:translateX(-50%);width:260px;height:14px;background:#1e0826;bottom:100px}
+#o6 .floor{background:linear-gradient(180deg,#080210,#050109)}
+
+/* robot 6 */
+#o6 .robot{bottom:114px;left:calc(50% - 20px);transform:translateX(-50%);animation:breathe 3.5s ease-in-out infinite}
+#o6 .r-head{width:44px;height:44px;background:linear-gradient(135deg,#701a75,#86198f);border:2px solid rgba(217,70,239,.4);animation:nod 4s ease-in-out infinite}
+#o6 .r-eye{color:#e879f9;animation:blink 5s infinite}
+#o6 .r-eye::after{background:#e879f9}
+#o6 .r-body{width:52px;height:44px;background:linear-gradient(135deg,#581c87,#701a75);border:2px solid rgba(217,70,239,.25)}
+#o6 .r-arm{height:28px;background:#701a75;border:1px solid rgba(217,70,239,.3)}
+#o6 .r-arm.L{transform:rotate(-30deg);transform-origin:top center;animation:conductL 5s ease-in-out infinite}
+#o6 .r-arm.R{transform:rotate(30deg);transform-origin:top center;animation:conductR 5s ease-in-out infinite;animation-delay:2.5s}
+#o6 .r-leg{background:#581c87;border:1px solid rgba(217,70,239,.2)}
+
+#o6 .float{font-size:16px;animation:heartPop 2.5s ease-in infinite}
+#o6 .f1{left:45%;animation-delay:0s}
+#o6 .f2{left:55%;animation-delay:.6s}
+#o6 .f3{left:40%;animation-delay:1.2s}
+#o6 .f4{left:60%;animation-delay:1.8s}
+
+/* ══════════════════════════════════════════════════════════════
+   OFFICE 7 — Programador de Turnos (wide)
+══════════════════════════════════════════════════════════════ */
+#o7 .room{background:linear-gradient(180deg,#020a04 0%,#041008 68%,#020602 68%,#010401 100%)}
+
+/* matrix rain columns */
+#o7 .matrix-col{position:absolute;top:0;bottom:70px;width:16px;font-size:10px;font-family:monospace;
+  color:rgba(0,255,70,.2);overflow:hidden;line-height:1.4;animation:matrixFall 3s linear infinite}
+#o7 .mc1{left:5%}.#o7 .mc2{left:15%}.#o7 .mc3{left:25%}.#o7 .mc4{left:75%}.#o7 .mc5{left:85%}.#o7 .mc6{left:95%}
+@keyframes matrixFall{0%{transform:translateY(-100%);opacity:0}10%{opacity:1}90%{opacity:.5}100%{transform:translateY(0);opacity:0}}
+
+/* big clock */
+#o7 .clock{position:absolute;top:40px;left:50%;transform:translateX(-50%);
+  width:90px;height:90px;border-radius:50%;border:4px solid rgba(0,255,70,.3);
+  background:rgba(0,20,0,.5);box-shadow:0 0 30px rgba(0,255,70,.15);display:flex;align-items:center;justify-content:center}
+#o7 .clock-hand-h{position:absolute;bottom:50%;left:50%;width:3px;height:28px;background:#00ff46;
+  transform-origin:bottom center;border-radius:3px;animation:tick 43200s linear infinite}
+#o7 .clock-hand-m{position:absolute;bottom:50%;left:50%;width:2px;height:36px;background:rgba(0,255,70,.8);
+  transform-origin:bottom center;border-radius:2px;animation:tick 3600s linear infinite}
+#o7 .clock-hand-s{position:absolute;bottom:50%;left:50%;width:1px;height:38px;background:#00e5ff;
+  transform-origin:bottom center;border-radius:1px;animation:tick 60s linear infinite}
+#o7 .clock-dot{position:absolute;width:6px;height:6px;border-radius:50%;background:#00ff46;top:50%;left:50%;transform:translate(-50%,-50%)}
+
+/* schedule slots */
+#o7 .slots{position:absolute;top:40px;right:80px;display:flex;flex-direction:column;gap:6px}
+#o7 .slot{display:flex;align-items:center;gap:8px;padding:6px 12px;background:rgba(0,255,70,.05);
+  border:1px solid rgba(0,255,70,.15);border-radius:6px;animation:slideIn 4s ease-in-out infinite}
+#o7 .slot:nth-child(1){animation-delay:0s}
+#o7 .slot:nth-child(2){animation-delay:1.3s}
+#o7 .slot:nth-child(3){animation-delay:2.6s}
+#o7 .slot-time{font-size:14px;font-weight:800;color:#00ff46;font-family:monospace;letter-spacing:-0.5px}
+#o7 .slot-plat{font-size:10px;color:#4b5563;text-transform:uppercase;letter-spacing:.06em}
+#o7 .slot-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* control panel */
+#o7 .panel{position:absolute;bottom:100px;left:80px;width:160px;height:70px;
+  background:#040f04;border:2px solid rgba(0,255,70,.2);border-radius:8px;padding:8px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+#o7 .btn{height:16px;border-radius:3px;animation:pulse 2s ease-in-out infinite}
+#o7 .btn:nth-child(odd){background:rgba(0,255,70,.2);animation-delay:0s}
+#o7 .btn:nth-child(even){background:rgba(0,229,255,.15);animation-delay:.5s}
+
+#o7 .desk{left:50%;transform:translateX(-50%);width:500px;height:14px;background:#030a03;bottom:100px}
+#o7 .floor{background:linear-gradient(180deg,#010401,#000300)}
+
+/* robot 7 */
+#o7 .robot{bottom:114px;left:50%;transform:translateX(-50%);animation:breathe 3s ease-in-out infinite}
+#o7 .r-head{width:44px;height:44px;background:linear-gradient(135deg,#052e16,#064e3b);border:2px solid rgba(0,255,70,.4);animation:nod 4s ease-in-out infinite}
+#o7 .r-eye{color:#00ff46;animation:blink 4s infinite}
+#o7 .r-eye::after{background:#00ff46}
+#o7 .r-body{width:52px;height:44px;background:linear-gradient(135deg,#022c22,#052e16);border:2px solid rgba(0,255,70,.25)}
+#o7 .r-arm{height:28px;background:#052e16;border:1px solid rgba(0,255,70,.3)}
+#o7 .r-arm.L{animation:typing .8s ease-in-out infinite}
+#o7 .r-arm.R{animation:typingR .8s ease-in-out infinite;animation-delay:.4s}
+#o7 .r-leg{background:#022c22;border:1px solid rgba(0,255,70,.2)}
+
+#o7 .float{color:#00ff46;font-family:monospace;font-size:11px}
+
+/* ══════════════════════════════════════════════════════════════
+   PIPELINE FLOW
+══════════════════════════════════════════════════════════════ */
+.pipeline-section{max-width:1200px;margin:0 auto;padding:60px 40px}
+.pipeline-section h2{text-align:center;font-size:22px;font-weight:800;letter-spacing:-.5px;
+  color:#374151;margin-bottom:40px;text-transform:uppercase;letter-spacing:.1em;font-size:13px}
+.flow{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0}
+.flow-node{text-align:center;padding:0 4px}
+.flow-box{width:100px;padding:12px 8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;transition:border-color .3s,box-shadow .3s;cursor:default}
+.flow-box:hover{border-color:var(--c);box-shadow:0 0 20px var(--c-glow)}
+.flow-icon{font-size:22px;margin-bottom:4px}
+.flow-name{font-size:10px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em}
+.flow-arrow{font-size:20px;color:#1f2937;padding:0 6px;animation:pulse 2s ease-in-out infinite}
+.flow-arrow:nth-child(2){animation-delay:.3s}
+.flow-arrow:nth-child(4){animation-delay:.6s}
+.flow-arrow:nth-child(6){animation-delay:.9s}
+.flow-arrow:nth-child(8){animation-delay:1.2s}
+.flow-arrow:nth-child(10){animation-delay:1.5s}
+
+/* ══════════════════════════════════════════════════════════════
+   SCHEDULE BAR
+══════════════════════════════════════════════════════════════ */
+.schedule{max-width:1200px;margin:0 auto 80px;padding:0 40px}
+.sched-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.sched{padding:28px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);text-align:center;position:relative;overflow:hidden}
+.sched::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--g);opacity:.7}
+.sched-time{font-size:44px;font-weight:900;letter-spacing:-2px;background:var(--g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.sched-sub{font-size:11px;color:#374151;text-transform:uppercase;letter-spacing:.1em;margin:6px 0 14px}
+.sched-tags{display:flex;justify-content:center;gap:8px}
+.tag{font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.04em}
+.tag-yt{background:rgba(255,0,0,.12);color:#ff5555;border:1px solid rgba(255,0,0,.2)}
+.tag-ig{background:rgba(195,64,255,.1);color:#d070ff;border:1px solid rgba(195,64,255,.2)}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Equipo ZIA Automate</h1>
+  <p>7 agentes · 3 publicaciones diarias · 0 intervención humana</p>
+  <div class="building-line"></div>
+</header>
+
+<!-- ══ OFFICES GRID ══ -->
+<div class="offices">
+
+  <!-- ══ OFFICE 1: El Jefe ══ -->
+  <div class="office" id="o1">
+    <div class="room">
+      <div class="wall-grid"></div>
+
+      <!-- monitors -->
+      <div class="mon mon1"><div class="scan"></div></div>
+      <div class="mon mon2"><div class="scan"></div></div>
+      <div class="mon mon3"><div class="scan"></div></div>
+
+      <!-- arrows -->
+      <span class="arrow arr1">→</span>
+      <span class="arrow arr2">←</span>
+
+      <!-- desk -->
+      <div class="desk"></div>
+      <div class="floor"></div>
+
+      <!-- robot -->
+      <div class="robot">
+        <div class="r-head">
+          <div class="r-eye L"></div>
+          <div class="r-eye R"></div>
+          <div class="r-mouth"></div>
+        </div>
+        <div class="r-body">
+          <div class="r-arms">
+            <div class="r-arm L"></div>
+            <div class="r-arm R"></div>
+          </div>
+        </div>
+        <div class="r-legs">
+          <div class="r-leg"></div>
+          <div class="r-leg"></div>
+        </div>
+      </div>
+
+      <!-- floats -->
+      <div class="floats">
+        <span class="float" style="left:15%;bottom:80px;animation-delay:0s">RUN</span>
+        <span class="float" style="left:75%;bottom:80px;animation-delay:1.5s">OK</span>
+        <span class="float" style="left:45%;bottom:80px;animation-delay:3s">▶</span>
+      </div>
+    </div>
+    <div class="info">
+      <h3 style="color:#00e5ff">El Jefe de Operaciones</h3>
+      <div class="role" style="color:#00e5ff">Orquestador del pipeline</div>
+      <div class="files"><span class="file">main.py</span></div>
+      <p>Recibe la orden del día y coordina a todos los demás en orden. Si algo falla decide si abortar o continuar. Limpia archivos temporales al terminar.</p>
+    </div>
+  </div>
+
+  <!-- ══ OFFICE 2: El Guionista ══ -->
+  <div class="office" id="o2">
+    <div class="room">
+      <!-- papers + lamp -->
+      <div class="lamp"></div>
+      <div class="papers">
+        <div class="paper"></div>
+        <div class="paper"></div>
+        <div class="paper"></div>
+      </div>
+
+      <div class="desk"></div>
+      <div class="floor"></div>
+
+      <!-- robot -->
+      <div class="robot">
+        <div class="r-head">
+          <div class="r-eye L"></div>
+          <div class="r-eye R"></div>
+          <div class="r-mouth"></div>
+        </div>
+        <div class="r-body">
+          <div class="r-arms">
+            <div class="r-arm L"></div>
+            <div class="r-arm R"></div>
+          </div>
+        </div>
+        <div class="r-legs">
+          <div class="r-leg"></div>
+          <div class="r-leg"></div>
+        </div>
+      </div>
+
+      <!-- floats -->
+      <div class="floats">
+        <span class="float" style="left:20%;bottom:90px;animation-delay:0s">640€</span>
+        <span class="float" style="left:50%;bottom:90px;animation-delay:1s">#ia</span>
+        <span class="float" style="left:70%;bottom:90px;animation-delay:2s">¿Y tú?</span>
+        <span class="float" style="left:35%;bottom:90px;animation-delay:3s">-70%</span>
+      </div>
+    </div>
+    <div class="info">
+      <h3 style="color:#fbbf24">El Guionista</h3>
+      <div class="role" style="color:#fbbf24">Selección y preparación del contenido</div>
+      <div class="files"><span class="file">generate_script.py</span><span class="file">scripts_bank.py</span></div>
+      <p>Calcula qué guion le toca hoy según el día del año. 30 guiones de marketing con hooks virales, números reales y preguntas de engagement.</p>
+      <button class="action-btn btn-guion" onclick="openGuiones()">📋 Ver guiones programados</button>
+    </div>
+  </div>
+
+  <!-- ══ OFFICE 3: El Locutor ══ -->
+  <div class="office" id="o3">
+    <div class="room">
+      <div class="foam"></div>
+
+      <!-- microphone -->
+      <div class="mic-stand"></div>
+      <div class="mic-arm"></div>
+      <div class="mic-head"></div>
+
+      <!-- sound rings -->
+      <div class="wave-ring wr1"></div>
+      <div class="wave-ring wr2"></div>
+      <div class="wave-ring wr3"></div>
+
+      <div class="desk"></div>
+      <div class="floor"></div>
+
+      <!-- eq bars -->
+      <div class="eq">
+        <div class="bar b1"></div><div class="bar b2"></div><div class="bar b3"></div>
+        <div class="bar b4"></div><div class="bar b5"></div><div class="bar b6"></div>
+        <div class="bar b7"></div><div class="bar b8"></div>
+      </div>
+
+      <!-- robot -->
+      <div class="robot">
+        <div class="r-head">
+          <div class="r-eye L"></div>
+          <div class="r-eye R"></div>
+          <div class="r-mouth"></div>
+        </div>
+        <div class="r-body">
+          <div class="r-arms">
+            <div class="r-arm L"></div>
+            <div class="r-arm R"></div>
+          </div>
+        </div>
+        <div class="r-legs">
+          <div class="r-leg"></div>
+          <div class="r-leg"></div>
+        </div>
+      </div>
+
+      <div class="floats">
+        <span class="float" style="left:20%;bottom:80px;animation-delay:.5s">♪</span>
+        <span class="float" style="left:65%;bottom:80px;animation-delay:2s">♫</span>
+      </div>
+    </div>
+    <div class="info">
+      <h3 style="color:#a78bfa">El Locutor IA</h3>
+      <div class="role" style="color:#a78bfa">Síntesis de voz y sincronización</div>
+      <div class="files"><span class="file">create_audio.py</span></div>
+      <p>Voz española Álvaro Neural. Captura el tiempo exacto de cada palabra para que los subtítulos aparezcan sincronizados al milisegundo.</p>
+    </div>
+  </div>
+
+  <!-- ══ OFFICE 4: El Director ══ -->
+  <div class="office" id="o4">
+    <div class="room">
+      <!-- film strip -->
+      <div class="filmstrip">
+        <div class="filmstrip-inner">
+          <div class="frame"></div><div class="frame"></div><div class="frame"></div><div class="frame"></div>
+          <div class="frame"></div><div class="frame"></div><div class="frame"></div><div class="frame"></div>
+          <div class="frame"></div><div class="frame"></div><div class="frame"></div><div class="frame"></div>
+          <div class="frame"></div><div class="frame"></div><div class="frame"></div><div class="frame"></div>
+        </div>
+      </div>
+
+      <div class="screen"></div>
+      <div class="screen-glow"></div>
+      <div class="clap"><div class="clap-top"></div></div>
+      <div class="tripod"><div class="tripod-center"></div></div>
+      <div class="camera"></div>
+
+      <div class="floor"></div>
+
+      <!-- robot -->
+      <div class="robot">
+        <div class="r-head">
+          <div class="r-eye L"></div>
+          <div class="r-eye R"></div>
+          <div class="r-mouth"></div>
+        </div>
+        <div class="r-body">
+          <div class="r-arms">
+            <div class="r-arm L"></div>
+            <div class="r-arm R"></div>
+          </div>
+        </div>
+        <div class="r-legs">
+          <div class="r-leg"></div>
+          <div class="r-leg"></div>
+        </div>
+      </div>
+
+      <div class="floats">
+        <span class="float" style="left:15%;bottom:80px;animation-delay:0s;font-size:10px;font-family:monospace">1080×1920</span>
+        <span class="float" style="left:65%;bottom:80px;animation-delay:2s;font-size:10px;font-family:monospace">30fps</span>
+      </div>
+    </div>
+    <div class="info">
+      <h3 style="color:#9ca3af">El Director de Cine</h3>
+      <div class="role" style="color:#9ca3af">Renderizado 3D del vídeo</div>
+      <div class="files"><span class="file">create_video.py</span><span class="file">ZiaVideo.tsx</span></div>
+      <p>Lanza Remotion y renderiza el vídeo frame a frame: aurora 3D, partículas, grid de ondas, subtítulos TikTok-style y frases de impacto rotando cada 3 segundos.</p>
+      <button class="action-btn btn-video" onclick="openVideo()">🎬 Vista previa del vídeo</button>
+    </div>
+  </div>
+
+  <!-- ══ OFFICE 5: YouTube Manager ══ -->
+  <div class="office" id="o5">
+    <div class="room">
+      <div class="yt-logo"></div>
+      <div class="bell">🔔</div>
+      <div class="counter">
+        <div class="counter-num">+1.2K 👁</div>
+        <div class="counter-label">views subiendo</div>
+      </div>
+
+      <div class="laptop"></div>
+      <div class="desk"></div>
+      <div class="floor"></div>
+
+      <!-- robot -->
+      <div class="robot">
+        <div class="r-head">
+          <div class="r-eye L"></div>
+          <div class="r-eye R"></div>
+          <div class="r-mouth"></div>
+        </div>
+        <div class="r-body">
+          <div class="r-arms">
+            <div class="r-arm L"></div>
+            <div class="r-arm R"></div>
+          </div>
+        </div>
+        <div class="r-legs">
+          <div class="r-leg"></div>
+          <div class="r-leg"></div>
+        </div>
+      </div>
+
+      <div class="floats">
+        <span class="float" style="left:20%;bottom:80px;animation-delay:0s">▶</span>
+        <span class="float" style="left:55%;bottom:80px;animation-delay:1s">👍</span>
+        <span class="float" style="left:75%;bottom:80px;animation-delay:2.5s">🔔</span>
+      </div>
+    </div>
+    <div class="info">
+      <h3 style="color:#f87171">El Manager de YouTube</h3>
+      <div class="role" style="color:#f87171">Publicación en YouTube</div>
+      <div class="files"><span class="file">post_youtube.py</span></div>
+      <p>Sube el vídeo con título SEO, descripción optimizada y tags dinámicos. OAuth2 con refresh token, sin login manual. Idioma español para el algoritmo de búsqueda.</p>
+    </div>
+  </div>
+
+  <!-- ══ OFFICE 6: Instagram Manager ══ -->
+  <div class="office" id="o6">
+    <div class="room">
+      <div class="wall-accent"></div>
+      <div class="phone"><div class="phone-screen"></div></div>
+      <div class="flash"></div>
+
+      <div class="desk"></div>
+      <div class="floor"></div>
+
+      <!-- robot -->
+      <div class="robot">
+        <div class="r-head">
+          <div class="r-eye L"></div>
+          <div class="r-eye R"></div>
+          <div class="r-mouth"></div>
+        </div>
+        <div class="r-body">
+          <div class="r-arms">
+            <div class="r-arm L"></div>
+            <div class="r-arm R"></div>
+          </div>
+        </div>
+        <div class="r-legs">
+          <div class="r-leg"></div>
+          <div class="r-leg"></div>
+        </div>
+      </div>
+
+      <div class="floats">
+        <span class="float f1">❤️</span>
+        <span class="float f2">💜</span>
+        <span class="float f3">🔥</span>
+        <span class="float f4">✨</span>
+      </div>
+    </div>
+    <div class="info">
+      <h3 style="color:#f472b6">El Manager de Instagram</h3>
+      <div class="role" style="color:#f472b6">Publicación en Instagram Reels</div>
+      <div class="files"><span class="file">post_instagram.py</span></div>
+      <p>Publica como Reel con caption estructurado: hook → cuerpo → pregunta → link → máx. 5 hashtags (algoritmo 2025). Sesión cifrada en secretos de GitHub.</p>
+    </div>
+  </div>
+
+  <!-- ══ OFFICE 7: Programador de Turnos (wide) ══ -->
+  <div class="office wide" id="o7">
+    <div class="room" style="height:300px">
+      <!-- matrix columns -->
+      <div class="matrix-col mc1">01<br>10<br>11<br>00<br>10<br>01<br>11</div>
+      <div class="matrix-col mc4" style="left:75%;animation-delay:1s">11<br>00<br>01<br>10<br>01<br>11<br>00</div>
+      <div class="matrix-col mc6" style="left:92%;animation-delay:.5s">00<br>11<br>10<br>01<br>11<br>00<br>10</div>
+
+      <!-- clock -->
+      <div class="clock">
+        <div class="clock-hand-h"></div>
+        <div class="clock-hand-m" style="transform:rotate(90deg)"></div>
+        <div class="clock-hand-s" style="transform:rotate(180deg)"></div>
+        <div class="clock-dot"></div>
+      </div>
+
+      <!-- schedule slots -->
+      <div class="slots">
+        <div class="slot">
+          <div class="slot-dot" style="background:#ff4444"></div>
+          <span class="slot-time">17:30</span>
+          <span class="slot-plat">YouTube</span>
+        </div>
+        <div class="slot">
+          <div class="slot-dot" style="background:#d070ff"></div>
+          <span class="slot-time">18:30</span>
+          <span class="slot-plat">Instagram</span>
+        </div>
+        <div class="slot">
+          <div class="slot-dot" style="background:#00e5ff"></div>
+          <span class="slot-time">20:00</span>
+          <span class="slot-plat">Ambas 🔥</span>
+        </div>
+      </div>
+
+      <!-- control panel -->
+      <div class="panel">
+        <div class="btn"></div><div class="btn"></div><div class="btn"></div><div class="btn"></div>
+        <div class="btn"></div><div class="btn"></div><div class="btn"></div><div class="btn"></div>
+      </div>
+
+      <div class="desk"></div>
+      <div class="floor"></div>
+
+      <!-- robot -->
+      <div class="robot">
+        <div class="r-head">
+          <div class="r-eye L"></div>
+          <div class="r-eye R"></div>
+          <div class="r-mouth"></div>
+        </div>
+        <div class="r-body">
+          <div class="r-arms">
+            <div class="r-arm L"></div>
+            <div class="r-arm R"></div>
+          </div>
+        </div>
+        <div class="r-legs">
+          <div class="r-leg"></div>
+          <div class="r-leg"></div>
+        </div>
+      </div>
+
+      <div class="floats">
+        <span class="float" style="left:38%;bottom:80px;animation-delay:0s;font-family:monospace">CRON OK</span>
+        <span class="float" style="left:55%;bottom:80px;animation-delay:2s;font-family:monospace">UTC+2</span>
+      </div>
+    </div>
+    <div class="info">
+      <h3 style="color:#4ade80">El Programador de Turnos</h3>
+      <div class="role" style="color:#4ade80">GitHub Actions — automatización de horarios</div>
+      <div class="files">
+        <span class="file">youtube_1730.yml</span>
+        <span class="file">instagram_1830.yml</span>
+        <span class="file">primetime_2000.yml</span>
+      </div>
+      <p>Dispara el pipeline a las horas exactas ajustándose automáticamente al horario de verano e invierno de España. Doble cron por workflow + guard de hora real: si el cron equivocado dispara, aborta en segundos sin publicar nada.</p>
+    </div>
+  </div>
+
+</div><!-- /offices -->
+
+<!-- ══ PIPELINE FLOW ══ -->
+<div class="pipeline-section">
+  <h2>Flujo de ejecución</h2>
+  <div class="flow">
+    <div class="flow-node">
+      <div class="flow-box" style="--c:#00e5ff;--c-glow:rgba(0,229,255,.15)">
+        <div class="flow-icon">🎯</div>
+        <div class="flow-name">main.py</div>
+      </div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">
+      <div class="flow-box" style="--c:#fbbf24;--c-glow:rgba(251,191,36,.15)">
+        <div class="flow-icon">✍️</div>
+        <div class="flow-name">Guion</div>
+      </div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">
+      <div class="flow-box" style="--c:#a78bfa;--c-glow:rgba(167,139,250,.15)">
+        <div class="flow-icon">🎙️</div>
+        <div class="flow-name">Audio</div>
+      </div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">
+      <div class="flow-box" style="--c:#9ca3af;--c-glow:rgba(156,163,175,.15)">
+        <div class="flow-icon">🎬</div>
+        <div class="flow-name">Vídeo</div>
+      </div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">
+      <div class="flow-box" style="--c:#f87171;--c-glow:rgba(248,113,113,.15)">
+        <div class="flow-icon">▶️</div>
+        <div class="flow-name">YouTube</div>
+      </div>
+    </div>
+    <div class="flow-arrow">+</div>
+    <div class="flow-node">
+      <div class="flow-box" style="--c:#f472b6;--c-glow:rgba(244,114,182,.15)">
+        <div class="flow-icon">📸</div>
+        <div class="flow-name">Instagram</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCHEDULE ══ -->
+<div class="schedule">
+  <div class="sched-grid">
+    <div class="sched" style="--g:linear-gradient(135deg,#ef4444,#f59e0b)">
+      <div class="sched-time">17:30</div>
+      <div class="sched-sub">España · cada día</div>
+      <div class="sched-tags"><span class="tag tag-yt">YouTube</span></div>
+    </div>
+    <div class="sched" style="--g:linear-gradient(135deg,#ec4899,#7c3aed)">
+      <div class="sched-time">18:30</div>
+      <div class="sched-sub">España · cada día</div>
+      <div class="sched-tags"><span class="tag tag-ig">Instagram</span></div>
+    </div>
+    <div class="sched" style="--g:linear-gradient(135deg,#00e5ff,#1a6bff,#7c3aed)">
+      <div class="sched-time">20:00</div>
+      <div class="sched-sub">España · prime time</div>
+      <div class="sched-tags"><span class="tag tag-yt">YouTube</span><span class="tag tag-ig">Instagram</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     MODAL: GUIONES
+══════════════════════════════════════════════════════════════ -->
+<div id="modal-guiones" class="modal-overlay" onclick="closeModal('modal-guiones')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <h2 class="modal-title">📋 Panel de Guiones</h2>
+        <p class="modal-sub">Programación automática · 30 guiones · ciclo de 10 días</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-guiones')">✕</button>
+    </div>
+
+    <!-- tabs -->
+    <div class="gtabs">
+      <button class="gtab active" onclick="switchTab(0)">Próximos 14 días</button>
+      <button class="gtab" onclick="switchTab(1)">Todos los guiones</button>
+    </div>
+
+    <!-- tab 0: calendar -->
+    <div id="gtab-0" class="gtab-content">
+      <div id="calendar-grid"></div>
+    </div>
+
+    <!-- tab 1: all scripts -->
+    <div id="gtab-1" class="gtab-content" style="display:none">
+      <div id="all-scripts-grid"></div>
+    </div>
+
+    <!-- expanded detail -->
+    <div id="script-detail" class="script-detail" style="display:none">
+      <button class="detail-back" onclick="closeDetail()">← Volver</button>
+      <div id="detail-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     MODAL: VIDEO PREVIEW
+══════════════════════════════════════════════════════════════ -->
+<div id="modal-video" class="modal-overlay" onclick="closeModal('modal-video')">
+  <div class="modal-box modal-box-video" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <h2 class="modal-title">🎬 Vista Previa del Vídeo</h2>
+        <p class="modal-sub" id="video-preview-date"></p>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-video')">✕</button>
+    </div>
+
+    <!-- slot switcher -->
+    <div class="slot-switcher">
+      <button class="slot-btn active" onclick="switchSlot(0,this)">▶ 17:30 YouTube</button>
+      <button class="slot-btn" onclick="switchSlot(1,this)">📸 18:30 Instagram</button>
+      <button class="slot-btn" onclick="switchSlot(2,this)">🔥 20:00 Ambas</button>
+    </div>
+
+    <div class="video-preview-layout">
+      <!-- phone mockup -->
+      <div class="phone-wrap">
+        <div class="phone-mock">
+          <div class="phone-notch"></div>
+          <div class="phone-screen" id="video-screen">
+            <div class="vs-bg" id="vs-bg"></div>
+            <div class="vs-progress" id="vs-progress"></div>
+            <div class="vs-brand">
+              <div class="vs-dot"></div>
+              <span class="vs-brandname">ziautomate</span>
+            </div>
+            <div class="vs-highlight" id="vs-highlight"></div>
+            <div class="vs-caption" id="vs-caption"></div>
+            <div class="vs-footer">ziautomate.netlify.app</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- info panel -->
+      <div class="video-info-panel">
+        <div class="vi-section">
+          <div class="vi-label">TEMA</div>
+          <div class="vi-value" id="vi-topic"></div>
+        </div>
+        <div class="vi-section">
+          <div class="vi-label">HIGHLIGHTS (rotan cada 3s)</div>
+          <div class="vi-chips" id="vi-highlights"></div>
+        </div>
+        <div class="vi-section">
+          <div class="vi-label">GUION COMPLETO</div>
+          <div class="vi-script" id="vi-script"></div>
+        </div>
+        <div class="vi-section">
+          <div class="vi-label">HASHTAGS</div>
+          <div class="vi-hashtags" id="vi-hashtags"></div>
+        </div>
+        <div class="vi-section">
+          <div class="vi-label">PREGUNTA DE ENGAGEMENT</div>
+          <div class="vi-question" id="vi-question"></div>
+        </div>
+        <div class="vi-section" id="vi-caption-wrap">
+          <div class="vi-label">CAPTION INSTAGRAM</div>
+          <div class="vi-caption-text" id="vi-caption-full"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* ── ACTION BUTTONS ── */
+.action-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:10px 20px;
+  border:none;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:.02em;cursor:pointer;transition:all .2s}
+.btn-guion{background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.3)}
+.btn-guion:hover{background:rgba(251,191,36,.22);box-shadow:0 0 16px rgba(251,191,36,.2)}
+.btn-video{background:rgba(156,163,175,.1);color:#d1d5db;border:1px solid rgba(156,163,175,.25)}
+.btn-video:hover{background:rgba(156,163,175,.2);box-shadow:0 0 16px rgba(156,163,175,.15)}
+
+/* ── MODAL OVERLAY ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;
+  display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)}
+.modal-overlay.open{display:flex}
+.modal-box{background:#0d0d16;border:1px solid rgba(255,255,255,.1);border-radius:20px;
+  width:100%;max-width:960px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:0 40px 100px rgba(0,0,0,.8)}
+.modal-box-video{max-width:1100px}
+.modal-header{display:flex;align-items:flex-start;justify-content:space-between;padding:28px 32px 0;flex-shrink:0}
+.modal-title{font-size:22px;font-weight:800;letter-spacing:-.5px;color:#e0e6f0}
+.modal-sub{font-size:12px;color:#4b5563;margin-top:3px;letter-spacing:.04em}
+.modal-close{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:#9ca3af;
+  width:34px;height:34px;border-radius:8px;font-size:16px;cursor:pointer;transition:.2s;flex-shrink:0}
+.modal-close:hover{background:rgba(255,255,255,.15);color:#fff}
+
+/* ── GUIONES TABS ── */
+.gtabs{display:flex;gap:4px;padding:20px 32px 0;flex-shrink:0}
+.gtab{background:transparent;border:1px solid rgba(255,255,255,.08);color:#6b7280;
+  padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:.2s}
+.gtab.active{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.3);color:#fbbf24}
+.gtab-content{flex:1;overflow-y:auto;padding:20px 32px 28px}
+
+/* ── CALENDAR GRID ── */
+#calendar-grid{display:flex;flex-direction:column;gap:12px}
+.day-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden}
+.day-header{padding:10px 16px;background:rgba(255,255,255,.04);display:flex;align-items:center;gap:12px}
+.day-date{font-size:13px;font-weight:800;color:#e0e6f0;letter-spacing:-.2px}
+.day-label{font-size:11px;color:#4b5563;text-transform:uppercase;letter-spacing:.08em}
+.day-today{font-size:10px;font-weight:700;background:rgba(0,229,255,.15);color:#00e5ff;
+  border:1px solid rgba(0,229,255,.3);border-radius:4px;padding:2px 8px;letter-spacing:.06em}
+.slot-row{display:flex;align-items:center;gap:14px;padding:10px 16px;border-top:1px solid rgba(255,255,255,.04);
+  cursor:pointer;transition:.15s}
+.slot-row:hover{background:rgba(255,255,255,.04)}
+.slot-time-badge{font-size:11px;font-weight:800;width:40px;flex-shrink:0;font-family:monospace}
+.slot-plat-icons{display:flex;gap:4px;width:52px;flex-shrink:0}
+.plat-chip{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px}
+.plat-yt{background:rgba(255,0,0,.12);color:#ff5555;border:1px solid rgba(255,0,0,.2)}
+.plat-ig{background:rgba(195,64,255,.1);color:#d070ff;border:1px solid rgba(195,64,255,.2)}
+.slot-topic{font-size:13px;font-weight:600;color:#d1d5db;flex:1}
+.slot-highlights{display:flex;gap:4px;flex-wrap:wrap}
+.h-chip{font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#9ca3af}
+
+/* ── ALL SCRIPTS ── */
+#all-scripts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.script-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;
+  padding:14px 16px;cursor:pointer;transition:.15s}
+.script-card:hover{background:rgba(255,255,255,.06);border-color:rgba(251,191,36,.2)}
+.sc-num{font-size:10px;font-weight:700;color:#374151;margin-bottom:4px;font-family:monospace}
+.sc-topic{font-size:13px;font-weight:700;color:#d1d5db;margin-bottom:8px;line-height:1.3}
+.sc-chips{display:flex;flex-wrap:wrap;gap:3px}
+
+/* ── DETAIL VIEW ── */
+.script-detail{flex:1;overflow-y:auto;padding:24px 32px}
+.detail-back{background:transparent;border:1px solid rgba(255,255,255,.1);color:#9ca3af;
+  padding:6px 14px;border-radius:7px;font-size:12px;cursor:pointer;margin-bottom:20px;transition:.2s}
+.detail-back:hover{background:rgba(255,255,255,.08);color:#fff}
+.detail-topic{font-size:24px;font-weight:900;letter-spacing:-.5px;color:#fbbf24;margin-bottom:6px}
+.detail-section{margin-top:20px}
+.detail-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#374151;margin-bottom:8px}
+.detail-script{font-size:14px;color:#9ca3af;line-height:1.7;background:rgba(255,255,255,.03);
+  border-radius:8px;padding:16px;border:1px solid rgba(255,255,255,.05)}
+.detail-chips{display:flex;flex-wrap:wrap;gap:6px}
+.detail-chip-h{font-size:12px;font-weight:800;padding:5px 14px;border-radius:6px;
+  background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.2);color:#00e5ff}
+.detail-chip-tag{font-size:12px;font-weight:600;padding:5px 12px;border-radius:6px;
+  background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);color:#a78bfa}
+.detail-question{font-size:14px;color:#fbbf24;font-style:italic;padding:12px 16px;
+  background:rgba(251,191,36,.05);border-radius:8px;border-left:3px solid rgba(251,191,36,.4)}
+.detail-caption{font-size:13px;color:#9ca3af;line-height:1.7;white-space:pre-wrap;
+  background:rgba(255,255,255,.03);border-radius:8px;padding:14px;border:1px solid rgba(255,255,255,.05)}
+
+/* ── VIDEO MODAL ── */
+.slot-switcher{display:flex;gap:8px;padding:16px 32px 0;flex-shrink:0}
+.slot-btn{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  color:#6b7280;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;transition:.2s}
+.slot-btn.active{background:rgba(156,163,175,.12);border-color:rgba(156,163,175,.3);color:#d1d5db}
+.slot-btn:hover{background:rgba(255,255,255,.1)}
+
+.video-preview-layout{display:flex;gap:32px;padding:20px 32px 28px;flex:1;overflow-y:auto;align-items:flex-start}
+
+/* phone */
+.phone-wrap{flex-shrink:0;display:flex;justify-content:center}
+.phone-mock{width:200px;background:#0a0a0f;border-radius:28px;padding:12px;
+  border:3px solid #1a1a2e;box-shadow:0 20px 60px rgba(0,0,0,.8),inset 0 0 0 2px rgba(255,255,255,.04);position:relative}
+.phone-notch{width:60px;height:10px;background:#0a0a0f;border-radius:5px;
+  position:absolute;top:18px;left:50%;transform:translateX(-50%);z-index:2;border:2px solid #1a1a2e}
+.phone-screen{width:100%;aspect-ratio:9/16;border-radius:18px;overflow:hidden;position:relative;background:#03010a}
+
+/* video screen elements */
+.vs-bg{position:absolute;inset:0;background:linear-gradient(135deg,#03010a 0%,#0d0520 40%,#03010a 100%);
+  animation:auroraShift 4s ease-in-out infinite alternate}
+@keyframes auroraShift{0%{background:linear-gradient(135deg,#0d0520 0%,#001a33 50%,#03010a 100%)}
+  50%{background:linear-gradient(225deg,#03010a 0%,#0a0128 50%,#001822 100%)}
+  100%{background:linear-gradient(315deg,#0a0128 0%,#001833 60%,#03010a 100%)}}
+.vs-progress{position:absolute;top:0;left:0;height:3px;width:60%;
+  background:linear-gradient(90deg,#00e5ff,#1a6bff,#7c3aed);animation:progAnim 8s linear infinite}
+@keyframes progAnim{0%{width:0%}100%{width:100%}}
+.vs-brand{position:absolute;top:12px;left:50%;transform:translateX(-50%);
+  background:rgba(3,1,10,.8);border:1px solid rgba(0,229,255,.2);border-radius:20px;
+  padding:4px 12px;display:flex;align-items:center;gap:5px;white-space:nowrap}
+.vs-dot{width:5px;height:5px;border-radius:50%;background:linear-gradient(135deg,#00e5ff,#7c3aed);flex-shrink:0}
+.vs-brandname{font-size:9px;font-weight:800;background:linear-gradient(135deg,#00e5ff,#1a6bff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.vs-highlight{position:absolute;top:20%;left:0;right:0;text-align:center;
+  font-size:14px;font-weight:900;text-transform:uppercase;letter-spacing:-.3px;
+  background:linear-gradient(135deg,#00e5ff,#1a6bff,#7c3aed);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  padding:0 8px;line-height:1.1;animation:hlCycle 3s ease-in-out infinite}
+@keyframes hlCycle{0%,85%{opacity:1}90%{opacity:0}95%{opacity:0}100%{opacity:1}}
+.vs-caption{position:absolute;top:45%;left:0;right:0;text-align:center;
+  font-size:11px;font-weight:800;text-transform:uppercase;color:#fff;padding:0 10px;
+  line-height:1.3;text-shadow:2px 2px 0 rgba(0,0,0,.95)}
+.vs-footer{position:absolute;bottom:8px;left:0;right:0;text-align:center;
+  font-size:7px;font-weight:700;background:linear-gradient(135deg,#00e5ff,#1a6bff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* video info panel */
+.video-info-panel{flex:1;display:flex;flex-direction:column;gap:16px;min-width:0}
+.vi-section{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
+  border-radius:10px;padding:14px 16px}
+.vi-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#374151;margin-bottom:8px}
+.vi-value{font-size:16px;font-weight:800;color:#e0e6f0;letter-spacing:-.3px}
+.vi-chips{display:flex;flex-wrap:wrap;gap:6px}
+.vi-chip{font-size:11px;font-weight:800;padding:4px 12px;border-radius:6px;
+  background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.2);color:#00e5ff}
+.vi-script{font-size:12px;color:#9ca3af;line-height:1.7}
+.vi-hashtags{display:flex;flex-wrap:wrap;gap:5px}
+.vi-hashtag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:5px;
+  background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);color:#a78bfa}
+.vi-question{font-size:13px;color:#fbbf24;font-style:italic}
+.vi-caption-text{font-size:11px;color:#9ca3af;line-height:1.6;white-space:pre-wrap}
+</style>
+
+<script>
+// ═══════════════════════════════════════════════
+// SCRIPTS DATA
+// ═══════════════════════════════════════════════
+const SCRIPTS = [
+  {topic:"Automatiza el seguimiento de clientes",script:"Estás perdiendo clientes que ya te habían dicho que sí. No porque tu servicio sea malo. Sino porque no les escribiste a tiempo. Un fontanero en Madrid cerraba 2 de cada 10 presupuestos. Ahora cierra 7. Solo cambió una cosa: cuando alguien pide precio, recibe un WhatsApp en 30 segundos. Automático. Él no toca nada. ¿Cuántos clientes has perdido tú esta semana? Escríbeme o entra en ziautomate.netlify.app",highlights:["CLIENTES PERDIDOS","30 SEGUNDOS","7 DE CADA 10","CIERRA MÁS"],hashtags:["#automatizacion","#gestionclientes","#pymesespana","#ventas","#ziautomate"],engagement_question:"¿Cuántos clientes has perdido esta semana por no hacer seguimiento a tiempo?"},
+  {topic:"Trabajas más horas que tus empleados",script:"Tienes un negocio pero sigues siendo tu empleado más barato. Confirmando citas a mano. Respondiendo las mismas preguntas de siempre. Introduciendo datos en Excel. Una dentista en Valencia hacía eso 2 horas al día. Cuarenta horas al mes regaladas a tareas de robot. Con una automatización ese tiempo desapareció. Sin contratar a nadie. Sin cambiar nada de lo que ya usaba. ¿Cuántas horas estás regalando tú? Escríbeme o entra en ziautomate.netlify.app",highlights:["40 HORAS/MES","TRABAJO DE ROBOT","SIN CONTRATAR","TIEMPO LIBRE"],hashtags:["#automatizacion","#productividadempresarial","#pymesdigitales","#trabajosmart","#ziautomate"],engagement_question:"¿Cuántas horas a la semana dedicas a tareas que podría hacer una máquina?"},
+  {topic:"El negocio que responde primero gana siempre",script:"Todo el mundo te dice que atiendas bien a tus clientes. Nadie te dice que si tardas más de 5 minutos en responder, ya perdiste esa venta. El 78% de las ventas va al negocio que contesta primero. No al mejor. Al más rápido. Una inmobiliaria en Málaga perdía 30 consultas al mes porque cerraban a las 8. Pusimos IA que responde al instante las 24 horas. Ese mes cerraron 4 operaciones más. Escríbeme o entra en ziautomate.netlify.app",highlights:["78% AL PRIMERO","24/7 RESPONDE","4 OPERACIONES MÁS","IA TRABAJA"],hashtags:["#automatizacion","#atencioncliente","#inteligenciaartificial","#pymesespana","#ziautomate"],engagement_question:"¿En cuánto tiempo respondes tú normalmente a los contactos nuevos?"},
+  {topic:"Publica en redes todos los días sin esfuerzo",script:"Dentro de 6 meses el negocio de tu sector que publique todos los días en redes va a tener el doble de clientes que el que no publica. ¿Cuál vas a ser tú? Una tienda de ropa en Sevilla publicaba una vez a la semana. Ahora publica todos los días. Con IA generan en 20 minutos el contenido de la semana entera. En 3 meses triplicaron seguidores y empezaron a recibir pedidos directamente del perfil. Escríbeme o entra en ziautomate.netlify.app",highlights:["CADA DÍA","20 MINUTOS","3X SEGUIDORES","PILOTO AUTO"],hashtags:["#marketingdigital","#instagramnegocios","#contenidodigital","#redessociales","#ziautomate"],engagement_question:"¿Cuántos días llevas sin publicar en tus redes?"},
+  {topic:"Tu formulario web está regalando clientes",script:"El 80% de las personas que rellenan un formulario en tu web y no reciben respuesta en 5 minutos se van con tu competencia. Para siempre. ¿Cuántos formularios has recibido esta semana? ¿En cuántos tardaste más de 5 minutos? Un electricista en Barcelona conectó su web a WhatsApp. Ahora cualquier formulario recibe respuesta en 30 segundos con el nombre del cliente y los próximos pasos. Sus presupuestos aceptados se triplicaron. Escríbeme o entra en ziautomate.netlify.app",highlights:["80% SE PIERDEN","5 MINUTOS","3X PRESUPUESTOS","RESPUESTA AUTO"],hashtags:["#automatizacion","#marketingdigital","#ventadigital","#pymesespana","#ziautomate"],engagement_question:"¿Cuánto tardas en responder los formularios que llegan a tu web?"},
+  {topic:"3 automatizaciones que te devuelven 20 horas al mes",script:"Voy a darte las 3 automatizaciones que más tiempo ahorran en cualquier negocio. Una: respuesta automática a contactos nuevos en menos de 2 minutos. Dos: recordatorio de cita 24 horas antes. Tres: seguimiento a presupuestos sin respuesta a los 2 días. Con estas tres, la mayoría de negocios recuperan entre 15 y 25 horas al mes. Una semana entera de trabajo que puedes dedicar a lo que realmente importa. Escríbeme o entra en ziautomate.netlify.app",highlights:["3 CLAVES","20 HORAS/MES","2 SEMANAS RESULT.","EMPIEZA HOY"],hashtags:["#automatizacion","#productividadempresarial","#pymesdigitales","#transformaciondigital","#ziautomate"],engagement_question:"¿Cuál de estas tres automatizaciones te ahorraría más tiempo a ti?"},
+  {topic:"n8n conecta todo tu negocio sin programadores",script:"Tienes web, WhatsApp, email, Excel e Instagram. Y todos funcionan por separado. Eso son horas perdidas cada día pasando datos de un sitio a otro a mano. n8n conecta todo automáticamente sin una línea de código. Una academia de idiomas tardaba 15 minutos en apuntar a cada alumno nuevo en 4 sistemas distintos. Ahora cuando alguien paga, todo se actualiza solo en 10 segundos. Nadie toca nada. Escríbeme o entra en ziautomate.netlify.app",highlights:["TODO CONECTADO","10 SEGUNDOS","SIN CÓDIGO","N8N"],hashtags:["#n8n","#automatizacion","#nocode","#integraciones","#ziautomate"],engagement_question:"¿Cuántas aplicaciones tienes abiertas ahora mismo que no se hablan entre sí?"},
+  {topic:"Tu web tiene visitas pero nadie te llama",script:"El 97% de la gente que entra en tu web se va sin dejar sus datos. Para siempre. El problema no es el diseño. Es que no tienes nada que los retenga. Lo que montamos: un chat de IA que aparece cuando llevan 30 segundos mirando un servicio, hace 2 preguntas y recoge su contacto. Te lo manda con un resumen de lo que quieren. Una óptica en Zaragoza captura ahora 40 leads al mes que antes perdía sin dejar rastro. Escríbeme o entra en ziautomate.netlify.app",highlights:["97% SE VAN","40 LEADS/MES","IA CAPTURA","NUNCA MÁS"],hashtags:["#marketingdigital","#generacionleads","#embudo","#pymesespana","#ziautomate"],engagement_question:"¿Sabes cuántas visitas recibe tu web al mes y cuántas acaban dejando sus datos?"},
+  {topic:"Deja de perseguir tus propios cobros",script:"No hay nada más humillante en un negocio que perseguir tus propios cobros. Escribir el mismo email de recordatorio una y otra vez. Esperar. Volver a escribir. Un diseñador gráfico perdía 3 horas a la semana solo en esto. Ahora la factura se genera sola cuando cierra un proyecto y manda recordatorios automáticos si no pagan. Sin que él toque nada. Recuperó 12 horas al mes y dejó de sentirse mal pidiendo lo que es suyo. Escríbeme o entra en ziautomate.netlify.app",highlights:["12 HORAS/MES","COBROS AUTO","SIN PERSEGUIR","FACTURA SOLA"],hashtags:["#automatizacion","#facturacion","#autonomos","#gestionempresarial","#ziautomate"],engagement_question:"¿Cuánto tiempo pierdes al mes persiguiendo cobros o enviando recordatorios de pago?"},
+  {topic:"Las inmobiliarias que no usan IA pierden ventas esta noche",script:"Un cliente busca piso a las 11 de la noche. Te escribe. Tú estás durmiendo. Mañana le contestas. Para entonces ya habló con 3 agencias más. Esta escena pasa cada noche en miles de agencias de España. Una en Málaga perdía 4 operaciones al mes así. Pusimos IA que responde al instante, agenda visitas y solo avisa al agente cuando hay que cerrar. El primer mes recuperaron las 4 operaciones que antes se perdían. Escríbeme o entra en ziautomate.netlify.app",highlights:["11PM RESPONDE","4 OPERACIONES","AGENDA VISITAS","0 PERDIDAS"],hashtags:["#inmobiliaria","#automatizacion","#inteligenciaartificial","#proptech","#ziautomate"],engagement_question:"¿A qué hora llegan los últimos mensajes a tu negocio y quién los responde?"},
+  {topic:"Make: automatiza tu negocio sin saber programar",script:"Dos personas gestionando pedidos a mano. Copiando datos entre plataformas. Cometiendo errores. Ese era el día a día de un ecommerce de productos naturales. Hoy una sola persona gestiona el doble de pedidos. ¿Qué cambió? Make. Cuando alguien compra, automáticamente se actualiza el stock, el almacén recibe el pedido, el cliente recibe el tracking y queda apuntado en el CRM. Todo en 3 segundos. Sin tocar nada. Escríbeme o entra en ziautomate.netlify.app",highlights:["3 SEGUNDOS","DOBLE PEDIDOS","SIN ERRORES","MAKE"],hashtags:["#makeautomation","#automatizacion","#nocode","#productividadempresarial","#ziautomate"],engagement_question:"¿Cuántos pasos manuales tiene tu proceso de pedidos o ventas ahora mismo?"},
+  {topic:"Tu competencia ya usa IA y tú todavía no",script:"Tu competencia tomó una decisión hace 6 meses que tú todavía no has tomado. No son grandes empresas. Son autónomos y pymes exactamente como tú. Cada mes que pasa la diferencia es mayor. Captan más leads. Atienden mejor. Cierran más. La buena noticia es que todavía estás a tiempo. Pero el tiempo se acaba. Un sistema básico de automatización se paga solo en el primer mes. ¿Cuánto más vas a esperar? Escríbeme o entra en ziautomate.netlify.app",highlights:["6 MESES TARDE","TODAVÍA A TIEMPO","MES 1 PAGADO","DECÍDETE YA"],hashtags:["#inteligenciaartificial","#transformaciondigital","#pymesespana","#futurodigital","#ziautomate"],engagement_question:"¿Qué es lo primero que automatizarías en tu negocio si pudieras empezar hoy?"},
+  {topic:"Automatiza las citas de tu negocio esta semana",script:"Cada cita que no aparece es dinero perdido, tiempo perdido y una rabia enorme. Una peluquería en Valencia tenía un 30% de no-shows cada semana. Treinta por ciento de la agenda vacía sin avisar. Lo automatizamos: WhatsApp automático 24 horas antes con botón de confirmar o cancelar. Si cancela, el hueco se rellena solo con alguien de lista de espera. No-shows bajaron al 5%. Veinticinco por ciento más de ingresos sin contratar a nadie. Escríbeme o entra en ziautomate.netlify.app",highlights:["30% NO-SHOWS","LISTA DE ESPERA","+25% INGRESOS","ESTA SEMANA"],hashtags:["#automatizacion","#gestioncitas","#pymesespana","#reservasautomaticas","#ziautomate"],engagement_question:"¿Cuántas citas o reservas no aparecen al mes en tu negocio?"},
+  {topic:"Tu CRM está vacío y sabes por qué",script:"Te voy a decir por qué tu CRM está vacío aunque hayas pagado por él. Porque actualizarlo a mano después de cada conversación, cada cita y cada venta es un infierno que nadie hace. Lo que nosotros montamos hace que se actualice solo. Cliente escribe por WhatsApp: entra en el CRM. Reserva una cita: queda registrado. Compra: se actualiza. Tú siempre sabes en qué punto está cada cliente sin haber tocado nada. Escríbeme o entra en ziautomate.netlify.app",highlights:["CRM VACÍO","AUTO-ACTUALIZA","SIEMPRE AL DÍA","SIN TOCAR NADA"],hashtags:["#crm","#automatizacion","#gestionclientes","#pymesdigitales","#ziautomate"],engagement_question:"¿Cuándo fue la última vez que actualizaste tu CRM de forma manual?"},
+  {topic:"Tu negocio generando clientes mientras duermes",script:"Imagina levantarte mañana y tener 5 mensajes de personas que quieren contratarte. Sin haber hecho nada la noche anterior. Eso no es un sueño. Es el día a día de un consultor financiero en Madrid. Un sistema responde sus consultas a las 3 de la mañana, captura el contacto y programa una llamada para el día siguiente. Cuando él se despierta, solo tiene que cerrar. Sus mañanas ya no son para buscar clientes. Son para atenderlos. Escríbeme o entra en ziautomate.netlify.app",highlights:["5 LEADS/NOCHE","3AM RESPONDE","MIENTRAS DUERMES","SOLO CIERRA"],hashtags:["#automatizacion","#negocioonline","#inteligenciaartificial","#emprendedordigital","#ziautomate"],engagement_question:"¿A qué hora fue el último mensaje que llegó a tu negocio sin que nadie lo atendiera?"},
+  {topic:"El restaurante que casi cierra por los no-shows",script:"Un restaurante en Barcelona llegó a tener el 30% de sus mesas vacías un sábado por la noche. Reservas que no aparecieron. Sin avisar. Sin pagar. Automatizamos todo: confirmación por WhatsApp 48 horas antes, lista de espera automática si cancela, solicitud de reseña en Google después de la visita. No-shows bajaron al 5%. Reseñas subieron de 4.1 a 4.7 en dos meses. El dueño no tuvo que hacer nada para montarlo. Escríbeme o entra en ziautomate.netlify.app",highlights:["30% VACÍAS","4.7 ESTRELLAS","LLENO SIEMPRE","-85% NO-SHOWS"],hashtags:["#restaurante","#automatizacion","#hosteleria","#gestionreservas","#ziautomate"],engagement_question:"¿Cuántas reservas fantasma tienes al mes en tu negocio?"},
+  {topic:"Cómo generar contenido con IA todos los días",script:"El algoritmo de Instagram premia la constancia por encima de todo. Y la constancia es exactamente lo que más cuesta cuando llevas un negocio solo. Una clínica estética en Madrid publicaba una vez a la semana. Ahora publica todos los días. Con IA generan en 20 minutos el contenido de la semana entera: textos, hashtags e ideas para vídeo. Lo programan y se publica solo. En 3 meses doblaron seguidores y empezaron a recibir consultas directamente de Instagram. Escríbeme o entra en ziautomate.netlify.app",highlights:["20 MINUTOS","TODOS LOS DÍAS","2X SEGUIDORES","CONSTANCIA"],hashtags:["#inteligenciaartificial","#marketingdigital","#contenidodigital","#instagramnegocios","#ziautomate"],engagement_question:"¿Cuántos días llevas sin publicar en Instagram?"},
+  {topic:"Sincroniza tu tienda online con tu almacén",script:"Vender algo que no tienes en stock es una de las peores experiencias que puede tener un cliente. Genera devoluciones, reseñas de una estrella y no vuelven nunca. Si gestionas el stock a mano en varios canales esto te va a pasar antes o después. La solución: sincronización automática en tiempo real. Vendes en tu web, en Amazon, en Instagram. El stock se actualiza solo en todos lados en segundos. Un ecommerce de moda redujo sus incidencias un 94% el primer mes. Escríbeme o entra en ziautomate.netlify.app",highlights:["TIEMPO REAL","-94% ERRORES","TODOS LOS CANALES","CERO MANUAL"],hashtags:["#ecommerce","#automatizacion","#tiendaonline","#ventaonline","#ziautomate"],engagement_question:"¿Gestionas el stock de tu tienda de forma manual en varios canales?"},
+  {topic:"La clínica que dejó de perder 640 euros al mes",script:"Ocho citas perdidas al mes. A 80 euros la sesión. Son 640 euros tirados cada mes. Eso es lo que perdía una psicóloga en Madrid por cancelaciones de última hora que no podía rellenar. Lo automatizamos: recordatorio por WhatsApp 72 horas antes, otro 24 horas antes, otro el mismo día. Si cancela con tiempo el hueco se rellena solo con alguien de lista de espera. Las citas perdidas bajaron un 70%. Ella no tocó nada. Escríbeme o entra en ziautomate.netlify.app",highlights:["640€/MES PERDIDOS","-70% CANCELACIONES","LISTA DE ESPERA","RECUPERA TODO"],hashtags:["#salud","#automatizacion","#gestioncitas","#clinicadigital","#ziautomate"],engagement_question:"¿Cuántas citas pierdes al mes por cancelaciones de última hora?"},
+  {topic:"Envía propuestas en 5 minutos y cierra el doble",script:"El 50% de las ventas van al proveedor que responde primero. No al mejor. No al más barato. Al más rápido. Y si tardas 2 horas en enviar una propuesta después de hablar con un cliente, ya estás perdiendo contra alguien que la envía en 5 minutos. Lo que montamos: rellenas 5 campos, la propuesta se genera sola con tu logo y tus precios, y se envía automáticamente con enlace para firmar. Un consultor pasó de cerrar 3 de cada 10 a cerrar 6. Escríbeme o entra en ziautomate.netlify.app",highlights:["50% AL PRIMERO","5 MINUTOS","6 DE CADA 10","FIRMA DIGITAL"],hashtags:["#automatizacion","#ventas","#cierreventas","#pymesespana","#ziautomate"],engagement_question:"¿Cuánto tardas en enviar una propuesta después de hablar con un cliente?"},
+  {topic:"Automatización e IA: la combinación que lo cambia todo",script:"La gente que cree que la IA lo va a hacer todo sola está equivocada. Y la que cree que la automatización es suficiente también. Lo más potente es combinar las dos. La IA entiende y decide. La automatización ejecuta. Ejemplo real: la IA lee un email de un cliente, detecta que quiere un presupuesto, y la automatización lo genera y envía sin que tú intervengas. El cliente recibe respuesta en segundos. Tú no has tocado nada. Eso es lo que montamos. Escríbeme o entra en ziautomate.netlify.app",highlights:["IA + AUTOMATIZA","ENTIENDE Y DECIDE","SIN INTERVENIR","ZIAUTOMATE"],hashtags:["#inteligenciaartificial","#automatizacion","#transformaciondigital","#ia","#ziautomate"],engagement_question:"¿Usas automatización, IA, o todavía ninguna de las dos en tu negocio?"},
+  {topic:"El presupuesto en silencio que todavía puedes recuperar",script:"Enviaste el presupuesto. Pasaron 3 días. Silencio. ¿Le escribes tú y pareces desesperado? ¿O esperas y pierdes la venta? Hay una tercera opción. Un sistema que a las 48 horas manda automáticamente un mensaje preguntando si tiene dudas. A los 5 días, otro con urgencia suave. Sin que tú escribas nada. Sin que parezca que estás persiguiéndole. El 30% de los presupuestos que antes se perdían así se recuperan con esto. Escríbeme o entra en ziautomate.netlify.app",highlights:["3 DÍAS SILENCIO","+30% RECUPERADOS","48H AUTOMÁTICO","DINERO QUE VUELVE"],hashtags:["#automatizacion","#ventas","#seguimientoclientes","#pymesespana","#ziautomate"],engagement_question:"¿Haces seguimiento a los presupuestos que envías o simplemente esperas respuesta?"},
+  {topic:"Del caos total al negocio organizado con Airtable",script:"Si tienes clientes en Excel, proyectos en WhatsApp, tareas en papel y facturas en otro sitio, no tienes un negocio organizado. Tienes un caos que un día va a costarte un cliente importante. Airtable centraliza todo y lo conecta con el resto de herramientas que ya usas. Una agencia de eventos gestiona 50 eventos al año desde un solo sitio. Cuando entra un cliente nuevo, todo el flujo de trabajo arranca solo. Sin reuniones de coordinación. Sin información perdida. Escríbeme o entra en ziautomate.netlify.app",highlights:["DEL CAOS AL ORDEN","50 EVENTOS","TODO EN UN SITIO","AIRTABLE"],hashtags:["#airtable","#automatizacion","#gestionempresarial","#nocode","#ziautomate"],engagement_question:"¿Dónde tienes guardada ahora mismo la información de tus clientes?"},
+  {topic:"Zapier, Make o n8n: cuál es para tu negocio",script:"Tres herramientas. Una pregunta. ¿Cuál te conviene a ti? Zapier: el más fácil y el más caro. Ideal si quieres empezar hoy sin complicaciones. Make: el equilibrio perfecto. Visual, potente y precio razonable. El que recomiendo para la mayoría de pymes. n8n: control total y el más barato a largo plazo. Para quien quiere independencia absoluta. Lo importante no es la herramienta. Es el sistema que montas con ella. ¿Cuál es el tuyo? Escríbeme o entra en ziautomate.netlify.app",highlights:["ZAPIER","MAKE","N8N","¿CUÁL ES EL TUYO?"],hashtags:["#zapier","#makeautomation","#n8n","#automatizacion","#ziautomate"],engagement_question:"¿Cuál usas tú: Zapier, Make, n8n o ninguno todavía?"},
+  {topic:"IA que atiende clientes mejor que muchos empleados",script:"Esto va a sonar raro: los clientes de una academia online dijeron que la atención había mejorado justo después de que la academia redujera su equipo de soporte a la mitad. ¿Qué pasó? Pusieron un bot de IA entrenado con toda la información del negocio. Responde el 80% de las consultas al instante. Las que no puede resolver las escala con el contexto completo. El tiempo de soporte bajó un 65%. La satisfacción subió. Escríbeme o entra en ziautomate.netlify.app",highlights:["80% RESUELTO","-65% SOPORTE","SATISFACCIÓN SUBE","IA REAL"],hashtags:["#inteligenciaartificial","#atencioncliente","#chatbot","#pymesespana","#ziautomate"],engagement_question:"¿Cuánto tiempo dedica tu equipo a responder preguntas repetitivas cada día?"},
+  {topic:"3 automatizaciones para empezar hoy mismo",script:"Si solo pudieras hacer 3 cosas para automatizar tu negocio esta semana, haz estas. Una: respuesta automática a cualquier contacto nuevo en menos de 5 minutos. Dos: recordatorio de cita 24 horas antes. Tres: mensaje automático a clientes que llevan 30 días sin comprarte. Estas tres generan más impacto que cualquier otra inversión que puedas hacer ahora mismo. La mayoría de negocios ven resultados en menos de 2 semanas. ¿Empezamos? Escríbeme o entra en ziautomate.netlify.app",highlights:["3 AUTOMATIZACIONES","5 MINUTOS RESP.","2 SEMANAS","EMPEZAMOS HOY"],hashtags:["#automatizacion","#productividadempresarial","#pymesdigitales","#transformaciondigital","#ziautomate"],engagement_question:"¿Por cuál de estas tres empezarías tú?"},
+  {topic:"El gimnasio que venció la fuga de enero a marzo",script:"Enero es el mejor mes para un gimnasio. Marzo es el peor. Cada año igual. Un gimnasio en Alicante perdía 40 socios cada primavera sin poder hacer nada. Ahora cuando un socio lleva 10 días sin entrar, el sistema le manda automáticamente un mensaje con motivación y una sesión gratis con entrenador. Las bajas bajaron un 25% en 2 meses. El dueño no persigue a nadie. El sistema lo hace por él. Los 12 meses del año. Escríbeme o entra en ziautomate.netlify.app",highlights:["40 BAJAS/MES","-25% EN 2 MESES","10 DÍAS SIN ENTRAR","VUELVEN SOLOS"],hashtags:["#gimnasio","#automatizacion","#fidelizacion","#gestionclientes","#ziautomate"],engagement_question:"¿Tu negocio tiene algún sistema para recuperar clientes que llevan tiempo sin volver?"},
+  {topic:"Los chatbots de IA de ahora no son los de antes",script:"Los chatbots de hace 5 años eran una vergüenza. Guiones rígidos que irritaban a cualquier cliente. Los de ahora son completamente distintos. Entienden lenguaje natural. Conocen tu negocio en profundidad. Están disponibles los 365 días a cualquier hora. Una ferretería en Toledo atiende ahora 200 consultas al día sin contratar a nadie más. El dueño solo interviene cuando hay que cerrar una venta grande. Todo lo demás lo gestiona el bot. Escríbeme o entra en ziautomate.netlify.app",highlights:["200 CONSULTAS/DÍA","365 DÍAS","SIN CONTRATAR","CHATBOT REAL"],hashtags:["#chatbot","#inteligenciaartificial","#atencioncliente","#pymesespana","#ziautomate"],engagement_question:"¿Tienes chatbot en tu negocio o todavía gestionas todas las consultas a mano?"},
+  {topic:"La automatización se paga sola en el primer mes",script:"¿Cuánto cuesta automatizar tu negocio? Entre 300 y 600 euros montar un sistema básico. ¿Cuánto te devuelve? Haz el cálculo: si ese sistema te trae 2 clientes al mes que antes se perdían y cada cliente vale 200 euros, el primer mes ya recuperaste la inversión. A partir del segundo mes es beneficio puro. Todos los meses. Sin hacer nada extra. La pregunta real no es si puedes permitirte hacerlo. Es si puedes permitirte seguir sin hacerlo. Escríbeme o entra en ziautomate.netlify.app",highlights:["300-600€","MES 1 AMORTIZADO","BENEFICIO PURO","¿PUEDES NO HACERLO?"],hashtags:["#automatizacion","#roi","#inversion","#pymesespana","#ziautomate"],engagement_question:"¿Has calculado cuánto dinero te cuesta al mes no tener automatizado tu negocio?"},
+  {topic:"El canal de marketing que nadie en España usa bien",script:"El canal con mejor retorno de inversión en marketing digital no es Instagram. No es Google. Es el email. Y casi nadie en España lo está usando bien. Lo que montamos son secuencias automáticas: alguien se apunta a tu lista y durante 2 semanas recibe emails que le llevan de no conocerte a querer comprarte. Sin que escribas nada nuevo. Una tienda de suplementos genera 3.000 euros al mes solo con la secuencia de bienvenida. Siempre activa. Escríbeme o entra en ziautomate.netlify.app",highlights:["MAYOR RETORNO","3.000€/MES","SIEMPRE ACTIVO","EMAIL MARKETING"],hashtags:["#emailmarketing","#automatizacion","#marketingdigital","#ventasonline","#ziautomate"],engagement_question:"¿Estás usando el email marketing en tu negocio o lo tienes todavía pendiente?"},
+  {topic:"Toma decisiones con datos, no con el estómago",script:"La mayoría de dueños de negocio toman sus decisiones con el estómago. Suben precios porque intuyen que pueden. Lanzan productos porque les parece buena idea. Y luego se preguntan por qué no funciona. Una tienda de moda online descubrió con IA que el 70% de sus ventas venían del 15% de sus productos. Eliminó el resto. Dobló el margen neto. No porque fuera más lista. Sino porque por fin tomó decisiones con datos reales. Escríbeme o entra en ziautomate.netlify.app",highlights:["DATOS REALES","70% EN 15%","DOBLE MARGEN","DECIDE MEJOR"],hashtags:["#analisisdedatos","#inteligenciaartificial","#decisionesempresariales","#pymesespana","#ziautomate"],engagement_question:"¿Tomas las decisiones de tu negocio con datos o con intuición?"},
+];
+
+// ═══════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════
+function getDayOfYear(d) {
+  const start = new Date(d.getFullYear(), 0, 1);
+  return Math.floor((d - start) / 86400000) + 1;
+}
+
+function getScript(date, slot) {
+  const day = getDayOfYear(date);
+  return SCRIPTS[(day * 3 + slot) % SCRIPTS.length];
+}
+
+function buildCaption(s) {
+  const raw = s.script.replace(/¿/g,'\n¿').replace(/\? /g,'?\n').replace(/\. /g,'.\n');
+  const sents = raw.split('\n').map(x=>x.trim()).filter(Boolean);
+  const hook = sents[0]||'';
+  const body = sents.slice(1,4).join('\n');
+  return `${hook}\n\n${body}\n\n${s.engagement_question}\n\n🔗 ziautomate.netlify.app\n\n${s.hashtags.join(' ')}`;
+}
+
+const DAYS_ES = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+const MONTHS_ES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+
+function fmtDate(d) {
+  return `${DAYS_ES[d.getDay()]} ${d.getDate()} ${MONTHS_ES[d.getMonth()]}`;
+}
+
+const SLOT_META = [
+  {time:'17:30', plats:['YT'],  label:'YouTube'},
+  {time:'18:30', plats:['IG'],  label:'Instagram'},
+  {time:'20:00', plats:['YT','IG'], label:'YouTube + Instagram'},
+];
+
+// ═══════════════════════════════════════════════
+// MODAL OPEN / CLOSE
+// ═══════════════════════════════════════════════
+function openGuiones() {
+  buildCalendar();
+  buildAllScripts();
+  document.getElementById('modal-guiones').classList.add('open');
+}
+
+function openVideo() {
+  const today = new Date();
+  document.getElementById('video-preview-date').textContent =
+    'Hoy · ' + fmtDate(today) + ' · mostrando slot seleccionado';
+  switchSlot(2, document.querySelectorAll('.slot-btn')[2]);
+  document.getElementById('modal-video').classList.add('open');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+// ═══════════════════════════════════════════════
+// GUIONES: CALENDAR
+// ═══════════════════════════════════════════════
+function buildCalendar() {
+  const grid = document.getElementById('calendar-grid');
+  if (grid.children.length) return; // already built
+  const today = new Date();
+  for (let i = 0; i < 14; i++) {
+    const d = new Date(today); d.setDate(today.getDate() + i);
+    const isToday = i === 0;
+    const card = document.createElement('div');
+    card.className = 'day-card';
+    let html = `<div class="day-header">
+      <span class="day-date">${fmtDate(d)}</span>
+      ${isToday ? '<span class="day-today">HOY</span>' : ''}
+    </div>`;
+    for (let slot = 0; slot < 3; slot++) {
+      const s = getScript(d, slot);
+      const m = SLOT_META[slot];
+      const platChips = m.plats.map(p =>
+        `<span class="plat-chip ${p==='YT'?'plat-yt':'plat-ig'}">${p==='YT'?'YT':'IG'}</span>`).join('');
+      const hChips = s.highlights.map(h=>`<span class="h-chip">${h}</span>`).join('');
+      const scriptIdx = (getDayOfYear(d)*3+slot) % SCRIPTS.length;
+      html += `<div class="slot-row" onclick="showDetail(${scriptIdx},${slot},'${d.toISOString()}')">
+        <span class="slot-time-badge" style="color:${slot===0?'#f87171':slot===1?'#d070ff':'#00e5ff'}">${m.time}</span>
+        <div class="slot-plat-icons">${platChips}</div>
+        <span class="slot-topic">${s.topic}</span>
+        <div class="slot-highlights">${hChips}</div>
+      </div>`;
+    }
+    card.innerHTML = html;
+    grid.appendChild(card);
+  }
+}
+
+// ═══════════════════════════════════════════════
+// GUIONES: ALL SCRIPTS
+// ═══════════════════════════════════════════════
+function buildAllScripts() {
+  const grid = document.getElementById('all-scripts-grid');
+  if (grid.children.length) return;
+  SCRIPTS.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'script-card';
+    const chips = s.highlights.map(h=>`<span class="h-chip">${h}</span>`).join('');
+    card.innerHTML = `<div class="sc-num">Guion #${i+1}</div>
+      <div class="sc-topic">${s.topic}</div>
+      <div class="sc-chips">${chips}</div>`;
+    card.onclick = () => showDetail(i, null, null);
+    grid.appendChild(card);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// GUIONES: DETAIL
+// ═══════════════════════════════════════════════
+function showDetail(idx, slot, dateISO) {
+  const s = SCRIPTS[idx];
+  const caption = buildCaption(s);
+  const slotLabel = slot !== null ? `· Slot ${SLOT_META[slot].time} (${SLOT_META[slot].label})` : '';
+  const dateLabel = dateISO ? `· ${fmtDate(new Date(dateISO))}` : '';
+  document.getElementById('detail-content').innerHTML = `
+    <div class="detail-topic">${s.topic}</div>
+    <p style="font-size:12px;color:#374151;margin-top:4px">Guion #${idx+1} ${dateLabel} ${slotLabel}</p>
+    <div class="detail-section">
+      <div class="detail-label">Guion completo</div>
+      <div class="detail-script">${s.script}</div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-label">Highlights (aparecen en el vídeo)</div>
+      <div class="detail-chips">${s.highlights.map(h=>`<span class="detail-chip-h">${h}</span>`).join('')}</div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-label">Hashtags</div>
+      <div class="detail-chips">${s.hashtags.map(h=>`<span class="detail-chip-tag">${h}</span>`).join('')}</div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-label">Pregunta de engagement</div>
+      <div class="detail-question">${s.engagement_question}</div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-label">Caption Instagram</div>
+      <div class="detail-caption">${caption}</div>
+    </div>`;
+  document.querySelector('.gtabs').style.display = 'none';
+  document.getElementById('gtab-0').style.display = 'none';
+  document.getElementById('gtab-1').style.display = 'none';
+  document.getElementById('script-detail').style.display = 'flex';
+  document.getElementById('script-detail').style.flexDirection = 'column';
+}
+
+function closeDetail() {
+  document.getElementById('script-detail').style.display = 'none';
+  document.querySelector('.gtabs').style.display = 'flex';
+  switchTab(_activeTab);
+}
+
+let _activeTab = 0;
+function switchTab(i) {
+  _activeTab = i;
+  document.querySelectorAll('.gtab').forEach((t,j)=>t.classList.toggle('active',j===i));
+  document.getElementById('gtab-0').style.display = i===0?'block':'none';
+  document.getElementById('gtab-1').style.display = i===1?'block':'none';
+}
+
+// ═══════════════════════════════════════════════
+// VIDEO PREVIEW
+// ═══════════════════════════════════════════════
+let _hlInterval = null;
+let _hlIdx = 0;
+
+function switchSlot(slot, btn) {
+  document.querySelectorAll('.slot-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const s = getScript(new Date(), slot);
+  // update phone screen
+  document.getElementById('vs-highlight').textContent = s.highlights[0];
+  const words = s.script.split(' ');
+  document.getElementById('vs-caption').textContent = words.slice(0,6).join(' ')+'...';
+  // rotate highlights
+  clearInterval(_hlInterval);
+  _hlIdx = 0;
+  _hlInterval = setInterval(() => {
+    _hlIdx = (_hlIdx + 1) % s.highlights.length;
+    document.getElementById('vs-highlight').textContent = s.highlights[_hlIdx];
+  }, 3000);
+  // update info panel
+  document.getElementById('vi-topic').textContent = s.topic;
+  document.getElementById('vi-highlights').innerHTML =
+    s.highlights.map(h=>`<span class="vi-chip">${h}</span>`).join('');
+  document.getElementById('vi-script').textContent = s.script;
+  document.getElementById('vi-hashtags').innerHTML =
+    s.hashtags.map(h=>`<span class="vi-hashtag">${h}</span>`).join('');
+  document.getElementById('vi-question').textContent = s.engagement_question;
+  const showCaption = slot === 1 || slot === 2;
+  const capWrap = document.getElementById('vi-caption-wrap');
+  capWrap.style.display = showCaption ? 'block' : 'none';
+  if (showCaption) {
+    document.getElementById('vi-caption-full').textContent = buildCaption(s);
+  }
+}
+</script>
+
+</body>
+</html>

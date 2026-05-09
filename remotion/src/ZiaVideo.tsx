@@ -8,6 +8,11 @@ import { ThreeCanvas } from "@remotion/three";
 import { LightLeak } from "@remotion/light-leaks";
 import { createTikTokStyleCaptions } from "@remotion/captions";
 import type { Caption } from "@remotion/captions";
+import { loadFont as loadSpaceGrotesk } from "@remotion/google-fonts/SpaceGrotesk";
+import { loadFont as loadInter } from "@remotion/google-fonts/Inter";
+
+const { fontFamily: _fontHead } = loadSpaceGrotesk("normal", { weights: ["500", "600", "700", "800"] });
+const { fontFamily: _fontBody } = loadInter("normal", { weights: ["400", "600", "700", "800", "900"] });
 
 export interface WordTiming { word: string; start: number; end: number; }
 export interface ZiaVideoProps {
@@ -28,14 +33,10 @@ const PURPLE = "#7c3aed";
 const WHITE  = "#ffffff";
 const TEXT   = "#d8dce8";
 const BRAND_GRADIENT = `linear-gradient(135deg, ${CYAN} 0%, ${BLUE} 55%, ${PURPLE} 100%)`;
-const FONT      = "'Inter', 'Noto Sans', Arial, sans-serif";
-const FONT_HEAD = "'Space Grotesk', 'Inter', 'Noto Sans', Arial, sans-serif";
+const FONT      = `${_fontBody}, 'Noto Sans', Arial, sans-serif`;
+const FONT_HEAD = `${_fontHead}, 'Noto Sans', Arial, sans-serif`;
 const SCENE_SECONDS = 3;
 const W = 1080, H = 1920;
-
-const BrandFonts: React.FC = () => (
-  <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&display=swap');`}</style>
-);
 
 // ─── Skill: TikTok-style captions using real wordTimings ─────────────────────
 // Converts our WordTiming format to Caption format required by @remotion/captions
@@ -407,7 +408,6 @@ export const ZiaVideo: React.FC<ZiaVideoProps> = ({ topic, wordTimings, duration
 
   return (
     <AbsoluteFill>
-      <BrandFonts />
       {audioSrc && <Audio src={staticFile(audioSrc)} />}
 
       {/* Aurora + particle background — colors shift every 3s */}

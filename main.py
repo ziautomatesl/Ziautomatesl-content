@@ -3,8 +3,10 @@ import os
 from generate_script import generate_script
 from create_audio import create_audio
 from create_video import create_animated_video
+from create_story import create_story_image
 from post_youtube import post_youtube
 from post_instagram import post_instagram
+from post_instagram_story import post_instagram_story
 
 # Cada slot publica en plataformas distintas y usa un script diferente del día
 SLOT_CONFIG = {
@@ -39,7 +41,7 @@ def main():
         highlights=content.get("highlights", []),
     )
 
-    yt_ok = ig_ok = False
+    yt_ok = ig_ok = story_ok = False
 
     if "youtube" in platforms:
         print("PASO 4: Publicando en YouTube...")
@@ -55,28 +57,40 @@ def main():
             print(f"YouTube error (se continua): {e}")
     else:
         print("PASO 4: YouTube omitido para este slot.")
-        yt_ok = True  # no es un fallo
+        yt_ok = True
 
     if "instagram" in platforms:
-        print("PASO 5: Publicando en Instagram...")
+        print("PASO 5: Publicando Reel en Instagram...")
         if os.environ.get("INSTAGRAM_USERNAME"):
             try:
                 post_instagram(video_path, caption=content["instagram_caption"])
                 ig_ok = True
             except Exception as e:
-                print(f"Instagram error: {e}")
+                print(f"Instagram Reel error: {e}")
+
+            print("PASO 6: Generando y publicando Historia de Instagram...")
+            try:
+                story_path = create_story_image(content, "zia_story.png")
+                post_instagram_story(story_path)
+                story_ok = True
+            except Exception as e:
+                print(f"Instagram Story error (no es crítico): {e}")
+                story_ok = True  # no bloquea el pipeline
         else:
             print("INSTAGRAM_USERNAME no configurado, saltando.")
-            ig_ok = True  # no es un fallo
+            ig_ok = story_ok = True
     else:
         print("PASO 5: Instagram omitido para este slot.")
-        ig_ok = True  # no es un fallo
+        ig_ok = story_ok = True
 
-    for f in ["zia_audio.mp3", "zia_video.mp4"]:
+    for f in ["zia_audio.mp3", "zia_video.mp4", "zia_story.png"]:
         if os.path.exists(f):
             os.remove(f)
 
-    print(f"\n✅ YouTube: {'OK' if yt_ok else 'FALLÓ'} | Instagram: {'OK' if ig_ok else 'FALLÓ'}\n")
+    print(f"\n✅ YouTube: {'OK' if yt_ok else 'FALLÓ'} | "
+          f"Instagram Reel: {'OK' if ig_ok else 'FALLÓ'} | "
+          f"Instagram Story: {'OK' if story_ok else 'FALLÓ'}\n")
+
     if not yt_ok and not ig_ok:
         raise SystemExit(1)
 
