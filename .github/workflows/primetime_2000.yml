@@ -1,8 +1,8 @@
-name: ZIA Video - Noche 20:30
+name: ZIA Video - Prime Time 20:00
 
 on:
   schedule:
-    - cron: '30 18 * * *'
+    - cron: '0 18 * * *'    # 20:00 España (UTC+2 verano)
   workflow_dispatch:
 
 jobs:
@@ -56,7 +56,7 @@ jobs:
           INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
           INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
           INSTAGRAM_SESSION: ${{ secrets.INSTAGRAM_SESSION }}
-        run: python main.py evening 2>&1 | tee debug.txt; exit ${PIPESTATUS[0]}
+        run: python main.py both 2>&1 | tee debug.txt; exit ${PIPESTATUS[0]}
 
       - name: Mostrar log si falla
         if: failure()

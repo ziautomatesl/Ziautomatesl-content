@@ -1,8 +1,8 @@
-name: ZIA Video - Manana 7:00
+name: ZIA Video - YouTube 17:30
 
 on:
   schedule:
-    - cron: '30 5 * * *'
+    - cron: '30 15 * * *'   # 17:30 España (UTC+2 verano)
   workflow_dispatch:
 
 jobs:
@@ -53,10 +53,7 @@ jobs:
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
-          INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
-          INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
-          INSTAGRAM_SESSION: ${{ secrets.INSTAGRAM_SESSION }}
-        run: python main.py morning 2>&1 | tee debug.txt; exit ${PIPESTATUS[0]}
+        run: python main.py youtube 2>&1 | tee debug.txt; exit ${PIPESTATUS[0]}
 
       - name: Mostrar log si falla
         if: failure()
