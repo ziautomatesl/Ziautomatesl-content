@@ -21,14 +21,16 @@ def save_leads(leads: list):
         json.dump(leads, f, ensure_ascii=False, indent=2)
 
 
-def _already_exists(leads: list, name: str, ciudad: str) -> bool:
-    name_lower  = name.lower().strip()
-    city_lower  = ciudad.lower().strip()
-    return any(
-        l.get("negocio", "").lower().strip() == name_lower and
-        l.get("ciudad",  "").lower().strip() == city_lower
-        for l in leads
-    )
+def known_emails(leads: list) -> set:
+    return {l["email"].lower().strip() for l in leads if l.get("email")}
+
+def known_names(leads: list) -> set:
+    return {l.get("negocio", "").lower().strip() for l in leads}
+
+def _already_exists(leads: list, name: str, email: str) -> bool:
+    if email and email.lower().strip() in known_emails(leads):
+        return True
+    return name.lower().strip() in known_names(leads)
 
 
 def _extract_email(url: str) -> str:
@@ -117,16 +119,25 @@ def scrape_leads(city: str = None, sector: str = None, max_new: int = 20) -> lis
     places = _search_places(sector, city, max_results=max_new * 2)
     print(f"  Negocios encontrados en Google Maps: {len(places)}")
 
-    new_leads = []
+    new_leads  = []
+    seen_emails = known_emails(existing)
+    seen_names  = known_names(existing)
+
     for place in places:
         if len(new_leads) >= max_new:
             break
-        if _already_exists(existing, place["name"], city):
-            print(f"    Saltando (ya existe): {place['name']}")
+
+        name_key = place["name"].lower().strip()
+        if name_key in seen_names:
+            print(f"    Saltando (nombre ya existe): {place['name']}")
             continue
 
         print(f"    Procesando: {place['name']}...")
         email = _extract_email(place["website"])
+
+        if email and email.lower().strip() in seen_emails:
+            print(f"    Saltando (email ya existe): {email}")
+            continue
 
         lead = {
             "id":       int(time.time() * 1000) + len(new_leads),
@@ -142,6 +153,9 @@ def scrape_leads(city: str = None, sector: str = None, max_new: int = 20) -> lis
             "fecha":    "",
         }
         new_leads.append(lead)
+        if email:
+            seen_emails.add(email.lower().strip())
+        seen_names.add(name_key)
         time.sleep(0.5)
 
     all_leads = new_leads + existing
