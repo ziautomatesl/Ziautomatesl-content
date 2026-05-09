@@ -4,14 +4,13 @@ from email.mime.multipart import MIMEMultipart
 from agents.config import SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SENDER_EMAIL, SENDER_NAME
 
 
-def send_email(to_email: str, subject: str, body: str) -> bool:
+def send_email(to_email: str, subject: str, body: str, html: str = "") -> bool:
     if not to_email or "@" not in to_email:
         print(f"    Email inválido: {to_email!r}")
         return False
 
     if not SMTP_PASS:
-        print(f"    [SIMULADO] → {to_email}")
-        print(f"    Asunto: {subject[:60]}")
+        print(f"    [SIMULADO] → {to_email} | {subject[:50]}")
         return True
 
     msg = MIMEMultipart("alternative")
@@ -20,6 +19,8 @@ def send_email(to_email: str, subject: str, body: str) -> bool:
     msg["To"]      = to_email
 
     msg.attach(MIMEText(body, "plain", "utf-8"))
+    if html:
+        msg.attach(MIMEText(html, "html", "utf-8"))
 
     try:
         with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=15) as server:

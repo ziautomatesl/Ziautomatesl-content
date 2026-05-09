@@ -38,7 +38,7 @@ def run():
         print(f"\n  → {lead['negocio']} ({lead['email']})")
 
         email_data = generate_email(lead)
-        success    = send_email(lead["email"], email_data["subject"], email_data["body"])
+        success    = send_email(lead["email"], email_data["subject"], email_data["body"], email_data.get("html", ""))
 
         if success:
             lead["estado"] = "enviado"

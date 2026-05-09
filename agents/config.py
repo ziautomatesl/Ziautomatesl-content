@@ -2,8 +2,24 @@ import os
 
 # ── Parámetros de campaña ────────────────────────────────────
 CAMPAIGN_CITY   = os.getenv("CAMPAIGN_CITY",   "Madrid")
-CAMPAIGN_SECTOR = os.getenv("CAMPAIGN_SECTOR", "peluquería")
-DAILY_LIMIT     = int(os.getenv("DAILY_LIMIT", "10"))
+DAILY_LIMIT     = int(os.getenv("DAILY_LIMIT", "5"))
+
+# Sectores que rota el agente día a día (lunes=0 … domingo=6)
+SECTOR_ROTATION = [
+    "peluquería",    # martes
+    "restaurante",   # miércoles
+    "clínica",       # jueves
+    "taller",        # viernes
+]
+
+def get_daily_sector() -> str:
+    if os.getenv("CAMPAIGN_SECTOR"):
+        return os.getenv("CAMPAIGN_SECTOR")
+    from datetime import date
+    idx = date.today().weekday() - 1  # mar=0, mié=1, jue=2, vie=3
+    return SECTOR_ROTATION[max(0, idx) % len(SECTOR_ROTATION)]
+
+CAMPAIGN_SECTOR = get_daily_sector()
 
 # ── APIs ─────────────────────────────────────────────────────
 GOOGLE_PLACES_API_KEY = os.getenv("GOOGLE_PLACES_API_KEY", "")
