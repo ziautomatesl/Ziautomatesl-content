@@ -4,7 +4,8 @@ from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 
-def post_youtube(video_path, title, description):
+
+def post_youtube(video_path: str, title: str, description: str, tags: list = None):
     creds = Credentials(
         token=None,
         refresh_token=os.environ["YOUTUBE_REFRESH_TOKEN"],
@@ -16,17 +17,27 @@ def post_youtube(video_path, title, description):
 
     youtube = build("youtube", "v3", credentials=creds)
 
+    # Tags deduplicated, each max 30 chars, total max 500 chars
+    clean_tags = []
+    total = 0
+    for t in (tags or []):
+        t = t[:30]
+        if total + len(t) + 1 <= 500:
+            clean_tags.append(t)
+            total += len(t) + 1
+
     body = {
         "snippet": {
             "title": title[:100],
-            "description": description,
-            "tags": ["automatizacion", "inteligenciaartificial", "ia", "negocio", "ziautomate", "pymes", "españa"],
+            "description": description[:5000],
+            "tags": clean_tags,
             "categoryId": "28",  # Science & Technology
+            "defaultLanguage": "es",
         },
         "status": {
             "privacyStatus": "public",
             "selfDeclaredMadeForKids": False,
-        }
+        },
     }
 
     media = MediaFileUpload(video_path, mimetype="video/mp4", resumable=True)

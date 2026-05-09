@@ -13,10 +13,12 @@ export interface WordTiming { word: string; start: number; end: number; }
 export interface ZiaVideoProps {
   topic: string; wordTimings: WordTiming[];
   durationInSeconds: number; audioSrc: string; seed: number;
+  highlights?: string[];
 }
 export const defaultZiaVideoProps: ZiaVideoProps = {
   topic: "Tu negocio en piloto automático",
   wordTimings: [], durationInSeconds: 30, audioSrc: "audio.mp3", seed: 0,
+  highlights: ["AUTOMATIZA", "SIN CÓDIGO", "IA 24/7", "MÁS CLIENTES"],
 };
 
 // ─── Brand ────────────────────────────────────────────────────────────────────
@@ -49,39 +51,50 @@ function toCaptions(wordTimings: WordTiming[]): Caption[] {
 
 const SWITCH_MS = 1400; // ~3 words per page
 
-// Skill: separate component for caption page with word highlighting
+// Skill: caption page — timing de la skill + estilo visual CapCut
 const CaptionPage: React.FC<{ page: ReturnType<typeof createTikTokStyleCaptions>["pages"][number] }> = ({ page }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const currentTimeMs = (frame / fps) * 1000;
-  const absoluteTimeMs = page.startMs + currentTimeMs;
+  const absoluteTimeMs = page.startMs + (frame / fps) * 1000;
+
+  // Skill: spring entrance de la página (timing.md — organic entrance)
+  const pageIn = spring({ fps, frame, config: { damping: 14, stiffness: 320, mass: 0.35 }, from: 0, to: 1 });
 
   return (
     <div style={{
-      position: "absolute", bottom: 180, left: 20, right: 20,
+      position: "absolute", top: "50%", left: 20, right: 20,
       display: "flex", justifyContent: "center", flexWrap: "wrap",
-      gap: "2px 4px", whiteSpace: "pre",
+      gap: "6px 8px", whiteSpace: "pre",
+      opacity: pageIn,
+      transform: `translateY(calc(-50% + ${(1 - pageIn) * 24}px))`,
     }}>
-      {page.tokens.map((token) => {
+      {page.tokens.map((token, i) => {
         const isActive = token.fromMs <= absoluteTimeMs && token.toMs > absoluteTimeMs;
-        const sc = spring({
-          fps, frame,
-          config: { damping: 10, stiffness: 280, mass: 0.4 },
-          from: 0.85, to: 1,
+
+        // Skill: stagger por palabra con playful overshoot (timing.md)
+        const wordIn = interpolate(frame, [i * 5, i * 5 + 12], [0, 1], {
+          extrapolateLeft: "clamp", extrapolateRight: "clamp",
+          easing: Easing.bezier(0.34, 1.56, 0.64, 1),
         });
+
+        // Skill: spring scale en palabra activa (spring para movimiento orgánico)
+        const activeSc = spring({ fps, frame, config: { damping: 9, stiffness: 300, mass: 0.38 }, from: 1, to: isActive ? 1.1 : 1 });
+
         return (
           <span key={token.fromMs} style={{
             display: "inline-block",
-            fontSize: 72, fontFamily: FONT_HEAD, fontWeight: 800,
+            fontSize: 92, fontFamily: FONT_HEAD, fontWeight: 800,
             textTransform: "uppercase", lineHeight: 1.15, letterSpacing: "-0.02em",
+            whiteSpace: "pre",
+            opacity: wordIn,
+            transform: `scale(${isActive ? activeSc : 1}) translateY(${(1 - wordIn) * 22}px)`,
+            transformOrigin: "center bottom",
             color: isActive ? "#03010a" : WHITE,
             background: isActive ? BRAND_GRADIENT : "transparent",
-            padding: isActive ? "4px 20px 8px" : "0",
-            borderRadius: isActive ? 12 : 0,
-            textShadow: isActive ? "none" : "2px 3px 0 rgba(0,0,0,0.95)",
-            boxShadow: isActive ? "0 0 28px rgba(26,107,255,0.5)" : "none",
-            transform: isActive ? `scale(${sc})` : "scale(1)",
-            transformOrigin: "center bottom",
+            padding: isActive ? "6px 26px 11px" : "0",
+            borderRadius: isActive ? 16 : 0,
+            textShadow: isActive ? "none" : "2px 3px 0 rgba(0,0,0,0.95), 0 0 28px rgba(0,0,0,0.9)",
+            boxShadow: isActive ? "0 0 36px rgba(26,107,255,0.6)" : "none",
           }}>
             {token.text}
           </span>
@@ -120,30 +133,42 @@ const SyncedCaptions: React.FC<{ wordTimings: WordTiming[] }> = ({ wordTimings }
   );
 };
 
-// ─── Topic headline — aparece al inicio, sigue visible todo el video ──────────
-const TopicHeadline: React.FC<{ topic: string; fps: number }> = ({ topic, fps }) => {
+// ─── Dynamic highlight — rota cada escena mostrando frases de impacto ─────────
+const DynamicHighlight: React.FC<{ highlights: string[]; sceneIdx: number }> = ({ highlights, sceneIdx }) => {
   const frame = useCurrentFrame();
-  // Skill: crisp UI entrance easing
-  const words = topic.split(" ");
+  const { fps } = useVideoConfig();
+  if (!highlights.length) return null;
+
+  const text = highlights[sceneIdx % highlights.length];
+  const localFrame = frame % Math.round(fps * SCENE_SECONDS);
+
+  const enter = spring({ fps, frame: localFrame, config: { damping: 13, stiffness: 260, mass: 0.45 }, from: 0, to: 1 });
+  const glowPulse = 0.5 + Math.sin(frame * 0.12) * 0.25;
+
+  const words = text.split(" ");
   return (
     <div style={{
-      position: "absolute", top: "28%", left: 44, right: 44,
+      position: "absolute", top: "12%", left: 30, right: 30,
       display: "flex", flexWrap: "wrap", justifyContent: "center",
-      gap: "6px 14px", lineHeight: 1.15, textAlign: "center",
+      gap: "4px 10px", zIndex: 5,
     }}>
       {words.map((word, i) => {
-        const wIn = interpolate(frame, [i * 8, i * 8 + 18], [0, 1], {
+        const wIn = interpolate(localFrame, [i * 6, i * 6 + 14], [0, 1], {
           extrapolateLeft: "clamp", extrapolateRight: "clamp",
-          easing: Easing.bezier(0.16, 1, 0.3, 1),
+          easing: Easing.bezier(0.34, 1.56, 0.64, 1),
         });
         return (
           <span key={i} style={{
             display: "inline-block",
-            fontSize: words.length > 6 ? 72 : 88,
-            fontFamily: FONT_HEAD, fontWeight: 800,
-            color: WHITE,
-            textShadow: "2px 3px 0 rgba(0,0,0,0.92), 0 0 40px rgba(0,0,0,0.85)",
-            opacity: wIn, transform: `translateY(${(1 - wIn) * 22}px)`,
+            fontSize: text.length > 12 ? 100 : 128,
+            fontFamily: FONT_HEAD, fontWeight: 900,
+            textTransform: "uppercase", letterSpacing: "-0.03em",
+            lineHeight: 1.0, textAlign: "center",
+            background: BRAND_GRADIENT,
+            WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+            opacity: wIn,
+            transform: `scale(${0.72 + wIn * 0.28}) translateY(${(1 - wIn) * 32}px)`,
+            filter: `drop-shadow(0 0 ${44 * glowPulse * enter}px rgba(0,229,255,0.8))`,
           }}>
             {word}
           </span>
@@ -271,7 +296,55 @@ const SCENE_AURORAS: [BlobCfg, BlobCfg, BlobCfg][] = [
   [[C_CYAN,   0.75, 9.0], [C_PURPLE, 0.65, 11.0], [C_BLUE,   0.60, 8.0]],
 ];
 
-// ─── Ad background: dark + aurora (per-scene) + particles ─────────────────────
+// ─── 3D wave grid — malla que se ondula como una superficie digital ────────────
+const SEGS_X = 32, SEGS_Y = 52;
+const GRID_W = 16, GRID_H = 30;
+const GRID_NX = SEGS_X + 1, GRID_NY = SEGS_Y + 1;
+
+const WaveGrid: React.FC<{ frame: number; sceneIdx: number }> = ({ frame, sceneIdx }) => {
+  const t = frame * 0.005;
+  const cfg = SCENE_AURORAS[sceneIdx % SCENE_AURORAS.length];
+  const gridColor = cfg[0][0];
+
+  const linePositions = useMemo(() => {
+    const grid = new Float32Array(GRID_NX * GRID_NY * 3);
+    for (let iy = 0; iy < GRID_NY; iy++) {
+      for (let ix = 0; ix < GRID_NX; ix++) {
+        const x = (ix / SEGS_X - 0.5) * GRID_W;
+        const y = (iy / SEGS_Y - 0.5) * GRID_H;
+        const z = Math.sin(x * 0.55 + t) * Math.cos(y * 0.38 + t * 0.72) * 1.3
+                + Math.sin(x * 0.30 + y * 0.24 + t * 1.10) * 0.55;
+        const i = (iy * GRID_NX + ix) * 3;
+        grid[i] = x; grid[i + 1] = y; grid[i + 2] = z;
+      }
+    }
+    const lines: number[] = [];
+    for (let iy = 0; iy < GRID_NY; iy++) {
+      for (let ix = 0; ix < SEGS_X; ix++) {
+        const i0 = (iy * GRID_NX + ix) * 3, i1 = i0 + 3;
+        lines.push(grid[i0], grid[i0 + 1], grid[i0 + 2], grid[i1], grid[i1 + 1], grid[i1 + 2]);
+      }
+    }
+    for (let ix = 0; ix < GRID_NX; ix++) {
+      for (let iy = 0; iy < SEGS_Y; iy++) {
+        const i0 = (iy * GRID_NX + ix) * 3, i1 = ((iy + 1) * GRID_NX + ix) * 3;
+        lines.push(grid[i0], grid[i0 + 1], grid[i0 + 2], grid[i1], grid[i1 + 1], grid[i1 + 2]);
+      }
+    }
+    return new Float32Array(lines);
+  }, [t]);
+
+  return (
+    <lineSegments rotation={[-Math.PI * 0.30, t * 0.016, t * 0.004]} position={[0, -1.5, -3.5]}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" args={[linePositions, 3]} />
+      </bufferGeometry>
+      <lineBasicMaterial color={gridColor} transparent opacity={0.16} />
+    </lineSegments>
+  );
+};
+
+// ─── Ad background: dark + aurora (per-scene) + wave grid + particles ──────────
 const AdBackground: React.FC<{ frame: number; sceneIdx: number }> = ({ frame, sceneIdx }) => {
   const t = frame * 0.004;
   const cfg = SCENE_AURORAS[sceneIdx % SCENE_AURORAS.length];
@@ -292,6 +365,9 @@ const AdBackground: React.FC<{ frame: number; sceneIdx: number }> = ({ frame, sc
         <AuroraBlob color={b2[0]} x={p2x} y={p2y} scale={b2[2]} alpha={b2[1]} />
         <AuroraBlob color={b3[0]} x={p3x} y={p3y} scale={b3[2]} alpha={b3[1]} />
 
+        {/* 3D wave grid — malla ondulante digital */}
+        <WaveGrid frame={frame} sceneIdx={sceneIdx} />
+
         {/* 2500-particle galaxy — continuous across all scenes */}
         <ParticleCloud frame={frame} />
       </ThreeCanvas>
@@ -310,7 +386,7 @@ const AdBackground: React.FC<{ frame: number; sceneIdx: number }> = ({ frame, sc
 };
 
 // ─── Main composition ─────────────────────────────────────────────────────────
-export const ZiaVideo: React.FC<ZiaVideoProps> = ({ topic, wordTimings, durationInSeconds, audioSrc, seed }) => {
+export const ZiaVideo: React.FC<ZiaVideoProps> = ({ topic, wordTimings, durationInSeconds, audioSrc, seed, highlights }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
@@ -381,8 +457,8 @@ export const ZiaVideo: React.FC<ZiaVideoProps> = ({ topic, wordTimings, duration
         </div>
       </div>
 
-      {/* Topic headline — animado, dinámico desde el guion IA */}
-      <TopicHeadline topic={topic || "Automatiza tu negocio"} fps={fps} />
+      {/* Frases de impacto que rotan cada escena */}
+      <DynamicHighlight highlights={highlights ?? []} sceneIdx={sceneIdx} />
 
       {/* Skill: captions sincronizados al audio real con wordTimings */}
       <SyncedCaptions wordTimings={wordTimings} />

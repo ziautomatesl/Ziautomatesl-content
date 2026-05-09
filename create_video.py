@@ -18,7 +18,7 @@ PUBLIC_DIR   = os.path.join(REMOTION_DIR, "public")
 
 
 def create_animated_video(audio_path, word_timings, output_path="zia_video.mp4",
-                          topic="", script_text=""):
+                          topic="", script_text="", highlights=None):
     os.makedirs(PUBLIC_DIR, exist_ok=True)
 
     # 1. Get audio duration
@@ -37,6 +37,7 @@ def create_animated_video(audio_path, word_timings, output_path="zia_video.mp4",
         "durationInSeconds": duration,
         "audioSrc":          "audio.mp3",
         "seed":              int(time.time()) % 100,  # different theme order each video
+        "highlights":        highlights or [],
     }
     props_path = os.path.join(REMOTION_DIR, "props.json")
     with open(props_path, "w", encoding="utf-8") as f:
