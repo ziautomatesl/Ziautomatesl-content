@@ -1,0 +1,86 @@
+name: ZIA Campaign - Outreach Diario
+
+on:
+  schedule:
+    - cron: '0 7 * * 2-5'   # 09:00 España verano  (UTC+2 / CEST) · Martes–Viernes
+    - cron: '0 8 * * 2-5'   # 09:00 España invierno (UTC+1 / CET)  · Martes–Viernes
+  workflow_dispatch:
+    inputs:
+      city:
+        description: 'Ciudad objetivo'
+        required: false
+        default: 'Madrid'
+      sector:
+        description: 'Sector objetivo (peluquería, restaurante, clínica...)'
+        required: false
+        default: 'peluquería'
+      daily_limit:
+        description: 'Emails a enviar hoy'
+        required: false
+        default: '10'
+
+jobs:
+  check-time:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+    steps:
+      - name: Verificar horario España
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "should_run=true" >> $GITHUB_OUTPUT
+            echo "Ejecución manual — sin comprobación de hora"
+          else
+            H=$(TZ='Europe/Madrid' date +%-H)
+            M=$(TZ='Europe/Madrid' date +%-M)
+            TOT=$((H*60+M))
+            echo "Hora España: ${H}:${M} (objetivo: 09:00)"
+            # Ventana 08:45–10:14
+            if [ "$TOT" -ge 525 ] && [ "$TOT" -le 614 ]; then
+              echo "should_run=true" >> $GITHUB_OUTPUT
+            else
+              echo "should_run=false" >> $GITHUB_OUTPUT
+              echo "Fuera de ventana horaria, omitiendo."
+            fi
+          fi
+
+  run-campaign:
+    needs: check-time
+    if: needs.check-time.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias
+        run: pip install requests
+
+      - name: Ejecutar campaña
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+          GEMINI_API_KEY:        ${{ secrets.GEMINI_API_KEY }}
+          BREVO_SMTP_USER:       ${{ secrets.BREVO_SMTP_USER }}
+          BREVO_SMTP_PASS:       ${{ secrets.BREVO_SMTP_PASS }}
+          SENDER_EMAIL:          ${{ secrets.SENDER_EMAIL }}
+          CAMPAIGN_CITY:         ${{ github.event.inputs.city || 'Madrid' }}
+          CAMPAIGN_SECTOR:       ${{ github.event.inputs.sector || 'peluquería' }}
+          DAILY_LIMIT:           ${{ github.event.inputs.daily_limit || '10' }}
+        run: python -m agents.run_campaign
+
+      - name: Commit leads.json actualizado
+        run: |
+          git config user.name  "ziautomate-bot"
+          git config user.email "ziautomate.sl@gmail.com"
+          git add leads.json
+          git diff --staged --quiet || git commit -m "campaign: leads actualizados $(date '+%Y-%m-%d')"
+          git push

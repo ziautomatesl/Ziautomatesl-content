@@ -518,6 +518,7 @@ header p{color:#4b5563;font-size:14px;letter-spacing:.12em;text-transform:upperc
       <div class="role" style="color:#00e5ff">Orquestador del pipeline</div>
       <div class="files"><span class="file">main.py</span></div>
       <p>Recibe la orden del día y coordina a todos los demás en orden. Si algo falla decide si abortar o continuar. Limpia archivos temporales al terminar.</p>
+      <button class="action-btn" style="background:rgba(0,229,255,.1);color:#00e5ff;border:1px solid rgba(0,229,255,.3)" onclick="openCampanas()">🎯 Panel de Campañas</button>
     </div>
   </div>
 
@@ -925,6 +926,12 @@ header p{color:#4b5563;font-size:14px;letter-spacing:.12em;text-transform:upperc
 </div>
 
 
+<!-- ══ CAMPAÑAS CTA ══ -->
+<div class="campaigns-section">
+  <button class="campaigns-cta" onclick="openCampanas()">🎯 Panel de Campañas &nbsp;·&nbsp; <span style="opacity:.55;font-weight:600">Outreach B2B</span></button>
+  <div class="campaigns-cta-sub">leads extraídos · seguimiento · conversiones</div>
+</div>
+
 <!-- ══════════════════════════════════════════════════════════════
      MODAL: GUIONES
 ══════════════════════════════════════════════════════════════ -->
@@ -1032,6 +1039,78 @@ header p{color:#4b5563;font-size:14px;letter-spacing:.12em;text-transform:upperc
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════════════════════════
+     MODAL: CAMPAÑAS OUTREACH
+══════════════════════════════════════════════════════════════ -->
+<div id="modal-campanas" class="modal-overlay" onclick="closeModal('modal-campanas')">
+  <div class="modal-box" onclick="event.stopPropagation()" style="max-width:1080px">
+    <div class="modal-header">
+      <div>
+        <h2 class="modal-title">🎯 Panel de Campañas Outreach</h2>
+        <p class="modal-sub">Leads B2B · seguimiento de estado · control de conversiones</p>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="camp-add-btn" id="sync-btn" onclick="syncFromGitHub()" title="Importar leads del agente automático">🔄 Sincronizar</button>
+        <button class="camp-add-btn" onclick="toggleAddForm()">+ Añadir lead</button>
+        <button class="modal-close" onclick="closeModal('modal-campanas')">✕</button>
+      </div>
+    </div>
+
+    <!-- stats -->
+    <div class="camp-stats" id="camp-stats"></div>
+
+    <!-- add form -->
+    <div class="camp-form" id="camp-form">
+      <div class="camp-form-grid">
+        <div><div class="camp-form-label">Negocio *</div><input class="camp-input" id="f-negocio" placeholder="Peluquería García"></div>
+        <div><div class="camp-form-label">Sector</div><input class="camp-input" id="f-sector" placeholder="Peluquería"></div>
+        <div><div class="camp-form-label">Ciudad</div><input class="camp-input" id="f-ciudad" placeholder="Madrid"></div>
+        <div><div class="camp-form-label">Email</div><input class="camp-input" id="f-email" placeholder="info@..."></div>
+        <div><div class="camp-form-label">Teléfono</div><input class="camp-input" id="f-telefono" placeholder="+34..."></div>
+        <div><div class="camp-form-label">Web</div><input class="camp-input" id="f-web" placeholder="www..."></div>
+      </div>
+      <div style="margin-bottom:12px"><div class="camp-form-label">Notas</div><input class="camp-input" id="f-notas" placeholder="Ej: sin web, interesado en reservas automáticas..."></div>
+      <button class="camp-save-btn" onclick="addLead()">Guardar lead</button>
+      <button class="camp-cancel-btn" onclick="toggleAddForm()">Cancelar</button>
+    </div>
+
+    <!-- filters + search -->
+    <div class="camp-filters">
+      <button class="camp-filter active" onclick="setFilter('todos',this)">Todos</button>
+      <button class="camp-filter" onclick="setFilter('pendiente',this)">🟡 Pendiente</button>
+      <button class="camp-filter" onclick="setFilter('enviado',this)">🔵 Enviado</button>
+      <button class="camp-filter" onclick="setFilter('respondio',this)">🟢 Respondió</button>
+      <button class="camp-filter" onclick="setFilter('no-interesa',this)">⚫ No interesa</button>
+      <button class="camp-filter" onclick="setFilter('cliente',this)">🟣 Cliente</button>
+      <input class="camp-search" id="camp-search" placeholder="🔍 Buscar..." oninput="renderTable()">
+    </div>
+
+    <!-- table -->
+    <div class="camp-table-wrap">
+      <table class="camp-table">
+        <thead>
+          <tr>
+            <th style="width:32px">#</th>
+            <th onclick="sortBy('negocio')">Negocio ↕</th>
+            <th onclick="sortBy('sector')">Sector ↕</th>
+            <th onclick="sortBy('ciudad')">Ciudad ↕</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th onclick="sortBy('estado')">Estado ↕</th>
+            <th onclick="sortBy('fecha')">Enviado ↕</th>
+            <th>Notas</th>
+            <th style="width:36px"></th>
+          </tr>
+        </thead>
+        <tbody id="camp-tbody"></tbody>
+      </table>
+      <div id="camp-empty" class="camp-empty" style="display:none">
+        No hay leads todavía. Pulsa <strong style="color:#00e5ff">+ Añadir lead</strong> para empezar.
+      </div>
+    </div>
+  </div>
+</div>
+
 <style>
 /* ── ACTION BUTTONS ── */
 .action-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:10px 20px;
@@ -1040,6 +1119,7 @@ header p{color:#4b5563;font-size:14px;letter-spacing:.12em;text-transform:upperc
 .btn-guion:hover{background:rgba(251,191,36,.22);box-shadow:0 0 16px rgba(251,191,36,.2)}
 .btn-video{background:rgba(156,163,175,.1);color:#d1d5db;border:1px solid rgba(156,163,175,.25)}
 .btn-video:hover{background:rgba(156,163,175,.2);box-shadow:0 0 16px rgba(156,163,175,.15)}
+.btn-camp:hover{background:rgba(0,229,255,.18);box-shadow:0 0 16px rgba(0,229,255,.15)}
 
 /* ── MODAL OVERLAY ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;
@@ -1173,6 +1253,68 @@ header p{color:#4b5563;font-size:14px;letter-spacing:.12em;text-transform:upperc
   background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);color:#a78bfa}
 .vi-question{font-size:13px;color:#fbbf24;font-style:italic}
 .vi-caption-text{font-size:11px;color:#9ca3af;line-height:1.6;white-space:pre-wrap}
+
+/* ══ CAMPAÑAS SECTION ══ */
+.campaigns-section{max-width:1200px;margin:0 auto 60px;padding:0 20px;text-align:center}
+.campaigns-cta{display:inline-flex;align-items:center;gap:12px;padding:18px 40px;
+  background:linear-gradient(135deg,rgba(0,229,255,.08),rgba(124,58,237,.08));
+  border:1px solid rgba(0,229,255,.22);border-radius:16px;color:#e0e6f0;
+  font-size:16px;font-weight:700;cursor:pointer;transition:all .25s;letter-spacing:-.2px;font-family:'Inter',sans-serif}
+.campaigns-cta:hover{background:linear-gradient(135deg,rgba(0,229,255,.16),rgba(124,58,237,.16));
+  border-color:rgba(0,229,255,.45);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,229,255,.12)}
+.campaigns-cta-sub{font-size:11px;color:#374151;margin-top:8px;letter-spacing:.1em;text-transform:uppercase}
+
+/* ══ CAMPAÑAS MODAL ══ */
+.camp-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:20px 28px 0;flex-shrink:0}
+.camp-stat{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:12px 10px;text-align:center}
+.camp-stat-num{font-size:26px;font-weight:800;letter-spacing:-1px}
+.camp-stat-label{font-size:10px;color:#4b5563;text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+.camp-filters{display:flex;gap:6px;padding:14px 28px 0;flex-wrap:wrap;align-items:center;flex-shrink:0}
+.camp-filter{padding:5px 13px;border-radius:20px;border:1px solid rgba(255,255,255,.09);
+  background:transparent;color:#6b7280;font-size:12px;cursor:pointer;transition:.15s;font-weight:500;font-family:'Inter',sans-serif}
+.camp-filter.active,.camp-filter:hover{background:rgba(0,229,255,.1);border-color:rgba(0,229,255,.35);color:#00e5ff}
+.camp-search{margin-left:auto;padding:6px 12px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.09);border-radius:8px;color:#e0e6f0;font-size:12px;outline:none;width:170px;font-family:'Inter',sans-serif}
+.camp-search:focus{border-color:rgba(0,229,255,.35)}
+.camp-add-btn{padding:7px 16px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);
+  border-radius:8px;color:#00e5ff;font-size:12px;font-weight:600;cursor:pointer;transition:.2s;font-family:'Inter',sans-serif}
+.camp-add-btn:hover{background:rgba(0,229,255,.15);box-shadow:0 0 12px rgba(0,229,255,.15)}
+.camp-form{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);
+  border-radius:12px;padding:16px 20px;margin:12px 28px 0;display:none;flex-shrink:0}
+.camp-form.open{display:block}
+.camp-form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px}
+.camp-form-label{font-size:10px;color:#4b5563;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.camp-input{padding:7px 10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);
+  border-radius:7px;color:#e0e6f0;font-size:12px;outline:none;width:100%;font-family:'Inter',sans-serif}
+.camp-input:focus{border-color:rgba(0,229,255,.35)}
+.camp-input::placeholder{color:#374151}
+.camp-save-btn{padding:8px 20px;background:rgba(0,229,255,.12);border:1px solid rgba(0,229,255,.3);
+  border-radius:7px;color:#00e5ff;font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.camp-save-btn:hover{box-shadow:0 0 12px rgba(0,229,255,.18)}
+.camp-cancel-btn{padding:8px 16px;background:transparent;border:1px solid rgba(255,255,255,.09);
+  border-radius:7px;color:#4b5563;font-size:12px;cursor:pointer;margin-left:8px;font-family:'Inter',sans-serif}
+.camp-table-wrap{flex:1;overflow-y:auto;padding:12px 28px 24px}
+.camp-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.camp-table th{padding:8px 10px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;color:#374151;border-bottom:1px solid rgba(255,255,255,.06);
+  background:rgba(255,255,255,.02);white-space:nowrap;cursor:pointer;user-select:none;position:sticky;top:0;z-index:1}
+.camp-table th:hover{color:#6b7280}
+.camp-table td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+.camp-table tr:last-child td{border-bottom:none}
+.camp-table tr:hover td{background:rgba(255,255,255,.018)}
+.st-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;cursor:pointer}
+.st-pendiente{background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.28)}
+.st-enviado{background:rgba(59,130,246,.12);color:#60a5fa;border:1px solid rgba(59,130,246,.28)}
+.st-respondio{background:rgba(52,211,153,.12);color:#34d399;border:1px solid rgba(52,211,153,.28)}
+.st-no-interesa{background:rgba(156,163,175,.08);color:#6b7280;border:1px solid rgba(156,163,175,.18)}
+.st-cliente{background:rgba(167,139,250,.15);color:#a78bfa;border:1px solid rgba(167,139,250,.35)}
+.camp-action{padding:3px 8px;border-radius:5px;border:1px solid rgba(255,255,255,.09);
+  background:transparent;color:#6b7280;font-size:11px;cursor:pointer;transition:.15s;font-family:'Inter',sans-serif}
+.camp-action:hover{background:rgba(255,255,255,.06);color:#e0e6f0}
+.camp-action.del:hover{border-color:rgba(248,113,113,.35);color:#f87171}
+.st-select{background:#0d0d16;border:1px solid rgba(255,255,255,.12);border-radius:6px;
+  color:#e0e6f0;font-size:11px;font-weight:600;cursor:pointer;outline:none;padding:3px 6px;font-family:'Inter',sans-serif}
+.camp-empty{text-align:center;padding:40px;color:#374151}
 </style>
 
 <script>
@@ -1408,6 +1550,194 @@ function switchSlot(slot, btn) {
   if (showCaption) {
     document.getElementById('vi-caption-full').textContent = buildCaption(s);
   }
+}
+
+// ═══════════════════════════════════════════════
+// CAMPAÑAS — LEADS MANAGEMENT
+// ═══════════════════════════════════════════════
+const CAMP_KEY = 'zia_leads_v1';
+let _campFilter = 'todos';
+let _campSort = { key: 'id', dir: -1 };
+
+const STATUS_META = {
+  'pendiente':   { label: 'Pendiente',   cls: 'st-pendiente'   },
+  'enviado':     { label: 'Enviado',     cls: 'st-enviado'     },
+  'respondio':   { label: 'Respondió',   cls: 'st-respondio'   },
+  'no-interesa': { label: 'No interesa', cls: 'st-no-interesa' },
+  'cliente':     { label: 'Cliente',     cls: 'st-cliente'     },
+};
+
+function getLeads() {
+  try { return JSON.parse(localStorage.getItem(CAMP_KEY) || '[]'); } catch { return []; }
+}
+function saveLeads(leads) { localStorage.setItem(CAMP_KEY, JSON.stringify(leads)); }
+
+function openCampanas() {
+  if (!getLeads().length) _seedDemo();
+  renderStats();
+  renderTable();
+  document.getElementById('modal-campanas').classList.add('open');
+}
+
+function toggleAddForm() {
+  const f = document.getElementById('camp-form');
+  f.classList.toggle('open');
+  if (f.classList.contains('open')) document.getElementById('f-negocio').focus();
+}
+
+function addLead() {
+  const negocio = document.getElementById('f-negocio').value.trim();
+  if (!negocio) { document.getElementById('f-negocio').style.borderColor='rgba(248,113,113,.6)'; return; }
+  document.getElementById('f-negocio').style.borderColor='';
+  const leads = getLeads();
+  leads.unshift({
+    id: Date.now(),
+    negocio,
+    sector:   document.getElementById('f-sector').value.trim(),
+    ciudad:   document.getElementById('f-ciudad').value.trim(),
+    email:    document.getElementById('f-email').value.trim(),
+    telefono: document.getElementById('f-telefono').value.trim(),
+    web:      document.getElementById('f-web').value.trim(),
+    notas:    document.getElementById('f-notas').value.trim(),
+    estado:   'pendiente',
+    fecha:    '',
+  });
+  saveLeads(leads);
+  ['f-negocio','f-sector','f-ciudad','f-email','f-telefono','f-web','f-notas'].forEach(id => { document.getElementById(id).value = ''; });
+  document.getElementById('camp-form').classList.remove('open');
+  renderStats(); renderTable();
+}
+
+function deleteLead(id) {
+  saveLeads(getLeads().filter(l => l.id !== id));
+  renderStats(); renderTable();
+}
+
+function changeStatus(id, newStatus) {
+  const leads = getLeads();
+  const lead = leads.find(l => l.id === id);
+  if (!lead) return;
+  lead.estado = newStatus;
+  if ((newStatus === 'enviado' || newStatus === 'respondio' || newStatus === 'cliente') && !lead.fecha) {
+    lead.fecha = new Date().toLocaleDateString('es-ES', { day:'2-digit', month:'2-digit', year:'2-digit' });
+  }
+  saveLeads(leads);
+  renderStats(); renderTable();
+}
+
+function setFilter(f, btn) {
+  _campFilter = f;
+  document.querySelectorAll('.camp-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTable();
+}
+
+function sortBy(key) {
+  _campSort = { key, dir: _campSort.key === key ? -_campSort.dir : 1 };
+  renderTable();
+}
+
+function renderStats() {
+  const leads = getLeads();
+  const c = { pendiente:0, enviado:0, respondio:0, 'no-interesa':0, cliente:0 };
+  leads.forEach(l => { if (c[l.estado] !== undefined) c[l.estado]++; });
+  const pct = leads.length ? Math.round((c.cliente / leads.length) * 100) : 0;
+  document.getElementById('camp-stats').innerHTML = `
+    <div class="camp-stat"><div class="camp-stat-num" style="color:#e0e6f0">${leads.length}</div><div class="camp-stat-label">Total leads</div></div>
+    <div class="camp-stat"><div class="camp-stat-num" style="color:#fbbf24">${c.pendiente}</div><div class="camp-stat-label">Pendientes</div></div>
+    <div class="camp-stat"><div class="camp-stat-num" style="color:#60a5fa">${c.enviado}</div><div class="camp-stat-label">Enviados</div></div>
+    <div class="camp-stat"><div class="camp-stat-num" style="color:#34d399">${c.respondio}</div><div class="camp-stat-label">Respondieron</div></div>
+    <div class="camp-stat"><div class="camp-stat-num" style="color:#a78bfa">${pct}%</div><div class="camp-stat-label">Conversión</div></div>`;
+}
+
+function renderTable() {
+  const search = (document.getElementById('camp-search')?.value || '').toLowerCase();
+  let leads = getLeads();
+  if (_campFilter !== 'todos') leads = leads.filter(l => l.estado === _campFilter);
+  if (search) leads = leads.filter(l =>
+    [l.negocio, l.sector, l.ciudad, l.email, l.notas].some(v => (v||'').toLowerCase().includes(search))
+  );
+  leads.sort((a, b) => {
+    const va = String(a[_campSort.key] ?? '').toLowerCase();
+    const vb = String(b[_campSort.key] ?? '').toLowerCase();
+    return va < vb ? -_campSort.dir : va > vb ? _campSort.dir : 0;
+  });
+  const tbody = document.getElementById('camp-tbody');
+  const empty = document.getElementById('camp-empty');
+  if (!leads.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  tbody.innerHTML = leads.map((l, i) => {
+    const meta = STATUS_META[l.estado] || STATUS_META['pendiente'];
+    const opts = Object.entries(STATUS_META).map(([k,v]) =>
+      `<option value="${k}"${l.estado===k?' selected':''}>${v.label}</option>`).join('');
+    const emailCell = l.email
+      ? `<span style="color:#60a5fa;font-size:11px;cursor:default" title="${l.email}">${l.email.length>22?l.email.slice(0,22)+'…':l.email}</span>`
+      : '<span style="color:#374151">—</span>';
+    return `<tr>
+      <td style="color:#374151;font-size:11px">${i+1}</td>
+      <td style="font-weight:700;color:#e0e6f0">${l.negocio}</td>
+      <td style="color:#6b7280;font-size:12px">${l.sector||'—'}</td>
+      <td style="color:#6b7280;font-size:12px">${l.ciudad||'—'}</td>
+      <td>${emailCell}</td>
+      <td style="color:#4b5563;font-size:11px">${l.telefono||'—'}</td>
+      <td>
+        <span class="st-badge ${meta.cls}" onclick="this.style.display='none';this.nextElementSibling.style.display='inline-block'">${meta.label}</span>
+        <select class="st-select" style="display:none" onchange="changeStatus(${l.id},this.value)" onblur="this.style.display='none';this.previousElementSibling.style.display='inline-block'">${opts}</select>
+      </td>
+      <td style="color:#4b5563;font-size:11px;white-space:nowrap">${l.fecha||'—'}</td>
+      <td style="color:#4b5563;font-size:11px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${l.notas||''}">${l.notas||'—'}</td>
+      <td><button class="camp-action del" onclick="if(confirm('¿Eliminar este lead?'))deleteLead(${l.id})">✕</button></td>
+    </tr>`;
+  }).join('');
+}
+
+// ─── Sync desde GitHub (leads.json del agente) ──────────────
+async function syncFromGitHub() {
+  const btn = document.getElementById('sync-btn');
+  btn.textContent = '⏳ Sincronizando...';
+  btn.disabled = true;
+  const RAW_URL = 'https://raw.githubusercontent.com/ziautomatesl/Ziautomatesl-content/main/leads.json';
+  try {
+    const resp = await fetch(RAW_URL + '?t=' + Date.now());
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const remote = await resp.json();
+    if (!Array.isArray(remote) || remote.length === 0) {
+      btn.textContent = '🔄 Sincronizar';
+      btn.disabled = false;
+      alert('El agente todavía no ha generado leads. Lanza el workflow "ZIA Campaign" en GitHub Actions.');
+      return;
+    }
+    const local = getLeads();
+    const localIds = new Set(local.map(l => String(l.id)));
+    // Merge: keep local status overrides, add new remote leads
+    const merged = [...local];
+    let nuevos = 0;
+    for (const rl of remote) {
+      if (!localIds.has(String(rl.id))) {
+        merged.push(rl);
+        nuevos++;
+      }
+    }
+    saveLeads(merged);
+    renderStats(); renderTable();
+    btn.textContent = '🔄 Sincronizar';
+    btn.disabled = false;
+    alert(`✅ Sincronizado: ${nuevos} leads nuevos importados del agente.\nTotal en panel: ${merged.length}`);
+  } catch(e) {
+    btn.textContent = '🔄 Sincronizar';
+    btn.disabled = false;
+    alert('Error al sincronizar: ' + e.message + '\nAsegúrate de tener conexión y de que leads.json existe en el repo.');
+  }
+}
+
+function _seedDemo() {
+  saveLeads([
+    {id:5,negocio:'Farmacia Salud+',sector:'Farmacia',ciudad:'Madrid',email:'farmacia@saludmas.es',telefono:'+34 915 678 234',web:'saludmas.es',notas:'Interesados en chatbot para consultas',estado:'cliente',fecha:'05/05/26'},
+    {id:4,negocio:'Taller MecáAuto',sector:'Automoción',ciudad:'Sevilla',email:'mecaauto@gmail.com',telefono:'+34 954 789 123',web:'',notas:'Sin web, solo Facebook',estado:'pendiente',fecha:''},
+    {id:3,negocio:'Clínica DentalPro',sector:'Salud',ciudad:'Valencia',email:'contacto@dentalpro.es',telefono:'+34 963 456 789',web:'dentalpro.es',notas:'Gestión de citas manual, 3 dentistas',estado:'respondio',fecha:'08/05/26'},
+    {id:2,negocio:'Bar El Rincón',sector:'Hostelería',ciudad:'Barcelona',email:'info@elrincon.es',telefono:'+34 932 111 222',web:'elrincon.es',notas:'Sin reseñas en Google, buena ubicación',estado:'enviado',fecha:'09/05/26'},
+    {id:1,negocio:'Peluquería Glamour',sector:'Peluquería',ciudad:'Madrid',email:'glamour@example.es',telefono:'+34 912 345 678',web:'peluqueriaglamour.es',notas:'Web antigua, sin reservas online',estado:'pendiente',fecha:''},
+  ]);
 }
 </script>
 
