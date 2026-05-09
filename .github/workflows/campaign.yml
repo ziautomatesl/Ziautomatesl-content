@@ -74,13 +74,7 @@ jobs:
           CAMPAIGN_CITY:         ${{ github.event.inputs.city || 'Madrid' }}
           CAMPAIGN_SECTOR:       ${{ github.event.inputs.sector || 'peluquería' }}
           DAILY_LIMIT:           ${{ github.event.inputs.daily_limit || '5' }}
-        run: |
-          echo "API key presente: $([ -n "$GOOGLE_PLACES_API_KEY" ] && echo SI || echo NO)"
-          echo "Gemini key presente: $([ -n "$GEMINI_API_KEY" ] && echo SI || echo NO)"
-          echo "Gmail pass presente: $([ -n "$GMAIL_APP_PASSWORD" ] && echo SI || echo NO)"
-          python -m agents.run_campaign
-          echo "--- leads.json resultado ---"
-          cat leads.json
+        run: python -m agents.run_campaign
 
       - name: Commit leads.json actualizado
         run: |
