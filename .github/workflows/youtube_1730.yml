@@ -19,13 +19,16 @@ jobs:
             echo "should_run=true" >> $GITHUB_OUTPUT
             echo "Ejecución manual: omitiendo comprobación de horario"
           else
-            HOUR=$(TZ='Europe/Madrid' date +%-H)
-            echo "Hora España: ${HOUR}h (objetivo: 17h)"
-            if [ "$HOUR" = "17" ]; then
+            H=$(TZ='Europe/Madrid' date +%-H)
+            M=$(TZ='Europe/Madrid' date +%-M)
+            TOT=$((H*60+M))
+            echo "Hora España: ${H}:${M} (objetivo: 17:30)"
+            # Ventana 17:00–18:14 para absorber retrasos de GitHub Actions
+            if [ "$TOT" -ge 1020 ] && [ "$TOT" -le 1094 ]; then
               echo "should_run=true" >> $GITHUB_OUTPUT
             else
               echo "should_run=false" >> $GITHUB_OUTPUT
-              echo "Cron incorrecto para esta zona horaria, omitiendo."
+              echo "Fuera de ventana horaria, omitiendo."
             fi
           fi
 
