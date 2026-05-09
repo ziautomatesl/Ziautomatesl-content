@@ -11,8 +11,8 @@ import type { Caption } from "@remotion/captions";
 import { loadFont as loadSpaceGrotesk } from "@remotion/google-fonts/SpaceGrotesk";
 import { loadFont as loadInter } from "@remotion/google-fonts/Inter";
 
-const { fontFamily: _fontHead } = loadSpaceGrotesk("normal", { weights: ["500", "600", "700", "800"] });
-const { fontFamily: _fontBody } = loadInter("normal", { weights: ["400", "600", "700", "800", "900"] });
+const { fontFamily: _fontHead } = loadSpaceGrotesk("normal", { weights: ["500", "600", "700"] });
+const { fontFamily: _fontBody } = loadInter("normal", { weights: ["400", "600", "700", "900"] });
 
 export interface WordTiming { word: string; start: number; end: number; }
 export interface ZiaVideoProps {
@@ -84,7 +84,7 @@ const CaptionPage: React.FC<{ page: ReturnType<typeof createTikTokStyleCaptions>
         return (
           <span key={token.fromMs} style={{
             display: "inline-block",
-            fontSize: 92, fontFamily: FONT_HEAD, fontWeight: 800,
+            fontSize: 92, fontFamily: FONT_HEAD, fontWeight: 700,
             textTransform: "uppercase", lineHeight: 1.15, letterSpacing: "-0.02em",
             whiteSpace: "pre",
             opacity: wordIn,
@@ -450,7 +450,7 @@ export const ZiaVideo: React.FC<ZiaVideoProps> = ({ topic, wordTimings, duration
         }}>
           <div style={{ width: 12, height: 12, borderRadius: "50%", background: BRAND_GRADIENT, boxShadow: `0 0 10px ${CYAN}` }} />
           <span style={{
-            fontSize: 48, fontFamily: FONT_HEAD, fontWeight: 800, letterSpacing: "-0.5px",
+            fontSize: 48, fontFamily: FONT_HEAD, fontWeight: 700, letterSpacing: "-0.5px",
             background: BRAND_GRADIENT, WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent", backgroundClip: "text",
           }}>ziautomate</span>
@@ -471,7 +471,7 @@ export const ZiaVideo: React.FC<ZiaVideoProps> = ({ topic, wordTimings, duration
         opacity: uiIn, zIndex: 10,
       }}>
         <span style={{
-          fontSize: 44, fontFamily: FONT_HEAD, fontWeight: 800, letterSpacing: "-0.5px",
+          fontSize: 44, fontFamily: FONT_HEAD, fontWeight: 700, letterSpacing: "-0.5px",
           background: BRAND_GRADIENT, WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent", backgroundClip: "text",
         }}>ziautomate.netlify.app</span>
