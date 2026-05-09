@@ -69,9 +69,8 @@ jobs:
         env:
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
           GEMINI_API_KEY:        ${{ secrets.GEMINI_API_KEY }}
-          BREVO_SMTP_USER:       ${{ secrets.BREVO_SMTP_USER }}
-          BREVO_SMTP_PASS:       ${{ secrets.BREVO_SMTP_PASS }}
-          SENDER_EMAIL:          ${{ secrets.SENDER_EMAIL }}
+          GMAIL_APP_PASSWORD:    ${{ secrets.GMAIL_APP_PASSWORD }}
+          SENDER_EMAIL:          "ziautomate.sl@gmail.com"
           CAMPAIGN_CITY:         ${{ github.event.inputs.city || 'Madrid' }}
           CAMPAIGN_SECTOR:       ${{ github.event.inputs.sector || 'peluquería' }}
           DAILY_LIMIT:           ${{ github.event.inputs.daily_limit || '10' }}

@@ -9,13 +9,13 @@ DAILY_LIMIT     = int(os.getenv("DAILY_LIMIT", "10"))
 GOOGLE_PLACES_API_KEY = os.getenv("GOOGLE_PLACES_API_KEY", "")
 GEMINI_API_KEY        = os.getenv("GEMINI_API_KEY", "")
 
-# ── Brevo SMTP ───────────────────────────────────────────────
-BREVO_SMTP_HOST = "smtp-relay.brevo.com"
-BREVO_SMTP_PORT = 587
-BREVO_SMTP_USER = os.getenv("BREVO_SMTP_USER", "")
-BREVO_SMTP_PASS = os.getenv("BREVO_SMTP_PASS", "")
-SENDER_EMAIL    = os.getenv("SENDER_EMAIL", "ziautomate.sl@gmail.com")
-SENDER_NAME     = "ziautomate"
+# ── Gmail SMTP ───────────────────────────────────────────────
+SMTP_HOST    = "smtp.gmail.com"
+SMTP_PORT    = 587
+SMTP_USER    = os.getenv("SENDER_EMAIL", "ziautomate.sl@gmail.com")
+SMTP_PASS    = os.getenv("GMAIL_APP_PASSWORD", "")
+SENDER_EMAIL = os.getenv("SENDER_EMAIL", "ziautomate.sl@gmail.com")
+SENDER_NAME  = "ziautomate"
 
 # ── Templates por sector ─────────────────────────────────────
 SECTOR_TEMPLATES = {
