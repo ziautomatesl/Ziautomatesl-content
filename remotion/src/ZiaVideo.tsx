@@ -52,14 +52,12 @@ function toCaptions(wordTimings: WordTiming[]): Caption[] {
 
 const SWITCH_MS = 1400; // ~3 words per page
 
-// Skill: caption page — timing de la skill + estilo visual CapCut
-const CaptionPage: React.FC<{ page: ReturnType<typeof createTikTokStyleCaptions>["pages"][number] }> = ({ page }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const absoluteTimeMs = page.startMs + (frame / fps) * 1000;
+type TikTokPage = ReturnType<typeof createTikTokStyleCaptions>["pages"][number];
 
-  // Skill: spring entrance de la página (timing.md — organic entrance)
-  const pageIn = spring({ fps, frame, config: { damping: 14, stiffness: 320, mass: 0.35 }, from: 0, to: 1 });
+const CaptionPage: React.FC<{ page: TikTokPage; currentMs: number; localFrame: number }> = ({ page, currentMs, localFrame }) => {
+  const { fps } = useVideoConfig();
+
+  const pageIn = spring({ fps, frame: localFrame, config: { damping: 14, stiffness: 320, mass: 0.35 }, from: 0, to: 1 });
 
   return (
     <div style={{
@@ -70,16 +68,14 @@ const CaptionPage: React.FC<{ page: ReturnType<typeof createTikTokStyleCaptions>
       transform: `translateY(calc(-50% + ${(1 - pageIn) * 24}px))`,
     }}>
       {page.tokens.map((token, i) => {
-        const isActive = token.fromMs <= absoluteTimeMs && token.toMs > absoluteTimeMs;
+        const isActive = token.fromMs <= currentMs && token.toMs > currentMs;
 
-        // Skill: stagger por palabra con playful overshoot (timing.md)
-        const wordIn = interpolate(frame, [i * 5, i * 5 + 12], [0, 1], {
+        const wordIn = interpolate(localFrame, [i * 2, i * 2 + 6], [0, 1], {
           extrapolateLeft: "clamp", extrapolateRight: "clamp",
           easing: Easing.bezier(0.34, 1.56, 0.64, 1),
         });
 
-        // Skill: spring scale en palabra activa (spring para movimiento orgánico)
-        const activeSc = spring({ fps, frame, config: { damping: 9, stiffness: 300, mass: 0.38 }, from: 1, to: isActive ? 1.1 : 1 });
+        const activeSc = spring({ fps, frame: localFrame, config: { damping: 9, stiffness: 300, mass: 0.38 }, from: 1, to: isActive ? 1.1 : 1 });
 
         return (
           <span key={token.fromMs} style={{
@@ -105,9 +101,11 @@ const CaptionPage: React.FC<{ page: ReturnType<typeof createTikTokStyleCaptions>
   );
 };
 
-// Skill: renders all caption pages as Sequences, each timed to the audio
+// Uses absolute frame → ms so token.fromMs/toMs comparisons are exact with no Sequence rounding
 const SyncedCaptions: React.FC<{ wordTimings: WordTiming[] }> = ({ wordTimings }) => {
+  const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const currentMs = (frame / fps) * 1000;
 
   const pages = useMemo(() => {
     if (!wordTimings.length) return [];
@@ -115,21 +113,21 @@ const SyncedCaptions: React.FC<{ wordTimings: WordTiming[] }> = ({ wordTimings }
     return createTikTokStyleCaptions({ captions, combineTokensWithinMilliseconds: SWITCH_MS }).pages;
   }, [wordTimings]);
 
+  // Find the current page: last page whose startMs <= currentMs
+  let activeIdx = -1;
+  for (let i = 0; i < pages.length; i++) {
+    if (pages[i].startMs <= currentMs) activeIdx = i;
+    else break;
+  }
+
+  if (activeIdx < 0) return <AbsoluteFill style={{ pointerEvents: "none" }} />;
+
+  const page = pages[activeIdx];
+  const localFrame = Math.max(0, frame - Math.round((page.startMs / 1000) * fps));
+
   return (
     <AbsoluteFill style={{ pointerEvents: "none" }}>
-      {pages.map((page, i) => {
-        const next = pages[i + 1] ?? null;
-        const startFrame = Math.floor((page.startMs / 1000) * fps);
-        const endFrame   = next
-          ? Math.floor((next.startMs / 1000) * fps)
-          : startFrame + Math.ceil((SWITCH_MS / 1000) * fps);
-        const dur = Math.max(1, endFrame - startFrame);
-        return (
-          <Sequence key={i} from={startFrame} durationInFrames={dur}>
-            <CaptionPage page={page} />
-          </Sequence>
-        );
-      })}
+      <CaptionPage key={activeIdx} page={page} currentMs={currentMs} localFrame={localFrame} />
     </AbsoluteFill>
   );
 };
