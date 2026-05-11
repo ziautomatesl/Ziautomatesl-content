@@ -2,7 +2,8 @@ name: ZIA Video - Prime Time 20:00
 
 on:
   schedule:
-    - cron: '0 18 * * *'    # 20:00 España verano (UTC+2 / CEST)
+    - cron: '0 18 * * *'    # 20:00 España verano  (UTC+2 / CEST)
+    - cron: '0 19 * * *'    # 20:00 España invierno (UTC+1 / CET)
   workflow_dispatch:
 
 jobs:
@@ -11,23 +12,26 @@ jobs:
     outputs:
       should_run: ${{ steps.check.outputs.should_run }}
     steps:
-      - name: Verificar horario España
+      - name: Verificar temporada España
         id: check
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "should_run=true" >> $GITHUB_OUTPUT
-            echo "Ejecución manual: omitiendo comprobación de horario"
+            echo "Ejecución manual: omitiendo comprobación de temporada"
           else
+            SCHED="${{ github.event.schedule }}"
+            OFFSET=$(TZ='Europe/Madrid' date +%z)
             H=$(TZ='Europe/Madrid' date +%-H)
             M=$(TZ='Europe/Madrid' date +%-M)
-            TOT=$((H*60+M))
-            echo "Hora España: ${H}:${M} (objetivo: 20:00)"
-            # Ventana 18:00–23:59 — GitHub Actions puede llegar hasta 4h tarde
-            if [ "$TOT" -ge 1080 ] && [ "$TOT" -le 1439 ]; then
+            echo "Hora España: ${H}:${M} | Offset: ${OFFSET} | Cron: ${SCHED}"
+            # Solo ejecuta el cron correcto según la temporada activa
+            if ([ "$SCHED" = "0 18 * * *" ] && [ "$OFFSET" = "+0200" ]) || \
+               ([ "$SCHED" = "0 19 * * *" ] && [ "$OFFSET" = "+0100" ]); then
               echo "should_run=true" >> $GITHUB_OUTPUT
+              echo "Cron de temporada correcto — publicando."
             else
               echo "should_run=false" >> $GITHUB_OUTPUT
-              echo "Fuera de ventana horaria, omitiendo."
+              echo "Cron fuera de temporada, omitiendo."
             fi
           fi
 
