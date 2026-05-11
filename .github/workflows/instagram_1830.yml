@@ -2,8 +2,7 @@ name: ZIA Video - Instagram 18:30
 
 on:
   schedule:
-    - cron: '30 16 * * *'   # 18:30 España verano  (UTC+2 / CEST)
-    - cron: '30 17 * * *'   # 18:30 España invierno (UTC+1 / CET)
+    - cron: '30 16 * * *'   # 18:30 España verano (UTC+2 / CEST)
   workflow_dispatch:
 
 jobs:
@@ -23,8 +22,8 @@ jobs:
             M=$(TZ='Europe/Madrid' date +%-M)
             TOT=$((H*60+M))
             echo "Hora España: ${H}:${M} (objetivo: 18:30)"
-            # Ventana 18:00–19:14 para absorber retrasos de GitHub Actions
-            if [ "$TOT" -ge 1080 ] && [ "$TOT" -le 1154 ]; then
+            # Ventana 16:00–23:59 — GitHub Actions puede llegar hasta 4h tarde
+            if [ "$TOT" -ge 960 ] && [ "$TOT" -le 1439 ]; then
               echo "should_run=true" >> $GITHUB_OUTPUT
             else
               echo "should_run=false" >> $GITHUB_OUTPUT
