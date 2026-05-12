@@ -25,23 +25,25 @@ jobs:
     outputs:
       should_run: ${{ steps.check.outputs.should_run }}
     steps:
-      - name: Verificar horario España
+      - name: Verificar temporada España
         id: check
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "should_run=true" >> $GITHUB_OUTPUT
-            echo "Ejecución manual — sin comprobación de hora"
+            echo "Ejecución manual — sin comprobación de temporada"
           else
+            SCHED="${{ github.event.schedule }}"
+            OFFSET=$(TZ='Europe/Madrid' date +%z)
             H=$(TZ='Europe/Madrid' date +%-H)
             M=$(TZ='Europe/Madrid' date +%-M)
-            TOT=$((H*60+M))
-            echo "Hora España: ${H}:${M} (objetivo: 09:00)"
-            # Ventana 08:45–10:14
-            if [ "$TOT" -ge 525 ] && [ "$TOT" -le 614 ]; then
+            echo "Hora España: ${H}:${M} | Offset: ${OFFSET} | Cron: ${SCHED}"
+            if ([ "$SCHED" = "0 7 * * 2-5" ] && [ "$OFFSET" = "+0200" ]) || \
+               ([ "$SCHED" = "0 8 * * 2-5" ] && [ "$OFFSET" = "+0100" ]); then
               echo "should_run=true" >> $GITHUB_OUTPUT
+              echo "Cron de temporada correcto — enviando emails."
             else
               echo "should_run=false" >> $GITHUB_OUTPUT
-              echo "Fuera de ventana horaria, omitiendo."
+              echo "Cron fuera de temporada, omitiendo."
             fi
           fi
 
