@@ -1,5 +1,31 @@
 [
   {
+    "id": 1778688647060,
+    "negocio": "Fermín González Peluquería y Estética Madrid",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "mingonzalez95@hotmail.com",
+    "telefono": "910 40 03 28",
+    "web": "https://widget.treatwell.es/establecimiento/394825/servicios/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps | Fermín González Peluquería y Estética Madrid: el 3",
+    "estado": "enviado",
+    "fecha": "13/05/26"
+  },
+  {
+    "id": 1778688651123,
+    "negocio": "Splash Madrid",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "910 62 11 34",
+    "web": "http://www.splashsalons.info/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
     "id": 1778670428575,
     "negocio": "Los Montes de Galicia",
     "sector": "Restaurante",
@@ -138,9 +164,9 @@
     "telefono": "911 76 97 35",
     "web": "https://www.elsocialrestaurante.com/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | El Social: las mesas vacías de fin de semana cuest",
+    "estado": "enviado",
+    "fecha": "13/05/26"
   },
   {
     "id": 1778670458379,
@@ -177,9 +203,9 @@
     "telefono": "910 23 80 38",
     "web": "http://www.inclanbrutalbar.com/?utm_source=google&utm_medium=GMB",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Inclan Brutal Bar: las mesas vacías de fin de sema",
+    "estado": "enviado",
+    "fecha": "13/05/26"
   },
   {
     "id": 1778670464187,
@@ -190,9 +216,9 @@
     "telefono": "915 71 10 88",
     "web": "https://lafraguadevulcanomadrid.eatbu.com/",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | Taberna La Fragua de Vulcano: las mesas vacías de",
+    "estado": "enviado",
+    "fecha": "13/05/26"
   },
   {
     "id": 1778592335310,
@@ -450,9 +476,9 @@
     "telefono": "910 14 55 47",
     "web": "http://www.gonzalezpeluqueria.es/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | “Peluquería y Barbería · Unisex ,Estética & Hair ·",
+    "estado": "enviado",
+    "fecha": "13/05/26"
   },
   {
     "id": 1778580996902,
