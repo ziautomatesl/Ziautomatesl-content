@@ -1,5 +1,44 @@
 [
   {
+    "id": 1778850948495,
+    "negocio": "Peluquería Mujer Escultor Belleza JG | Mujer y Caballeros",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "608 19 16 90",
+    "web": "https://escultorpeluqueriamujer.com/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1778850952591,
+    "negocio": "Brazil Beauty Concept | Peluquería de mujer en Chamberí",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "brazilbc@outlook.es",
+    "telefono": "658 78 89 79",
+    "web": "https://www.brazilbeautyconcept.es/",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps | Brazil Beauty Concept | Peluquería de mujer en Cha",
+    "estado": "enviado",
+    "fecha": "15/05/26"
+  },
+  {
+    "id": 1778850954999,
+    "negocio": ". Pitu Sanchez Beauty estilistas profesionales",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "918 96 33 26",
+    "web": "https://www.pitusanchez.com/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
     "id": 1778688647060,
     "negocio": "Fermín González Peluquería y Estética Madrid",
     "sector": "Peluquería",
