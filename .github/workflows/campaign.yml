@@ -74,7 +74,7 @@ jobs:
           GMAIL_APP_PASSWORD:    ${{ secrets.GMAIL_APP_PASSWORD }}
           SENDER_EMAIL:          ziautomate.sl@gmail.com
           CAMPAIGN_CITY:         ${{ github.event.inputs.city || 'Madrid' }}
-          CAMPAIGN_SECTOR:       ${{ github.event.inputs.sector || 'peluquería' }}
+          CAMPAIGN_SECTOR:       ${{ github.event.inputs.sector }}
           DAILY_LIMIT:           ${{ github.event.inputs.daily_limit || '5' }}
         run: python -m agents.run_campaign
 
