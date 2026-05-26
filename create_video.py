@@ -23,7 +23,7 @@ def create_carousel_video(content: dict, output_path: str = "zia_video.mp4") -> 
             "--output",       abs_output,
             "--codec",        "h264",
             "--image-format", "jpeg",
-            "--jpeg-quality", "85",
+            "--jpeg-quality", "95",
             "--concurrency",  "4",
         ],
         cwd=REMOTION_DIR,
