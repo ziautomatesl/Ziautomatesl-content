@@ -1,5 +1,18 @@
 [
   {
+    "id": 1779818802281,
+    "negocio": "Va de Pelos",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "vadepelos97@gmail.com",
+    "telefono": "915 49 41 40",
+    "web": "http://vadepelosmadrid.wixsite.com/vadepelosmadrid",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps | Va de Pelos: el 30% de tus citas se pueden estar p",
+    "estado": "enviado",
+    "fecha": "26/05/26"
+  },
+  {
     "id": 1779465899941,
     "negocio": "Talleres J J",
     "sector": "Taller",
@@ -307,9 +320,9 @@
     "telefono": "912 14 31 00",
     "web": "https://vithas.es/centro/vithas-hospital-madrid-arturo-soria/",
     "rating": 3.6,
-    "notas": "⭐ 3.6 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 3.6 · Google Maps | Hospital Universitario Vithas Madrid Arturo Soria:",
+    "estado": "enviado",
+    "fecha": "26/05/26"
   },
   {
     "id": 1779382198227,
@@ -359,9 +372,9 @@
     "telefono": "914 29 49 59",
     "web": "https://openhouse.es/clinica-madrid",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Open House Madrid | Clínica ETS: cada cita cancela",
+    "estado": "enviado",
+    "fecha": "26/05/26"
   },
   {
     "id": 1779382205673,
@@ -372,9 +385,9 @@
     "telefono": "912 52 24 77",
     "web": "https://madrid.defelipe.com/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Clínica dermatológica De Felipe Madrid: cada cita",
+    "estado": "enviado",
+    "fecha": "26/05/26"
   },
   {
     "id": 1779382206933,
@@ -385,9 +398,9 @@
     "telefono": "915 22 22 83",
     "web": "https://clinicasauramed.com/",
     "rating": 3.3,
-    "notas": "⭐ 3.3 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 3.3 · Google Maps | Clínicas Auramed: cada cita cancelada sin rellenar",
+    "estado": "enviado",
+    "fecha": "26/05/26"
   },
   {
     "id": 1779300091397,
