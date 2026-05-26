@@ -2,19 +2,25 @@ import os
 import json
 import base64
 import random
+from pathlib import Path
 
-MUSIC_QUERIES = ["phonk", "trap motivation", "dark trap", "motivacional", "hustle beats"]
+MUSIC_QUERIES = ["phonk", "trap motivation", "dark trap", "motivacional", "hustle", "viral"]
 
 
-def get_track(cl):
-    try:
-        tracks = cl.search_music(random.choice(MUSIC_QUERIES))
-        if tracks:
-            track = random.choice(tracks[:8])
-            print(f"Música reel: '{track.title}' – {track.display_artist}")
-            return track
-    except Exception as e:
-        print(f"Música no disponible: {e}")
+def get_track_with_uri(cl):
+    """Busca un track trending de Instagram con URI descargable para el reel."""
+    random.shuffle(MUSIC_QUERIES)
+    for query in MUSIC_QUERIES:
+        try:
+            tracks = cl.search_music(query)
+            # Necesitamos uri para poder mezclar el audio con el vídeo
+            valid = [t for t in tracks if t.uri]
+            if valid:
+                track = random.choice(valid[:6])
+                print(f"Música reel: '{track.title}' – {track.display_artist}")
+                return track
+        except Exception as e:
+            print(f"Error buscando música ({query}): {e}")
     return None
 
 
@@ -37,17 +43,21 @@ def post_instagram(video_path: str, caption: str) -> str:
 
     cl.login(username, password)
 
-    track = get_track(cl)
+    track = get_track_with_uri(cl)
 
     print("Subiendo Reel a Instagram...")
     try:
         if track:
-            media = cl.clip_upload_as_reel_with_music(video_path, caption=caption, track=track)
+            media = cl.clip_upload_as_reel_with_music(
+                path=Path(video_path),
+                caption=caption,
+                track=track,
+            )
         else:
-            raise Exception("Sin track")
+            raise ValueError("No se encontró track válido")
     except Exception as e:
         print(f"Upload con música falló ({e}), subiendo sin música...")
-        media = cl.clip_upload(video_path, caption=caption)
+        media = cl.clip_upload(Path(video_path), caption=caption)
 
     print(f"Reel publicado! ID: {media.pk}")
     return media.pk
