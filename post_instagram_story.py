@@ -18,15 +18,26 @@ MUSIC_QUERIES = ["phonk", "trap motivation", "dark trap", "motivacional", "hustl
 
 
 def get_track(cl):
-    """Busca cualquier track trending de Instagram (para story no necesita URI)."""
+    from instagrapi.extractors import extract_track as _extract_track
     random.shuffle(MUSIC_QUERIES)
     for query in MUSIC_QUERIES:
         try:
-            tracks = cl.search_music(query)
-            if tracks:
-                track = random.choice(tracks[:8])
-                print(f"Música story: '{track.title}' – {track.display_artist}")
-                return track
+            result = cl.private_request(
+                "music/audio_global_search/",
+                params={"query": query, "browse_session_id": cl.generate_uuid()},
+            )
+            for item in (result or {}).get("items") or []:
+                if not item or not isinstance(item, dict):
+                    continue
+                track_data = item.get("track")
+                if not track_data or not isinstance(track_data, dict):
+                    continue
+                try:
+                    track = _extract_track(track_data)
+                    print(f"Música story: '{track.title}' – {track.display_artist}")
+                    return track
+                except Exception:
+                    continue
         except Exception as e:
             print(f"Error buscando música ({query}): {e}")
     return None
