@@ -67,7 +67,7 @@ def post_instagram_story(video_path: str, poll_index: int = -1) -> str:
     # Encuesta rotativa
     idx = poll_index % len(POLL_OPTIONS) if poll_index >= 0 else random.randint(0, len(POLL_OPTIONS) - 1)
     question, options = POLL_OPTIONS[idx]
-    poll = StoryPoll(x=0.5, y=0.72, width=0.88, height=0.14, rotation=0.0, question=question, options=options)
+    poll = StoryPoll(x=0.5, y=0.82, width=0.72, height=0.14, rotation=0.0, question=question, options=options)
     print(f"Encuesta: '{question}' → {options}")
 
     # Link directo al DM
@@ -79,17 +79,20 @@ def post_instagram_story(video_path: str, poll_index: int = -1) -> str:
     path = Path(video_path)
     print(f"Subiendo Story: {path.name}")
 
-    # Intento 1: con música de Instagram + encuesta + link
+    # Intento 1: música solo metadata (sin mezcla local), encuesta + link
     if track:
         try:
-            media = cl.video_upload_to_story_with_music(
-                path=path,
-                caption="",
-                track=track,
-                links=[link],
-                polls=[poll],
+            music_extra = cl.story_music_extra_data(
+                track,
                 original_volume=0.0,
                 music_volume=1.0,
+            )
+            media = cl.video_upload_to_story(
+                path=path,
+                caption="",
+                links=[link],
+                polls=[poll],
+                extra_data=music_extra,
             )
             print(f"Story publicada con música! ID: {media.pk}")
             return media.pk
