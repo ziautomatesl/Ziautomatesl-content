@@ -2,6 +2,9 @@ import React from "react";
 import {
   AbsoluteFill, interpolate, useCurrentFrame, Easing, Img, staticFile,
 } from "remotion";
+import { loadFont } from "@remotion/google-fonts/Montserrat";
+
+const { fontFamily: MONT } = loadFont("normal", { weights: ["400", "600", "700", "900"], subsets: ["latin"] });
 
 // ── Brand ─────────────────────────────────────────────────────────────────────
 const CYAN   = "#00d4ff";
@@ -10,7 +13,6 @@ const WHITE  = "#ffffff";
 const WDIM   = "rgba(255,255,255,0.75)";
 const WFAINT = "rgba(255,255,255,0.45)";
 const BG     = "#060610";
-const MONT   = "'Montserrat','Noto Sans',Arial,sans-serif";
 
 // ── Layout ────────────────────────────────────────────────────────────────────
 const SL = 54, SR = 936, ST = 145;
