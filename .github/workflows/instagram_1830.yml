@@ -39,7 +39,7 @@ jobs:
     needs: check-time
     if: needs.check-time.outputs.should_run == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 50
 
     steps:
       - name: Descargar código

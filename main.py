@@ -2,7 +2,7 @@ import sys
 import os
 from datetime import date
 from generate_script import generate_script
-from create_video import create_carousel_video
+from create_video import create_carousel_video, create_story_video
 from post_youtube import post_youtube
 from post_instagram import post_instagram
 from post_instagram_story import post_instagram_story
@@ -12,8 +12,6 @@ SLOT_CONFIG = {
     "instagram": {"platforms": ["instagram"],            "slot_number": 1},  # 18:30
     "both":      {"platforms": ["youtube", "instagram"], "slot_number": 2},  # 20:00
 }
-
-STORY_VIDEO = os.path.join(os.path.dirname(__file__), "videos", "stories", "story1.mp4")
 
 
 def main():
@@ -30,6 +28,9 @@ def main():
 
     print("PASO 2: Renderizando carrusel...")
     video_path = create_carousel_video(content, "zia_video.mp4")
+
+    print("PASO 2b: Renderizando historia...")
+    story_path = create_story_video(content, "zia_story.mp4")
 
     yt_ok = ig_ok = story_ok = False
 
@@ -61,7 +62,7 @@ def main():
             print("PASO 5: Publicando Story en Instagram...")
             try:
                 poll_index = date.today().toordinal()
-                post_instagram_story(STORY_VIDEO, poll_index=poll_index)
+                post_instagram_story(story_path, poll_index=poll_index)
                 story_ok = True
             except Exception as e:
                 print(f"Instagram Story error (no crítico): {e}")
@@ -75,6 +76,8 @@ def main():
 
     if os.path.exists("zia_video.mp4"):
         os.remove("zia_video.mp4")
+    if os.path.exists("zia_story.mp4"):
+        os.remove("zia_story.mp4")
 
     print(f"\n{'OK' if yt_ok else 'FALLÓ'} YouTube | "
           f"{'OK' if ig_ok else 'FALLÓ'} Instagram Reel | "
