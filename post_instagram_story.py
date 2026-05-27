@@ -67,7 +67,7 @@ def post_instagram_story(video_path: str, poll_index: int = -1) -> str:
     # Encuesta rotativa
     idx = poll_index % len(POLL_OPTIONS) if poll_index >= 0 else random.randint(0, len(POLL_OPTIONS) - 1)
     question, options = POLL_OPTIONS[idx]
-    poll = StoryPoll(x=0.5, y=0.82, width=0.72, height=0.14, rotation=0.0, question=question, options=options)
+    poll = StoryPoll(x=0.5, y=0.73, width=0.70, height=0.14, rotation=0.0, question=question, options=options)
     print(f"Encuesta: '{question}' → {options}")
 
     # Link directo al DM
