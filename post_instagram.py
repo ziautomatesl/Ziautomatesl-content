@@ -2,7 +2,18 @@ import os
 import json
 import base64
 import random
+import subprocess
+import tempfile
 from pathlib import Path
+
+
+def _make_thumbnail(video_path: str) -> str:
+    tmp = tempfile.mktemp(suffix=".jpg")
+    subprocess.run(
+        ["ffmpeg", "-y", "-i", video_path, "-vframes", "1", "-q:v", "2", tmp],
+        capture_output=True,
+    )
+    return tmp
 
 MUSIC_QUERIES = ["phonk", "trap motivation", "dark trap", "motivacional", "hustle", "viral"]
 
@@ -54,21 +65,27 @@ def post_instagram(video_path: str, caption: str) -> str:
 
     track = get_track(cl)
 
+    thumbnail = _make_thumbnail(video_path)
+
     print("Subiendo Reel a Instagram...")
     try:
         if track:
-            # Igual que la app: pasa el track ID a Instagram, ellos ponen la música
             extra_data = cl.clip_music_extra_data(
                 track=track,
-                original_volume=0.0,  # vídeo sin audio original
-                music_volume=1.0,     # música de Instagram al 100%
+                original_volume=0.0,
+                music_volume=1.0,
             )
-            media = cl.clip_upload(Path(video_path), caption=caption, extra_data=extra_data)
+            media = cl.clip_upload(Path(video_path), caption=caption, thumbnail=Path(thumbnail), extra_data=extra_data)
         else:
             raise ValueError("Sin track")
     except Exception as e:
         print(f"Upload con música falló ({e}), subiendo sin música...")
-        media = cl.clip_upload(Path(video_path), caption=caption)
+        media = cl.clip_upload(Path(video_path), caption=caption, thumbnail=Path(thumbnail))
+
+    try:
+        os.remove(thumbnail)
+    except Exception:
+        pass
 
     print(f"Reel publicado! ID: {media.pk}")
     return media.pk
