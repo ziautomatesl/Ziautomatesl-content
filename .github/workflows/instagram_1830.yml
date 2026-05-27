@@ -87,6 +87,7 @@ jobs:
           INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
           INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
           INSTAGRAM_SESSION: ${{ secrets.INSTAGRAM_SESSION }}
+          IMAGEIO_FFMPEG_EXE: /usr/bin/ffmpeg
         run: python main.py instagram 2>&1 | tee debug.txt; exit ${PIPESTATUS[0]}
 
       - name: Mostrar log si falla
