@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 def _download_audio(cl, track) -> str | None:
-    url = getattr(track, "progressive_download_url", None)
+    url = getattr(track, "_audio_url", None) or getattr(track, "progressive_download_url", None)
     if not url:
         return None
     try:
@@ -71,7 +71,15 @@ def get_track(cl):
                     continue
                 try:
                     track = _extract_track(track_data)
-                    print(f"Música story: '{track.title}' – {track.display_artist}")
+                    mai = track_data.get("music_asset_info") or {}
+                    audio_url = (
+                        track_data.get("progressive_download_url")
+                        or mai.get("progressive_download_url")
+                        or mai.get("audio_asset_url")
+                        or track_data.get("preview_url")
+                    )
+                    track._audio_url = audio_url
+                    print(f"Música story: '{track.title}' – {track.display_artist} | audio: {'sí' if audio_url else 'no'}")
                     return track
                 except Exception:
                     continue
