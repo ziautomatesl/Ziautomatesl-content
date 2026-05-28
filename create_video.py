@@ -1,12 +1,67 @@
 import os
 import json
 import subprocess
+import urllib.request
+import urllib.parse
 
 _HERE        = os.path.dirname(os.path.abspath(__file__))
 REMOTION_DIR = os.path.join(_HERE, "remotion")
 
+PEXELS_QUERIES = {
+    "automatizacion": "business automation technology",
+    "clientes":       "business customer service",
+    "ventas":         "sales business growth",
+    "whatsapp":       "smartphone communication business",
+    "ia":             "artificial intelligence technology",
+    "horas":          "productivity work time",
+    "redes":          "social media content creation",
+    "cobros":         "business finance invoice",
+    "formulario":     "web business lead",
+    "n8n":            "technology automation workflow",
+    "default":        "modern business professional",
+}
+
+
+def _pexels_query(topic: str) -> str:
+    t = topic.lower()
+    for kw, q in PEXELS_QUERIES.items():
+        if kw in t:
+            return q
+    return PEXELS_QUERIES["default"]
+
+
+def fetch_pexels_photos(topic: str, count: int = 6, suffix: str = "dynamic") -> bool:
+    api_key = os.environ.get("PEXELS_API_KEY", "")
+    if not api_key:
+        print("PEXELS_API_KEY no configurado, usando fotos estáticas.")
+        return False
+
+    query = _pexels_query(topic)
+    photos_dir = os.path.join(REMOTION_DIR, "public", "photos")
+    os.makedirs(photos_dir, exist_ok=True)
+
+    url = f"https://api.pexels.com/v1/search?query={urllib.parse.quote(query)}&per_page={count}&orientation=portrait"
+    req = urllib.request.Request(url, headers={"Authorization": api_key})
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read())
+        photos = data.get("photos", [])
+        if not photos:
+            print(f"Pexels sin resultados para '{query}', usando fotos estáticas.")
+            return False
+        for i, photo in enumerate(photos[:count]):
+            img_url = photo["src"]["portrait"]
+            dest = os.path.join(photos_dir, f"{suffix}_{i}.jpg")
+            urllib.request.urlretrieve(img_url, dest)
+        print(f"Fotos Pexels descargadas: {len(photos[:count])} ({query})")
+        return True
+    except Exception as e:
+        print(f"Pexels error ({e}), usando fotos estáticas.")
+        return False
+
 
 def create_carousel_video(content: dict, output_path: str = "zia_video.mp4") -> str:
+    fetch_pexels_photos(content.get("topic", ""), count=6, suffix="carousel")
     props = build_carousel_props(content)
 
     props_path = os.path.join(REMOTION_DIR, "props.json")
@@ -40,6 +95,7 @@ def create_carousel_video(content: dict, output_path: str = "zia_video.mp4") -> 
 
 
 def create_story_video(content: dict, output_path: str = "zia_story.mp4") -> str:
+    fetch_pexels_photos(content.get("topic", ""), count=1, suffix="story")
     props = build_story_props(content)
 
     props_path = os.path.join(REMOTION_DIR, "story_props.json")
@@ -84,11 +140,10 @@ def build_story_props(content: dict) -> dict:
     highlights = content.get("highlights", [])
     script = content.get("script", "")
 
-    # Split question into 2 punchy lines (~3-4 words each)
+    # Split question into exactly 2 lines of max 3 words each
     words = eng_q.split()
-    mid = max(2, min(4, len(words) // 2))
-    hook_line1 = " ".join(words[:mid])
-    hook_line2 = " ".join(words[mid:]) if mid < len(words) else topic[:38]
+    hook_line1 = " ".join(words[:3])
+    hook_line2 = " ".join(words[3:6]) if len(words) > 3 else topic.split()[0]
 
     # Stat
     stat_number, stat_suffix = 78, "%"
@@ -99,17 +154,20 @@ def build_story_props(content: dict) -> dict:
             stat_suffix = m.group(2).upper()
             break
 
-    # Stat label: first sentence of script, max 65 chars
+    # Stat label: first complete sentence of script, max 60 chars at word boundary
     sentences = [s.strip() for s in re.split(r'(?<=[.?!])\s+', script) if len(s.strip()) > 10]
-    stat_label = sentences[0][:65] if sentences else "de las ventas va al negocio que responde primero."
+    raw = sentences[0] if sentences else "de las ventas va al negocio que responde primero."
+    if len(raw) > 60:
+        raw = raw[:60].rsplit(" ", 1)[0] + "…"
+    stat_label = raw
 
     # Photo rotates daily (1-6)
     photo_index = (date.today().toordinal() % 6) + 1
 
     return {
         "hook_label":  "PREGUNTA DEL DÍA",
-        "hook_line1":  hook_line1[:38],
-        "hook_line2":  hook_line2[:38],
+        "hook_line1":  hook_line1,
+        "hook_line2":  hook_line2,
         "hook_sub":    "Responde abajo — ¿cuánto te cuesta el silencio?",
         "stat_number": stat_number,
         "stat_suffix": stat_suffix,

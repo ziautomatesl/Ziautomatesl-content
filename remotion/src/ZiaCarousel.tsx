@@ -109,7 +109,7 @@ const S1Hook: React.FC<{ f: number; p: ZiaCarouselProps }> = ({ f, p }) => {
   return (
     <AbsoluteFill style={{ overflow: "hidden", backgroundColor: BG }}>
       <AbsoluteFill style={{ transform: `scale(${photoScale(f)})`, transformOrigin: "center" }}>
-        <Img src={staticFile("photos/v4_1.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        <Img src={staticFile("photos/carousel_0.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
       </AbsoluteFill>
       <AbsoluteFill style={{ background: "linear-gradient(180deg,rgba(6,6,16,.65) 0%,rgba(6,6,16,.1) 30%,rgba(6,6,16,.93) 100%)" }} />
       <div style={{ position: "absolute", top: ST - 30, left: SL }}><Logo /></div>
@@ -141,7 +141,7 @@ const S2Stat: React.FC<{ f: number; p: ZiaCarouselProps }> = ({ f, p }) => {
   return (
     <AbsoluteFill style={{ overflow: "hidden", backgroundColor: BG }}>
       <AbsoluteFill>
-        <Img src={staticFile("photos/v4_2.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.2 }} />
+        <Img src={staticFile("photos/carousel_1.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.2 }} />
       </AbsoluteFill>
       <AbsoluteFill style={{ background: "radial-gradient(ellipse at center,rgba(6,6,16,0) 0%,rgba(6,6,16,.88) 100%)" }} />
       <div style={{ position: "absolute", top: ST - 30, left: SL }}><Logo /></div>
@@ -173,7 +173,7 @@ const S3Solution: React.FC<{ f: number; p: ZiaCarouselProps }> = ({ f, p }) => {
   return (
     <AbsoluteFill style={{ overflow: "hidden", backgroundColor: BG }}>
       <AbsoluteFill>
-        <Img src={staticFile("photos/v4_3.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.22 }} />
+        <Img src={staticFile("photos/carousel_2.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.22 }} />
       </AbsoluteFill>
       <AbsoluteFill style={{ background: "linear-gradient(180deg,rgba(6,6,16,.65) 0%,rgba(6,6,16,.3) 40%,rgba(6,6,16,.92) 100%)" }} />
       <div style={{ position: "absolute", top: ST - 30, left: SL }}><Logo /></div>
@@ -206,7 +206,7 @@ const S4Vision: React.FC<{ f: number; p: ZiaCarouselProps }> = ({ f, p }) => {
   return (
     <AbsoluteFill style={{ overflow: "hidden", backgroundColor: BG }}>
       <AbsoluteFill>
-        <Img src={staticFile("photos/v4_4.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.2 }} />
+        <Img src={staticFile("photos/carousel_3.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.2 }} />
       </AbsoluteFill>
       <div style={{ position: "absolute", top: ST - 30, left: SL }}><Logo /></div>
       <div style={{ position: "absolute", top: 0, bottom: 0, left: SL, right: 1080 - SR, display: "flex", flexDirection: "column", justifyContent: "center", gap: 20 }}>
@@ -239,7 +239,7 @@ const S5Proof: React.FC<{ f: number; p: ZiaCarouselProps }> = ({ f, p }) => {
   return (
     <AbsoluteFill style={{ overflow: "hidden", backgroundColor: BG }}>
       <AbsoluteFill>
-        <Img src={staticFile("photos/v4_5.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.2 }} />
+        <Img src={staticFile("photos/carousel_4.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.2 }} />
       </AbsoluteFill>
       <AbsoluteFill style={{ background: "linear-gradient(180deg,rgba(6,6,16,.7) 0%,rgba(6,6,16,.5) 50%,rgba(6,6,16,.9) 100%)" }} />
       <div style={{ position: "absolute", top: ST - 30, left: SL }}><Logo /></div>
@@ -278,7 +278,7 @@ const S6CTA: React.FC<{ f: number; p: ZiaCarouselProps }> = ({ f, p }) => {
   return (
     <AbsoluteFill style={{ overflow: "hidden", backgroundColor: BG }}>
       <AbsoluteFill style={{ transform: `scale(${ps})`, transformOrigin: "center" }}>
-        <Img src={staticFile("photos/v4_6.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.4 }} />
+        <Img src={staticFile("photos/carousel_5.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.4 }} />
       </AbsoluteFill>
       <AbsoluteFill style={{ background: "linear-gradient(180deg,rgba(6,6,16,.65) 0%,rgba(6,6,16,.3) 35%,rgba(6,6,16,.92) 100%)" }} />
       <div style={{ position: "absolute", top: ST - 30, left: SL }}><Logo /></div>

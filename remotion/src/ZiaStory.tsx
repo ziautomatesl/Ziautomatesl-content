@@ -59,7 +59,7 @@ export const ZiaStory: React.FC<ZiaStoryProps> = (p) => {
   const a5 = anim(f, 128);
   const a6 = anim(f, 200);
 
-  const photo = staticFile(`photos/v4_${Math.max(1, Math.min(6, p.photo_index))}.jpg`);
+  const photo = staticFile("photos/story_0.jpg");
 
   return (
     <AbsoluteFill style={{ backgroundColor: BG }}>
