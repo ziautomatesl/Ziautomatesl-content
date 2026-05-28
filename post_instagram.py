@@ -15,6 +15,44 @@ def _make_thumbnail(video_path: str) -> str:
     )
     return tmp
 
+
+def _download_audio(cl, track) -> str | None:
+    url = getattr(track, "progressive_download_url", None)
+    if not url:
+        return None
+    try:
+        tmp = tempfile.mktemp(suffix=".mp3")
+        resp = cl.private.get(str(url), timeout=20, stream=True)
+        if resp.status_code == 200:
+            with open(tmp, "wb") as f:
+                for chunk in resp.iter_content(8192):
+                    f.write(chunk)
+            print(f"Audio descargado: {os.path.getsize(tmp)} bytes")
+            return tmp
+    except Exception as e:
+        print(f"No se pudo descargar audio: {e}")
+    return None
+
+
+def _mix_audio(video_path: str, audio_path: str) -> str:
+    out = video_path.replace(".mp4", "_m.mp4")
+    r = subprocess.run([
+        "ffmpeg", "-y",
+        "-i", video_path,
+        "-stream_loop", "-1", "-i", audio_path,
+        "-map", "0:v", "-map", "1:a",
+        "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
+        "-shortest",
+        "-af", "afade=t=in:d=1,afade=t=out:st=22:d=2",
+        out,
+    ], capture_output=True)
+    if r.returncode == 0 and os.path.exists(out):
+        print("Audio mezclado en el vídeo.")
+        return out
+    print("ffmpeg mix falló, subiendo sin audio.")
+    return video_path
+
+
 MUSIC_QUERIES = ["phonk", "trap motivation", "dark trap", "motivacional", "hustle", "viral"]
 
 
@@ -65,27 +103,41 @@ def post_instagram(video_path: str, caption: str) -> str:
 
     track = get_track(cl)
 
-    thumbnail = _make_thumbnail(video_path)
+    # Descargar audio y mezclarlo en el vídeo para que suene de verdad
+    upload_path = video_path
+    audio_tmp = None
+    mixed_tmp = None
+    if track:
+        audio_tmp = _download_audio(cl, track)
+        if audio_tmp:
+            mixed = _mix_audio(video_path, audio_tmp)
+            if mixed != video_path:
+                mixed_tmp = mixed
+                upload_path = mixed_tmp
+
+    thumbnail = _make_thumbnail(upload_path)
 
     print("Subiendo Reel a Instagram...")
     try:
         if track:
             extra_data = cl.clip_music_extra_data(
                 track=track,
-                original_volume=0.0,
-                music_volume=1.0,
+                original_volume=1.0,
+                music_volume=0.0,
             )
-            media = cl.clip_upload(Path(video_path), caption=caption, thumbnail=Path(thumbnail), extra_data=extra_data)
+            media = cl.clip_upload(Path(upload_path), caption=caption, thumbnail=Path(thumbnail), extra_data=extra_data)
         else:
-            raise ValueError("Sin track")
+            media = cl.clip_upload(Path(upload_path), caption=caption, thumbnail=Path(thumbnail))
     except Exception as e:
-        print(f"Upload con música falló ({e}), subiendo sin música...")
-        media = cl.clip_upload(Path(video_path), caption=caption, thumbnail=Path(thumbnail))
+        print(f"Upload falló ({e}), reintentando sin music_extra_data...")
+        media = cl.clip_upload(Path(upload_path), caption=caption, thumbnail=Path(thumbnail))
 
-    try:
-        os.remove(thumbnail)
-    except Exception:
-        pass
+    for f in [thumbnail, audio_tmp, mixed_tmp]:
+        try:
+            if f and os.path.exists(f):
+                os.remove(f)
+        except Exception:
+            pass
 
     print(f"Reel publicado! ID: {media.pk}")
     return media.pk

@@ -3,7 +3,44 @@ import json
 import base64
 import time
 import random
+import subprocess
+import tempfile
 from pathlib import Path
+
+
+def _download_audio(cl, track) -> str | None:
+    url = getattr(track, "progressive_download_url", None)
+    if not url:
+        return None
+    try:
+        tmp = tempfile.mktemp(suffix=".mp3")
+        resp = cl.private.get(str(url), timeout=20, stream=True)
+        if resp.status_code == 200:
+            with open(tmp, "wb") as f:
+                for chunk in resp.iter_content(8192):
+                    f.write(chunk)
+            return tmp
+    except Exception as e:
+        print(f"No se pudo descargar audio story: {e}")
+    return None
+
+
+def _mix_audio(video_path: str, audio_path: str) -> str:
+    out = video_path.replace(".mp4", "_m.mp4")
+    r = subprocess.run([
+        "ffmpeg", "-y",
+        "-i", video_path,
+        "-stream_loop", "-1", "-i", audio_path,
+        "-map", "0:v", "-map", "1:a",
+        "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
+        "-shortest",
+        "-af", "afade=t=in:d=1,afade=t=out:st=8:d=2",
+        out,
+    ], capture_output=True)
+    if r.returncode == 0 and os.path.exists(out):
+        print("Audio mezclado en story.")
+        return out
+    return video_path
 
 POLL_OPTIONS = [
     ("¿Tu negocio responde de noche?",    ["Sí, siempre 💪",  "No, lo pierdo 😬"]),
@@ -76,30 +113,21 @@ def post_instagram_story(video_path: str, poll_index: int = -1) -> str:
     # Track de Instagram para la story
     track = get_track(cl)
 
-    path = Path(video_path)
+    # Mezclar audio en el vídeo si tenemos track
+    upload_path = video_path
+    audio_tmp = None
+    mixed_tmp = None
+    if track:
+        audio_tmp = _download_audio(cl, track)
+        if audio_tmp:
+            mixed = _mix_audio(video_path, audio_tmp)
+            if mixed != video_path:
+                mixed_tmp = mixed
+                upload_path = mixed_tmp
+
+    path = Path(upload_path)
     print(f"Subiendo Story: {path.name}")
 
-    # Intento 1: música solo metadata (sin mezcla local), encuesta + link
-    if track:
-        try:
-            music_extra = cl.story_music_extra_data(
-                track,
-                original_volume=0.0,
-                music_volume=1.0,
-            )
-            media = cl.video_upload_to_story(
-                path=path,
-                caption="",
-                links=[link],
-                polls=[poll],
-                extra_data=music_extra,
-            )
-            print(f"Story publicada con música! ID: {media.pk}")
-            return media.pk
-        except Exception as e:
-            print(f"Story con música falló: {e}")
-
-    # Intento 2: sin música, con encuesta + link
     try:
         media = cl.video_upload_to_story(
             path=path,
@@ -107,12 +135,17 @@ def post_instagram_story(video_path: str, poll_index: int = -1) -> str:
             links=[link],
             polls=[poll],
         )
-        print(f"Story publicada (sin música)! ID: {media.pk}")
-        return media.pk
+        print(f"Story publicada! ID: {media.pk}")
     except Exception as e:
-        print(f"Story con link falló: {e}")
+        print(f"Story con link/poll falló ({e}), solo encuesta...")
+        media = cl.video_upload_to_story(path=path, caption="", polls=[poll])
+        print(f"Story publicada (solo encuesta)! ID: {media.pk}")
 
-    # Intento 3: mínimo — solo encuesta
-    media = cl.video_upload_to_story(path=path, caption="", polls=[poll])
-    print(f"Story publicada (solo encuesta)! ID: {media.pk}")
+    for f in [audio_tmp, mixed_tmp]:
+        try:
+            if f and os.path.exists(f):
+                os.remove(f)
+        except Exception:
+            pass
+
     return media.pk
