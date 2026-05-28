@@ -58,11 +58,48 @@ def _mix_audio(video_path: str, audio_path: str) -> str:
     return video_path
 
 
-MUSIC_QUERIES = ["phonk", "trap motivation", "dark trap", "motivacional", "hustle", "viral"]
+MUSIC_QUERIES = ["trending", "viral 2024", "viral reels", "phonk drift", "motivation gym", "trap beats"]
+
+
+def _extract_audio_url(track_data: dict) -> str | None:
+    mai = track_data.get("music_asset_info") or {}
+    return (
+        track_data.get("progressive_download_url")
+        or mai.get("progressive_download_url")
+        or mai.get("audio_asset_url")
+        or track_data.get("preview_url")
+    )
 
 
 def get_track(cl):
     from instagrapi.extractors import extract_track as _extract_track
+
+    # Intentar primero trending de Instagram
+    try:
+        result = cl.private_request(
+            "music/trending_reels/",
+            params={"product": "clips"},
+        )
+        items = (result or {}).get("items") or []
+        random.shuffle(items)
+        for item in items[:20]:
+            if not isinstance(item, dict):
+                continue
+            track_data = item.get("track") or item
+            if not isinstance(track_data, dict) or not track_data.get("title"):
+                continue
+            try:
+                track = _extract_track(track_data)
+                audio_url = _extract_audio_url(track_data)
+                track._audio_url = audio_url
+                print(f"Música trending: '{track.title}' – {track.display_artist} | audio: {'sí' if audio_url else 'no'}")
+                return track
+            except Exception:
+                continue
+    except Exception as e:
+        print(f"Trending falló ({e}), buscando por query...")
+
+    # Fallback: búsqueda por query
     random.shuffle(MUSIC_QUERIES)
     for query in MUSIC_QUERIES:
         try:
@@ -71,23 +108,16 @@ def get_track(cl):
                 params={"query": query, "browse_session_id": cl.generate_uuid()},
             )
             for item in (result or {}).get("items") or []:
-                if not item or not isinstance(item, dict):
+                if not isinstance(item, dict):
                     continue
                 track_data = item.get("track")
-                if not track_data or not isinstance(track_data, dict):
+                if not isinstance(track_data, dict):
                     continue
                 try:
                     track = _extract_track(track_data)
-                    # Buscar URL de audio en el raw response
-                    mai = track_data.get("music_asset_info") or {}
-                    audio_url = (
-                        track_data.get("progressive_download_url")
-                        or mai.get("progressive_download_url")
-                        or mai.get("audio_asset_url")
-                        or track_data.get("preview_url")
-                    )
-                    track._audio_url = audio_url  # guardar en el objeto
-                    print(f"Música: '{track.title}' – {track.display_artist} | audio_url: {'sí' if audio_url else 'no'}")
+                    audio_url = _extract_audio_url(track_data)
+                    track._audio_url = audio_url
+                    print(f"Música: '{track.title}' – {track.display_artist} | audio: {'sí' if audio_url else 'no'}")
                     return track
                 except Exception:
                     continue

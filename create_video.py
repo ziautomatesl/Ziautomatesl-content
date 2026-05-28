@@ -53,14 +53,11 @@ def fetch_pexels_photos(topic: str, count: int = 6, suffix: str = "dynamic") -> 
 
     query = _pexels_query(topic)
     url = f"https://api.pexels.com/v1/search?query={urllib.parse.quote(query)}&per_page={count}&orientation=portrait"
-    req = urllib.request.Request(url, headers={
-        "Authorization": api_key,
-        "User-Agent": "Mozilla/5.0",
-    })
     try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            data = json.loads(resp.read())
-        photos = data.get("photos", [])
+        import requests as _req
+        resp = _req.get(url, headers={"Authorization": api_key}, timeout=15)
+        resp.raise_for_status()
+        photos = resp.json().get("photos", [])
         if not photos:
             print(f"Pexels sin resultados para '{query}', usando fotos estáticas.")
             _fallback_photos(photos_dir, suffix, count)
@@ -68,7 +65,9 @@ def fetch_pexels_photos(topic: str, count: int = 6, suffix: str = "dynamic") -> 
         for i, photo in enumerate(photos[:count]):
             img_url = photo["src"]["portrait"]
             dest = os.path.join(photos_dir, f"{suffix}_{i}.jpg")
-            urllib.request.urlretrieve(img_url, dest)
+            img_data = _req.get(img_url, timeout=15).content
+            with open(dest, "wb") as f:
+                f.write(img_data)
         print(f"Fotos Pexels descargadas: {len(photos[:count])} ({query})")
         return True
     except Exception as e:
