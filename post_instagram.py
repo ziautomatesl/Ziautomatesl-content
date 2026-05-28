@@ -4,6 +4,7 @@ import base64
 import random
 import subprocess
 import tempfile
+import urllib.request
 from pathlib import Path
 
 
@@ -20,15 +21,19 @@ def _download_audio(cl, track) -> str | None:
     url = getattr(track, "_audio_url", None) or getattr(track, "progressive_download_url", None)
     if not url:
         return None
+    tmp = tempfile.mktemp(suffix=".mp3")
     try:
-        tmp = tempfile.mktemp(suffix=".mp3")
-        resp = cl.private.get(str(url), timeout=20, stream=True)
-        if resp.status_code == 200:
+        req = urllib.request.Request(str(url), headers={
+            "User-Agent": "Instagram 219.0.0.12.117 Android",
+        })
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            data = resp.read()
+        if len(data) > 1000:
             with open(tmp, "wb") as f:
-                for chunk in resp.iter_content(8192):
-                    f.write(chunk)
-            print(f"Audio descargado: {os.path.getsize(tmp)} bytes")
+                f.write(data)
+            print(f"Audio descargado: {len(data)} bytes")
             return tmp
+        print(f"Audio vacío ({len(data)} bytes), sin audio.")
     except Exception as e:
         print(f"No se pudo descargar audio: {e}")
     return None
