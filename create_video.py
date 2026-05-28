@@ -1,5 +1,6 @@
 import os
 import json
+import shutil
 import subprocess
 import urllib.request
 import urllib.parse
@@ -30,24 +31,39 @@ def _pexels_query(topic: str) -> str:
     return PEXELS_QUERIES["default"]
 
 
+def _fallback_photos(photos_dir: str, prefix: str, count: int):
+    """Copia las v4_X.jpg como fallback cuando Pexels falla."""
+    for i in range(count):
+        dest = os.path.join(photos_dir, f"{prefix}_{i}.jpg")
+        if not os.path.exists(dest):
+            fallback = os.path.join(photos_dir, f"v4_{(i % 6) + 1}.jpg")
+            if os.path.exists(fallback):
+                shutil.copy(fallback, dest)
+
+
 def fetch_pexels_photos(topic: str, count: int = 6, suffix: str = "dynamic") -> bool:
     api_key = os.environ.get("PEXELS_API_KEY", "")
-    if not api_key:
-        print("PEXELS_API_KEY no configurado, usando fotos estáticas.")
-        return False
-
-    query = _pexels_query(topic)
     photos_dir = os.path.join(REMOTION_DIR, "public", "photos")
     os.makedirs(photos_dir, exist_ok=True)
 
+    if not api_key:
+        print("PEXELS_API_KEY no configurado, usando fotos estáticas.")
+        _fallback_photos(photos_dir, suffix, count)
+        return False
+
+    query = _pexels_query(topic)
     url = f"https://api.pexels.com/v1/search?query={urllib.parse.quote(query)}&per_page={count}&orientation=portrait"
-    req = urllib.request.Request(url, headers={"Authorization": api_key})
+    req = urllib.request.Request(url, headers={
+        "Authorization": api_key,
+        "User-Agent": "Mozilla/5.0",
+    })
     try:
         with urllib.request.urlopen(req, timeout=15) as resp:
             data = json.loads(resp.read())
         photos = data.get("photos", [])
         if not photos:
             print(f"Pexels sin resultados para '{query}', usando fotos estáticas.")
+            _fallback_photos(photos_dir, suffix, count)
             return False
         for i, photo in enumerate(photos[:count]):
             img_url = photo["src"]["portrait"]
@@ -57,6 +73,7 @@ def fetch_pexels_photos(topic: str, count: int = 6, suffix: str = "dynamic") -> 
         return True
     except Exception as e:
         print(f"Pexels error ({e}), usando fotos estáticas.")
+        _fallback_photos(photos_dir, suffix, count)
         return False
 
 
