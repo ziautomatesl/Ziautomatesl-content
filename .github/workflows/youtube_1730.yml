@@ -69,7 +69,7 @@ jobs:
           key: remotion-chrome-${{ runner.os }}-v1
 
       - name: Instalar dependencias del sistema
-        run: sudo apt-get install -y fonts-dejavu fonts-noto-core ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y fonts-dejavu fonts-noto-core ffmpeg
 
       - name: Instalar dependencias Python
         run: pip install -r requirements.txt
