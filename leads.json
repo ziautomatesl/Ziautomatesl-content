@@ -1,5 +1,44 @@
 [
   {
+    "id": 1780430208917,
+    "negocio": "Studio by 351 - Peluquería y barberia en Madrid",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "studioby351@gmail.com",
+    "telefono": "663 41 45 79",
+    "web": "https://studioby351.es/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps | Studio by 351 - Peluquería y barberia en Madrid: e",
+    "estado": "enviado",
+    "fecha": "02/06/26"
+  },
+  {
+    "id": 1780430209995,
+    "negocio": "ILEA Hair Club",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "info@ileahc.com",
+    "telefono": "747 43 16 65",
+    "web": "http://www.ileahc.com/",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps | ILEA Hair Club: el 30% de tus citas se pueden esta",
+    "estado": "enviado",
+    "fecha": "02/06/26"
+  },
+  {
+    "id": 1780430211291,
+    "negocio": "Are You Ready? Hair Experience by Jess Tobachi",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "911 69 37 58",
+    "web": "https://www.areyouready.es/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
     "id": 1780078630186,
     "negocio": "Dávila Auto.",
     "sector": "Taller",
@@ -307,9 +346,9 @@
     "telefono": "914 11 17 79",
     "web": "https://www.clinicadkf.com/",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | CLÍNICA DKF - Clínica privada en Madrid: cada cita",
+    "estado": "enviado",
+    "fecha": "02/06/26"
   },
   {
     "id": 1779992494861,
@@ -320,9 +359,9 @@
     "telefono": "915 57 04 05",
     "web": "https://www.policlinicaretiro.com/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Policlínica Retiro: cada cita cancelada sin rellen",
+    "estado": "enviado",
+    "fecha": "02/06/26"
   },
   {
     "id": 1779992495954,
@@ -346,9 +385,9 @@
     "telefono": "917 37 51 45",
     "web": "https://www.clinicasdiegodeleon.com/",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | Clínicas Diego de León: cada cita cancelada sin re",
+    "estado": "enviado",
+    "fecha": "02/06/26"
   },
   {
     "id": 1779992499712,
