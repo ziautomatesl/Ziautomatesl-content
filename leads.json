@@ -1,5 +1,44 @@
 [
   {
+    "id": 1780487366144,
+    "negocio": "El Patio de Atocha",
+    "sector": "Restaurante",
+    "ciudad": "Madrid",
+    "email": "reservations@palaciodeatocha.com",
+    "telefono": "910 88 77 87",
+    "web": "https://elpatiodeatocha.com/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps | El Patio de Atocha: las mesas vacías de fin de sem",
+    "estado": "enviado",
+    "fecha": "03/06/26"
+  },
+  {
+    "id": 1780487366645,
+    "negocio": "Taberna \"Venta El Buscón\"",
+    "sector": "Restaurante",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "915 22 54 12",
+    "web": "",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1780487367885,
+    "negocio": "Trattoria Pulcinella | Restaurante Italiano Madrid",
+    "sector": "Restaurante",
+    "ciudad": "Madrid",
+    "email": "pulcinella@gruppopulcinella.com",
+    "telefono": "913 19 73 63",
+    "web": "https://gruppopulcinella.com/restaurantes/trattoria-pulcinella/?utm_source=gmb&utm_medium=organic&utm_campaign=gmb_website",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps | Trattoria Pulcinella | Restaurante Italiano Madrid",
+    "estado": "enviado",
+    "fecha": "03/06/26"
+  },
+  {
     "id": 1780430208917,
     "negocio": "Studio by 351 - Peluquería y barberia en Madrid",
     "sector": "Peluquería",
@@ -398,9 +437,9 @@
     "telefono": "914 37 42 22",
     "web": "http://www.avenida101.es/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | Centro médico \"Avda 101\": cada cita cancelada sin",
+    "estado": "enviado",
+    "fecha": "03/06/26"
   },
   {
     "id": 1779992500213,
@@ -424,9 +463,9 @@
     "telefono": "913 11 10 00",
     "web": "https://clinicaisadora.es/",
     "rating": 4.2,
-    "notas": "⭐ 4.2 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.2 · Google Maps | Clínica Isadora: cada cita cancelada sin rellenar",
+    "estado": "enviado",
+    "fecha": "03/06/26"
   },
   {
     "id": 1779905274403,
@@ -567,9 +606,9 @@
     "telefono": "689 53 33 49",
     "web": "http://www.caluana.com/",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | Caluana: las mesas vacías de fin de semana cuestan",
+    "estado": "enviado",
+    "fecha": "03/06/26"
   },
   {
     "id": 1779905302708,
