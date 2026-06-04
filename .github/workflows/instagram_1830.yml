@@ -1,50 +1,66 @@
 name: ZIA Video - Instagram 18:30
 
 on:
-  workflow_dispatch:   # disparado por clock.yml a las 18:30 España
+  schedule:
+    - cron: '30 16 * * *'   # 18:30 España verano  (UTC+2)
+    - cron: '30 17 * * *'   # 18:30 España invierno (UTC+1)
+  workflow_dispatch:
 
 jobs:
+  check-time:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+    steps:
+      - name: Verificar temporada España
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "should_run=true" >> $GITHUB_OUTPUT
+          else
+            SCHED="${{ github.event.schedule }}"
+            OFFSET=$(TZ='Europe/Madrid' date +%z)
+            H=$(TZ='Europe/Madrid' date +%-H)
+            M=$(TZ='Europe/Madrid' date +%-M)
+            echo "Hora España: ${H}:${M} | Offset: ${OFFSET} | Cron: ${SCHED}"
+            if ([ "$SCHED" = "30 16 * * *" ] && [ "$OFFSET" = "+0200" ]) || \
+               ([ "$SCHED" = "30 17 * * *" ] && [ "$OFFSET" = "+0100" ]); then
+              echo "should_run=true" >> $GITHUB_OUTPUT
+            else
+              echo "should_run=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+
   publicar-video:
+    needs: check-time
+    if: needs.check-time.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 50
 
     steps:
-      - name: Descargar código
-        uses: actions/checkout@v4
-
-      - name: Instalar Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
-      - name: Instalar Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Caché node_modules (Remotion)
-        uses: actions/cache@v4
+      - uses: actions/cache@v4
         with:
           path: remotion/node_modules
           key: npm-${{ runner.os }}-${{ hashFiles('remotion/package.json') }}
           restore-keys: npm-${{ runner.os }}-
-
-      - name: Caché Chrome headless (Remotion)
-        uses: actions/cache@v4
+      - uses: actions/cache@v4
         with:
           path: ~/.cache/remotion
           key: remotion-chrome-${{ runner.os }}-v1
-
       - name: Instalar dependencias del sistema
         run: sudo apt-get update && sudo apt-get install -y fonts-dejavu fonts-noto-core ffmpeg
-
       - name: Instalar dependencias Python
         run: pip install -r requirements.txt
-
       - name: Instalar dependencias Remotion
         run: npm install
         working-directory: remotion
-
       - name: Generar y publicar video
         env:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
@@ -53,7 +69,6 @@ jobs:
           INSTAGRAM_SESSION: ${{ secrets.INSTAGRAM_SESSION }}
           IMAGEIO_FFMPEG_EXE: /usr/bin/ffmpeg
         run: python main.py instagram 2>&1 | tee debug.txt; exit ${PIPESTATUS[0]}
-
       - name: Mostrar log si falla
         if: failure()
         run: cat debug.txt || echo "(sin log)"
