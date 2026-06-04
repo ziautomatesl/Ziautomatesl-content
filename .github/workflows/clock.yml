@@ -2,7 +2,7 @@ name: ZIA Clock — Disparador de precisión
 
 on:
   schedule:
-    - cron: '0,30 * * * *'   # cada 30 min — ligero, sale rápido de cola
+    - cron: '0,30 * * * *'   # cada 30 min
   workflow_dispatch:
 
 permissions:
@@ -13,45 +13,61 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-      - name: Disparar workflow según hora España
+      - name: Disparar workflows según hora España
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         run: |
           H=$(TZ='Europe/Madrid' date +%-H)
           M=$(TZ='Europe/Madrid' date +%-M)
-          echo "Hora Madrid: ${H}:${M}"
+          TODAY=$(TZ='Europe/Madrid' date +%Y-%m-%d)
+          NOW=$(date +%s)
+          echo "Hora Madrid: ${H}:${M} | Fecha: ${TODAY}"
 
-          # Dispara el workflow solo si no hubo run en las últimas 3h
-          dispatch_if_not_recent() {
+          # Dispara solo si no hay run de ese workflow HOY
+          dispatch_if_not_today() {
             local workflow=$1
             local label=$2
-            local recent
-            recent=$(gh api "repos/$REPO/actions/workflows/$workflow/runs?per_page=1" \
+
+            local last_run
+            last_run=$(gh api "repos/$REPO/actions/workflows/$workflow/runs?per_page=1&event=workflow_dispatch" \
               --jq '.workflow_runs[0].created_at // empty' 2>/dev/null || echo "")
-            if [ -n "$recent" ]; then
-              local age=$(( $(date +%s) - $(date -d "$recent" +%s 2>/dev/null || echo 0) ))
-              if [ "$age" -lt 10800 ]; then
-                echo "  $label: run reciente hace $((age/60)) min — no disparar"
+
+            if [ -n "$last_run" ]; then
+              local run_date
+              run_date=$(date -d "$last_run" +%Y-%m-%d 2>/dev/null || echo "")
+              if [ "$run_date" = "$TODAY" ]; then
+                echo "  $label: ya corrió hoy ($last_run) — saltando"
                 return
               fi
             fi
+
             gh api "repos/$REPO/actions/workflows/$workflow/dispatches" -f ref=main
             echo "  $label: disparado OK"
           }
 
-          # YouTube 17:30 → ventana 17:15–17:59
-          if [ "$H" -eq 17 ] && [ "$M" -ge 15 ]; then
-            dispatch_if_not_recent "youtube_1730.yml" "YouTube 17:30"
+          # ── Ventanas principales (±90 min) ──────────────────────────────
+          # YouTube 17:30 → ventana 16:00–19:00 España
+          if [ "$H" -ge 16 ] && [ "$H" -lt 19 ]; then
+            dispatch_if_not_today "youtube_1730.yml" "YouTube 17:30"
           fi
 
-          # Instagram 18:30 → ventana 18:15–18:59
-          if [ "$H" -eq 18 ] && [ "$M" -ge 15 ]; then
-            dispatch_if_not_recent "instagram_1830.yml" "Instagram 18:30"
+          # Instagram 18:30 → ventana 17:00–20:00 España
+          if [ "$H" -ge 17 ] && [ "$H" -lt 20 ]; then
+            dispatch_if_not_today "instagram_1830.yml" "Instagram 18:30"
           fi
 
-          # Prime Time 20:00 → ventana 19:45–20:29
-          if { [ "$H" -eq 19 ] && [ "$M" -ge 45 ]; } || \
-             { [ "$H" -eq 20 ] && [ "$M" -lt 30 ]; }; then
-            dispatch_if_not_recent "primetime_2000.yml" "Prime Time 20:00"
+          # Prime Time 20:00 → ventana 18:30–21:30 España
+          if { [ "$H" -eq 18 ] && [ "$M" -ge 30 ]; } || \
+             { [ "$H" -eq 19 ]; } || \
+             { [ "$H" -eq 20 ]; } || \
+             { [ "$H" -eq 21 ] && [ "$M" -lt 30 ]; }; then
+            dispatch_if_not_today "primetime_2000.yml" "Prime Time 20:00"
+          fi
+
+          # ── Fallback nocturno: si a las 22:00-23:30 España no corrió hoy, publica ya ──
+          if [ "$H" -ge 22 ]; then
+            dispatch_if_not_today "youtube_1730.yml"    "Fallback nocturno YouTube"
+            dispatch_if_not_today "instagram_1830.yml"  "Fallback nocturno Instagram"
+            dispatch_if_not_today "primetime_2000.yml"  "Fallback nocturno Prime Time"
           fi
