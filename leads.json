@@ -1,5 +1,18 @@
 [
   {
+    "id": 1781088410064,
+    "negocio": "En Busca del Tiempo",
+    "sector": "Restaurante",
+    "ciudad": "Madrid",
+    "email": "mrc08@hotmail.es",
+    "telefono": "915 21 98 01",
+    "web": "http://www.enbuscadeltiempo.es/",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps | En Busca del Tiempo: las mesas vacías de fin de se",
+    "estado": "enviado",
+    "fecha": "10/06/26"
+  },
+  {
     "id": 1780569105943,
     "negocio": "Clínica CEMTRO",
     "sector": "Clínica",
