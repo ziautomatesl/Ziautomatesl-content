@@ -1,5 +1,31 @@
 [
   {
+    "id": 1781176581592,
+    "negocio": "Hospital Universitario Quirónsalud Pozuelo",
+    "sector": "Clínica",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "914 52 19 00",
+    "web": "https://www.quironsalud.es/hospital-madrid",
+    "rating": 3.1,
+    "notas": "⭐ 3.1 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1781176582374,
+    "negocio": "Clinica Virgen del Camino SRL",
+    "sector": "Clínica",
+    "ciudad": "Madrid",
+    "email": "ruthsilvan@virgendelcamino.es",
+    "telefono": "914 68 28 61",
+    "web": "http://clinicavirgendelcamino.es/",
+    "rating": 2.9,
+    "notas": "⭐ 2.9 · Google Maps | Clinica Virgen del Camino SRL: cada cita cancelada",
+    "estado": "enviado",
+    "fecha": "11/06/26"
+  },
+  {
     "id": 1781088410064,
     "negocio": "En Busca del Tiempo",
     "sector": "Restaurante",
