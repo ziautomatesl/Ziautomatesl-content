@@ -2,7 +2,7 @@ import os
 
 # ── Parámetros de campaña ────────────────────────────────────
 CAMPAIGN_CITY   = os.getenv("CAMPAIGN_CITY",   "Madrid")
-DAILY_LIMIT     = int(os.getenv("DAILY_LIMIT", "5"))
+DAILY_LIMIT     = int(os.getenv("DAILY_LIMIT", "10"))
 
 # Sectores que rota el agente día a día (lunes=0 … domingo=6)
 SECTOR_ROTATION = [

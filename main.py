@@ -66,7 +66,6 @@ def main():
                 story_ok = True
             except Exception as e:
                 print(f"Instagram Story error (no crítico): {e}")
-                story_ok = True
         else:
             print("INSTAGRAM_USERNAME no configurado, saltando.")
             ig_ok = story_ok = True
@@ -83,7 +82,7 @@ def main():
           f"{'OK' if ig_ok else 'FALLÓ'} Instagram Reel | "
           f"{'OK' if story_ok else 'FALLÓ'} Instagram Story\n")
 
-    if not yt_ok and not ig_ok:
+    if not yt_ok or not ig_ok:
         raise SystemExit(1)
 
 

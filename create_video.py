@@ -1,5 +1,6 @@
 import os
 import json
+import random
 import shutil
 import subprocess
 import urllib.request
@@ -52,7 +53,8 @@ def fetch_pexels_photos(topic: str, count: int = 6, suffix: str = "dynamic") -> 
         return False
 
     query = _pexels_query(topic)
-    url = f"https://api.pexels.com/v1/search?query={urllib.parse.quote(query)}&per_page={count}&orientation=portrait"
+    page = random.randint(1, 8)
+    url = f"https://api.pexels.com/v1/search?query={urllib.parse.quote(query)}&per_page={count}&page={page}&orientation=portrait"
     try:
         import requests as _req
         resp = _req.get(url, headers={"Authorization": api_key}, timeout=15)
@@ -192,18 +194,74 @@ def build_story_props(content: dict) -> dict:
     }
 
 
+_SLIDE_VARIANTS = [
+    {
+        "solution_line1": "Una IA que",
+        "solution_line2": "trabaja por ti.",
+        "solution_word1": "Responde.",
+        "solution_word2": "Convierte.",
+        "solution_sub":   "Automático. Las 24 horas.",
+        "vision_body":    "Tu negocio funcionando mientras dormías.",
+        "cta_sub":        "Sin empleados extra. Sin estrés.",
+        "cta_button":     "Activa tu negocio 24/7",
+    },
+    {
+        "solution_line1": "Automatiza",
+        "solution_line2": "sin complicarte.",
+        "solution_word1": "Capta.",
+        "solution_word2": "Fideliza.",
+        "solution_sub":   "Cada cliente. Sin pausas.",
+        "vision_body":    "Clientes atendidos sin que tú estés.",
+        "cta_sub":        "Sin código. Sin contrataciones.",
+        "cta_button":     "Quiero automatizar",
+    },
+    {
+        "solution_line1": "Tu negocio",
+        "solution_line2": "siempre disponible.",
+        "solution_word1": "Ahorra.",
+        "solution_word2": "Escala.",
+        "solution_sub":   "24 horas. 7 días. 0 descansos.",
+        "vision_body":    "Ventas cerradas mientras tú descansas.",
+        "cta_sub":        "Más clientes. Menos trabajo manual.",
+        "cta_button":     "Quiero más clientes",
+    },
+    {
+        "solution_line1": "La IA que",
+        "solution_line2": "nunca descansa.",
+        "solution_word1": "Atiende.",
+        "solution_word2": "Cierra.",
+        "solution_sub":   "Día y noche. Sin pausas.",
+        "vision_body":    "Tu empresa trabajando sin parar.",
+        "cta_sub":        "Fácil de activar. Difícil de parar.",
+        "cta_button":     "Actívalo ahora",
+    },
+    {
+        "solution_line1": "Más ventas,",
+        "solution_line2": "menos esfuerzo.",
+        "solution_word1": "Responde.",
+        "solution_word2": "Agenda.",
+        "solution_sub":   "Solo en 24 horas.",
+        "vision_body":    "Tu negocio cerró clientes mientras dormías.",
+        "cta_sub":        "Sin empleados extra. Sin estrés.",
+        "cta_button":     "Ver cómo funciona",
+    },
+]
+
+
 def build_carousel_props(content: dict) -> dict:
     # Use explicit carousel field if provided in scripts_bank
     if "carousel" in content:
         return content["carousel"]
 
-    topic     = content.get("topic", "Tu negocio 24/7")
+    from datetime import date
+    import re
+
+    topic      = content.get("topic", "Tu negocio 24/7")
     highlights = content.get("highlights", [])
-    script    = content.get("script", "")
-    eng_q     = content.get("engagement_question", "")
+    script     = content.get("script", "")
+    eng_q      = content.get("engagement_question", "")
 
     # Extract stat number from highlights (e.g. "78% AL PRIMERO" → 78, "%")
-    import re
     stat_number, stat_suffix = 67, "%"
     for h in highlights:
         m = re.search(r"(\d+)\s*(%|X|x)", h)
@@ -226,10 +284,13 @@ def build_carousel_props(content: dict) -> dict:
     hook = " ".join(words[:mid])
     result = " ".join(words[mid:]) if mid < len(words) else topic
 
-    # Stat context from script (first sentence before any number)
+    # Stat context from script
     sentences = [s.strip() for s in re.split(r'(?<=[.?])\s+', script) if len(s.strip()) > 15]
-    stat_context = sentences[2] if len(sentences) > 2 else f"de los negocios {topic.lower()}"
+    stat_context  = sentences[2] if len(sentences) > 2 else f"de los negocios {topic.lower()}"
     stat_footnote = sentences[3] if len(sentences) > 3 else eng_q[:80]
+
+    # Rotate visual variant daily
+    v = _SLIDE_VARIANTS[date.today().toordinal() % len(_SLIDE_VARIANTS)]
 
     return {
         "topic":          topic,
@@ -238,18 +299,18 @@ def build_carousel_props(content: dict) -> dict:
         "stat_suffix":    stat_suffix,
         "stat_context":   stat_context[:80],
         "stat_footnote":  stat_footnote[:80],
-        "solution_line1": "Una IA que",
-        "solution_line2": "trabaja por ti.",
-        "solution_word1": "Responde.",
-        "solution_word2": "Convierte.",
-        "solution_sub":   "Automático. Las 24 horas.",
+        "solution_line1": v["solution_line1"],
+        "solution_line2": v["solution_line2"],
+        "solution_word1": v["solution_word1"],
+        "solution_word2": v["solution_word2"],
+        "solution_sub":   v["solution_sub"],
         "vision_hook":    f"{hook}.",
         "vision_result":  f"{result}.",
-        "vision_body":    "Tu negocio funcionando mientras dormías.",
+        "vision_body":    v["vision_body"],
         "vision_brand":   "Eso es ziautomate.",
         "bullet1":        bullets[0],
         "bullet2":        bullets[1],
         "bullet3":        bullets[2],
-        "cta_sub":        "Sin empleados extra. Sin estrés.",
-        "cta_button":     "Activa tu negocio 24/7",
+        "cta_sub":        v["cta_sub"],
+        "cta_button":     v["cta_button"],
     }
