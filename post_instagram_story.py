@@ -9,6 +9,15 @@ import urllib.request
 from pathlib import Path
 
 
+def _make_thumbnail(video_path: str) -> str:
+    tmp = tempfile.mktemp(suffix=".jpg")
+    subprocess.run(
+        ["ffmpeg", "-y", "-i", video_path, "-vframes", "1", "-q:v", "2", tmp],
+        capture_output=True,
+    )
+    return tmp
+
+
 def _download_audio(cl, track) -> str | None:
     url = getattr(track, "_audio_url", None) or getattr(track, "progressive_download_url", None)
     if not url:
@@ -170,21 +179,23 @@ def post_instagram_story(video_path: str, poll_index: int = -1) -> str:
 
     path = Path(upload_path)
     print(f"Subiendo Story: {path.name}")
+    thumbnail = _make_thumbnail(upload_path)
 
     try:
         media = cl.video_upload_to_story(
             path=path,
             caption="",
+            thumbnail=Path(thumbnail),
             links=[link],
             polls=[poll],
         )
         print(f"Story publicada! ID: {media.pk}")
     except Exception as e:
         print(f"Story con link/poll falló ({e}), solo encuesta...")
-        media = cl.video_upload_to_story(path=path, caption="", polls=[poll])
+        media = cl.video_upload_to_story(path=path, caption="", thumbnail=Path(thumbnail), polls=[poll])
         print(f"Story publicada (solo encuesta)! ID: {media.pk}")
 
-    for f in [audio_tmp, mixed_tmp]:
+    for f in [thumbnail, audio_tmp, mixed_tmp]:
         try:
             if f and os.path.exists(f):
                 os.remove(f)
