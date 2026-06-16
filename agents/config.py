@@ -1,16 +1,32 @@
 import os
 
 # ── Parámetros de campaña ────────────────────────────────────
-CAMPAIGN_CITY   = os.getenv("CAMPAIGN_CITY",   "Madrid")
 DAILY_LIMIT     = int(os.getenv("DAILY_LIMIT", "10"))
 
-# Sectores que rota el agente día a día (lunes=0 … domingo=6)
+# Ciudades que rotan semanalmente
+CITY_ROTATION = [
+    "Madrid", "Barcelona", "Valencia", "Sevilla",
+    "Bilbao", "Málaga", "Zaragoza", "Murcia",
+]
+
+# Sectores que rotan por día de la semana
 SECTOR_ROTATION = [
     "peluquería",    # martes
     "restaurante",   # miércoles
     "clínica",       # jueves
     "taller",        # viernes
+    "academia",      # (semana siguiente empieza aquí)
+    "inmobiliaria",
+    "gimnasio",
+    "farmacia",
 ]
+
+def get_daily_city() -> str:
+    if os.getenv("CAMPAIGN_CITY"):
+        return os.getenv("CAMPAIGN_CITY")
+    from datetime import date
+    week = date.today().isocalendar()[1]
+    return CITY_ROTATION[week % len(CITY_ROTATION)]
 
 def get_daily_sector() -> str:
     if os.getenv("CAMPAIGN_SECTOR"):
@@ -19,6 +35,7 @@ def get_daily_sector() -> str:
     idx = date.today().weekday() - 1  # mar=0, mié=1, jue=2, vie=3
     return SECTOR_ROTATION[max(0, idx) % len(SECTOR_ROTATION)]
 
+CAMPAIGN_CITY   = get_daily_city()
 CAMPAIGN_SECTOR = get_daily_sector()
 
 # ── APIs ─────────────────────────────────────────────────────
