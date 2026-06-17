@@ -1,39 +1,10 @@
-name: ZIA Video - Prime Time 20:00
+name: ZIA Video - Prime Time
 
 on:
-  schedule:
-    - cron: '0 18 * * *'    # 20:00 España verano  (UTC+2)
-    - cron: '0 19 * * *'    # 20:00 España invierno (UTC+1)
-  workflow_dispatch:
+  workflow_dispatch:   # publicación manual únicamente
 
 jobs:
-  check-time:
-    runs-on: ubuntu-latest
-    outputs:
-      should_run: ${{ steps.check.outputs.should_run }}
-    steps:
-      - name: Verificar temporada España
-        id: check
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "should_run=true" >> $GITHUB_OUTPUT
-          else
-            SCHED="${{ github.event.schedule }}"
-            OFFSET=$(TZ='Europe/Madrid' date +%z)
-            H=$(TZ='Europe/Madrid' date +%-H)
-            M=$(TZ='Europe/Madrid' date +%-M)
-            echo "Hora España: ${H}:${M} | Offset: ${OFFSET} | Cron: ${SCHED}"
-            if ([ "$SCHED" = "0 18 * * *" ] && [ "$OFFSET" = "+0200" ]) || \
-               ([ "$SCHED" = "0 19 * * *" ] && [ "$OFFSET" = "+0100" ]); then
-              echo "should_run=true" >> $GITHUB_OUTPUT
-            else
-              echo "should_run=false" >> $GITHUB_OUTPUT
-            fi
-          fi
-
   publicar-video:
-    needs: check-time
-    if: needs.check-time.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 50
 

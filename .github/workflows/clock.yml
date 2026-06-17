@@ -13,61 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-      - name: Disparar workflows según hora España
+      - name: Verificar hora España
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         run: |
           H=$(TZ='Europe/Madrid' date +%-H)
           M=$(TZ='Europe/Madrid' date +%-M)
-          TODAY=$(TZ='Europe/Madrid' date +%Y-%m-%d)
-          NOW=$(date +%s)
-          echo "Hora Madrid: ${H}:${M} | Fecha: ${TODAY}"
-
-          # Dispara solo si no hay run de ese workflow HOY
-          dispatch_if_not_today() {
-            local workflow=$1
-            local label=$2
-
-            local last_run
-            last_run=$(gh api "repos/$REPO/actions/workflows/$workflow/runs?per_page=1&event=workflow_dispatch" \
-              --jq '.workflow_runs[0].created_at // empty' 2>/dev/null || echo "")
-
-            if [ -n "$last_run" ]; then
-              local run_date
-              run_date=$(date -d "$last_run" +%Y-%m-%d 2>/dev/null || echo "")
-              if [ "$run_date" = "$TODAY" ]; then
-                echo "  $label: ya corrió hoy ($last_run) — saltando"
-                return
-              fi
-            fi
-
-            gh api "repos/$REPO/actions/workflows/$workflow/dispatches" -f ref=main
-            echo "  $label: disparado OK"
-          }
-
-          # ── Ventanas principales (±90 min) ──────────────────────────────
-          # YouTube 17:30 → ventana 16:00–19:00 España
-          if [ "$H" -ge 16 ] && [ "$H" -lt 19 ]; then
-            dispatch_if_not_today "youtube_1730.yml" "YouTube 17:30"
-          fi
-
-          # Instagram 18:30 → ventana 17:00–20:00 España
-          if [ "$H" -ge 17 ] && [ "$H" -lt 20 ]; then
-            dispatch_if_not_today "instagram_1830.yml" "Instagram 18:30"
-          fi
-
-          # Prime Time 20:00 → ventana 18:30–21:30 España
-          if { [ "$H" -eq 18 ] && [ "$M" -ge 30 ]; } || \
-             { [ "$H" -eq 19 ]; } || \
-             { [ "$H" -eq 20 ]; } || \
-             { [ "$H" -eq 21 ] && [ "$M" -lt 30 ]; }; then
-            dispatch_if_not_today "primetime_2000.yml" "Prime Time 20:00"
-          fi
-
-          # ── Fallback nocturno: si a las 22:00-23:30 España no corrió hoy, publica ya ──
-          if [ "$H" -ge 22 ]; then
-            dispatch_if_not_today "youtube_1730.yml"    "Fallback nocturno YouTube"
-            dispatch_if_not_today "instagram_1830.yml"  "Fallback nocturno Instagram"
-            dispatch_if_not_today "primetime_2000.yml"  "Fallback nocturno Prime Time"
-          fi
+          echo "Hora Madrid: ${H}:${M} — clock activo (sin disparos de vídeo)"
