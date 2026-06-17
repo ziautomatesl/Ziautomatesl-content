@@ -1,8 +1,0 @@
-node_modules/
-public/
-!public/photos/
-props.json
-overlay.webm
-test_*.png
-*.png
-*.webm
