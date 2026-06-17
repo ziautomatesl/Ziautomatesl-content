@@ -1,5 +1,31 @@
 [
   {
+    "id": 1781695542802,
+    "negocio": "Restaurante El Sueño de Carmen",
+    "sector": "Restaurante",
+    "ciudad": "Madrid",
+    "email": "gonbermer@gmail.com",
+    "telefono": "655 01 25 88",
+    "web": "https://elsuenodecarmen.com/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps | Restaurante El Sueño de Carmen: las mesas vacías d",
+    "estado": "enviado",
+    "fecha": "17/06/26"
+  },
+  {
+    "id": 1781695546533,
+    "negocio": "Restaurante Ten Con Ten",
+    "sector": "Restaurante",
+    "ciudad": "Madrid",
+    "email": "reservastenconten@grupoparaguas.com",
+    "telefono": "915 75 92 54",
+    "web": "https://restaurantetenconten.com/",
+    "rating": 4.3,
+    "notas": "⭐ 4.3 · Google Maps | Restaurante Ten Con Ten: las mesas vacías de fin d",
+    "estado": "enviado",
+    "fecha": "17/06/26"
+  },
+  {
     "id": 1781176581592,
     "negocio": "Hospital Universitario Quirónsalud Pozuelo",
     "sector": "Clínica",
