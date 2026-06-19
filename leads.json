@@ -1,5 +1,57 @@
 [
   {
+    "id": 1781867467905,
+    "negocio": "Talleres Santa Juliana",
+    "sector": "Taller",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "914 50 03 17",
+    "web": "http://www.talleressantajuliana.com/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1781867469246,
+    "negocio": "Taller en Madrid",
+    "sector": "Taller",
+    "ciudad": "Madrid",
+    "email": "recambios@turbosenmadrid.com",
+    "telefono": "647 60 92 85",
+    "web": "https://tallerenmadrid.es/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps | Taller en Madrid: el 78% de las ventas va al negoc",
+    "estado": "enviado",
+    "fecha": "19/06/26"
+  },
+  {
+    "id": 1781867470609,
+    "negocio": "Taller Oficial Zontes Centro Madrid",
+    "sector": "Taller",
+    "ciudad": "Madrid",
+    "email": "info@zontescentromadrid.es",
+    "telefono": "910 05 30 56",
+    "web": "https://zontescentromadrid.es/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps | Taller Oficial Zontes Centro Madrid: el 78% de las",
+    "estado": "enviado",
+    "fecha": "19/06/26"
+  },
+  {
+    "id": 1781867471110,
+    "negocio": "Taller Santos",
+    "sector": "Taller",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "915 49 33 86",
+    "web": "",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
     "id": 1781695542802,
     "negocio": "Restaurante El Sueño de Carmen",
     "sector": "Restaurante",
