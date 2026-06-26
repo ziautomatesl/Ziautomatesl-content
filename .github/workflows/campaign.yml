@@ -73,7 +73,7 @@ jobs:
           GEMINI_API_KEY:        ${{ secrets.GEMINI_API_KEY }}
           GMAIL_APP_PASSWORD:    ${{ secrets.GMAIL_APP_PASSWORD }}
           SENDER_EMAIL:          ziautomate.sl@gmail.com
-          CAMPAIGN_CITY:         ${{ github.event.inputs.city || 'Madrid' }}
+          CAMPAIGN_CITY:         ${{ github.event.inputs.city }}
           CAMPAIGN_SECTOR:       ${{ github.event.inputs.sector }}
           DAILY_LIMIT:           ${{ github.event.inputs.daily_limit || '10' }}
         run: python -m agents.run_campaign
