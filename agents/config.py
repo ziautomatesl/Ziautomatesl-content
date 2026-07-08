@@ -1,7 +1,7 @@
 import os
 
 # ── Parámetros de campaña ────────────────────────────────────
-DAILY_LIMIT     = int(os.getenv("DAILY_LIMIT", "10"))
+DAILY_LIMIT     = int(os.getenv("DAILY_LIMIT", "15"))
 
 # Ciudades que rotan semanalmente
 CITY_ROTATION = [
