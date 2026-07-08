@@ -20,7 +20,7 @@ def generate_email(lead: dict) -> dict:
 def _gemini(lead: dict, tmpl: dict) -> dict | None:
     url = (
         "https://generativelanguage.googleapis.com/v1beta/models/"
-        f"gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
+        f"gemini-flash-latest:generateContent?key={GEMINI_API_KEY}"
     )
     prompt = f"""Eres experto en cold email para PYMEs españolas. Escribe un email de prospección breve y personal.
 
@@ -50,7 +50,11 @@ Devuelve SOLO un JSON válido con este formato exacto:
         resp = requests.post(
             url, json={"contents": [{"parts": [{"text": prompt}]}]}, timeout=15
         )
-        text = resp.json()["candidates"][0]["content"]["parts"][0]["text"]
+        data = resp.json()
+        if "error" in data:
+            print(f"    Gemini API error {data['error'].get('code')}: {data['error'].get('message', '')[:120]}")
+            return None
+        text = data["candidates"][0]["content"]["parts"][0]["text"]
         start, end = text.find("{"), text.rfind("}") + 1
         return json.loads(text[start:end])
     except Exception as e:
@@ -80,65 +84,33 @@ Lo que hacemos en ziautomate es {tmpl['solution']}, sin que tengáis que cambiar
 
 
 def _build_html(body_text: str, lead: dict) -> str:
+    # Estilo "email personal": sin cabecera, sin botón, sin tarjeta.
+    # Parece escrito a mano desde Gmail — mejor entrega y más respuestas.
     paragraphs = "".join(
-        f"<p style='margin:0 0 16px 0;'>{p.strip()}</p>"
+        f"<p style='margin:0 0 14px 0;'>{p.strip()}</p>"
         for p in body_text.strip().split("\n\n") if p.strip()
     )
-    negocio = lead.get("negocio", "")
 
     return f"""<!DOCTYPE html>
 <html lang="es">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#f4f4f7;font-family:'Helvetica Neue',Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f7;padding:32px 0;">
-    <tr><td align="center">
-      <table width="580" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08);">
+<body style="margin:0;padding:0;background:#ffffff;">
+  <div style="max-width:560px;margin:0 auto;padding:24px 20px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#222222;">
 
-        <!-- Header -->
-        <tr>
-          <td style="background:linear-gradient(135deg,#00e5ff 0%,#1a6bff 50%,#7c3aed 100%);padding:28px 40px;">
-            <span style="font-size:22px;font-weight:700;color:#ffffff;letter-spacing:-0.5px;">ziautomate</span>
-            <span style="font-size:13px;color:rgba(255,255,255,.75);margin-left:10px;">Tu negocio en piloto automático</span>
-          </td>
-        </tr>
+    {paragraphs}
 
-        <!-- Body -->
-        <tr>
-          <td style="padding:36px 40px 24px;color:#1f2937;font-size:15px;line-height:1.7;">
-            {paragraphs}
-          </td>
-        </tr>
+    <p style="margin:0 0 14px 0;">Si te viene mejor por WhatsApp, escríbeme aquí:
+      <a href="{WA_LINK}" style="color:#1a6bff;">wa.me/34675082562</a></p>
 
-        <!-- CTA Button -->
-        <tr>
-          <td align="center" style="padding:8px 40px 36px;">
-            <a href="{WA_LINK}" target="_blank"
-               style="display:inline-block;background:linear-gradient(135deg,#1a6bff,#7c3aed);color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;padding:14px 32px;border-radius:8px;letter-spacing:0.2px;">
-              Me interesa — escribir por WhatsApp
-            </a>
-          </td>
-        </tr>
+    <p style="margin:24px 0 2px 0;">Un saludo,</p>
+    <p style="margin:0;font-weight:bold;">Zia</p>
+    <p style="margin:0;color:#555555;">ziautomate — automatización para negocios locales</p>
+    <p style="margin:0;color:#555555;">675 082 562 · <a href="https://ziautomate.netlify.app" style="color:#1a6bff;">ziautomate.netlify.app</a></p>
 
-        <!-- Firma -->
-        <tr>
-          <td style="padding:0 40px 28px;border-top:1px solid #f0f0f0;">
-            <p style="margin:20px 0 4px;font-size:14px;color:#374151;font-weight:600;">ziautomate</p>
-            <p style="margin:0;font-size:13px;color:#6b7280;">675 082 562 &nbsp;·&nbsp; ziautomate.netlify.app &nbsp;·&nbsp; @ziautomate.sl</p>
-          </td>
-        </tr>
+    <p style="margin:28px 0 0 0;font-size:12px;color:#999999;">
+      Si no quieres recibir más emails, responde con "No gracias" y no te vuelvo a escribir.
+    </p>
 
-        <!-- Footer -->
-        <tr>
-          <td style="background:#f9fafb;padding:16px 40px;border-top:1px solid #e5e7eb;">
-            <p style="margin:0;font-size:11px;color:#9ca3af;text-align:center;">
-              ziautomate S.L. &nbsp;·&nbsp; Madrid, España<br>
-              Si no deseas recibir más emails, responde con <em>No gracias</em>
-            </p>
-          </td>
-        </tr>
-
-      </table>
-    </td></tr>
-  </table>
+  </div>
 </body>
 </html>"""

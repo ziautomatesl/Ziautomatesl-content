@@ -33,17 +33,37 @@ def _already_exists(leads: list, name: str, email: str) -> bool:
     return name.lower().strip() in known_names(leads)
 
 
+def _is_valid_email(email: str) -> bool:
+    email = email.lower()
+    # Nombres de archivo que el regex confunde con emails (logo@2x.png, foto.jpg...)
+    bad_endings = (".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg",
+                   ".css", ".js", ".ico", ".woff", ".woff2", ".ttf", ".mp4", ".pdf")
+    if email.endswith(bad_endings):
+        return False
+    # Imágenes retina tipo logo@2x / icon@3x
+    local, _, domain = email.partition("@")
+    if re.fullmatch(r"\d+x[\w.\-]*", domain.split(".")[0]):
+        return False
+    # Restos de URL codificada (%20nombre@...) u otros caracteres raros
+    if "%" in local or not local:
+        return False
+    blocked = {"example", "sentry", "schema", "test", "noreply", "no-reply",
+               "w3.org", "domain.com", "email.com", "yoursite", "wixpress",
+               "placeholder", "your-email", "user@"}
+    return not any(b in email for b in blocked)
+
+
 def _extract_email(url: str) -> str:
     if not url:
         return ""
     try:
         headers = {"User-Agent": "Mozilla/5.0 (compatible; ziautomate-bot/1.0)"}
         resp = requests.get(url, timeout=8, headers=headers, allow_redirects=True)
-        emails = re.findall(r'[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}', resp.text)
-        blocked = {"example", "sentry", "schema", "test", "noreply", "no-reply",
-                   "w3.org", "domain.com", "email.com", "yoursite"}
+        from urllib.parse import unquote
+        text = unquote(resp.text)  # %20nombre@... → nombre@...
+        emails = re.findall(r'[a-zA-Z0-9._+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}', text)
         for email in emails:
-            if not any(b in email.lower() for b in blocked):
+            if _is_valid_email(email):
                 return email.lower()
     except Exception:
         pass
