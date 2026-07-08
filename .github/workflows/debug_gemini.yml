@@ -1,0 +1,26 @@
+name: Debug Gemini (temporal)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Listar modelos disponibles y probar generacion
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          echo "=== Modelos disponibles ==="
+          curl -s "https://generativelanguage.googleapis.com/v1beta/models?key=$GEMINI_API_KEY" \
+            | python3 -c "import json,sys; d=json.load(sys.stdin); print('\n'.join(m['name'] for m in d.get('models', [])) if 'models' in d else json.dumps(d, indent=2))"
+          echo ""
+          echo "=== Test gemini-2.5-flash ==="
+          curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$GEMINI_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"contents":[{"parts":[{"text":"Di hola en una palabra"}]}]}' | head -c 2000
+          echo ""
+          echo "=== Test gemini-1.5-flash (el actual, roto) ==="
+          curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$GEMINI_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"contents":[{"parts":[{"text":"Di hola en una palabra"}]}]}' | head -c 2000
