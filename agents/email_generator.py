@@ -2,7 +2,9 @@ import json
 import requests
 from agents.config import GEMINI_API_KEY, get_template, SENDER_NAME
 
-WA_LINK = "https://wa.me/34675082562?text=Hola%2C%20he%20recibido%20vuestro%20email%20y%20me%20interesa%20saber%20m%C3%A1s%20sobre%20ziautomate"
+WA_PHONE   = "34624752916"          # número de empresa
+WA_DISPLAY = "624 752 916"
+WA_LINK = f"https://wa.me/{WA_PHONE}?text=Hola%2C%20he%20recibido%20vuestro%20email%20y%20me%20interesa%20saber%20m%C3%A1s%20sobre%20ziautomate"
 
 
 def generate_email(lead: dict) -> dict:
@@ -100,12 +102,12 @@ def _build_html(body_text: str, lead: dict) -> str:
     {paragraphs}
 
     <p style="margin:0 0 14px 0;">Si te viene mejor por WhatsApp, escríbeme aquí:
-      <a href="{WA_LINK}" style="color:#1a6bff;">wa.me/34675082562</a></p>
+      <a href="{WA_LINK}" style="color:#1a6bff;">wa.me/{WA_PHONE}</a></p>
 
     <p style="margin:24px 0 2px 0;">Un saludo,</p>
     <p style="margin:0;font-weight:bold;">Zia</p>
     <p style="margin:0;color:#555555;">ziautomate — automatización para negocios locales</p>
-    <p style="margin:0;color:#555555;">675 082 562 · <a href="https://ziautomate.netlify.app" style="color:#1a6bff;">ziautomate.netlify.app</a></p>
+    <p style="margin:0;color:#555555;">{WA_DISPLAY} · <a href="https://ziautomate.netlify.app" style="color:#1a6bff;">ziautomate.netlify.app</a></p>
 
     <p style="margin:28px 0 0 0;font-size:12px;color:#999999;">
       Si no quieres recibir más emails, responde con "No gracias" y no te vuelvo a escribir.
