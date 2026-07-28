@@ -59,7 +59,7 @@ def mensaje(lead: dict) -> str:
     sector  = lead.get("sector", "negocio").lower()
     plural  = PLURALES.get(sector, sector + "s")
     return (
-        f"Hola, ¿{negocio}? Soy Zia, de ziautomate. "
+        f"Hola, ¿{negocio}? Soy Ziad, de ziautomate. "
         f"Ayudo a {plural} de {lead.get('ciudad','')} con {_gancho(sector)}. "
         f"¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema."
     )

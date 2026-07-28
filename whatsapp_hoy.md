@@ -9,7 +9,7 @@
 
 **Mensaje:**
 ```
-Hola, ¿Alejandro Martínez Peluquería / Barbería? Soy Zia, de ziautomate. Ayudo a peluquerías de Murcia con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
+Hola, ¿Alejandro Martínez Peluquería / Barbería? Soy Ziad, de ziautomate. Ayudo a peluquerías de Murcia con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
 ```
 
 ## 2. Clínica Azala
@@ -19,7 +19,7 @@ Hola, ¿Alejandro Martínez Peluquería / Barbería? Soy Zia, de ziautomate. Ayu
 
 **Mensaje:**
 ```
-Hola, ¿Clínica Azala? Soy Zia, de ziautomate. Ayudo a clínicas de Zaragoza con los recordatorios de cita automáticos, para reducir las cancelaciones de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
+Hola, ¿Clínica Azala? Soy Ziad, de ziautomate. Ayudo a clínicas de Zaragoza con los recordatorios de cita automáticos, para reducir las cancelaciones de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
 ```
 
 ## 3. TALLER ADIMOTOR
@@ -29,7 +29,7 @@ Hola, ¿Clínica Azala? Soy Zia, de ziautomate. Ayudo a clínicas de Zaragoza co
 
 **Mensaje:**
 ```
-Hola, ¿TALLER ADIMOTOR? Soy Zia, de ziautomate. Ayudo a talleres de Málaga con responder al instante a quien pide cita, aunque estéis con las manos ocupadas. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
+Hola, ¿TALLER ADIMOTOR? Soy Ziad, de ziautomate. Ayudo a talleres de Málaga con responder al instante a quien pide cita, aunque estéis con las manos ocupadas. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
 ```
 
 ## 4. Talleres Málaga (El Viso)
@@ -39,7 +39,7 @@ Hola, ¿TALLER ADIMOTOR? Soy Zia, de ziautomate. Ayudo a talleres de Málaga con
 
 **Mensaje:**
 ```
-Hola, ¿Talleres Málaga (El Viso)? Soy Zia, de ziautomate. Ayudo a talleres de Málaga con responder al instante a quien pide cita, aunque estéis con las manos ocupadas. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
+Hola, ¿Talleres Málaga (El Viso)? Soy Ziad, de ziautomate. Ayudo a talleres de Málaga con responder al instante a quien pide cita, aunque estéis con las manos ocupadas. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
 ```
 
 ## 5. Clínica Médico Estética Incorpore Málaga- Dr. Juan Enrique Pérez Enríquez
@@ -49,7 +49,7 @@ Hola, ¿Talleres Málaga (El Viso)? Soy Zia, de ziautomate. Ayudo a talleres de 
 
 **Mensaje:**
 ```
-Hola, ¿Clínica Médico Estética Incorpore Málaga? Soy Zia, de ziautomate. Ayudo a clínicas de Málaga con los recordatorios de cita automáticos, para reducir las cancelaciones de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
+Hola, ¿Clínica Médico Estética Incorpore Málaga? Soy Ziad, de ziautomate. Ayudo a clínicas de Málaga con los recordatorios de cita automáticos, para reducir las cancelaciones de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
 ```
 
 ## 6. Ana Velasco Peluquería
@@ -59,7 +59,7 @@ Hola, ¿Clínica Médico Estética Incorpore Málaga? Soy Zia, de ziautomate. Ay
 
 **Mensaje:**
 ```
-Hola, ¿Ana Velasco Peluquería? Soy Zia, de ziautomate. Ayudo a peluquerías de Málaga con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
+Hola, ¿Ana Velasco Peluquería? Soy Ziad, de ziautomate. Ayudo a peluquerías de Málaga con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
 ```
 
 ## 7. Peluquería | Corte 10 Peluqueros
@@ -69,7 +69,7 @@ Hola, ¿Ana Velasco Peluquería? Soy Zia, de ziautomate. Ayudo a peluquerías de
 
 **Mensaje:**
 ```
-Hola, ¿Peluquería? Soy Zia, de ziautomate. Ayudo a peluquerías de Málaga con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
+Hola, ¿Peluquería? Soy Ziad, de ziautomate. Ayudo a peluquerías de Málaga con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
 ```
 
 ## 8. Jomardy Peluquería
@@ -79,7 +79,7 @@ Hola, ¿Peluquería? Soy Zia, de ziautomate. Ayudo a peluquerías de Málaga con
 
 **Mensaje:**
 ```
-Hola, ¿Jomardy Peluquería? Soy Zia, de ziautomate. Ayudo a peluquerías de Málaga con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
+Hola, ¿Jomardy Peluquería? Soy Ziad, de ziautomate. Ayudo a peluquerías de Málaga con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
 ```
 
 ## 9. Talleres Mike
@@ -89,7 +89,7 @@ Hola, ¿Jomardy Peluquería? Soy Zia, de ziautomate. Ayudo a peluquerías de Má
 
 **Mensaje:**
 ```
-Hola, ¿Talleres Mike? Soy Zia, de ziautomate. Ayudo a talleres de Bilbao con responder al instante a quien pide cita, aunque estéis con las manos ocupadas. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
+Hola, ¿Talleres Mike? Soy Ziad, de ziautomate. Ayudo a talleres de Bilbao con responder al instante a quien pide cita, aunque estéis con las manos ocupadas. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
 ```
 
 ## 10. ATELIER HAIR & SHOP - PELUQUERÍA & ESTÉTICA LOS REMEDIOS
@@ -99,7 +99,7 @@ Hola, ¿Talleres Mike? Soy Zia, de ziautomate. Ayudo a talleres de Bilbao con re
 
 **Mensaje:**
 ```
-Hola, ¿ATELIER HAIR & SHOP? Soy Zia, de ziautomate. Ayudo a peluquerías de Sevilla con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
+Hola, ¿ATELIER HAIR & SHOP? Soy Ziad, de ziautomate. Ayudo a peluquerías de Sevilla con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
 ```
 
 ## 11. Sofía Carrera peluquería
@@ -109,7 +109,7 @@ Hola, ¿ATELIER HAIR & SHOP? Soy Zia, de ziautomate. Ayudo a peluquerías de Sev
 
 **Mensaje:**
 ```
-Hola, ¿Sofía Carrera peluquería? Soy Zia, de ziautomate. Ayudo a peluquerías de Madrid con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
+Hola, ¿Sofía Carrera peluquería? Soy Ziad, de ziautomate. Ayudo a peluquerías de Madrid con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
 ```
 
 ## 12. La Peluquería de Carlos
@@ -119,7 +119,7 @@ Hola, ¿Sofía Carrera peluquería? Soy Zia, de ziautomate. Ayudo a peluquerías
 
 **Mensaje:**
 ```
-Hola, ¿La Peluquería de Carlos? Soy Zia, de ziautomate. Ayudo a peluquerías de Murcia con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
+Hola, ¿La Peluquería de Carlos? Soy Ziad, de ziautomate. Ayudo a peluquerías de Murcia con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
 ```
 
 ## 13. Salón de Belleza Natalia's Secret
@@ -129,7 +129,7 @@ Hola, ¿La Peluquería de Carlos? Soy Zia, de ziautomate. Ayudo a peluquerías d
 
 **Mensaje:**
 ```
-Hola, ¿Salón de Belleza Natalia's Secret? Soy Zia, de ziautomate. Ayudo a peluquerías de Murcia con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
+Hola, ¿Salón de Belleza Natalia's Secret? Soy Ziad, de ziautomate. Ayudo a peluquerías de Murcia con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
 ```
 
 ## 14. STUDIO 46 ESTILISTAS
@@ -139,7 +139,7 @@ Hola, ¿Salón de Belleza Natalia's Secret? Soy Zia, de ziautomate. Ayudo a pelu
 
 **Mensaje:**
 ```
-Hola, ¿STUDIO 46 ESTILISTAS? Soy Zia, de ziautomate. Ayudo a peluquerías de Murcia con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
+Hola, ¿STUDIO 46 ESTILISTAS? Soy Ziad, de ziautomate. Ayudo a peluquerías de Murcia con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
 ```
 
 ## 15. Cheis Estilistas Unisex
@@ -149,5 +149,5 @@ Hola, ¿STUDIO 46 ESTILISTAS? Soy Zia, de ziautomate. Ayudo a peluquerías de Mu
 
 **Mensaje:**
 ```
-Hola, ¿Cheis Estilistas Unisex? Soy Zia, de ziautomate. Ayudo a peluquerías de Murcia con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
+Hola, ¿Cheis Estilistas Unisex? Soy Ziad, de ziautomate. Ayudo a peluquerías de Murcia con los recordatorios de cita automáticos, para que no se caigan las reservas de última hora. ¿Te cuento en 2 minutos cómo funciona? Si no te encaja, sin problema.
 ```

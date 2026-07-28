@@ -105,7 +105,7 @@ def _build_html(body_text: str, lead: dict) -> str:
       <a href="{WA_LINK}" style="color:#1a6bff;">wa.me/{WA_PHONE}</a></p>
 
     <p style="margin:24px 0 2px 0;">Un saludo,</p>
-    <p style="margin:0;font-weight:bold;">Zia</p>
+    <p style="margin:0;font-weight:bold;">Ziad</p>
     <p style="margin:0;color:#555555;">ziautomate — automatización para negocios locales</p>
     <p style="margin:0;color:#555555;">{WA_DISPLAY} · <a href="https://ziautomate.netlify.app" style="color:#1a6bff;">ziautomate.netlify.app</a></p>
 
