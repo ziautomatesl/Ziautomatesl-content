@@ -1,5 +1,265 @@
 [
   {
+    "id": 1785835914007,
+    "negocio": "Tatiana Silva Hair & Beauty | Alisados y Extensiones en Madrid",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "tatihairdesign@gmail.com",
+    "telefono": "910 70 90 94",
+    "web": "https://tatianasilva.es/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps | Tatiana Silva Hair & Beauty | Alisados y Extension",
+    "estado": "enviado",
+    "fecha": "04/08/26"
+  },
+  {
+    "id": 1785835915498,
+    "negocio": "Gema Casas Peluquería Orgánica",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "gemacasaspeluqueriaorganica@gmail.com",
+    "telefono": "915 91 69 29",
+    "web": "https://widget.treatwell.es/establecimiento/100036478/servicios/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps | Gema Casas Peluquería Orgánica: el 30% de tus cita",
+    "estado": "enviado",
+    "fecha": "04/08/26"
+  },
+  {
+    "id": 1785835915999,
+    "negocio": "Peluquería unisex Alain Roma",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "914 12 00 99",
+    "web": "",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1785835916500,
+    "negocio": "Medussa Hair Studio • Peluquería",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "623 03 63 74",
+    "web": "",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1785835919464,
+    "negocio": "LA ANTESALA",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "laantesala@laantesala.es",
+    "telefono": "627 03 96 96",
+    "web": "http://www.laantesala.es/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps | LA ANTESALA: el 30% de tus citas se pueden estar p",
+    "estado": "enviado",
+    "fecha": "04/08/26"
+  },
+  {
+    "id": 1785835925879,
+    "negocio": "Zhervo Lavapies Peluquería",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "910 40 44 67",
+    "web": "https://www.fresha.com/book-now/zhervo-lavapies-tp5tetsa/all-offer?share=true&pId=2781227",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1785835927078,
+    "negocio": "Nicole Bu Studio | Peluquería Madrid",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "651 55 78 73",
+    "web": "https://www.instagram.com/nicolebu.store",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1785835928108,
+    "negocio": "🇺🇸Paparazzi Hair Studio Men - Women & Store👗🇮🇹",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "914 38 04 90",
+    "web": "https://www.facebook.com/p/Paparazzi-Studio-hair-100067968961677/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1785835934044,
+    "negocio": "RAMIRO Madrid HairStudio & Beauty",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "info@ramiromolinapeluqueros.es",
+    "telefono": "913 65 31 71",
+    "web": "http://ramiromolinapeluqueros.es/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps | RAMIRO Madrid HairStudio & Beauty: el 30% de tus c",
+    "estado": "enviado",
+    "fecha": "04/08/26"
+  },
+  {
+    "id": 1785835936201,
+    "negocio": "Espacio Q",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "info@espacioq.es",
+    "telefono": "914 45 21 31",
+    "web": "https://espacioq.es/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps | Espacio Q: el 30% de tus citas se pueden estar per",
+    "estado": "enviado",
+    "fecha": "04/08/26"
+  },
+  {
+    "id": 1785835937218,
+    "negocio": "InBloom Peluquería",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "inbloom.peluqueria@gmail.com",
+    "telefono": "645 39 42 03",
+    "web": "https://www.inbloompeluqueria.com/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps | InBloom Peluquería: el 30% de tus citas se pueden",
+    "estado": "enviado",
+    "fecha": "04/08/26"
+  },
+  {
+    "id": 1785835937719,
+    "negocio": "Madrid Oldschool - Peluquería y Barbería",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "912 45 26 35",
+    "web": "",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1785835939299,
+    "negocio": "Peluquería Valino Hair",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "clientes@valinohair.com",
+    "telefono": "639 61 31 34",
+    "web": "https://www.salonvalinohair.es/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps | Peluquería Valino Hair: el 30% de tus citas se pue",
+    "estado": "enviado",
+    "fecha": "04/08/26"
+  },
+  {
+    "id": 1785835941400,
+    "negocio": "Salón Álex Sestelo | Peluquería Barrio Salamanca",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "info@salonalexsestelo.com",
+    "telefono": "914 16 13 20",
+    "web": "http://www.salonalexsestelo.com/",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps | Salón Álex Sestelo | Peluquería Barrio Salamanca:",
+    "estado": "enviado",
+    "fecha": "04/08/26"
+  },
+  {
+    "id": 1785835943600,
+    "negocio": "DIM SALÓN ▷ 【Peluquería Malasaña】",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "info@dimsalon.es",
+    "telefono": "622 00 23 32",
+    "web": "https://dimsalon.es/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps | DIM SALÓN ▷ 【Peluquería Malasaña】: el 30% de tus c",
+    "estado": "enviado",
+    "fecha": "04/08/26"
+  },
+  {
+    "id": 1785835945563,
+    "negocio": "Salón TONI&GUY - Madrid Chamberí",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "912 79 44 11",
+    "web": "https://toniandguy.es/?utm_source=google&utm_medium=maps&utm_campaign=mybusiness&utm_id=GMB+CHAMBERI&utm_content=madrid-chamberi",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1785835946740,
+    "negocio": "AVA MADRID SALON",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "910 01 48 78",
+    "web": "https://link.booksy.com/AvaMadrid",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1785835948571,
+    "negocio": "Entre 3 Peluquería y Belleza",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "913 66 44 68",
+    "web": "http://www.entre3peluqueriaybelleza.com/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1785835949072,
+    "negocio": "Salón Cheska",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "915 77 29 36",
+    "web": "",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1785835950328,
+    "negocio": "B-612 Peluquería",
+    "sector": "Peluquería",
+    "ciudad": "Madrid",
+    "email": "",
+    "telefono": "915 41 48 84",
+    "web": "http://www.instagram.com/beseiscientosdoce",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
     "id": 1785490545520,
     "negocio": "Taller MotorTown Murcia Av. Libertad",
     "sector": "Taller",
@@ -6859,9 +7119,9 @@
     "telefono": "952 21 42 53",
     "web": "https://belugamalaga.es/",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | Restaurante Beluga Málaga: las mesas vacías de fin",
+    "estado": "enviado",
+    "fecha": "04/08/26"
   },
   {
     "id": 1784106271858,
@@ -6872,9 +7132,9 @@
     "telefono": "603 72 36 23",
     "web": "http://www.lacabreramalaga.es/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | La Cabrera: las mesas vacías de fin de semana cues",
+    "estado": "enviado",
+    "fecha": "04/08/26"
   },
   {
     "id": 1784106272359,
@@ -8068,9 +8328,9 @@
     "telefono": "946 12 54 24",
     "web": "https://talleresautotechnik.com/",
     "rating": 3.7,
-    "notas": "⭐ 3.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 3.7 · Google Maps | Talleres Auto Technik: el 78% de las ventas va al",
+    "estado": "enviado",
+    "fecha": "04/08/26"
   },
   {
     "id": 1783678450996,
@@ -8497,9 +8757,9 @@
     "telefono": "944 32 96 70",
     "web": "https://medibilbaosalud.com/",
     "rating": 4.2,
-    "notas": "⭐ 4.2 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.2 · Google Maps | Medibilbao salud: cada cita cancelada sin rellenar",
+    "estado": "enviado",
+    "fecha": "04/08/26"
   },
   {
     "id": 1783592255443,
@@ -8523,9 +8783,9 @@
     "telefono": "911 21 24 27",
     "web": "https://clinicasbarber.com/",
     "rating": 4,
-    "notas": "⭐ 4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4 · Google Maps | Clínicas Barber | Clínica Medicina Estética Bilbao",
+    "estado": "enviado",
+    "fecha": "04/08/26"
   },
   {
     "id": 1783592258222,
@@ -8549,9 +8809,9 @@
     "telefono": "638 82 59 42",
     "web": "http://www.muguerza-franco.com/",
     "rating": 4.1,
-    "notas": "⭐ 4.1 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.1 · Google Maps | Medicina Estética y Obesidad | Clínica Euskalduna",
+    "estado": "enviado",
+    "fecha": "04/08/26"
   },
   {
     "id": 1783592263462,
@@ -8562,9 +8822,9 @@
     "telefono": "946 61 19 40",
     "web": "https://www.clinicabaviera.com/clinica-oftalmologica/bilbao-lehendakari?utm_source=gmb&utm_medium=maps&utm_campaign=clinic",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Baviera: cada cita cancelada sin rellenar vale ent",
+    "estado": "enviado",
+    "fecha": "04/08/26"
   },
   {
     "id": 1783592264111,
@@ -8588,9 +8848,9 @@
     "telefono": "946 51 00 10",
     "web": "https://www.podoactiva.com/clinicas-y-centros/podoactiva-bilbao",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | Podoactiva Bilbao: cada cita cancelada sin rellena",
+    "estado": "enviado",
+    "fecha": "04/08/26"
   },
   {
     "id": 1783592270805,
@@ -8614,9 +8874,9 @@
     "telefono": "944 10 05 05",
     "web": "https://www.drtxantonmartinezastorquiza.com/",
     "rating": 3.9,
-    "notas": "⭐ 3.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 3.9 · Google Maps | Clinica Ginecológica Amnium Bilbao. Ginecología y",
+    "estado": "enviado",
+    "fecha": "04/08/26"
   },
   {
     "id": 1783592278519,
@@ -8627,9 +8887,9 @@
     "telefono": "659 60 13 13",
     "web": "http://www.cirugiaplasticabilbao.com/",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | CIRUGÍA PLÁSTICA BILBAO. Dra. Laura Cabañas Weisz",
+    "estado": "enviado",
+    "fecha": "04/08/26"
   },
   {
     "id": 1783592279453,
@@ -8653,9 +8913,9 @@
     "telefono": "944 43 97 58",
     "web": "https://siwa.clinic/",
     "rating": 4.3,
-    "notas": "⭐ 4.3 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.3 · Google Maps | Siwa.clinic: cada cita cancelada sin rellenar vale",
+    "estado": "enviado",
+    "fecha": "04/08/26"
   },
   {
     "id": 1783592284721,
