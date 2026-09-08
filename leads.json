@@ -1,5 +1,213 @@
 [
   {
+    "id": 1788868163064,
+    "negocio": "Máximo`s Alisados",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "603 16 08 57",
+    "web": "",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1788868163950,
+    "negocio": "Pablo L. Peluqueros",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 24 05 35",
+    "web": "https://pablolpeluqueros.com/",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1788868164656,
+    "negocio": "Peluquería Chepina",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "693 70 73 46",
+    "web": "https://peluqueria-chepina.negocio.site/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1788868170035,
+    "negocio": "Peluqueria Edén",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "info@peluqueriaeden.com",
+    "telefono": "657 04 55 88",
+    "web": "http://www.peluqueriaeden.com/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps | Peluqueria Edén: el 30% de tus citas se pueden est",
+    "estado": "enviado",
+    "fecha": "08/09/26"
+  },
+  {
+    "id": 1788868171255,
+    "negocio": "Peluquería Vintage",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "hola@directoriomalaga.com",
+    "telefono": "951 70 30 78",
+    "web": "https://directoriomalaga.com/negocio/peluqueria-vintage",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps | Peluquería Vintage: el 30% de tus citas se pueden",
+    "estado": "enviado",
+    "fecha": "08/09/26"
+  },
+  {
+    "id": 1788868173547,
+    "negocio": "Urban Look Peluquería Unisex Málaga",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "690 25 59 75",
+    "web": "",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1788868175728,
+    "negocio": "Ana Gaitán",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 28 08 99",
+    "web": "https://www.instagram.com/agpeluquerias/?hl=es",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1788868176229,
+    "negocio": "EXPERIENCE Cecilia Velasco - Centro Belleza",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 91 23 39",
+    "web": "",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1788868179378,
+    "negocio": "Biopeluquería",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "608 43 80 22",
+    "web": "http://www.biopeluqueria.com/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1788868181445,
+    "negocio": "Frank Peluquería",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 60 13 89",
+    "web": "https://www.instagram.com/_frankpeluqueria_/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1788868183373,
+    "negocio": "Surbarbers",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "951 91 13 64",
+    "web": "https://www.facebook.com/Surbarbers",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1788868186056,
+    "negocio": "Gustavo Peluqueria Masculina",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "info@gustavopeluqueros.com",
+    "telefono": "656 64 32 22",
+    "web": "https://gustavopeluqueros.com/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps | Gustavo Peluqueria Masculina: el 30% de tus citas",
+    "estado": "enviado",
+    "fecha": "08/09/26"
+  },
+  {
+    "id": 1788868187940,
+    "negocio": "Art-Shampop Hair Stylist",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 22 47 02",
+    "web": "https://www.facebook.com/art.shampop",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1788868188441,
+    "negocio": "Juanfran Peluqueros",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "655 98 95 91",
+    "web": "",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1788868189989,
+    "negocio": "Salón de belleza Fanni Mena",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "951 43 84 86",
+    "web": "https://www.salondebellezafannimena.com/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1788868194074,
+    "negocio": "Secretos del Agua Salón Store",
+    "sector": "Peluquería",
+    "ciudad": "Málaga",
+    "email": "hola@secretosdelagua.com",
+    "telefono": "650 06 26 80",
+    "web": "http://www.secretosdelagua.com/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps | Secretos del Agua Salón Store: el 30% de tus citas",
+    "estado": "enviado",
+    "fecha": "08/09/26"
+  },
+  {
     "id": 1788522556019,
     "negocio": "Talleres Gurrea",
     "sector": "Taller",
@@ -47,9 +255,9 @@
     "telefono": "946 66 43 58",
     "web": "http://www.bscooter.es/",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | Taller Motos Bscooter Bilbao | Taller de reparació",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788522565605,
@@ -125,9 +333,9 @@
     "telefono": "944 75 68 66",
     "web": "https://www.toyota.es/concesionarios/japancar/bilbao-exposicion-taller?utm_source=googlemybusiness&utm_medium=sitiowebgbptaller&utm_campaign=visitar_web_taller&journeyId=GoogleMyBusiness",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | Taller Oficial TOYOTA Bilbao - Japan Car: el 78% d",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788522574135,
@@ -190,9 +398,9 @@
     "telefono": "671 39 38 23",
     "web": "http://www.zureauto.com/",
     "rating": 4,
-    "notas": "⭐ 4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4 · Google Maps | Zure Auto: el 78% de las ventas va al negocio que",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788522586371,
@@ -216,9 +424,9 @@
     "telefono": "944 44 50 12",
     "web": "http://www.clinicaindautxu.com/",
     "rating": 3.1,
-    "notas": "⭐ 3.1 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 3.1 · Google Maps | Clínica Indautxu. ETS-ITS Bilbao, laboratorio, Ray",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788436081280,
@@ -229,9 +437,9 @@
     "telefono": "944 27 11 10",
     "web": "https://www.facialclinique.com/",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | FC Facial CLINIQUE Bilbao: cada cita cancelada sin",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788436082363,
@@ -255,9 +463,9 @@
     "telefono": "944 79 36 63",
     "web": "https://www.clinicaarriaga.com/",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | Clínica Arriaga - Tu podólogo en Bilbao: cada cita",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788436090194,
@@ -268,9 +476,9 @@
     "telefono": "669 97 78 37",
     "web": "https://saludintegralbilbao.com/",
     "rating": 5,
-    "notas": "⭐ 5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 5 · Google Maps | Salud Integral Bilbao-Clinica Euskalduna: cada cit",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788436090922,
@@ -281,9 +489,9 @@
     "telefono": "611 48 92 94",
     "web": "https://clinicatheage.es/",
     "rating": 5,
-    "notas": "⭐ 5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 5 · Google Maps | Clínica THE AGE - Medicina Estética y Antienvejeci",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788436092511,
@@ -294,9 +502,9 @@
     "telefono": "946 34 52 18",
     "web": "https://www.mugisalud.com/",
     "rating": 5,
-    "notas": "⭐ 5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 5 · Google Maps | Mugisalud - Centro Integral Osteoarticular: cada c",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788436093836,
@@ -320,9 +528,9 @@
     "telefono": "944 39 35 10",
     "web": "https://urologiaclinica.biz/",
     "rating": 3.4,
-    "notas": "⭐ 3.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 3.4 · Google Maps | Urología Clínica: cada cita cancelada sin rellenar",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788436097459,
@@ -359,9 +567,9 @@
     "telefono": "944 39 74 93",
     "web": "http://www.multiesteticabilbao.com/",
     "rating": 4.3,
-    "notas": "⭐ 4.3 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.3 · Google Maps | Multiestetica Bilbao: cada cita cancelada sin rell",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788436103827,
@@ -372,9 +580,9 @@
     "telefono": "944 01 01 10",
     "web": "https://www.dermitek.com/?utm_source=gmb&utm_medium=organic&utm_campaign=local",
     "rating": 4.1,
-    "notas": "⭐ 4.1 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.1 · Google Maps | Dermitek: cada cita cancelada sin rellenar vale en",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788436106224,
@@ -385,9 +593,9 @@
     "telefono": "944 15 89 02",
     "web": "https://ortizvigon.com/",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | Clínica Dental Ortiz-Vigón | Especialistas en impl",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788436107582,
@@ -424,9 +632,9 @@
     "telefono": "944 76 40 32",
     "web": "http://www.sanasport.es/",
     "rating": 5,
-    "notas": "⭐ 5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 5 · Google Maps | CLÍNICA SANASPORT BILBAO: cada cita cancelada sin",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788436120173,
@@ -489,9 +697,9 @@
     "telefono": "946 63 00 12",
     "web": "https://www.laolladelaplazanueva.es/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | La Olla de la Plaza Nueva: las mesas vacías de fin",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788349673690,
@@ -502,9 +710,9 @@
     "telefono": "944 45 21 32",
     "web": "http://www.restauranteburgoa.es/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | BURGOA RESTAURANTE: las mesas vacías de fin de sem",
+    "estado": "enviado",
+    "fecha": "08/09/26"
   },
   {
     "id": 1788349676190,
