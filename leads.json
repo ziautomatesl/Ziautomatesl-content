@@ -1,5 +1,187 @@
 [
   {
+    "id": 1789041291164,
+    "negocio": "Clínica METS Málaga",
+    "sector": "Clínica",
+    "ciudad": "Málaga",
+    "email": "recepcion.malaga@clinicasmets.es",
+    "telefono": "661 37 95 72",
+    "web": "https://clinicasmets.es/clinica-malaga/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps | Clínica METS Málaga: cada cita cancelada sin relle",
+    "estado": "enviado",
+    "fecha": "10/09/26"
+  },
+  {
+    "id": 1789041295800,
+    "negocio": "Hospital Vithas Xanit Internacional",
+    "sector": "Clínica",
+    "ciudad": "Málaga",
+    "email": "info.xanit@vithas.es",
+    "telefono": "952 36 71 90",
+    "web": "https://vithas.es/centro/vithas-hospital-xanit-internacional/",
+    "rating": 3.7,
+    "notas": "⭐ 3.7 · Google Maps | Hospital Vithas Xanit Internacional: cada cita can",
+    "estado": "enviado",
+    "fecha": "10/09/26"
+  },
+  {
+    "id": 1789041296606,
+    "negocio": "Clínicas Revitae del Dr. Oyola Málaga",
+    "sector": "Clínica",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "951 20 71 70",
+    "web": "https://clinicasrevitae.com/clinica-de-medicina-y-cirugia-estetica-en-malaga/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789041297602,
+    "negocio": "Clínica del Pie La Malagueta",
+    "sector": "Clínica",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "699 16 58 00",
+    "web": "https://clinicadelpielamalagueta.com/?utm_source=googlemybusiness&utm_medium=googlemybusiness&utm_campaign=googlemybusiness",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789041300708,
+    "negocio": "Clínica Martí-Torres",
+    "sector": "Clínica",
+    "ciudad": "Málaga",
+    "email": "info@clinicamartitorres.com",
+    "telefono": "952 21 30 30",
+    "web": "http://clinicamartitorres.com/",
+    "rating": 2.8,
+    "notas": "⭐ 2.8 · Google Maps | Clínica Martí-Torres: cada cita cancelada sin rell",
+    "estado": "enviado",
+    "fecha": "10/09/26"
+  },
+  {
+    "id": 1789041304395,
+    "negocio": "CosMédica - Cirugía Estética, Medicina Estética en Málaga",
+    "sector": "Clínica",
+    "ciudad": "Málaga",
+    "email": "info@cirugiacosmedica.com",
+    "telefono": "952 07 36 00",
+    "web": "https://www.cirugiacosmedica.com/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps | CosMédica - Cirugía Estética, Medicina Estética en",
+    "estado": "enviado",
+    "fecha": "10/09/26"
+  },
+  {
+    "id": 1789041305507,
+    "negocio": "Policlínica Litoral S.L. en Málaga",
+    "sector": "Clínica",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 35 04 00",
+    "web": "https://www.policlinicalitoral.com/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789041306713,
+    "negocio": "Clínica Dra. Espínola Medicina Estética Cirugía Plástica y Psicología",
+    "sector": "Clínica",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "610 27 53 91",
+    "web": "https://clinicaespinola.com/",
+    "rating": 4.2,
+    "notas": "⭐ 4.2 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789041313783,
+    "negocio": "Medicina Estética Málaga | Clínica Dra Laura Moral",
+    "sector": "Clínica",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "680 88 83 35",
+    "web": "http://lauramoral.com/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789041318359,
+    "negocio": "Especialistas Málaga",
+    "sector": "Clínica",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "951 51 88 20",
+    "web": "http://www.especialistasmalaga.com/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789041335032,
+    "negocio": "Vitali Salud La paz | Centro medico",
+    "sector": "Clínica",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 32 46 56",
+    "web": "https://vitalisalud.com/",
+    "rating": 2.9,
+    "notas": "⭐ 2.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789041335923,
+    "negocio": "Clínica Médico Estética - Línea Ideal Málaga",
+    "sector": "Clínica",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 60 60 97",
+    "web": "https://www.lineaideal.es/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789041339271,
+    "negocio": "Clínica Dental Grupo Dental Clinics",
+    "sector": "Clínica",
+    "ciudad": "Málaga",
+    "email": "ilr@gmail.com",
+    "telefono": "628 85 29 82",
+    "web": "https://www.grupodentalclinics.es/clinica-dental-malaga-centro/",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps | Clínica Dental Grupo Dental Clinics: cada cita can",
+    "estado": "enviado",
+    "fecha": "10/09/26"
+  },
+  {
+    "id": 1789041339893,
+    "negocio": "Ginemed Málaga - Clínica de Reproducción Asistida y Fertilidad",
+    "sector": "Clínica",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "951 76 37 00",
+    "web": "https://www.ginemed.es/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
     "id": 1788955239061,
     "negocio": "Restaurante Divinno",
     "sector": "Restaurante",
@@ -1412,9 +1594,9 @@
     "telefono": "944 06 99 39",
     "web": "http://www.lafabrique.coop/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | La Fabrique Peluqueros: el 30% de tus citas se pue",
+    "estado": "enviado",
+    "fecha": "10/09/26"
   },
   {
     "id": 1788264636445,
@@ -1451,9 +1633,9 @@
     "telefono": "946 40 90 88",
     "web": "http://radiancestilistas.com/",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | Radiance Estilistas: el 30% de tus citas se pueden",
+    "estado": "enviado",
+    "fecha": "10/09/26"
   },
   {
     "id": 1788264639428,
@@ -1477,9 +1659,9 @@
     "telefono": "944 02 90 26",
     "web": "http://www.delospiesalacabeza.es/",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | Peluqueria en Bilbao Delospiesalacabeza Heros: el",
+    "estado": "enviado",
+    "fecha": "10/09/26"
   },
   {
     "id": 1788264644168,
@@ -1594,9 +1776,9 @@
     "telefono": "650 53 88 29",
     "web": "https://reservas.koibox.cloud/zona-curly-bilbao",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | Zona Curly, los Expertos en Método Curly de Bilbao",
+    "estado": "enviado",
+    "fecha": "10/09/26"
   },
   {
     "id": 1788264670855,
@@ -1698,9 +1880,9 @@
     "telefono": "944 47 50 01",
     "web": "http://www.marcelarranz.net/",
     "rating": 4.6,
-    "notas": "⭐ 4.6 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.6 · Google Maps | Marcel Arranz Hair Spa Bilbao: el 30% de tus citas",
+    "estado": "enviado",
+    "fecha": "10/09/26"
   },
   {
     "id": 1788264679138,
@@ -1750,9 +1932,9 @@
     "telefono": "670 46 18 91",
     "web": "http://www.multitalleres24horas.es/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Multitalleres: el 78% de las ventas va al negocio",
+    "estado": "enviado",
+    "fecha": "10/09/26"
   },
   {
     "id": 1787944027844,
@@ -1854,9 +2036,9 @@
     "telefono": "955 13 58 05",
     "web": "http://www.manuelmorenotalleres.es/",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | Talleres Manuel Moreno: el 78% de las ventas va al",
+    "estado": "enviado",
+    "fecha": "10/09/26"
   },
   {
     "id": 1787944039403,
@@ -1893,9 +2075,9 @@
     "telefono": "642 73 00 03",
     "web": "http://www.neumaticoslanegrilla.com/",
     "rating": 4.6,
-    "notas": "⭐ 4.6 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.6 · Google Maps | Neumáticos La Negrilla Sevilla | Taller neumáticos",
+    "estado": "enviado",
+    "fecha": "10/09/26"
   },
   {
     "id": 1787944042206,
@@ -1971,9 +2153,9 @@
     "telefono": "671 41 37 29",
     "web": "https://icarstalleres.com/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | iCars Sevilla CC.Alcampo: el 78% de las ventas va",
+    "estado": "enviado",
+    "fecha": "10/09/26"
   },
   {
     "id": 1787944055193,
@@ -1984,9 +2166,9 @@
     "telefono": "615 59 75 97",
     "web": "https://www.lobatotalleres.com/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Talleres Lobato Automocion: el 78% de las ventas v",
+    "estado": "enviado",
+    "fecha": "10/09/26"
   },
   {
     "id": 1787944055695,
@@ -2023,9 +2205,9 @@
     "telefono": "954 51 55 80",
     "web": "https://tallerwelcomemovil.com/",
     "rating": 4.1,
-    "notas": "⭐ 4.1 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.1 · Google Maps | Taller Welcome Móvil Sevilla: el 78% de las ventas",
+    "estado": "enviado",
+    "fecha": "10/09/26"
   },
   {
     "id": 1787944058480,
@@ -2049,9 +2231,9 @@
     "telefono": "954 28 23 99",
     "web": "http://www.talleresokauto.com/",
     "rating": 3.9,
-    "notas": "⭐ 3.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 3.9 · Google Maps | Talleres OK auto: el 78% de las ventas va al negoc",
+    "estado": "enviado",
+    "fecha": "10/09/26"
   },
   {
     "id": 1787944060111,
@@ -2075,9 +2257,9 @@
     "telefono": "854 73 85 66",
     "web": "https://www.tallerautoreset.com/",
     "rating": 4.1,
-    "notas": "⭐ 4.1 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.1 · Google Maps | TALLER MECÁNICO AUTORESET SEVILLA: el 78% de las v",
+    "estado": "enviado",
+    "fecha": "10/09/26"
   },
   {
     "id": 1787944063201,
@@ -2140,9 +2322,9 @@
     "telefono": "625 69 95 02",
     "web": "http://www.talleressantacatalina.com/",
     "rating": 3.9,
-    "notas": "⭐ 3.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 3.9 · Google Maps | Taller Santa Catalina: el 78% de las ventas va al",
+    "estado": "enviado",
+    "fecha": "10/09/26"
   },
   {
     "id": 1787944075527,
@@ -2205,9 +2387,9 @@
     "telefono": "640 68 25 20",
     "web": "https://talleresmecanicosa.wixsite.com/tallermecanicoapena",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | Taller Mecánico A. Peña: el 78% de las ventas va a",
+    "estado": "enviado",
+    "fecha": "10/09/26"
   },
   {
     "id": 1787944080893,
