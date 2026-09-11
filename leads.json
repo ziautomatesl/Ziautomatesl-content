@@ -1,5 +1,343 @@
 [
   {
+    "id": 1789127623419,
+    "negocio": "Valvoline Service Talleres M. García,",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "info@talleresmgarcia.es",
+    "telefono": "952 35 53 06",
+    "web": "http://talleresmgarcia.com/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps | Valvoline Service Talleres M. García,: el 78% de l",
+    "estado": "enviado",
+    "fecha": "11/09/26"
+  },
+  {
+    "id": 1789127624886,
+    "negocio": "INDALMAR MOTOR TALLER MALAGA",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "648 00 46 93",
+    "web": "https://www.indalmarmotor.com/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127625571,
+    "negocio": "TALLERES NUZAS",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 30 83 04",
+    "web": "https://cubesa.blogspot.com/",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127626420,
+    "negocio": "Euromaster Málaga El Viso",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 33 10 98",
+    "web": "https://www.euromaster-neumaticos.es/centros/andalucia/malaga/euromaster-malaga-el-viso?utm_source=Google&utm_medium=organic&utm_campaign=Uberall_GBP&utm_content=LDS&utm_term=Uberall_GBP",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127626922,
+    "negocio": "Talleres Juan Moreno",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 24 58 42",
+    "web": "",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127627423,
+    "negocio": "Talleres RS",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "635 27 92 13",
+    "web": "",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127627991,
+    "negocio": "Midas MALAGA/Bailén",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "951 79 45 65",
+    "web": "https://www.midas.es/talleres-coche-moto-midas/andalucia/malaga/malaga/malagabailen_3565",
+    "rating": 4.1,
+    "notas": "⭐ 4.1 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127629878,
+    "negocio": "Taller Electro Frio Motor - Tacógrafos",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "electrofriomotorsl@contacta.email",
+    "telefono": "952 23 84 77",
+    "web": "https://electrofriomotor.com.es/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps | Taller Electro Frio Motor - Tacógrafos: el 78% de",
+    "estado": "enviado",
+    "fecha": "11/09/26"
+  },
+  {
+    "id": 1789127632164,
+    "negocio": "Talleres Fernández Hidalgo | Bosch Car Service | Certified first | MercedesBenz BMW Audi Porsche",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "citas@talleresfernandezhidalgo.com",
+    "telefono": "952 24 19 29",
+    "web": "http://www.talleresfernandezhidalgo.com/",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps | Talleres Fernández Hidalgo | Bosch Car Service | C",
+    "estado": "enviado",
+    "fecha": "11/09/26"
+  },
+  {
+    "id": 1789127640901,
+    "negocio": "Talleres Sáez SC | Taller Malaga - Inyectores Diesel",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 31 66 93",
+    "web": "http://talleresaezsc.com/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127649621,
+    "negocio": "Taller Coches Málaga - Hermanos Camacho Pelegrina",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 32 20 89",
+    "web": "http://www.tallerescamachopelegrina.es/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127650486,
+    "negocio": "Málaga Wagen - Taller Oficial Volkswagen",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "f@faisalman.com",
+    "telefono": "951 23 16 00",
+    "web": "https://www.volkswagen.es/es/clientes/cita-previa-instalacion.html?dealer=00498",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps | Málaga Wagen - Taller Oficial Volkswagen: el 78% d",
+    "estado": "enviado",
+    "fecha": "11/09/26"
+  },
+  {
+    "id": 1789127650987,
+    "negocio": "Talleres Bernet",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 36 24 73",
+    "web": "",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127651558,
+    "negocio": "Midas MALAGA/El Palo",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "951 79 51 79",
+    "web": "https://www.midas.es/talleres-coche-moto-midas/andalucia/malaga/malaga/malagael-palo_3576",
+    "rating": 3.9,
+    "notas": "⭐ 3.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127662074,
+    "negocio": "Taller Lisa",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "602 32 42 19",
+    "web": "http://www.tallerlisa.es/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127662575,
+    "negocio": "Talleres Gonzalez",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "620 38 98 47",
+    "web": "",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127664670,
+    "negocio": "ChapiSalas Málaga",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 32 76 04",
+    "web": "http://www.chapisalas.es/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127665172,
+    "negocio": "Electromecánica Talleres Zamarrilla",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 39 77 66",
+    "web": "",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127666642,
+    "negocio": "Talleres La Paloma",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "info@tallereslapaloma.com",
+    "telefono": "952 24 06 06",
+    "web": "http://www.tallereslapaloma.com/",
+    "rating": 4.1,
+    "notas": "⭐ 4.1 · Google Maps | Talleres La Paloma: el 78% de las ventas va al neg",
+    "estado": "enviado",
+    "fecha": "11/09/26"
+  },
+  {
+    "id": 1789127669155,
+    "negocio": "Talleres Solis. BMW, Porsche y Mercedes Málaga.",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "taller@a-solis.com",
+    "telefono": "952 23 10 13",
+    "web": "https://a-solis.com/",
+    "rating": 4.2,
+    "notas": "⭐ 4.2 · Google Maps | Talleres Solis. BMW, Porsche y Mercedes Málaga.: e",
+    "estado": "enviado",
+    "fecha": "11/09/26"
+  },
+  {
+    "id": 1789127670170,
+    "negocio": "BricoAutoMálaga",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "bricoautomalaga@gmail.com",
+    "telefono": "951 13 25 32",
+    "web": "http://www.alquilerdeboxmalaga.com/",
+    "rating": 4.1,
+    "notas": "⭐ 4.1 · Google Maps | BricoAutoMálaga: el 78% de las ventas va al negoci",
+    "estado": "enviado",
+    "fecha": "11/09/26"
+  },
+  {
+    "id": 1789127670671,
+    "negocio": "Talleres Alarcón Motor",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "951 32 58 42",
+    "web": "",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127671172,
+    "negocio": "Talleres Corral",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 39 37 95",
+    "web": "",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127671674,
+    "negocio": "Talleres Moyá",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "644 13 08 34",
+    "web": "",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127674975,
+    "negocio": "Málaga Wagen",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "",
+    "telefono": "952 23 86 60",
+    "web": "http://www.malagawagen.es/",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789127678837,
+    "negocio": "Taller De Mecanica Rapida",
+    "sector": "Taller",
+    "ciudad": "Málaga",
+    "email": "info@tallerdemecanicarapida.com",
+    "telefono": "952 31 83 24",
+    "web": "https://tallerdemecanicarapida.es/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps | Taller De Mecanica Rapida: el 78% de las ventas va",
+    "estado": "enviado",
+    "fecha": "11/09/26"
+  },
+  {
     "id": 1789041291164,
     "negocio": "Clínica METS Málaga",
     "sector": "Clínica",
@@ -2413,9 +2751,9 @@
     "telefono": "",
     "web": "http://www.tallervirgen.com/",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | Taller Virgen Cerámica: el 78% de las ventas va al",
+    "estado": "enviado",
+    "fecha": "11/09/26"
   },
   {
     "id": 1787853414220,
@@ -2426,9 +2764,9 @@
     "telefono": "954 41 30 56",
     "web": "http://www.clinicamarest.com/",
     "rating": 4.6,
-    "notas": "⭐ 4.6 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.6 · Google Maps | Clínica Marest: cada cita cancelada sin rellenar v",
+    "estado": "enviado",
+    "fecha": "11/09/26"
   },
   {
     "id": 1787853419808,
@@ -2439,9 +2777,9 @@
     "telefono": "854 70 29 12",
     "web": "https://clinicbc.com/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Clinica BC Bienestar y Cuidado Sevilla: cada cita",
+    "estado": "enviado",
+    "fecha": "11/09/26"
   },
   {
     "id": 1787853426830,
@@ -2452,9 +2790,9 @@
     "telefono": "954 98 80 53",
     "web": "https://www.clinicaclever.com/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Clínica Clever: cada cita cancelada sin rellenar v",
+    "estado": "enviado",
+    "fecha": "11/09/26"
   },
   {
     "id": 1787853430781,
@@ -2491,9 +2829,9 @@
     "telefono": "955 32 02 89",
     "web": "https://www.clinicajuvent.com/?utm_source=google&utm_medium=gmb&utm_campaign=gmb_button",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | Clínica de Medicina Estética Juvent: cada cita can",
+    "estado": "enviado",
+    "fecha": "11/09/26"
   },
   {
     "id": 1787853437958,
@@ -2504,9 +2842,9 @@
     "telefono": "954 21 72 16",
     "web": "http://clinicalaguens.com/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | Clinica Lagüéns: cada cita cancelada sin rellenar",
+    "estado": "enviado",
+    "fecha": "11/09/26"
   },
   {
     "id": 1787853438459,
@@ -2530,9 +2868,9 @@
     "telefono": "954 32 82 50",
     "web": "http://www.clinicarenal.es/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | CLÍNICA ARENAL, MEDICINA ESTÉTICA y DERMATOLOGÍA:",
+    "estado": "enviado",
+    "fecha": "11/09/26"
   },
   {
     "id": 1787853446735,
@@ -2543,9 +2881,9 @@
     "telefono": "955 60 48 17",
     "web": "http://demaxclinic.com/",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | Demax Clinic | Dermatología, Medicina y Cirugía Es",
+    "estado": "enviado",
+    "fecha": "11/09/26"
   },
   {
     "id": 1787853448361,
@@ -2569,9 +2907,9 @@
     "telefono": "955 29 26 97",
     "web": "https://clinicamontecarmelo.es/",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | Clínica Montecarmelo: cada cita cancelada sin rell",
+    "estado": "enviado",
+    "fecha": "11/09/26"
   },
   {
     "id": 1787853452009,
@@ -2582,9 +2920,9 @@
     "telefono": "954 22 77 77",
     "web": "https://clinicalo.es/",
     "rating": 5,
-    "notas": "⭐ 5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 5 · Google Maps | Clínica LÓ: cada cita cancelada sin rellenar vale",
+    "estado": "enviado",
+    "fecha": "11/09/26"
   },
   {
     "id": 1787853456582,
@@ -2595,9 +2933,9 @@
     "telefono": "643 20 92 02",
     "web": "http://www.clinicaintegra.es/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Integra, Clínica Médico Estética en Sevilla: cada",
+    "estado": "enviado",
+    "fecha": "11/09/26"
   },
   {
     "id": 1787853458268,
@@ -2608,9 +2946,9 @@
     "telefono": "954 98 00 55",
     "web": "https://clinicarociovazquez.com/?utm_source=google&utm_medium=organic&utm_campaign=google_business_profile",
     "rating": 4.3,
-    "notas": "⭐ 4.3 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.3 · Google Maps | Clínica Rocío Vázquez | Medicina y Cirugía Estétic",
+    "estado": "enviado",
+    "fecha": "11/09/26"
   },
   {
     "id": 1787853467143,
