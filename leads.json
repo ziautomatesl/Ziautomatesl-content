@@ -1,5 +1,278 @@
 [
   {
+    "id": 1789474667684,
+    "negocio": "Peluquería Zaragoza Angelina salón",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "876 44 59 28",
+    "web": "https://peluqueria380.wordpress.com/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474670389,
+    "negocio": "Esther Val Estilistas",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "645 29 95 50",
+    "web": "https://www.facebook.com/ev.estilistas59/",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474674567,
+    "negocio": "Cebado Zaragoza",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 55 83 20",
+    "web": "http://www.cebadozaragoza.es/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474676141,
+    "negocio": "Peluquería PEPE Hair Design",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 59 10 12",
+    "web": "http://www.pepehairdesign.com/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474676642,
+    "negocio": "peluquería belle uñas estética y barbería",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "876 43 35 30",
+    "web": "",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474678817,
+    "negocio": "MARIA YUS peluquería y estética",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "info@mariayus.com",
+    "telefono": "976 21 24 49",
+    "web": "http://www.mariayus.com/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps | MARIA YUS peluquería y estética: el 30% de tus cit",
+    "estado": "enviado",
+    "fecha": "15/09/26"
+  },
+  {
+    "id": 1789474680239,
+    "negocio": "Dania Peluquerías",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "dania@daniapeluquerias.com",
+    "telefono": "691 33 19 29",
+    "web": "http://daniapeluquerias.com/",
+    "rating": 4.2,
+    "notas": "⭐ 4.2 · Google Maps | Dania Peluquerías: el 30% de tus citas se pueden e",
+    "estado": "enviado",
+    "fecha": "15/09/26"
+  },
+  {
+    "id": 1789474684244,
+    "negocio": "Salón Cristina Cisneros",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "hola@peluqueriacristinacisneros.es",
+    "telefono": "976 79 47 85",
+    "web": "http://www.peluqueriacristinacisneros.es/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps | Salón Cristina Cisneros: el 30% de tus citas se pu",
+    "estado": "enviado",
+    "fecha": "15/09/26"
+  },
+  {
+    "id": 1789474684745,
+    "negocio": "Meraki",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "876 28 76 43",
+    "web": "",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474685246,
+    "negocio": "Peluquería Julia",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 96 65 53",
+    "web": "",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474685961,
+    "negocio": "Peluquería NancyLu - Especialistas en Alisados Zaragoza",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "peluquerianancylu@gmail.com",
+    "telefono": "651 09 77 89",
+    "web": "https://peluquerianancylu.com/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps | Peluquería NancyLu - Especialistas en Alisados Zar",
+    "estado": "enviado",
+    "fecha": "15/09/26"
+  },
+  {
+    "id": 1789474686462,
+    "negocio": "Peluquería Sabai",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 00 20 71",
+    "web": "",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474686963,
+    "negocio": "Peluquería Ramón Guerri",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 22 80 25",
+    "web": "",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474687464,
+    "negocio": "Menta",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "876 28 57 13",
+    "web": "",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474690480,
+    "negocio": "La Barbería del Tío Jorge (Exclusive)",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "658 06 28 13",
+    "web": "http://www.labarberiadeltiojorge.com/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474690982,
+    "negocio": "Unión Estilistas",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 56 58 13",
+    "web": "",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474692699,
+    "negocio": "Laura Seco Peluquería",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 09 80 15",
+    "web": "https://www.facebook.com/LauraSecoEstilista/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474693617,
+    "negocio": "Mentha Lemon Peluquería y Belleza Zaragoza",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 23 15 51",
+    "web": "https://www.instagram.com/menthalemon/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474694130,
+    "negocio": "M.o Peluquería",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "602 07 19 18",
+    "web": "https://mopeluqueria.es/",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474694631,
+    "negocio": "Peluquería Lonael",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 23 79 34",
+    "web": "",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789474696471,
+    "negocio": "JACSA peluquería zona puente piedra Zaragoza",
+    "sector": "Peluquería",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 29 33 02",
+    "web": "http://www.jacsa.com/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
     "id": 1789127623419,
     "negocio": "Valvoline Service Talleres M. García,",
     "sector": "Taller",
@@ -2959,9 +3232,9 @@
     "telefono": "954 64 71 71",
     "web": "https://clinicacisem.com/",
     "rating": 5,
-    "notas": "⭐ 5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 5 · Google Maps | Clínica Estética en Sevilla | Clínica Cisem: cada",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787853473010,
@@ -2972,9 +3245,9 @@
     "telefono": "954 28 01 98",
     "web": "https://clinicabernaldez.com/?utm_source=google&utm_medium=maps",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | SportMe Medical Center Traumatólogo Clínica Bernal",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787853474561,
@@ -3011,9 +3284,9 @@
     "telefono": "955 70 02 87",
     "web": "https://www.clinicaeps.com/",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | Clínica EPS Aljarafe: cada cita cancelada sin rell",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787853488090,
@@ -3050,9 +3323,9 @@
     "telefono": "954 66 35 02",
     "web": "http://centromedicohispalia.es/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | Centro Médico Hispalia: cada cita cancelada sin re",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787853492405,
@@ -3063,9 +3336,9 @@
     "telefono": "679 36 69 57",
     "web": "https://clinicadoctorloza.es/",
     "rating": 5,
-    "notas": "⭐ 5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 5 · Google Maps | Clinica Doctor Loza / Medicina Estética Sevilla: c",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787853500145,
@@ -3115,9 +3388,9 @@
     "telefono": "653 71 96 03",
     "web": "https://estetica-medica.es/",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | Estética Médica Sevilla ( Dr. Román Onsalo & Dra.",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787853506621,
@@ -3154,9 +3427,9 @@
     "telefono": "955 54 05 15",
     "web": "https://clinicacuve.es/",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | Clínica Cuve - Medicina Estética, Cirugía Plástica",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787853514405,
@@ -3180,9 +3453,9 @@
     "telefono": "954 28 60 18",
     "web": "https://clinicadoctorortiz.es/",
     "rating": 4.6,
-    "notas": "⭐ 4.6 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.6 · Google Maps | Clínica Doctor Ortiz: cada cita cancelada sin rell",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787853525046,
@@ -3193,9 +3466,9 @@
     "telefono": "654 46 63 76",
     "web": "https://www.maramedicinaestetica.com/",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | Mara Jiménez | Clínica de Medicina Estética en Sev",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787853528001,
@@ -3219,9 +3492,9 @@
     "telefono": "637 09 95 16",
     "web": "https://zerescapilar.es/?utm_source=GMB&utm_medium=Ficha+Google+&utm_campaign=Maps",
     "rating": 5,
-    "notas": "⭐ 5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 5 · Google Maps | Clinica Capilar Sevilla | Zeres ®: cada cita cance",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787853533246,
@@ -3232,9 +3505,9 @@
     "telefono": "954 27 64 33",
     "web": "http://www.centromedicovirgendelvalle.es/",
     "rating": 4,
-    "notas": "⭐ 4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4 · Google Maps | Reconocimientos médicos CM Virgen del Valle: cada",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787853535482,
@@ -3271,9 +3544,9 @@
     "telefono": "615 55 11 55",
     "web": "https://www.andromedi.com/clinica-sevilla/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | Andromedi Sevilla - Clínica de Urología y Androlog",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787729716294,
@@ -3284,9 +3557,9 @@
     "telefono": "",
     "web": "https://recovecorestaurante.com/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | Restaurante Recoveco: las mesas vacías de fin de s",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787729719511,
@@ -3323,9 +3596,9 @@
     "telefono": "954 50 12 80",
     "web": "https://www.restauranteelmiradordesevilla.com/",
     "rating": 4.3,
-    "notas": "⭐ 4.3 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.3 · Google Maps | El Mirador de Sevilla: las mesas vacías de fin de",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787729724687,
@@ -3349,9 +3622,9 @@
     "telefono": "955 79 56 39",
     "web": "http://www.casalonja.com/?utm_source=google-my-business",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Casa Lonja - Restaurante en el centro de Sevilla:",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787729729522,
@@ -3388,9 +3661,9 @@
     "telefono": "954 22 20 91",
     "web": "https://www.donaencarna.com/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | Doña Encarna: las mesas vacías de fin de semana cu",
+    "estado": "enviado",
+    "fecha": "15/09/26"
   },
   {
     "id": 1787729735835,
