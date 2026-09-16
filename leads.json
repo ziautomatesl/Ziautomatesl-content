@@ -1,5 +1,291 @@
 [
   {
+    "id": 1789560990906,
+    "negocio": "Restaurante Carcas Casa Pedro",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 29 11 68",
+    "web": "https://carcasrestaurante.com/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789560994906,
+    "negocio": "Restaurante Casa Agustín",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "contacto@restaurantecasagustin.com",
+    "telefono": "876 45 26 30",
+    "web": "https://restaurantecasagustin.es/",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps | Restaurante Casa Agustín: las mesas vacías de fin",
+    "estado": "enviado",
+    "fecha": "16/09/26"
+  },
+  {
+    "id": 1789560995995,
+    "negocio": "SOPHIA Gastrobar",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "info@sophiagastro.com",
+    "telefono": "976 23 43 76",
+    "web": "https://sophiagastro.com/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps | SOPHIA Gastrobar: las mesas vacías de fin de seman",
+    "estado": "enviado",
+    "fecha": "16/09/26"
+  },
+  {
+    "id": 1789560997795,
+    "negocio": "Rassmia Zaragoza",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "633 96 03 38",
+    "web": "https://rassmiazaragoza.com/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789561000460,
+    "negocio": "Restaurante Quema",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "676 37 40 62",
+    "web": "http://www.restaurantequema.com/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789561006706,
+    "negocio": "Restaurante Celebris Zaragoza",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "rttecelebris@palafoxhoteles.com",
+    "telefono": "876 54 20 06",
+    "web": "http://www.restaurantecelebris.com/",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps | Restaurante Celebris Zaragoza: las mesas vacías de",
+    "estado": "enviado",
+    "fecha": "16/09/26"
+  },
+  {
+    "id": 1789561007513,
+    "negocio": "Restaurante La Bombonera Zaragoza",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "labombonerazgz@gmail.com",
+    "telefono": "876 77 12 19",
+    "web": "https://restaurantelabombonera.metro.rest/?lang=es#",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps | Restaurante La Bombonera Zaragoza: las mesas vacía",
+    "estado": "enviado",
+    "fecha": "16/09/26"
+  },
+  {
+    "id": 1789561019519,
+    "negocio": "Bodegón Azoque",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "nreservas@bodegonazoque.com",
+    "telefono": "976 22 03 20",
+    "web": "http://www.bodegonazoque.com/",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps | Bodegón Azoque: las mesas vacías de fin de semana",
+    "estado": "enviado",
+    "fecha": "16/09/26"
+  },
+  {
+    "id": 1789561020557,
+    "negocio": "Carnívoro Wine and Grill",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "info@restaurantecarnivoro.es",
+    "telefono": "876 70 66 49",
+    "web": "https://restaurantecarnivoro.es/",
+    "rating": 4.3,
+    "notas": "⭐ 4.3 · Google Maps | Carnívoro Wine and Grill: las mesas vacías de fin",
+    "estado": "enviado",
+    "fecha": "16/09/26"
+  },
+  {
+    "id": 1789561021481,
+    "negocio": "Urola Restaurante",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 56 02 21",
+    "web": "http://www.urolarestaurante.es/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789561030340,
+    "negocio": "BOULEVARDIER RESTAURANTE",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 92 58 88",
+    "web": "http://www.grupoboulevardier.com/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789561032581,
+    "negocio": "Origen 1952",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "876 45 12 03",
+    "web": "https://origen1952.com/",
+    "rating": 4.3,
+    "notas": "⭐ 4.3 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789561034087,
+    "negocio": "Saona Zaragoza (Plaza de los Sitios)",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "645 38 64 26",
+    "web": "https://www.gruposaona.com/restaurante/saona-plaza-de-los-sitios/",
+    "rating": 4.3,
+    "notas": "⭐ 4.3 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789561038903,
+    "negocio": "Restaurante Birolla 4",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "info@birolla.com",
+    "telefono": "976 97 90 93",
+    "web": "http://birolla.com/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps | Restaurante Birolla 4: las mesas vacías de fin de",
+    "estado": "enviado",
+    "fecha": "16/09/26"
+  },
+  {
+    "id": 1789561044745,
+    "negocio": "Restaurante Txalupa",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "info@txalupazaragoza.com",
+    "telefono": "976 56 61 70",
+    "web": "http://www.txalupazaragoza.com/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps | Restaurante Txalupa: las mesas vacías de fin de se",
+    "estado": "enviado",
+    "fecha": "16/09/26"
+  },
+  {
+    "id": 1789561047678,
+    "negocio": "Tragantúa Gran Taberna",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "info@grupoloscabezudos.es",
+    "telefono": "976 29 91 74",
+    "web": "https://grupoloscabezudos.es/restaurante-tragantua/",
+    "rating": 4.2,
+    "notas": "⭐ 4.2 · Google Maps | Tragantúa Gran Taberna: las mesas vacías de fin de",
+    "estado": "enviado",
+    "fecha": "16/09/26"
+  },
+  {
+    "id": 1789561053527,
+    "negocio": "Crudo Taberna Gastronómica",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "876 71 01 47",
+    "web": "http://www.crudozaragoza.com/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789561057456,
+    "negocio": "Marengo Urban Food",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 22 05 70",
+    "web": "http://www.restaurantemarengo.com/",
+    "rating": 4.3,
+    "notas": "⭐ 4.3 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789561058708,
+    "negocio": "Restaurante El Comienzo",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "elcomienzorest@gmail.com",
+    "telefono": "624 02 75 04",
+    "web": "https://restauranteelcomienzo.com/",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps | Restaurante El Comienzo: las mesas vacías de fin d",
+    "estado": "enviado",
+    "fecha": "16/09/26"
+  },
+  {
+    "id": 1789561059961,
+    "negocio": "Frida Tasty Room",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "876 00 94 31",
+    "web": "https://fridazaragoza.com/",
+    "rating": 4.3,
+    "notas": "⭐ 4.3 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789561060965,
+    "negocio": "La Clandestina Bistro & Cafe",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "reservaslaclandestina@gmail.com",
+    "telefono": "876 28 11 65",
+    "web": "https://www.laclandestinabistro.es/",
+    "rating": 4.3,
+    "notas": "⭐ 4.3 · Google Maps | La Clandestina Bistro & Cafe: las mesas vacías de",
+    "estado": "enviado",
+    "fecha": "16/09/26"
+  },
+  {
+    "id": 1789561069915,
+    "negocio": "El Windsor",
+    "sector": "Restaurante",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 02 20 96",
+    "web": "https://elwindsor.es/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
     "id": 1789474667684,
     "negocio": "Peluquería Zaragoza Angelina salón",
     "sector": "Peluquería",
@@ -3713,9 +3999,9 @@
     "telefono": "674 81 96 52",
     "web": "http://www.panycirco.es/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Pan y Circo: las mesas vacías de fin de semana cue",
+    "estado": "enviado",
+    "fecha": "16/09/26"
   },
   {
     "id": 1787729748226,
@@ -3752,9 +4038,9 @@
     "telefono": "691 88 54 27",
     "web": "http://eltraga.com/",
     "rating": 4.6,
-    "notas": "⭐ 4.6 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.6 · Google Maps | El Traga: las mesas vacías de fin de semana cuesta",
+    "estado": "enviado",
+    "fecha": "16/09/26"
   },
   {
     "id": 1787729760066,
@@ -3765,9 +4051,9 @@
     "telefono": "954 22 95 95",
     "web": "http://www.petitcomitesevilla.es/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | Petit Comité Sevilla: las mesas vacías de fin de s",
+    "estado": "enviado",
+    "fecha": "16/09/26"
   },
   {
     "id": 1787729761699,
@@ -3778,9 +4064,9 @@
     "telefono": "637 24 38 31",
     "web": "http://www.srcangrejo.es/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Sr. Cangrejo | Restaurante en Sevilla: las mesas v",
+    "estado": "enviado",
+    "fecha": "16/09/26"
   },
   {
     "id": 1787729763210,
@@ -3908,9 +4194,9 @@
     "telefono": "954 42 27 59",
     "web": "http://www.el3deoro.com/",
     "rating": 4.1,
-    "notas": "⭐ 4.1 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.1 · Google Maps | Restaurante El 3 de Oro: las mesas vacías de fin d",
+    "estado": "enviado",
+    "fecha": "16/09/26"
   },
   {
     "id": 1787729788080,
@@ -3921,9 +4207,9 @@
     "telefono": "854 71 23 30",
     "web": "https://restaurantemoyabrunch.shop/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | Restaurante Moya Brunch: las mesas vacías de fin d",
+    "estado": "enviado",
+    "fecha": "16/09/26"
   },
   {
     "id": 1787729789843,
@@ -3986,9 +4272,9 @@
     "telefono": "954 21 31 50",
     "web": "https://www.casarobles.es/",
     "rating": 4.2,
-    "notas": "⭐ 4.2 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.2 · Google Maps | Restaurante Casa Robles: las mesas vacías de fin d",
+    "estado": "enviado",
+    "fecha": "16/09/26"
   },
   {
     "id": 1787729799893,
@@ -4025,9 +4311,9 @@
     "telefono": "954 21 45 25",
     "web": "https://restauranteelgiraldillo.com/es",
     "rating": 4.2,
-    "notas": "⭐ 4.2 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.2 · Google Maps | Restaurante El Giraldillo: las mesas vacías de fin",
+    "estado": "enviado",
+    "fecha": "16/09/26"
   },
   {
     "id": 1787729805351,
@@ -4038,9 +4324,9 @@
     "telefono": "954 21 07 63",
     "web": "https://www.cincojotas.com/es/experiencias/restaurantes/sevilla",
     "rating": 4.3,
-    "notas": "⭐ 4.3 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.3 · Google Maps | Cinco Jotas Sevilla: las mesas vacías de fin de se",
+    "estado": "enviado",
+    "fecha": "16/09/26"
   },
   {
     "id": 1787729806259,
