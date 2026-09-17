@@ -1,5 +1,226 @@
 [
   {
+    "id": 1789647381414,
+    "negocio": "Centro Médico de Especialidades Goya",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 35 12 34",
+    "web": "https://cmedicogoya.com/",
+    "rating": 2.7,
+    "notas": "⭐ 2.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789647385352,
+    "negocio": "Centro Médico Estético Santa Lucía",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "centromedicoesteticosantalucia@gmail.com",
+    "telefono": "976 43 71 43",
+    "web": "http://cmesantalucia.es/",
+    "rating": 4.2,
+    "notas": "⭐ 4.2 · Google Maps | Centro Médico Estético Santa Lucía: cada cita canc",
+    "estado": "enviado",
+    "fecha": "17/09/26"
+  },
+  {
+    "id": 1789647390340,
+    "negocio": "Centro Médico Multiconsulta",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 32 10 80",
+    "web": "https://www.multiconsulta.es/",
+    "rating": 3.5,
+    "notas": "⭐ 3.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789647391030,
+    "negocio": "Centro Médico Miraflores",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 41 27 91",
+    "web": "http://www.centromedicomiraflores.com/",
+    "rating": 4,
+    "notas": "⭐ 4 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789647399684,
+    "negocio": "Consultas Externas. Hospital Clínico Universitario Lozano Blesa",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "",
+    "web": "http://www.hcuz.es/",
+    "rating": 3.2,
+    "notas": "⭐ 3.2 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789647401514,
+    "negocio": "ID Clinic | Clínica de Fisioterapia en Zaragoza",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "fisioterapia@id-clinic.es",
+    "telefono": "661 46 98 96",
+    "web": "https://id-clinic.es/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps | ID Clinic | Clínica de Fisioterapia en Zaragoza: c",
+    "estado": "enviado",
+    "fecha": "17/09/26"
+  },
+  {
+    "id": 1789647402677,
+    "negocio": "IVI Zaragoza - Clínica de Reproducción Asistida y Fertilidad",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "651 79 10 00",
+    "web": "https://ivi.es/clinicas/zaragoza/?utm_source=google-mb&utm_medium=organic&utm_campaign=ivi_es_clinica-zaragoza_conversion",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789647406203,
+    "negocio": "Clínica fisioterapia Zaragoza",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "info@luahsalud.com",
+    "telefono": "604 81 42 18",
+    "web": "https://www.luahsalud.com/fisioterapia-zaragoza/",
+    "rating": 0,
+    "notas": "⭐ 0 · Google Maps | Clínica fisioterapia Zaragoza: cada cita cancelada",
+    "estado": "enviado",
+    "fecha": "17/09/26"
+  },
+  {
+    "id": 1789647407070,
+    "negocio": "Institutos Odontológicos - Clínica Dental Zaragoza Centro",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "876 50 61 55",
+    "web": "https://ioa.es/clinicas/clinica-dental-zaragoza-centro/?utm_medium=organic_local&utm_promo=ficha_gbp&utm_source=google",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789647407688,
+    "negocio": "OBELION Fisioterapia Zaragoza",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "info@obelionfisioterapia.com",
+    "telefono": "640 90 20 82",
+    "web": "https://obelionfisioterapia.com/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps | OBELION Fisioterapia Zaragoza: cada cita cancelada",
+    "estado": "enviado",
+    "fecha": "17/09/26"
+  },
+  {
+    "id": 1789647410286,
+    "negocio": "Clínica Loscos - Clínica Dental En Zaragoza",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "info@clinicaloscos.es",
+    "telefono": "976 21 20 68",
+    "web": "https://www.clinicaloscos.es/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps | Clínica Loscos - Clínica Dental En Zaragoza: cada",
+    "estado": "enviado",
+    "fecha": "17/09/26"
+  },
+  {
+    "id": 1789647411121,
+    "negocio": "ARAVIS Oftalmología",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "info@aravis.es",
+    "telefono": "976 25 92 92",
+    "web": "http://www.aravis.es/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps | ARAVIS Oftalmología: cada cita cancelada sin relle",
+    "estado": "enviado",
+    "fecha": "17/09/26"
+  },
+  {
+    "id": 1789647411926,
+    "negocio": "Vida Recoletas Salud | Zaragoza",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 25 19 26",
+    "web": "https://vidarecoletas.com/vida-zaragoza-medicina-reproductiva/",
+    "rating": 3.9,
+    "notas": "⭐ 3.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789647414027,
+    "negocio": "Clínica Dental Adeslas",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "900 229 922",
+    "web": "https://www.adeslasdental.es/clinicas/clinica-dental-adeslas-Zaragoza-Centro?utm_campaign=Local&utm_medium=organic&utm_source=GoogleMyBuiness",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789647416415,
+    "negocio": "Clínica Molière",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "clinicamoliere@gmail.com",
+    "telefono": "976 93 77 22",
+    "web": "http://www.clinicamoliere.com/",
+    "rating": 3.9,
+    "notas": "⭐ 3.9 · Google Maps | Clínica Molière: cada cita cancelada sin rellenar",
+    "estado": "enviado",
+    "fecha": "17/09/26"
+  },
+  {
+    "id": 1789647418548,
+    "negocio": "Clínica Dental Saura · Dentista en Zaragoza",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "info@clinicasaura.com",
+    "telefono": "976 21 52 24",
+    "web": "http://www.clinicasaura.com/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps | Clínica Dental Saura · Dentista en Zaragoza: cada",
+    "estado": "enviado",
+    "fecha": "17/09/26"
+  },
+  {
+    "id": 1789647419859,
+    "negocio": "AniCura Emvet Referencia Veterinaria (Emergencias Veterinarias de Zaragoza)",
+    "sector": "Clínica",
+    "ciudad": "Zaragoza",
+    "email": "emvet@anicura.es",
+    "telefono": "976 40 45 13",
+    "web": "https://www.anicura.es/clinicas/emvet-referencia-veterinaria/",
+    "rating": 4.3,
+    "notas": "⭐ 4.3 · Google Maps | AniCura Emvet Referencia Veterinaria (Emergencias",
+    "estado": "enviado",
+    "fecha": "17/09/26"
+  },
+  {
     "id": 1789560990906,
     "negocio": "Restaurante Carcas Casa Pedro",
     "sector": "Restaurante",
@@ -4376,9 +4597,9 @@
     "telefono": "955 72 22 60",
     "web": "http://www.alimentari.es/",
     "rating": 4.6,
-    "notas": "⭐ 4.6 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.6 · Google Maps | Restaurante Cocina Italiana en Sevilla - ALIMENTAR",
+    "estado": "enviado",
+    "fecha": "17/09/26"
   },
   {
     "id": 1787729813948,
@@ -4402,9 +4623,9 @@
     "telefono": "954 22 47 02",
     "web": "https://www.donaireazabache.com/",
     "rating": 4.3,
-    "notas": "⭐ 4.3 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.3 · Google Maps | Restaurante Donaire Azabache: las mesas vacías de",
+    "estado": "enviado",
+    "fecha": "17/09/26"
   },
   {
     "id": 1787643267014,
@@ -4571,9 +4792,9 @@
     "telefono": "659 93 47 62",
     "web": "http://www.piconpeluqueros.es/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Picón Peluqueros: el 30% de tus citas se pueden es",
+    "estado": "enviado",
+    "fecha": "17/09/26"
   },
   {
     "id": 1787643281517,
@@ -4597,9 +4818,9 @@
     "telefono": "651 06 97 69",
     "web": "http://www.andromedabarberia.com/",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | Andromeda Barbería Peluquería: el 30% de tus citas",
+    "estado": "enviado",
+    "fecha": "17/09/26"
   },
   {
     "id": 1787643282805,
@@ -4766,9 +4987,9 @@
     "telefono": "610 68 86 11",
     "web": "https://www.vibrasclub.es/",
     "rating": 5,
-    "notas": "⭐ 5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 5 · Google Maps | Club Vibras | Peluquería Sevilla: el 30% de tus ci",
+    "estado": "enviado",
+    "fecha": "17/09/26"
   },
   {
     "id": 1787643308617,
@@ -4844,9 +5065,9 @@
     "telefono": "673 61 78 45",
     "web": "https://amorecohair.es/",
     "rating": 5,
-    "notas": "⭐ 5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 5 · Google Maps | Amor Eco Hair Design: el 30% de tus citas se puede",
+    "estado": "enviado",
+    "fecha": "17/09/26"
   },
   {
     "id": 1787643315582,
@@ -4948,9 +5169,9 @@
     "telefono": "692 16 64 83",
     "web": "https://toldim.com/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | TolDim Taller: el 78% de las ventas va al negocio",
+    "estado": "enviado",
+    "fecha": "17/09/26"
   },
   {
     "id": 1787297580959,
@@ -5026,9 +5247,9 @@
     "telefono": "963 13 58 58",
     "web": "https://www.toyota.es/concesionarios/toyotavalencia/valencia-tres-cruces-exposicion-y-taller?utm_source=googlemybusiness&utm_medium=sitiowebgbptaller&utm_campaign=visitar_web_taller&journeyId=GoogleMyBusiness",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | Taller Oficial TOYOTA Valencia - Toyota Valencia:",
+    "estado": "enviado",
+    "fecha": "17/09/26"
   },
   {
     "id": 1787297586393,
@@ -5078,9 +5299,9 @@
     "telefono": "963 20 45 14",
     "web": "https://www.motortorrent.com/",
     "rating": 4.2,
-    "notas": "⭐ 4.2 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.2 · Google Maps | Motor Torrent Valencia: el 78% de las ventas va al",
+    "estado": "enviado",
+    "fecha": "17/09/26"
   },
   {
     "id": 1787297590199,
@@ -5104,9 +5325,9 @@
     "telefono": "963 69 43 29",
     "web": "https://www.baldajos.com/taller-valencia-mestalla/",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | Taller Omnia Motor Valencia Mestalla: el 78% de la",
+    "estado": "enviado",
+    "fecha": "17/09/26"
   },
   {
     "id": 1787297592975,
@@ -5156,9 +5377,9 @@
     "telefono": "963 69 57 51",
     "web": "http://www.talleresperolo.com/",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | Talleres Perolo: el 78% de las ventas va al negoci",
+    "estado": "enviado",
+    "fecha": "17/09/26"
   },
   {
     "id": 1787297597874,
