@@ -1,5 +1,291 @@
 [
   {
+    "id": 1789732569209,
+    "negocio": "NAS AUTOMOTRIZ",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 73 68 35",
+    "web": "",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732571284,
+    "negocio": "Sartopina Zaragoza - Taller Oficial Volkswagen",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "ventas@sartopina.com",
+    "telefono": "976 46 58 26",
+    "web": "https://www.volkswagen.es/es/concesionarios/sartopina-zaragoza.html?campaign=mydealer_gmb&language=ES&adchan=othr&publisher=gmb&country=ES&cpid=52v12&adpay=np&adcta=0&adpl=gmb&adcr=ficha",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps | Sartopina Zaragoza - Taller Oficial Volkswagen: el",
+    "estado": "enviado",
+    "fecha": "18/09/26"
+  },
+  {
+    "id": 1789732571785,
+    "negocio": "Talleres Caspe",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "607 68 41 27",
+    "web": "",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732572286,
+    "negocio": "Talleres Marco Zaragoza",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 42 97 47",
+    "web": "",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732572787,
+    "negocio": "Talleres Ordesa",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 27 35 81",
+    "web": "",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732581475,
+    "negocio": "Taller Mecánico Autoreparaciones Cortes",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 43 34 36",
+    "web": "https://autoreparacionescortes.com/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732581976,
+    "negocio": "Talleres Abío S.L.",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 22 02 92",
+    "web": "",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732583045,
+    "negocio": "ArranCar - Grupo Talleres Cuarte",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "876 71 50 62",
+    "web": "https://www.confortauto.com/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732583546,
+    "negocio": "Autovenecia",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "876 28 20 00",
+    "web": "",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732584174,
+    "negocio": "Midas ZARAGOZA/Avd.Cesáreo Alierta",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "876 08 21 69",
+    "web": "https://www.midas.es/talleres-coche-moto-midas/aragon/zaragoza/zaragoza/zaragozaavdcesareo-alierta_3743",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732586974,
+    "negocio": "Taller Harry's Motors",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "643 34 80 65",
+    "web": "https://harrysmotors.com/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732587475,
+    "negocio": "Talleres Javier Lahuerta",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 31 13 50",
+    "web": "",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732588813,
+    "negocio": "Talleres Autounion",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 59 51 96",
+    "web": "http://www.talleresautounion.es/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732593367,
+    "negocio": "Auto Zone Chapa Pintura",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "876 04 06 62",
+    "web": "https://www.talleresautozone.es/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732594200,
+    "negocio": "Autogoya",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "info@goodyear.de",
+    "telefono": "976 40 25 58",
+    "web": "https://www.vulco.es/autogoya/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps | Autogoya: el 78% de las ventas va al negocio que c",
+    "estado": "enviado",
+    "fecha": "18/09/26"
+  },
+  {
+    "id": 1789732595464,
+    "negocio": "Talleres V. Longares - Taller de Chapa y Pintura Zaragoza",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "tallereslongares@hotmail.com",
+    "telefono": "669 94 09 66",
+    "web": "http://www.tallereslongares.com/",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps | Talleres V. Longares - Taller de Chapa y Pintura Z",
+    "estado": "enviado",
+    "fecha": "18/09/26"
+  },
+  {
+    "id": 1789732596017,
+    "negocio": "Midas ZARAGOZA/Calle Corona de Aragón",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 55 13 43",
+    "web": "https://www.midas.es/talleres-coche-moto-midas/aragon/zaragoza/zaragoza/zaragozacalle-corona-de-aragon_3704",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732597352,
+    "negocio": "Bean Automoción",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 25 38 07",
+    "web": "http://www.beanautomocion.com/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732597853,
+    "negocio": "Auto-Plancha",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 27 47 07",
+    "web": "",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732599658,
+    "negocio": "New Car Zaragoza",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 73 70 18",
+    "web": "https://newcarzaragoza.com/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732600160,
+    "negocio": "Talleres Lobera – Reparación y Mantenimiento de Vehículos en Zaragoza",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "623 30 63 42",
+    "web": "",
+    "rating": 4.2,
+    "notas": "⭐ 4.2 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1789732600891,
+    "negocio": "Talleres Alcolea Motor",
+    "sector": "Taller",
+    "ciudad": "Zaragoza",
+    "email": "",
+    "telefono": "976 10 81 38",
+    "web": "http://www.talleresalcolea.com/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
     "id": 1789647381414,
     "negocio": "Centro Médico de Especialidades Goya",
     "sector": "Clínica",
@@ -5403,9 +5689,9 @@
     "telefono": "963 59 15 62",
     "web": "http://www.sergiochozasmecanico.com/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | Talleres Sergio Valencia: el 78% de las ventas va",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787297600686,
@@ -5455,9 +5741,9 @@
     "telefono": "963 39 35 20",
     "web": "http://www.autosweden.es/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Volvo Car Auto Sweden Valencia: el 78% de las vent",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787297607128,
@@ -5468,9 +5754,9 @@
     "telefono": "963 57 12 59",
     "web": "https://kgm.com.es/",
     "rating": 5,
-    "notas": "⭐ 5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 5 · Google Maps | Taller KGM Valencia - Ssangval Automoción, S.L.: e",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787297608509,
@@ -5481,9 +5767,9 @@
     "telefono": "963 47 47 51",
     "web": "https://www.tallerescoda.es/",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | Talleres CODA Valencia: el 78% de las ventas va al",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787297609201,
@@ -5546,9 +5832,9 @@
     "telefono": "722 87 92 84",
     "web": "http://www.tallerdepatineteserazo.com/",
     "rating": 4.6,
-    "notas": "⭐ 4.6 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.6 · Google Maps | Erazo | Taller de Patinetes: el 78% de las ventas",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787297614157,
@@ -5611,9 +5897,9 @@
     "telefono": "963 60 00 00",
     "web": "http://www.autolavadosprimado.es/",
     "rating": 4.3,
-    "notas": "⭐ 4.3 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.3 · Google Maps | TALLER PRIMADO: el 78% de las ventas va al negocio",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787297619660,
@@ -5637,9 +5923,9 @@
     "telefono": "963 22 05 81",
     "web": "https://www.policlinicasanmartin.es/",
     "rating": 3,
-    "notas": "⭐ 3 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 3 · Google Maps | Clínica San Martín Valencia: cada cita cancelada s",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787211065894,
@@ -5728,9 +6014,9 @@
     "telefono": "960 55 04 55",
     "web": "https://premiummedical.es/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Clínica Premium Medical Valencia: cada cita cancel",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787211077554,
@@ -5754,9 +6040,9 @@
     "telefono": "963 17 91 00",
     "web": "https://vithas.es/centro/vithas-hospital-valencia-9-de-octubre/",
     "rating": 3.7,
-    "notas": "⭐ 3.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 3.7 · Google Maps | Hospital Vithas Valencia 9 de Octubre: cada cita c",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787211079446,
@@ -5767,9 +6053,9 @@
     "telefono": "960 61 90 02",
     "web": "https://institutomedicoricart.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb",
     "rating": 4.2,
-    "notas": "⭐ 4.2 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.2 · Google Maps | IMR Valencia: cada cita cancelada sin rellenar val",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787211080475,
@@ -5845,9 +6131,9 @@
     "telefono": "962 06 63 09",
     "web": "http://valenclinic.es/",
     "rating": 4.2,
-    "notas": "⭐ 4.2 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.2 · Google Maps | Valenclinic: cada cita cancelada sin rellenar vale",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787211102798,
@@ -5910,9 +6196,9 @@
     "telefono": "963 53 00 30",
     "web": "https://ivade.es/",
     "rating": 4,
-    "notas": "⭐ 4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4 · Google Maps | IVADE: cada cita cancelada sin rellenar vale entre",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787211119279,
@@ -5923,9 +6209,9 @@
     "telefono": "747 47 99 33",
     "web": "https://clinicaorigenvalencia.es/",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | ORIGEN Clínica Estética Valencia | Medicina Estéti",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787211120473,
@@ -5975,9 +6261,9 @@
     "telefono": "963 25 49 00",
     "web": "http://clinicabarondecarcer.com/",
     "rating": 4.2,
-    "notas": "⭐ 4.2 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.2 · Google Maps | Clínica Barón de Cárcer: cada cita cancelada sin r",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787211130294,
@@ -6001,9 +6287,9 @@
     "telefono": "666 59 43 15",
     "web": "http://www.clinicaaston.com/",
     "rating": 4.1,
-    "notas": "⭐ 4.1 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.1 · Google Maps | Clínica Aston: cada cita cancelada sin rellenar va",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787211134943,
@@ -6027,9 +6313,9 @@
     "telefono": "963 74 84 35",
     "web": "https://www.saludonnet.com/clinica/clinica-sueca",
     "rating": 3,
-    "notas": "⭐ 3 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 3 · Google Maps | Clínica Sueca: cada cita cancelada sin rellenar va",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787211138448,
@@ -6040,9 +6326,9 @@
     "telefono": "963 74 08 64",
     "web": "https://clinicacampos.com/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Clínica Campos Valencia - Medicina Estética: cada",
+    "estado": "enviado",
+    "fecha": "18/09/26"
   },
   {
     "id": 1787211139431,
