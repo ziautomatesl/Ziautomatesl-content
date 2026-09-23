@@ -1,5 +1,187 @@
 [
   {
+    "id": 1790166143909,
+    "negocio": "Lionza",
+    "sector": "Restaurante",
+    "ciudad": "Murcia",
+    "email": "info@lionza.es",
+    "telefono": "665 51 81 34",
+    "web": "https://lionza.es/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps | Lionza: las mesas vacías de fin de semana cuestan",
+    "estado": "enviado",
+    "fecha": "23/09/26"
+  },
+  {
+    "id": 1790166147589,
+    "negocio": "Restaurante Torombolo Murcia",
+    "sector": "Restaurante",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "633 23 75 36",
+    "web": "https://www.restaurantetorombolo.com/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790166148090,
+    "negocio": "Mesón de Pepe",
+    "sector": "Restaurante",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "968 51 58 53",
+    "web": "",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790166148676,
+    "negocio": "LA BARRA DE PEPE EL TORRAO",
+    "sector": "Restaurante",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "968 21 94 95",
+    "web": "https://restaurantelabarradeltorrao.com/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790166151922,
+    "negocio": "Pizzería Mano a Mano",
+    "sector": "Restaurante",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "644 72 29 11",
+    "web": "http://www.pizzeriamanoamano.es/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790166154239,
+    "negocio": "Tándem",
+    "sector": "Restaurante",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "868 16 92 87",
+    "web": "http://www.tandemrest.com/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790166159711,
+    "negocio": "Steakburger | Hamburguesería Murcia",
+    "sector": "Restaurante",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "910 78 20 67",
+    "web": "http://www.steakburger.es/?utm_source=gmb&utm_medium=organic&utm_campaign=gmb_website",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790166160406,
+    "negocio": "La Niña Guindilla",
+    "sector": "Restaurante",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "615 91 83 70",
+    "web": "https://m.facebook.com/profile.php?id=100061948038002",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790166160907,
+    "negocio": "La Brasería de Carlos",
+    "sector": "Restaurante",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "673 42 71 13",
+    "web": "",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790166163725,
+    "negocio": "La Tapeoteca",
+    "sector": "Restaurante",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "663 72 40 59",
+    "web": "https://www.latapeoteca.es/?utm_source=gmb&utm_medium=organic&utm_campaign=gmb_website",
+    "rating": 4.2,
+    "notas": "⭐ 4.2 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790166167137,
+    "negocio": "Restaurante Acuario",
+    "sector": "Restaurante",
+    "ciudad": "Murcia",
+    "email": "info@restauranteacuario.com",
+    "telefono": "968 21 99 55",
+    "web": "http://www.restauranteacuario.com/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps | Restaurante Acuario: las mesas vacías de fin de se",
+    "estado": "enviado",
+    "fecha": "23/09/26"
+  },
+  {
+    "id": 1790166169081,
+    "negocio": "La Abadía Brasserie- Restaurante en Murcia",
+    "sector": "Restaurante",
+    "ciudad": "Murcia",
+    "email": "info@laabadiaibericos.es",
+    "telefono": "607 86 20 09",
+    "web": "https://www.laabadiabrasserie.es/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps | La Abadía Brasserie- Restaurante en Murcia: las me",
+    "estado": "enviado",
+    "fecha": "23/09/26"
+  },
+  {
+    "id": 1790166169582,
+    "negocio": "Restaurante Nada Escrito",
+    "sector": "Restaurante",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "968 02 43 00",
+    "web": "",
+    "rating": 4.4,
+    "notas": "⭐ 4.4 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790166170657,
+    "negocio": "La Bella Lola",
+    "sector": "Restaurante",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "868 81 18 77",
+    "web": "http://www.labellalolatapas.com/",
+    "rating": 3.8,
+    "notas": "⭐ 3.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
     "id": 1790079029965,
     "negocio": "Francisco Abril",
     "sector": "Peluquería",
@@ -7106,9 +7288,9 @@
     "telefono": "963 94 36 12",
     "web": "http://www.restauranteelencuentro.es/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | Restaurante El Encuentro: las mesas vacías de fin",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124532711,
@@ -7145,9 +7327,9 @@
     "telefono": "660 92 47 16",
     "web": "https://www.onlyyouhotels.com/hoteles/only-you-hotel-valencia/el-mirador/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | El mirador de Only YOU: las mesas vacías de fin de",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124537895,
@@ -7223,9 +7405,9 @@
     "telefono": "963 74 07 87",
     "web": "http://www.gordon10.com/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Restaurante Asador Argentino Gordon 10: las mesas",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124545351,
@@ -7236,9 +7418,9 @@
     "telefono": "633 20 44 24",
     "web": "https://restaurante-espurnes.es/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Restaurante Espurnes: las mesas vacías de fin de s",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124546614,
@@ -7249,9 +7431,9 @@
     "telefono": "637 29 16 06",
     "web": "http://www.restaurantekarak.com/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Karak: las mesas vacías de fin de semana cuestan d",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124547477,
@@ -7275,9 +7457,9 @@
     "telefono": "638 81 62 06",
     "web": "https://www.latteefarina.es/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Latte e Farina Cucina Italiana: las mesas vacías d",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124552898,
@@ -7288,9 +7470,9 @@
     "telefono": "961 67 26 30",
     "web": "https://lefavole.es/",
     "rating": 4.6,
-    "notas": "⭐ 4.6 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.6 · Google Maps | Le Favole: las mesas vacías de fin de semana cuest",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124554429,
@@ -7301,9 +7483,9 @@
     "telefono": "697 66 00 16",
     "web": "http://www.ateneasky.com/",
     "rating": 4.2,
-    "notas": "⭐ 4.2 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.2 · Google Maps | Atenea Sky ✢ Rooftop: las mesas vacías de fin de s",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124555524,
@@ -7314,9 +7496,9 @@
     "telefono": "650 73 01 99",
     "web": "https://meatmarketrestaurante.com/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Meat Market: las mesas vacías de fin de semana cue",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124556515,
@@ -7327,9 +7509,9 @@
     "telefono": "963 21 86 86",
     "web": "https://vuelvecarolina.com/",
     "rating": 4.1,
-    "notas": "⭐ 4.1 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.1 · Google Maps | Restaurante Vuelve Carolina: las mesas vacías de f",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124557542,
@@ -7353,9 +7535,9 @@
     "telefono": "",
     "web": "https://fumdellum.com/?utm_source=google_business_profile&utm_medium=organic",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Fum de LLum | Valencia: las mesas vacías de fin de",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124561558,
@@ -7483,9 +7665,9 @@
     "telefono": "963 35 54 18",
     "web": "https://www.ricardcamarena.com/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Ricard Camarena Restaurant: las mesas vacías de fi",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124585628,
@@ -7496,9 +7678,9 @@
     "telefono": "961 62 00 60",
     "web": "http://www.arroceriamaribel.com/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Arrocería Maribel: las mesas vacías de fin de sema",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124587608,
@@ -7509,9 +7691,9 @@
     "telefono": "963 82 92 23",
     "web": "http://www.centralbar.es/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | Central Bar by Ricard Camarena: las mesas vacías d",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124588517,
@@ -7535,9 +7717,9 @@
     "telefono": "671 22 48 97",
     "web": "http://www.mumarestaurante.com/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | MUMA Restaurante: las mesas vacías de fin de seman",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124590826,
@@ -7561,9 +7743,9 @@
     "telefono": "696 38 06 55",
     "web": "https://lamoma.com/",
     "rating": 4.4,
-    "notas": "⭐ 4.4 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.4 · Google Maps | La Moma: las mesas vacías de fin de semana cuestan",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124596337,
@@ -7626,9 +7808,9 @@
     "telefono": "960 69 16 32",
     "web": "https://www.manaw.es/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Manaw - Nikkei Bar: las mesas vacías de fin de sem",
+    "estado": "enviado",
+    "fecha": "23/09/26"
   },
   {
     "id": 1787124604167,
