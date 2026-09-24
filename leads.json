@@ -1,5 +1,213 @@
 [
   {
+    "id": 1790252522983,
+    "negocio": "HLA Hospital La Vega",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "info@hlalavega.com",
+    "telefono": "968 27 81 00",
+    "web": "https://hlalavega.com/",
+    "rating": 4.6,
+    "notas": "⭐ 4.6 · Google Maps | HLA Hospital La Vega: cada cita cancelada sin rell",
+    "estado": "enviado",
+    "fecha": "24/09/26"
+  },
+  {
+    "id": 1790252523828,
+    "negocio": "Hospital Viamed San José",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "968 80 06 00",
+    "web": "https://www.viamedsalud.com/hospital-san-jose/",
+    "rating": 3.7,
+    "notas": "⭐ 3.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790252532469,
+    "negocio": "SEA Clinic | Cirugía Plástica y Medicina estética en Murcia",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "643 35 03 60",
+    "web": "https://seaclinic.es/",
+    "rating": 4.7,
+    "notas": "⭐ 4.7 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790252549212,
+    "negocio": "Aura (Ronda Norte) - Clínica especialista en Injerto capilar",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "968 95 01 77",
+    "web": "https://www.auraclinica.com/",
+    "rating": 4.9,
+    "notas": "⭐ 4.9 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790252550150,
+    "negocio": "CLÍNICA IMAR | Clínica de Reproducción asistida, fertilidad e Inseminación artificial en Murcia",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "968 21 23 70",
+    "web": "https://clinicaimar.com/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790252554024,
+    "negocio": "Dermamurcia",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "info@dermamurcia.com",
+    "telefono": "868 99 99 69",
+    "web": "http://www.dermamurcia.com/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps | Dermamurcia: cada cita cancelada sin rellenar vale",
+    "estado": "enviado",
+    "fecha": "24/09/26"
+  },
+  {
+    "id": 1790252555846,
+    "negocio": "Hospital Universitario Reina Sofía de Murcia",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "968 35 90 00",
+    "web": "http://www.murciasalud.es/seccion.php?idsec=77",
+    "rating": 3.2,
+    "notas": "⭐ 3.2 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790252557234,
+    "negocio": "CENTRO MEDICO SANTA CATALINA.(Murcia) Depilación láser Médico Diodo shr",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "697 55 56 30",
+    "web": "https://www.santacatalinaplaza.es/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790252559196,
+    "negocio": "CLINICA CALIZA",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "info@clinicacaliza.com",
+    "telefono": "608 69 81 96",
+    "web": "http://clinicacaliza.com/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps | CLINICA CALIZA: cada cita cancelada sin rellenar v",
+    "estado": "enviado",
+    "fecha": "24/09/26"
+  },
+  {
+    "id": 1790252563851,
+    "negocio": "Clínica DeLabra | Fisioterapia Murcia",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "619 30 91 50",
+    "web": "https://www.clinicadelabra.com/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790252572390,
+    "negocio": "HIFU CLINICS - MURCIA",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "679 11 24 11",
+    "web": "https://www.hifuclinics.es/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790252572891,
+    "negocio": "Clínica Depilación Tulaser & Medicina Estética Murcia",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "650 40 49 62",
+    "web": "",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790252581519,
+    "negocio": "I AM CARE - Clínica de Tratamientos médicos estéticos",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "968 39 34 03",
+    "web": "https://iamcare.es/",
+    "rating": 4.8,
+    "notas": "⭐ 4.8 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790252583900,
+    "negocio": "Clínica Sesemann Dental Murcia",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "636 16 26 06",
+    "web": "http://www.sesemanndental.es/",
+    "rating": 5,
+    "notas": "⭐ 5 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790252584976,
+    "negocio": "Centro Salud La Flota / Vistalegre",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "",
+    "telefono": "968 24 26 75",
+    "web": "https://www.murciasalud.es/",
+    "rating": 3,
+    "notas": "⭐ 3 · Google Maps",
+    "estado": "pendiente",
+    "fecha": ""
+  },
+  {
+    "id": 1790252586071,
+    "negocio": "Next Fertility Murcia - Clínica de Reproducción Asistida y Fertilidad",
+    "sector": "Clínica",
+    "ciudad": "Murcia",
+    "email": "info.murcia@nextfertility.es",
+    "telefono": "968 90 19 03",
+    "web": "https://nextfertility.es/clinica/next-fertility-murcia/",
+    "rating": 4.5,
+    "notas": "⭐ 4.5 · Google Maps | Next Fertility Murcia - Clínica de Reproducción As",
+    "estado": "enviado",
+    "fecha": "24/09/26"
+  },
+  {
     "id": 1790166143909,
     "negocio": "Lionza",
     "sector": "Restaurante",
@@ -7821,9 +8029,9 @@
     "telefono": "963 91 06 68",
     "web": "https://sagardi.com/",
     "rating": 4.3,
-    "notas": "⭐ 4.3 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.3 · Google Maps | Sagardi Valencia Centro: las mesas vacías de fin d",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787124605172,
@@ -7834,9 +8042,9 @@
     "telefono": "963 30 52 44",
     "web": "https://fierrovlc.com/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Fierro Restaurant: las mesas vacías de fin de sema",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787124605942,
@@ -7873,9 +8081,9 @@
     "telefono": "854 62 79 12",
     "web": "http://www.restaurantelapappardella.com/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | La Pappardella | Maestri italiani della pasta fres",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787038058900,
@@ -7886,9 +8094,9 @@
     "telefono": "963 49 06 58",
     "web": "https://pablopeluquero.com/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | Pablo Peluqueros: el 30% de tus citas se pueden es",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787038062468,
@@ -7912,9 +8120,9 @@
     "telefono": "960 28 33 82",
     "web": "https://zivahsalon.es/",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | Zivah Salón | Peluquería en Valencia: el 30% de tu",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787038068472,
@@ -7938,9 +8146,9 @@
     "telefono": "963 95 67 00",
     "web": "https://desancho.com/",
     "rating": 4.7,
-    "notas": "⭐ 4.7 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.7 · Google Maps | Desancho Estilistas | Reino de Valencia, 7: el 30%",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787038070324,
@@ -8029,9 +8237,9 @@
     "telefono": "961 11 38 79",
     "web": "https://juanvicamarasa.com/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Juanvi Camarasa - Hair Studio: el 30% de tus citas",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787038083701,
@@ -8042,9 +8250,9 @@
     "telefono": "722 14 52 39",
     "web": "https://reservas.koibox.cloud/salon-66",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | Salon 66 - Barberia: el 30% de tus citas se pueden",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787038087917,
@@ -8120,9 +8328,9 @@
     "telefono": "961 10 00 21",
     "web": "http://www.juanromeropeluqueros.com/",
     "rating": 4.6,
-    "notas": "⭐ 4.6 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.6 · Google Maps | Peluquería Juan Romero Peluqueros Valencia: el 30%",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787038094883,
@@ -8185,9 +8393,9 @@
     "telefono": "623 29 55 03",
     "web": "https://www.fioreloconcept.com/",
     "rating": 5,
-    "notas": "⭐ 5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 5 · Google Maps | Fiorelo Concept: el 30% de tus citas se pueden est",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787038103449,
@@ -8224,9 +8432,9 @@
     "telefono": "624 96 94 30",
     "web": "https://joan-silva-hair-studio.ueniweb.com/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Joan silva hair studio: el 30% de tus citas se pue",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787038106099,
@@ -8276,9 +8484,9 @@
     "telefono": "677 01 46 14",
     "web": "https://gustavotelesca.es/",
     "rating": 4.9,
-    "notas": "⭐ 4.9 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.9 · Google Maps | Telescas Estilistas: el 30% de tus citas se pueden",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787038110156,
@@ -8315,9 +8523,9 @@
     "telefono": "637 67 98 49",
     "web": "https://fashestilistas.com/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Fash Estilistas: el 30% de tus citas se pueden est",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787038113181,
@@ -8445,9 +8653,9 @@
     "telefono": "963 30 72 96",
     "web": "http://www.quinasestilistas.com/",
     "rating": 4.8,
-    "notas": "⭐ 4.8 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.8 · Google Maps | Quiña´s Peluqueros Estilistas: el 30% de tus citas",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787038135099,
@@ -8484,9 +8692,9 @@
     "telefono": "963 51 05 30",
     "web": "http://www.siscopel.es/",
     "rating": 4.5,
-    "notas": "⭐ 4.5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 4.5 · Google Maps | Siscopel- Productos profesionales de peluquería y",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787038139552,
@@ -8575,9 +8783,9 @@
     "telefono": "963 53 45 87",
     "web": "https://www.treatwell.es/establecimiento/studio-c-valencia/",
     "rating": 5,
-    "notas": "⭐ 5 · Google Maps",
-    "estado": "pendiente",
-    "fecha": ""
+    "notas": "⭐ 5 · Google Maps | 🤎 StudioC Valencia - Peluquería: el 30% de tus cit",
+    "estado": "enviado",
+    "fecha": "24/09/26"
   },
   {
     "id": 1787038144833,
